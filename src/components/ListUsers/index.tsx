@@ -1,9 +1,8 @@
 "use client"
-
-import { getAllListUsersAPI } from "@/services/listUsersAPIs";
 import { useEffect, useState } from "react";
 import TanStackTableComponent from "../Core/TanStackTableComponent";
 import { ListUserColumns } from "./ListUsersColumns";
+import { getAllListUsersAPI } from "@/services/listUsersAPIs";
 
 const ListUsers = () => {
 

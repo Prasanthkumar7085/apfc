@@ -1,0 +1,162 @@
+.imageIcon {
+  width: 60%;
+  position: relative;
+  border-radius: 20px;
+  height: 100%;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.logoIcon {
+  width: 130px;
+  height: 99.5px;
+}
+
+.paragraph,
+.title {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  line-height: 140%;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 28px;
+  line-height: 130%;
+  font-family: inherit;
+  color: var(--color-black);
+}
+
+.titlegroup {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+}
+
+.label {
+  cursor: pointer;
+  align-self: stretch;
+  position: relative;
+  line-height: 100%;
+}
+
+.inputtype {
+  border: 0;
+  background-color: transparent;
+  align-self: stretch;
+  font-family: var(--font-poppins);
+  font-size: var(--font-size-base);
+  color: var(--color-darkgray);
+}
+
+.inputusername,
+.passwordgroup {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-3xs);
+}
+
+.passwordgroup {
+  justify-content: center;
+}
+
+.forgotYourPassword {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: var(--font-size-base);
+  line-height: 100%;
+  font-weight: 500;
+  color: var(--red);
+  text-align: right;
+}
+
+.inputgroup,
+.inputpassword {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputpassword {
+  align-self: stretch;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+}
+
+.inputgroup {
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 32px;
+}
+
+.inputbutton,
+.inputgroup {
+  align-self: stretch;
+}
+
+.inputsection,
+.logingroup,
+.loginsection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.inputsection {
+  align-self: stretch;
+  justify-content: flex-start;
+  gap: 64px;
+  color: var(--color-black);
+}
+
+.logingroup,
+.loginsection {
+  justify-content: center;
+}
+
+.logingroup {
+  align-self: stretch;
+  gap: 40px;
+}
+
+.loginsection {
+  width: 420px;
+  gap: 80px;
+}
+
+.login,
+.loginpage {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.login {
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 140px;
+  min-width: 430px;
+}
+
+.loginpage {
+  width: 1920px;
+  background-color: #fff;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--green-brand);
+  font-family: var(--font-inter);
+}

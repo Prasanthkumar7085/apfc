@@ -15,7 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Providers>
-          {pathname == "/signin" ? children : <LayoutNavbar>{children}</LayoutNavbar>}
+          {pathname == "/" ? children : <LayoutNavbar>{children}</LayoutNavbar>}
         </Providers>
       </body>
     </html>
