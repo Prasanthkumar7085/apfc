@@ -21,7 +21,7 @@ class FetchService {
   constructor(fetchTypeValue = "json", headerOrNot = true) {
     this._fetchType = fetchTypeValue;
     this._noHeaders = headerOrNot;
-    store.subscribe(() => {});
+    store.subscribe(() => { });
   }
 
   configureAuthorization(config: any) {

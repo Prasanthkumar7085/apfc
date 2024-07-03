@@ -1,0 +1,6 @@
+.main {
+    margin-left: 5rem;
+    background: var(--background, #F5F7FA);
+    min-height: 100vh;
+    position: relative;
+}

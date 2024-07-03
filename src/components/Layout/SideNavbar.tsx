@@ -1,6 +1,8 @@
+import { useRouter } from "next/navigation";
 import styles from "./SideNavbar.module.css";
 
 const SideNavBar = () => {
+  const router = useRouter();
   return (
     <div className={styles.navbar}>
       <div className={styles.headermenu}>
@@ -10,7 +12,9 @@ const SideNavBar = () => {
             <img className={styles.server1Icon} alt="" src="/server-1.svg" />
             <h6 className={styles.devices}>Devices</h6>
           </div>
-          <div className={styles.menuItem1}>
+          <div className={styles.menuItem1}
+            onClick={() => router.push("/users")}
+          >
             <img
               className={styles.server1Icon}
               alt=""
