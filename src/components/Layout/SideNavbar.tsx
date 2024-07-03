@@ -8,7 +8,9 @@ const SideNavBar = () => {
       <div className={styles.headermenu}>
         <img className={styles.logoIcon} alt="" src="/logo1.svg" />
         <div className={styles.navgroup}>
-          <div className={styles.menuItem}>
+          <div className={styles.menuItem}
+            onClick={() => router.push("/devices")}
+          >
             <img className={styles.server1Icon} alt="" src="/server-1.svg" />
             <h6 className={styles.devices}>Devices</h6>
           </div>

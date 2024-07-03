@@ -29,6 +29,7 @@
   align-items: center;
   padding: var(--padding-xs);
   gap: var(--gap-5xs);
+  cursor: pointer;
 }
 
 .headermenu,
