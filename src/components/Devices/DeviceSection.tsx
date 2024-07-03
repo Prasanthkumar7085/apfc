@@ -8,9 +8,8 @@ const DeviceSection = ({ devicesData }: any) => {
       {
         devicesData.map((item: any, index: number) => {
           return (
-            <div className={styles.devicesection}>
-
-              <div className={styles.devicegroup} key={index}>
+            <div className={styles.devicesection} key={index}>
+              <div className={styles.devicegroup}>
                 <div className={styles.deviceheading}>
                   <div className={styles.devicename}>
                     <h4 className={styles.morocoDevice}>{item?.device_name}</h4>
