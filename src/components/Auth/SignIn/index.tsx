@@ -45,7 +45,7 @@ const LoginPage = () => {
         toast.success(response?.message);
         Cookies.set("user", response?.data?.user_details?.user_type);
         dispatch(setUserDetails(response));
-        router.replace("/users");
+        router.push("/devices")
       } else if (response.status == 422) {
         setErrorMessages(response.error_data);
         setLoading(false);
@@ -74,81 +74,82 @@ const LoginPage = () => {
         <div className={styles.loginsection}>
           <img className={styles.logoIcon} alt="" src="/logo.svg" />
           <div className={styles.logingroup}>
-            <form onSubmit={signIn}>
-              <div className={styles.titlegroup}>
-                <p className={styles.paragraph}>LOGIN</p>
-                <h2 className={styles.title}>
-                  Welcome to the Peepul Agri APFC Application
-                </h2>
-              </div>
-              <div className={styles.inputsection}>
-                <div className={styles.inputgroup}>
-                  <div className={styles.inputusername}>
-                    <label className={styles.label}>User Name</label>
+            {/* <form onSubmit={signIn}> */}
+            <div className={styles.titlegroup}>
+              <p className={styles.paragraph}>LOGIN</p>
+              <h2 className={styles.title}>
+                Welcome to the Peepul Agri APFC Application
+              </h2>
+            </div>
+            <div className={styles.inputsection}>
+              <div className={styles.inputgroup}>
+                <div className={styles.inputusername}>
+                  <label className={styles.label}>User Name</label>
+                  <TextField
+                    className={styles.inputtype}
+                    color="primary"
+                    variant="outlined"
+                    sx={{ "& .MuiInputBase-root": { height: "48px" } }}
+                    name="email"
+                    type={"text"}
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      setErrorMessages(null);
+                    }}
+                  />
+                  <ErrorMessagesComponent errorMessage={errorMessages?.email} />
+                </div>
+                <div className={styles.inputpassword}>
+                  <div className={styles.passwordgroup}>
+                    <label className={styles.label}>Password</label>
                     <TextField
                       className={styles.inputtype}
                       color="primary"
                       variant="outlined"
                       sx={{ "& .MuiInputBase-root": { height: "48px" } }}
-                      name="email"
-                      type={"text"}
-                      value={email}
+                      name="password"
+                      type={showPassword ? "text" : "password"}
+                      value={password}
                       onChange={(e) => {
-                        setEmail(e.target.value);
+                        setPassword(e.target.value);
                         setErrorMessages(null);
                       }}
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="end">
+                            <IconButton onClick={togglePasswordVisibility} edge="end">
+                              {showPassword ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </InputAdornment>
+                        ),
+                      }}
                     />
-                    <ErrorMessagesComponent errorMessage={errorMessages?.email} />
+                    <ErrorMessagesComponent errorMessage={errorMessages?.password} />
                   </div>
-                  <div className={styles.inputpassword}>
-                    <div className={styles.passwordgroup}>
-                      <label className={styles.label}>Password</label>
-                      <TextField
-                        className={styles.inputtype}
-                        color="primary"
-                        variant="outlined"
-                        sx={{ "& .MuiInputBase-root": { height: "48px" } }}
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(e) => {
-                          setPassword(e.target.value);
-                          setErrorMessages(null);
-                        }}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton onClick={togglePasswordVisibility} edge="end">
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <ErrorMessagesComponent errorMessage={errorMessages?.password} />
-                    </div>
-                    <p className={styles.forgotYourPassword}>
-                      Forgot Your Password?
-                    </p>
-                  </div>
+                  <p className={styles.forgotYourPassword}>
+                    Forgot Your Password?
+                  </p>
                 </div>
-                <Button
-                  className={styles.inputbutton}
-                  disableElevation
-                  color="success"
-                  variant="contained"
-                  sx={{ borderRadius: "0px 0px 0px 0px" }}
-                  type="submit"
-                >
-                  {loading ? (
-                    <CircularProgress color="inherit" size={"1.8rem"} />
-                  ) : (
-                    "Login"
-                  )}
-
-                </Button>
               </div>
-            </form>
+              <Button
+                className={styles.inputbutton}
+                disableElevation
+                color="success"
+                variant="contained"
+                sx={{ borderRadius: "0px 0px 0px 0px" }}
+                // type="submit"
+                onClick={() => router.push("/devices")}
+              >
+                {loading ? (
+                  <CircularProgress color="inherit" size={"1.8rem"} />
+                ) : (
+                  "Login"
+                )}
+
+              </Button>
+            </div>
+            {/* </form> */}
           </div>
         </div>
       </div>

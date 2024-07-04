@@ -12,3 +12,23 @@ export const getAllListUsersAPI = async () => {
         throw err;
     }
 };
+
+
+export const addUserAPI = async (payload: {
+    name: string,
+    email: string,
+    phone: string,
+    status: string,
+}) => {
+    try {
+        const { success, data } = await $fetch.post("", payload);
+
+        if (!success) {
+            return handleAPIErrorResponse(data);
+        }
+
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+};
