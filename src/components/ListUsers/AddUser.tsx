@@ -2,8 +2,12 @@
 import { useState } from "react";
 import { TextField, Select, MenuItem, Button, Box, Typography } from "@mui/material";
 import { addUserAPI } from "@/services/listUsersAPIs";
+import LoadingComponent from "../Core/LoadingComponent";
+import { useRouter } from "next/navigation";
 
 const AddUser = () => {
+    const router = useRouter();
+
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
@@ -56,6 +60,7 @@ const AddUser = () => {
                 variant="outlined"
                 color="error"
                 sx={{ alignSelf: 'flex-start', mb: 2 }}
+                onClick={() => router.back()}
             >
                 Back
             </Button>
@@ -102,6 +107,7 @@ const AddUser = () => {
             >
                 Add User
             </Button>
+            <LoadingComponent loading={loading} />
         </Box>
     );
 }

@@ -7,24 +7,28 @@
   font-weight: 500;
   font-family: inherit;
 }
+
 .icondot {
   width: 6px;
   position: relative;
   border-radius: 50%;
   height: 6px;
 }
+
 .online {
   margin: 0;
   position: relative;
   line-height: 100%;
   font-weight: 500;
 }
+
 .devicename,
 .devicestatus {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
 .devicestatus {
   border-radius: var(--br-9xs);
   background-color: rgba(69, 168, 69, 0.1);
@@ -34,17 +38,20 @@
   font-size: var(--font-size-base);
   color: var(--green-brand);
 }
+
 .devicename {
   flex: 1;
   justify-content: space-between;
   padding: 0 0 0 var(--padding-base);
 }
+
 .iconsetting {
   width: 32px;
   border-radius: 5px;
   height: 32px;
   min-height: 32px;
 }
+
 .deviceheading {
   align-self: stretch;
   display: flex;
@@ -56,21 +63,25 @@
   font-size: var(--font-size-lg);
   color: var(--color-black);
 }
+
 .averageVoltageLn,
 .v {
   margin: 0;
   position: relative;
   line-height: 100%;
 }
+
 .averageVoltageLn {
   align-self: stretch;
 }
+
 .v {
   font-size: var(--font-size-base);
   font-weight: 500;
   font-family: inherit;
   color: var(--color-black);
 }
+
 .devicecolumn {
   align-self: stretch;
   display: flex;
@@ -80,12 +91,14 @@
   gap: var(--gap-7xs);
   min-width: 120px;
 }
+
 .averageVoltageLl,
 .v1 {
   margin: 0;
   position: relative;
   line-height: 100%;
 }
+
 .v1 {
   align-self: stretch;
   font-size: var(--font-size-base);
@@ -93,17 +106,20 @@
   font-family: inherit;
   color: var(--color-black);
 }
+
 .devicecolumn1,
 .devicerow {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .devicecolumn1 {
   flex-direction: column;
   gap: var(--gap-7xs);
   min-width: 120px;
 }
+
 .devicerow {
   align-self: stretch;
   border-bottom: 1px solid #eeeef0;
@@ -111,6 +127,7 @@
   padding: 0 var(--padding-base) var(--padding-xs);
   gap: var(--gap-29xl);
 }
+
 .h53 {
   margin: 0;
   position: relative;
@@ -120,12 +137,14 @@
   font-family: inherit;
   color: var(--green-gradient);
 }
+
 .devicecolumn6,
 .devicerow1 {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .devicecolumn6 {
   border-radius: var(--br-9xs);
   background-color: #e1f0dc;
@@ -134,22 +153,26 @@
   gap: var(--gap-7xs);
   font-size: 10px;
 }
+
 .devicerow1 {
   align-self: stretch;
   flex-direction: row;
   padding: 0 var(--padding-base) var(--padding-xs);
   gap: var(--gap-29xl);
 }
+
 .icontemperature {
   width: 68px;
   height: 24px;
 }
+
 .iconinfo {
   width: 20.3px;
   height: 20.3px;
   overflow: hidden;
   flex-shrink: 0;
 }
+
 .noVoltageError {
   margin: 0;
   position: relative;
@@ -158,6 +181,7 @@
   font-weight: 500;
   font-family: inherit;
 }
+
 .errormessage,
 .temperaturecolumn {
   display: flex;
@@ -165,21 +189,25 @@
   align-items: center;
   justify-content: flex-start;
 }
+
 .errormessage {
   border-radius: var(--br-41xl);
   background-color: var(--background-red);
   padding: 6px var(--padding-xs);
   gap: var(--gap-9xs);
 }
+
 .temperaturecolumn {
   gap: 19px;
 }
+
 .profileavatarIcon {
   width: 28px;
   border-radius: var(--br-41xl);
   height: 28px;
   object-fit: cover;
 }
+
 .profilename {
   margin: 0;
   flex: 1;
@@ -189,6 +217,7 @@
   font-weight: 400;
   font-family: inherit;
 }
+
 .profilegroup {
   width: 163px;
   display: flex;
@@ -197,6 +226,7 @@
   justify-content: flex-start;
   gap: var(--gap-xs);
 }
+
 .icon {
   width: 20px;
   position: relative;
@@ -204,6 +234,7 @@
   overflow: hidden;
   flex-shrink: 0;
 }
+
 .devicestatus1 {
   border-radius: var(--br-9xs);
   background-color: var(--background-red);
@@ -214,6 +245,7 @@
   font-size: var(--font-size-base);
   color: var(--red);
 }
+
 .devicestatus1,
 .devicetemperature,
 .profilecolumn {
@@ -221,12 +253,14 @@
   flex-direction: row;
   align-items: center;
 }
+
 .profilecolumn {
   justify-content: flex-start;
   gap: var(--gap-base);
   font-size: var(--font-size-sm);
   color: var(--color-black);
 }
+
 .devicetemperature {
   align-self: stretch;
   background-color: rgba(211, 217, 240, 0.4);
@@ -235,23 +269,25 @@
   font-size: var(--font-size-base);
   color: var(--red);
 }
+
 .devicegroup,
 .devicesection {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
 }
+
 .devicegroup {
   flex: 1;
   flex-direction: column;
   gap: var(--gap-5xl);
 }
+
 .devicesection {
-  width: 1340px;
+  width: 160%;
   box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
   background-color: var(--neutral-white-100);
-  max-width: 100%;
   overflow: hidden;
   flex-direction: row;
   padding: var(--padding-xs) 0 0;
@@ -260,4 +296,5 @@
   font-size: var(--font-size-xs);
   color: var(--color-gray-300);
   font-family: var(--font-inter);
+  height: 100%;
 }

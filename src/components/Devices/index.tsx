@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import DeviceSection from "./DeviceSection";
 import { getAllDevicesAPI } from "@/services/devicesAPIs";
+import LoadingComponent from "../Core/LoadingComponent";
 
 const Devices = () => {
 
@@ -30,6 +31,7 @@ const Devices = () => {
             <DeviceSection
                 devicesData={devicesData}
             />
+            <LoadingComponent loading={loading} />
         </div>
     );
 }

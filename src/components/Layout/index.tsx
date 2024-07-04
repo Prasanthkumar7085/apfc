@@ -12,9 +12,11 @@ const LayoutNavbar: FC<pageProps> = ({ children }) => {
     return (
         <div>
             <HeadNavbar />
-            <SideNavBar />
-            <div className={styles.main}>
-                {children}
+            <div style={{ display: "flex", flexDirection: "row", }}>
+                <SideNavBar />
+                <div className={styles.main}>
+                    {children}
+                </div>
             </div>
         </div>
     );

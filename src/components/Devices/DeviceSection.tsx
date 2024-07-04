@@ -1,8 +1,11 @@
 import type { NextPage } from "next";
 import styles from "./DeviceSection.module.css";
-import { Avatar, Stack } from "@mui/material";
+import { Avatar, Button, Stack } from "@mui/material";
+import { useState } from "react";
+import AssignUserDialog from "./AssignUserDialog";
 
 const DeviceSection = ({ devicesData }: any) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   return (
     <>
       {
@@ -73,6 +76,9 @@ const DeviceSection = ({ devicesData }: any) => {
                     )}
                   </div>
                   <div className={styles.profilecolumn}>
+                    <Button variant="outlined" onClick={() => setDialogOpen(true)}>
+                      Assign User
+                    </Button>
                     <div className={styles.profilegroup}>
                       <Stack direction="row" spacing={2}>
                         <Avatar sx={{ bgcolor: "orange" }}>
@@ -96,6 +102,10 @@ const DeviceSection = ({ devicesData }: any) => {
             </div>
           )
         })}
+      <AssignUserDialog
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+      />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import TanStackTableComponent from "../Core/TanStackTableComponent";
 import { ListUserColumns } from "./ListUsersColumns";
 import { getAllListUsersAPI } from "@/services/listUsersAPIs";
+import LoadingComponent from "../Core/LoadingComponent";
 
 const ListUsers = () => {
 
@@ -27,12 +28,13 @@ const ListUsers = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{ width: "100%" }}>
             <TanStackTableComponent
                 data={usersData}
                 columns={ListUserColumns}
                 loading={loading}
             />
+            <LoadingComponent loading={loading} />
         </div>
     );
 }
