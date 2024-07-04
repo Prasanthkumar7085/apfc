@@ -28,7 +28,7 @@ const ListUsers = () => {
     }, [])
 
     return (
-        <div style={{ width: "100%" }}>
+        <div>
             <TanStackTableComponent
                 data={usersData}
                 columns={ListUserColumns}
