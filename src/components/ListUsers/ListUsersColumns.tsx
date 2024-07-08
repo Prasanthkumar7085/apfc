@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const ListUserColumns = [
     {
         accessorFn: (row: any) => row.first_name,
@@ -60,11 +62,11 @@ export const ListUserColumns = [
         width: "150px",
     },
     {
-        accessorFn: (row: any) => row.devices_assigend,
-        id: "devices_assigend",
+        accessorFn: (row: any) => row.device_ids,
+        id: "device_ids",
         header: () => <span>Devices Assigend</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+            return <span>{info.getValue() ? info.getValue()?.length : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",
@@ -74,7 +76,34 @@ export const ListUserColumns = [
         id: "actions",
         header: () => <span>Actions</span>,
         cell: (info: any) => {
-            return <span></span>;
+            return (
+                <div style={{ display: "flex", gap: "1rem" }}>
+                    <div title="User View" style={{ cursor: "pointer" }}>
+                        <Image
+                            alt=""
+                            src="/user-view.svg"
+                            width={20}
+                            height={20}
+                        />
+                    </div>
+                    <div title="User Edit" style={{ cursor: "pointer" }}>
+                        <Image
+                            alt=""
+                            src="/edit-user.svg"
+                            width={20}
+                            height={20}
+                        />
+                    </div>
+                    <div title="User Delete" style={{ cursor: "pointer" }}>
+                        <Image
+                            alt=""
+                            src="/delete-user.svg"
+                            width={20}
+                            height={20}
+                        />
+                    </div>
+                </div>
+            );
         },
         footer: (props: any) => props.column.id,
         width: "150px",
