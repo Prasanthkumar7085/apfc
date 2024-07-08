@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const ListUserColumns = [
     {
         accessorFn: (row: any) => row.first_name,
@@ -60,23 +62,14 @@ export const ListUserColumns = [
         width: "150px",
     },
     {
-        accessorFn: (row: any) => row.devices_assigend,
-        id: "devices_assigend",
+        accessorFn: (row: any) => row.device_ids,
+        id: "device_ids",
         header: () => <span>Devices Assigend</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+            return <span>{info.getValue() ? info.getValue()?.length : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",
     },
-    {
-        accessorFn: (row: any) => row.actions,
-        id: "actions",
-        header: () => <span>Actions</span>,
-        cell: (info: any) => {
-            return <span></span>;
-        },
-        footer: (props: any) => props.column.id,
-        width: "150px",
-    },
+
 ]

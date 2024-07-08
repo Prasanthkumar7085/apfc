@@ -8,10 +8,11 @@ import {
   TextField
 } from "@mui/material";
 import styles from "./HeadNavbar.module.css";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const HeadNavbar = () => {
   const router = useRouter();
+  const path = usePathname();
   return (
     <div className={styles.headnav}>
       <h4 className={styles.pagetitle}>Devices</h4>
@@ -78,14 +79,18 @@ const HeadNavbar = () => {
             <FormHelperText />
           </FormControl>
         </div>
-        <div>
-          <Button
-            variant='contained'
-            onClick={() => router.push("/users/add")}
-          >
-            Add User
-          </Button>
-        </div>
+        {path?.includes("/users") ? (
+          <div>
+            <Button
+              variant='contained'
+              onClick={() => router.push("/users/add")}
+            >
+              Add User
+            </Button>
+          </div>
+        ) : (
+          ""
+        )}
         <div className={styles.profilegroup}>
           <img className={styles.avatarIcon} alt="" src="/avatar@2x.png" />
           <div className={styles.profilename}>

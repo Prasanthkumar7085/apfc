@@ -32,3 +32,15 @@ export const addUserAPI = async (payload: {
         console.error(err);
     }
 };
+
+export const getSigleUserAPI = async () => {
+    try {
+        const { success, data } = await $fetch.get(`/6683a734e41b4d34e40bed62 `);
+        if (!success) {
+            return handleAPIErrorResponse(data);
+        }
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
