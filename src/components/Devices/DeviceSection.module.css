@@ -244,6 +244,7 @@
   gap: var(--gap-3xs);
   font-size: var(--font-size-base);
   color: var(--red);
+  cursor: pointer;
 }
 
 .devicestatus1,

@@ -3,8 +3,10 @@ import styles from "./DeviceSection.module.css";
 import { Avatar, Button, Stack } from "@mui/material";
 import { useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
+import { useRouter } from "next/navigation";
 
 const DeviceSection = ({ devicesData }: any) => {
+  const router = useRouter();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   return (
@@ -93,7 +95,12 @@ const DeviceSection = ({ devicesData }: any) => {
                       /> */}
                       <h4 className={styles.profilename}>{item?.user?.first_name + " " + item?.user?.last_name || "--"}</h4>
                     </div>
-                    <div className={styles.devicestatus1}>
+                    <div
+                      className={styles.devicestatus1}
+                      onClick={() => {
+                        router.push(`/devices/${item?.id}`)
+                      }}
+                    >
                       <img className={styles.icon} alt="" src="/icon2.svg" />
                       <h6 className={styles.noVoltageError}>View</h6>
                     </div>
