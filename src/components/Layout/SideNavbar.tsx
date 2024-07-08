@@ -1,20 +1,22 @@
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import styles from "./SideNavbar.module.css";
 
 const SideNavBar = () => {
   const router = useRouter();
+  const path = usePathname();
+
   return (
     <div className={styles.navbar}>
       <div className={styles.headermenu}>
         <img className={styles.logoIcon} alt="" src="/logo1.svg" />
         <div className={styles.navgroup}>
-          <div className={styles.menuItem}
+          <div className={path.includes("/devices") ? styles.menuItem : styles.menuItem1}
             onClick={() => router.push("/devices")}
           >
             <img className={styles.server1Icon} alt="" src="/server-1.svg" />
             <h6 className={styles.devices}>Devices</h6>
           </div>
-          <div className={styles.menuItem1}
+          <div className={path.includes("/users") ? styles.menuItem : styles.menuItem1}
             onClick={() => router.push("/users")}
           >
             <img
