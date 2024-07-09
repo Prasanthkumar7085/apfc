@@ -88,10 +88,7 @@ const LoginPage = () => {
                 <label className="formLabel">User Name</label>
                 <TextField
                   autoComplete="new-email"
-                  className="inputtype"
-                  color="primary"
                   variant="outlined"
-                  sx={{ "& .MuiInputBase-root": { height: "48px" } }}
                   name="email"
                   type={"text"}
                   value={email}
@@ -106,9 +103,7 @@ const LoginPage = () => {
                 <label className="formLabel">Password</label>
                 <TextField
                   autoComplete="new-password"
-                  className="inputtype"
                   variant="outlined"
-                  sx={{ "& .MuiInputBase-root": { height: "48px" } }}
                   name="password"
                   type={showPassword ? "text" : "password"}
                   value={password}
@@ -120,20 +115,24 @@ const LoginPage = () => {
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton onClick={togglePasswordVisibility} edge="end">
-                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                          {showPassword ? <VisibilityOff sx={{ fontSize: "1.2rem" }} /> : <Visibility sx={{ fontSize: "1.2rem" }} />}
                         </IconButton>
                       </InputAdornment>
                     ),
                   }}
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.password} />
-                <p className="forgotYourPassword">
-                  Forgot Your Password?
-                </p>
+                <div className="forgotBtnGrp">
+
+                  <Button variant="text" className="forgotBtn">
+                    Forgot Your Password ?
+                  </Button>
+                </div>
               </div>
               <Button
-                className="inputbutton"
+                className="loginBtn"
                 variant="contained"
+                fullWidth
                 onClick={() => router.push("/devices")}
               >
                 {loading ? (
