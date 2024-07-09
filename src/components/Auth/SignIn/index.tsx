@@ -6,6 +6,7 @@ import {
   IconButton,
   Button,
   CircularProgress,
+  Grid,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Cookies from "js-cookie";
@@ -68,84 +69,86 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="loginpage">
-      <div className="login">
-        <Image className="imageIcon" alt="" src="/image@2x.jpg" height={10} width={10} />
-        <div className="loginsection">
-          <Image className="logoIcon" alt="" src="/logo.svg" height={10} width={10} />
-          <div className="logingroup">
-            <div className="titlegroup">
-              <p className="paragraph">LOGIN</p>
-              <h2 className="title">
-                Welcome to the Peepul Agri APFC Application
-              </h2>
-            </div>
-            <div className="inputsection">
-              <div className="inputgroup">
-                <div className="inputusername">
-                  <label className="label">User Name</label>
-                  <TextField
-                    className="inputtype"
-                    color="primary"
-                    variant="outlined"
-                    sx={{ "& .MuiInputBase-root": { height: "48px" } }}
-                    name="email"
-                    type={"text"}
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                      setErrorMessages(null);
-                    }}
-                  />
-                  <ErrorMessagesComponent errorMessage={errorMessages?.email} />
-                </div>
-                <div className="inputpassword">
-                  <div className="passwordgroup">
-                    <label className="label">Password</label>
+    <div className="loginPage">
+      <Grid container>
+        <Grid item lg={8}>
+          <picture>
+            <img className="loginImg" alt="" src="/image@2x.jpg" />
+          </picture>
+        </Grid>
+        <Grid item lg={4}>
+          <div className="formContainer">
+            <Image className="logoIcon" alt="" src="/logo.svg" height={90} width={10} />
+                <p className="formTitle">LOGIN</p>
+                <h2 className="formSubTitle">
+                  Welcome to the Peepul Agri APFC Application
+                </h2>
+              <div className="inputsection">
+                <div className="inputgroup">
+                  <div className="inputusername">
+                    <label className="label">User Name</label>
                     <TextField
                       className="inputtype"
+                      color="primary"
                       variant="outlined"
                       sx={{ "& .MuiInputBase-root": { height: "48px" } }}
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
+                      name="email"
+                      type={"text"}
+                      value={email}
                       onChange={(e) => {
-                        setPassword(e.target.value);
+                        setEmail(e.target.value);
                         setErrorMessages(null);
                       }}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="end">
-                            <IconButton onClick={togglePasswordVisibility} edge="end">
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        ),
-                      }}
                     />
-                    <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+                    <ErrorMessagesComponent errorMessage={errorMessages?.email} />
                   </div>
-                  <p className="forgotYourPassword">
-                    Forgot Your Password?
-                  </p>
+                  <div className="inputpassword">
+                    <div className="passwordgroup">
+                      <label className="label">Password</label>
+                      <TextField
+                        className="inputtype"
+                        variant="outlined"
+                        sx={{ "& .MuiInputBase-root": { height: "48px" } }}
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => {
+                          setPassword(e.target.value);
+                          setErrorMessages(null);
+                        }}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="end">
+                              <IconButton onClick={togglePasswordVisibility} edge="end">
+                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                        }}
+                      />
+                      <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+                    </div>
+                    <p className="forgotYourPassword">
+                      Forgot Your Password?
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <Button
-                className="inputbutton"                
-                variant="contained"
-                onClick={() => router.push("/devices")}
-              >
-                {loading ? (
-                  <CircularProgress color="inherit" size={"1.8rem"} />
-                ) : (
-                  "Login"
-                )}
+                <Button
+                  className="inputbutton"
+                  variant="contained"
+                  onClick={() => router.push("/devices")}
+                >
+                  {loading ? (
+                    <CircularProgress color="inherit" size={"1.8rem"} />
+                  ) : (
+                    "Login"
+                  )}
 
-              </Button>
-            </div>
+                </Button>
+              </div>
           </div>
-        </div>
-      </div>
+        </Grid>
+      </Grid>
     </div>
   );
 };
