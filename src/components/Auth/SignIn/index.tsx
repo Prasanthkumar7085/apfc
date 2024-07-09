@@ -70,85 +70,83 @@ const LoginPage = () => {
 
   return (
     <div className="loginPage">
-      <Grid container>
-        <Grid item lg={8}>
+      <div className="loginContainer">
+        <div className="leftContainer">
           <picture>
-            <img className="loginImg" alt="" src="/image@2x.jpg" />
+            <img className="loginImg" alt="" src="/login-image.png" />
           </picture>
-        </Grid>
-        <Grid item lg={4}>
+        </div>
+        <div className="rightContainer" >
           <div className="formContainer">
             <Image className="logoIcon" alt="" src="/logo.svg" height={90} width={10} />
-                <p className="formTitle">LOGIN</p>
-                <h2 className="formSubTitle">
-                  Welcome to the Peepul Agri APFC Application
-                </h2>
-              <div className="inputsection">
-                <div className="inputgroup">
-                  <div className="inputusername">
-                    <label className="label">User Name</label>
-                    <TextField
-                      className="inputtype"
-                      color="primary"
-                      variant="outlined"
-                      sx={{ "& .MuiInputBase-root": { height: "48px" } }}
-                      name="email"
-                      type={"text"}
-                      value={email}
-                      onChange={(e) => {
-                        setEmail(e.target.value);
-                        setErrorMessages(null);
-                      }}
-                    />
-                    <ErrorMessagesComponent errorMessage={errorMessages?.email} />
-                  </div>
-                  <div className="inputpassword">
-                    <div className="passwordgroup">
-                      <label className="label">Password</label>
-                      <TextField
-                        className="inputtype"
-                        variant="outlined"
-                        sx={{ "& .MuiInputBase-root": { height: "48px" } }}
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        value={password}
-                        onChange={(e) => {
-                          setPassword(e.target.value);
-                          setErrorMessages(null);
-                        }}
-                        InputProps={{
-                          endAdornment: (
-                            <InputAdornment position="end">
-                              <IconButton onClick={togglePasswordVisibility} edge="end">
-                                {showPassword ? <VisibilityOff /> : <Visibility />}
-                              </IconButton>
-                            </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <ErrorMessagesComponent errorMessage={errorMessages?.password} />
-                    </div>
-                    <p className="forgotYourPassword">
-                      Forgot Your Password?
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  className="inputbutton"
-                  variant="contained"
-                  onClick={() => router.push("/devices")}
-                >
-                  {loading ? (
-                    <CircularProgress color="inherit" size={"1.8rem"} />
-                  ) : (
-                    "Login"
-                  )}
-
-                </Button>
+            <p className="formTitle">LOGIN</p>
+            <h2 className="formSubTitle">
+              Welcome to the Peepul Agri APFC Application
+            </h2>
+            <div className="formsBlock">
+              <div className="InputFeild">
+                <label className="formLabel">User Name</label>
+                <TextField
+                  autoComplete="new-email"
+                  className="inputtype"
+                  color="primary"
+                  variant="outlined"
+                  sx={{ "& .MuiInputBase-root": { height: "48px" } }}
+                  name="email"
+                  type={"text"}
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setErrorMessages(null);
+                  }}
+                />
+                <ErrorMessagesComponent errorMessage={errorMessages?.email} />
               </div>
+              <div className="InputFeild">
+                <label className="formLabel">Password</label>
+                <TextField
+                  autoComplete="new-password"
+                  className="inputtype"
+                  variant="outlined"
+                  sx={{ "& .MuiInputBase-root": { height: "48px" } }}
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setErrorMessages(null);
+                  }}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={togglePasswordVisibility} edge="end">
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                />
+                <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+                <p className="forgotYourPassword">
+                  Forgot Your Password?
+                </p>
+              </div>
+              <Button
+                className="inputbutton"
+                variant="contained"
+                onClick={() => router.push("/devices")}
+              >
+                {loading ? (
+                  <CircularProgress color="inherit" size={"1.8rem"} />
+                ) : (
+                  "Login"
+                )}
+
+              </Button>
+            </div>
           </div>
-        </Grid>
-      </Grid>
+        </div>
+      </div>
     </div>
   );
 };
