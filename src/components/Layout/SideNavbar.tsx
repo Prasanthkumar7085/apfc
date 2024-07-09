@@ -8,7 +8,7 @@ const SideNavBar = () => {
 
   return (
     <div className="navbar">
-      <div className="headermenu">
+      <div className="headerMenu">
         <Image
           className="logoIcon"
           alt=""
