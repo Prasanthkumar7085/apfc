@@ -1,0 +1,84 @@
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(5, 161, 85, 0.1);
+  border-right: 1px solid var(--stroke);
+  box-sizing: border-box;
+  width: 12rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--padding-xl) var(--padding-5xs);
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 1rem 1rem;
+  .menuTxt {
+  margin: 0;
+  flex: 1;
+  position: relative;
+  font-size: inherit;
+  line-height: 100%;
+  font-weight: 400;
+  font-family: inherit;
+}
+  .headermenu {
+    gap: var(--gap-61xl);
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+    display: flex;
+    justify-content: flex-start;
+    .navgroup {
+      gap: 13px;
+      flex-direction: column;
+      align-items: flex-start;
+      align-self: stretch;
+      display: flex;
+      justify-content: flex-start;
+
+      .menuBtn {
+        border-radius: var(--br-3xs);
+        background-color: var(--green-brand);
+        flex-direction: row;
+        align-items: center;
+        padding: var(--padding-xs);
+        gap: var(--gap-5xs);
+        cursor: pointer;
+        align-self: stretch;
+        display: flex;
+        justify-content: flex-start;
+      }
+
+      .menuBtnActive {
+        border-radius: var(--br-3xs);
+        background-color: var(--neutral-white-100);
+        border: 1px solid var(--color-gray-100);
+        flex-direction: row;
+        align-items: center;
+        padding: var(--padding-xs);
+        gap: var(--gap-5xs);
+        color: var(--primarytext);
+        cursor: pointer;
+        align-self: stretch;
+        display: flex;
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  .helpbutton {
+    align-self: stretch;
+    border-radius: var(--br-3xs);
+    background-color: var(--neutral-white-100);
+    border: 1px solid var(--color-gray-100);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: var(--padding-xs);
+    gap: var(--gap-5xs);
+    color: var(--neutral-black-90);
+  }
+}

@@ -1,36 +1,42 @@
 import { usePathname, useRouter } from "next/navigation";
-import styles from "./SideNavbar.module.css";
+import "./SideNavbar.scss";
+import Image from "next/image";
 
 const SideNavBar = () => {
   const router = useRouter();
   const path = usePathname();
 
   return (
-    <div className={styles.navbar}>
-      <div className={styles.headermenu}>
-        <img className={styles.logoIcon} alt="" src="/logo1.svg" />
-        <div className={styles.navgroup}>
-          <div className={path.includes("/devices") ? styles.menuItem : styles.menuItem1}
+    <div className="navbar">
+      <div className="headermenu">
+        <Image
+          className="logoIcon"
+          alt=""
+          src="/logo1.svg"
+          width={60}
+          height={60}
+        />
+
+        <div className="navgroup">
+          <div
+            className={path.includes("/devices") ? "menuBtn" : "menuBtnActive"}
             onClick={() => router.push("/devices")}
           >
-            <img className={styles.server1Icon} alt="" src="/server-1.svg" />
-            <h6 className={styles.devices}>Devices</h6>
+            <Image alt="" src="/server-1.svg" width={20} height={20} />
+            <h6 className="menuTxt">Devices</h6>
           </div>
-          <div className={path.includes("/users") ? styles.menuItem : styles.menuItem1}
+          <div
+            className={path.includes("/users") ? "menuBtn" : "menuBtnActive"}
             onClick={() => router.push("/users")}
           >
-            <img
-              className={styles.server1Icon}
-              alt=""
-              src="/usersavatar-1-1.svg"
-            />
-            <h6 className={styles.devices}>Users</h6>
+            <Image alt="" src="/usersavatar-1-1.svg" width={20} height={20} />
+            <h6 className="menuTxt">Users</h6>
           </div>
         </div>
       </div>
-      <div className={styles.helpbutton}>
-        <img className={styles.icon} alt="" src="/icon.svg" />
-        <h6 className={styles.devices}>Need Help</h6>
+      <div className="helpbutton">
+        <Image alt="" src="/icon.svg" width={24} height={24} />
+        <h6 className="menuTxt">Need Help</h6>
       </div>
     </div>
   );

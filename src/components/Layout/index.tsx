@@ -10,15 +10,16 @@ interface pageProps {
 const LayoutNavbar: FC<pageProps> = ({ children }) => {
 
     return (
-        <div>
-            <HeadNavbar />
-            <div style={{ display: "flex", flexDirection: "row", }}>
-                <SideNavBar />
+        <div style={{ display: "flex", flexDirection: "row",height:"100vh",overflow:"auto" ,marginLeft:"12rem"}}>
+            <SideNavBar />
+            <div>
+                <HeadNavbar />
                 <div className={styles.main}>
                     {children}
                 </div>
             </div>
         </div>
+
     );
 }
 export default LayoutNavbar; 
