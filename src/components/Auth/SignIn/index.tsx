@@ -13,10 +13,10 @@ import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
 import { useRouter } from "next/navigation";
-import styles from "./index.module.css";
 import { signInAPI } from "@/services/authAPIs";
 import { setUserDetails } from "@/redux/Modules/userlogin";
 import ErrorMessagesComponent from "@/components/Core/ErrorMessagesComponent";
+import Image from "next/image";
 
 
 const LoginPage = () => {
@@ -68,25 +68,24 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={styles.loginpage}>
-      <div className={styles.login}>
-        <img className={styles.imageIcon} alt="" src="/image@2x.jpg" />
-        <div className={styles.loginsection}>
-          <img className={styles.logoIcon} alt="" src="/logo.svg" />
-          <div className={styles.logingroup}>
-            {/* <form onSubmit={signIn}> */}
-            <div className={styles.titlegroup}>
-              <p className={styles.paragraph}>LOGIN</p>
-              <h2 className={styles.title}>
+    <div className="loginpage">
+      <div className="login">
+        <Image className="imageIcon" alt="" src="/image@2x.jpg" height={10} width={10} />
+        <div className="loginsection">
+          <Image className="logoIcon" alt="" src="/logo.svg" height={10} width={10} />
+          <div className="logingroup">
+            <div className="titlegroup">
+              <p className="paragraph">LOGIN</p>
+              <h2 className="title">
                 Welcome to the Peepul Agri APFC Application
               </h2>
             </div>
-            <div className={styles.inputsection}>
-              <div className={styles.inputgroup}>
-                <div className={styles.inputusername}>
-                  <label className={styles.label}>User Name</label>
+            <div className="inputsection">
+              <div className="inputgroup">
+                <div className="inputusername">
+                  <label className="label">User Name</label>
                   <TextField
-                    className={styles.inputtype}
+                    className="inputtype"
                     color="primary"
                     variant="outlined"
                     sx={{ "& .MuiInputBase-root": { height: "48px" } }}
@@ -100,12 +99,11 @@ const LoginPage = () => {
                   />
                   <ErrorMessagesComponent errorMessage={errorMessages?.email} />
                 </div>
-                <div className={styles.inputpassword}>
-                  <div className={styles.passwordgroup}>
-                    <label className={styles.label}>Password</label>
+                <div className="inputpassword">
+                  <div className="passwordgroup">
+                    <label className="label">Password</label>
                     <TextField
-                      className={styles.inputtype}
-                      color="primary"
+                      className="inputtype"
                       variant="outlined"
                       sx={{ "& .MuiInputBase-root": { height: "48px" } }}
                       name="password"
@@ -127,18 +125,14 @@ const LoginPage = () => {
                     />
                     <ErrorMessagesComponent errorMessage={errorMessages?.password} />
                   </div>
-                  <p className={styles.forgotYourPassword}>
+                  <p className="forgotYourPassword">
                     Forgot Your Password?
                   </p>
                 </div>
               </div>
               <Button
-                className={styles.inputbutton}
-                disableElevation
-                color="success"
+                className="inputbutton"                
                 variant="contained"
-                sx={{ borderRadius: "0px 0px 0px 0px" }}
-                // type="submit"
                 onClick={() => router.push("/devices")}
               >
                 {loading ? (
@@ -149,7 +143,6 @@ const LoginPage = () => {
 
               </Button>
             </div>
-            {/* </form> */}
           </div>
         </div>
       </div>

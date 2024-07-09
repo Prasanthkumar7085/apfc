@@ -3,6 +3,7 @@ import LayoutNavbar from "@/components/Layout";
 import { Providers } from "@/redux/Provider";
 import { usePathname } from "next/navigation";
 import "./globals.css";
+import "@/components/styles/app.scss"
 
 
 export default function RootLayout({
