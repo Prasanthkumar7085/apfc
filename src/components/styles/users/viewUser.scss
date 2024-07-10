@@ -3,9 +3,12 @@ $labelColor: #4f4f4f;
 $inputBorderColor: #9c9c9c;
 $inputHoverBorder: #2f80ed;
 $inputTxtColor: #bdbdbd;
+$avatharColor: #ff7a00;
 
 #viewUserPage {
   width: 100%;
+  font-family: "Inter", sans-serif !important;
+
   .backBtn {
     border-radius: 4px;
     border: 1px solid $backBtnCOlor;
@@ -17,43 +20,42 @@ $inputTxtColor: #bdbdbd;
     padding: 1px 2px 1px 6px;
     margin-bottom: 1.5rem;
   }
-}
-
-/* Avatar */
-.profileavatarIcon {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: orange;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: white;
-}
-
-.profilename {
-  font-size: 18px;
-  font-weight: 600;
-  margin: 8px 0;
-}
-
-.profilegroup {
-  display: flex;
-  align-items: center;
-}
-
-.iconstatus {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-  color: green;
-}
-
-.statusicon {
-  width: 10px;
-  height: 10px;
+  .userInfo {
+    .profileGrp {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      .profileavatarIcon {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background-color: $avatharColor;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        color: $whiteColor;
+        font-family: "Inter";
+        font-weight: 500;
+      }
+      .profileName {
+        color: $blackColor;
+        font-size: clamp(14px, 0.93vw, 20px);
+        font-weight: 400;
+        line-height: 100%;
+        margin: 0;
+        padding-right: 0.5rem;
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        color: $greenColor;
+        font-size: clamp(13px, 0.83vw, 16px);
+        font-weight: 400;
+      }
+    }
+  }
 }
 
 /* User Info */
