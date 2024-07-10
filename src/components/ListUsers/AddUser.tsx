@@ -100,7 +100,7 @@ const AddUser = () => {
                 className="addUserBtn"
                 variant="contained"
                 color="success"
-                sx={{alignSelf:"end" }}
+                sx={{alignSelf:"flex-end" }}
                 
             >
                 Add User

@@ -35,40 +35,42 @@ const SingleUserView = () => {
     }, [])
 
     return (
-        <div style={{ width: "100%" }}>
+        <div id="viewUserPage" >
             <Button
                 variant="outlined"
-                color="error"
+                className="backBtn"
                 sx={{ alignSelf: 'flex-start', mb: 2 }}
                 onClick={() => router.back()}
+                startIcon={<Image src="/users/back-icon.svg" alt="" width={13} height={13} />}
+
             >
                 Back
             </Button>
-            <div className={styles.profilegroup}>
-                <Avatar className={styles.profileavatarIcon}>
+            <div className="profilegroup">
+                <Avatar className="profileavatarIcon">
                     {usersData?.first_name?.[0]}{usersData?.last_name?.[0]}
                 </Avatar>
                 <div>
-                    <h4 className={styles.profilename}>{usersData?.first_name + " " + usersData?.last_name}</h4>
-                    <div className={styles.iconstatus}>
-                        <Image className={styles.statusicon} alt="" src="/Completed 1.svg" width={10} height={10} />
+                    <h4 className="profilename">{usersData?.first_name + " " + usersData?.last_name}</h4>
+                    <div className="iconstatus">
+                        <Image className="statusicon" alt="" src="/Completed 1.svg" width={10} height={10} />
                         <span>{usersData?.status}</span>
                     </div>
-                    <div className={styles.userinfo}>
+                    <div className="userinfo">
                         <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
                         <span>{usersData?.updated_at}</span>
                     </div>
-                    <div className={styles.userinfo}>
+                    <div className="userinfo">
                         <Image alt="" src="/mail.svg" width={15} height={15} />
                         <span>{usersData?.email}</span>
                     </div>
-                    <div className={styles.userinfo}>
+                    <div className="userinfo">
                         <Image alt="" src="/phone.svg" width={15} height={15} />
                         <span>{usersData?.phone}</span>
                     </div>
                 </div>
             </div>
-            <div className={styles.devicesection}>
+            <div className="devicesection">
                 <h4>Devices</h4>
                 <DeviceSection
                     devicesData={data}
