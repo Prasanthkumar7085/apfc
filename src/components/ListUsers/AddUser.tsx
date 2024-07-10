@@ -4,6 +4,7 @@ import { TextField, Select, MenuItem, Button, Box, Typography } from "@mui/mater
 import { addUserAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const AddUser = () => {
     const router = useRouter();
@@ -42,68 +43,65 @@ const AddUser = () => {
     };
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                padding: 3,
-                backgroundColor: 'white',
-                borderRadius: 2,
-                boxShadow: 3,
-                width: 400,
-                margin: 'auto',
-                mt: 5,
-            }}
-        >
+        <Box id="addUser">
             <Button
+                className="backBtn"
                 variant="outlined"
-                color="error"
                 sx={{ alignSelf: 'flex-start', mb: 2 }}
                 onClick={() => router.back()}
+                startIcon={<Image src="/users/back-icon.svg" alt="" width={13} height={13} />}
             >
                 Back
             </Button>
-            <TextField
-                label="Name*"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="User Name"
-                fullWidth
-                margin="normal"
-            />
-            <TextField
-                label="Email*"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="User Email"
-                fullWidth
-                margin="normal"
-            />
-            <TextField
-                label="Mobile*"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="User Mobile"
-                fullWidth
-                margin="normal"
-            />
-            <Select
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                displayEmpty
-                fullWidth
-                sx={{ mb: 2 }}
-                placeholder="Select Status"
-            >
-                <MenuItem value="active">Active</MenuItem>
-                <MenuItem value="inactive">Inactive</MenuItem>
-            </Select>
+            <div className="feildBlock">
+                <label className="label">Name <span>*</span></label>
+                <TextField
+                    className="textFeild"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="User Name"
+                    fullWidth
+                />
+            </div>
+            <div className="feildBlock">
+                <label className="label">Email <span>*</span></label>
+                <TextField
+                    className="textFeild"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="User Email"
+                    fullWidth
+                />
+            </div>
+            <div className="feildBlock">
+                <label className="label">Mobile <span>*</span></label>
+                <TextField
+                    className="textFeild"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="User Mobile"
+                    fullWidth
+                />
+            </div>
+            <div className="feildBlock">
+                <label className="label">Status <span>*</span></label>
+                <Select
+                    className="selectComponent"
+                    value={status}
+                    onChange={(e) => setStatus(e.target.value)}
+                    displayEmpty
+                    fullWidth
+                >
+                    <MenuItem className="menuItem" value="active">Active</MenuItem>
+                    <MenuItem className="menuItem" value="inactive">Inactive</MenuItem>
+                </Select>
+            </div>
             <Button
+                className="addUserBtn"
                 variant="contained"
                 color="success"
-                sx={{ mt: 2 }}
-                fullWidth
+                sx={{alignSelf:"end" }}
+                
             >
                 Add User
             </Button>
