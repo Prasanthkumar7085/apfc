@@ -82,19 +82,70 @@
 }
 .headnav {
   width: 100%;
-  background-color: var(--neutral-white-100);
-  border-bottom: 1px solid var(--border-color-2);
+  background-color: $whiteColor;
   box-sizing: border-box;
   max-width: 100%;
   overflow: hidden;
   justify-content: space-between;
   padding: var(--padding-base) var(--padding-5xl);
-  text-align: left;
-  font-size: 18px;
-  color: var(--color-black);
-  font-family: var(--font-inter);
   position: sticky;
   top: 0;
   z-index: 999;
-  border-bottom: 1px solid var(--Border-color-2, #d5d9dd);
+  border-bottom: 1px solid #d5d9dd;
+  .navActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+    width: 80%;
+
+    .defaultTextFeild {
+      width: 250px;
+      .MuiInputBase-root {
+        background: $whiteColor;
+        color: $blackColor;
+        font-weight: 400;
+        font-size: 13.5px;
+        box-sizing: border-box;
+        border-radius: 3;
+        height: 30px;
+        border: 1px solid #d2dff4;
+        font-family: "Poppins", sans-serif;
+        font-size: clamp(0.75em, 0.72vw, 1.1em);
+
+        fieldset {
+          border: 0 !important;
+        }
+      }
+    }
+    .defaultSelect {
+      width: 150px;
+      .MuiSelect-select {
+        width: 100%;
+        font-family: "Poppins", sans-serif;
+        padding: 3px 11px !important;
+        font-size: clamp(0.75em, 0.72vw, 1.1em);
+        border: 1px solid #d2dff4;
+        border-radius: 4px;
+      }
+      .MuiSvgIcon-root {
+        width: 0.9em;
+      }
+      fieldset {
+        border: 0;
+        border-radius: 4px;
+      }
+    }
+    .addUserBtn {
+      border-radius: 4px;
+      background: $primaryColor;
+      text-transform: capitalize;
+      color: $whiteColor;
+      font-family: "Inter", sans-serif;
+      font-size: clamp(11px, 0.72vw, 15px);
+      font-weight: 500;
+      padding: 5px 10px;
+      box-shadow: none;
+    }
+  }
 }
