@@ -48,31 +48,31 @@ const ListUsers = () => {
                             <Image
                                 alt=""
                                 src="/user-view.svg"
-                                width={20}
-                                height={20}
+                                width={15}
+                                height={15}
                             />
                         </div>
                         <div title="User Edit" style={{ cursor: "pointer" }}>
                             <Image
                                 alt=""
                                 src="/edit-user.svg"
-                                width={20}
-                                height={20}
+                                width={13}
+                                height={13}
                             />
                         </div>
                         <div title="User Delete" style={{ cursor: "pointer" }}>
                             <Image
                                 alt=""
                                 src="/delete-user.svg"
-                                width={20}
-                                height={20}
+                                width={15}
+                                height={15}
                             />
                         </div>
                     </div>
                 );
             },
             footer: (props: any) => props.column.id,
-            width: "150px",
+            width: "100px",
         },
     ]
 

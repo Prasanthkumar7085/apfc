@@ -46,10 +46,12 @@ export const ListUserColumns = [
         id: "status",
         header: () => <span>Status</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+            const value = info.getValue();
+            const capitalizedValue = value ? value.charAt(0).toUpperCase() + value.slice(1) : "--";
+            return <span className={value === "active" ? "status active" : "status inactive"}>{capitalizedValue}</span>;
         },
         footer: (props: any) => props.column.id,
-        width: "150px",
+        width: "100px",
     },
     {
         accessorFn: (row: any) => row.last_login,
@@ -66,7 +68,7 @@ export const ListUserColumns = [
         id: "device_ids",
         header: () => <span>Devices Assigend</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? info.getValue()?.length : "--"}</span>;
+            return <span className="assignDeviceText">{info.getValue() ? info.getValue()?.length : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",

@@ -40,7 +40,7 @@ $bodyBorderColor: #edf2f7;
             color: $blackColor;
             font-size: clamp(12px, 0.72vw, 16px);
             font-style: normal;
-            font-weight: 600;
+            font-weight: 500;
             text-transform: capitalize;
             box-sizing: border-box;
             padding: 0 12px;
@@ -69,12 +69,13 @@ $bodyBorderColor: #edf2f7;
       .tbody {
         .table-row {
           .cell {
-            padding: 4px 12px !important;
+            padding: 6px 12px !important;
             font-size: clamp(12px, 0.72vw, 16px);
             text-align: start;
             box-shadow: none !important;
             background-color: $whiteColor !important;
-            border-bottom: 1px solid $bodyBorderColor;
+            font-weight: 400;
+            color: $blackColor;
             &:first-child {
               @include first-child-sticky;
             }

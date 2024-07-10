@@ -1,3 +1,37 @@
 #usersPage {
-    // background-color: red;
+  .table {
+    .assignDeviceText {
+      border-radius: 2px;
+      background: #dce9fe;
+      font-weight: 400;
+      height: 25px;
+      width: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .status {
+      position: relative;
+      padding-left: 10px;
+      &::before {
+        content: "";
+        position: absolute;
+        height: 8px;
+        width: 8px;
+        border-radius: 50px;
+        top: calc(50% - 3px);
+        left: -4px;
+      }
+      &.active {
+        &::before {
+          background-color: green;
+        }
+      }
+      &.inactive {
+        &::before {
+          background-color: red;
+        }
+      }
+    }
+  }
 }
