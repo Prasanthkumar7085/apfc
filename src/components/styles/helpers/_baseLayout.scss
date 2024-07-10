@@ -1,0 +1,21 @@
+$baseLayoutBackground:#F5F7FA;
+
+.mainBodyContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: auto;
+  margin-left: 12rem;
+  .mainContainer {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    background: $baseLayoutBackground;
+    .mainChlidren {
+      width: 100%;
+      position: relative;
+      box-sizing: border-box;
+      padding: 1.5rem;
+    }
+  }
+}

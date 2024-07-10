@@ -35,45 +35,50 @@ const SingleUserView = () => {
     }, [])
 
     return (
-        <div style={{ width: "100%" }}>
+        <div id="viewUserPage" >
             <Button
                 variant="outlined"
-                color="error"
+                className="backBtn"
                 sx={{ alignSelf: 'flex-start', mb: 2 }}
                 onClick={() => router.back()}
-            >
+                startIcon={<Image src="/users/back-icon.svg" alt="" width={13} height={13} />}  >
                 Back
             </Button>
-            <div className={styles.profilegroup}>
-                <Avatar className={styles.profileavatarIcon}>
-                    {usersData?.first_name?.[0]}{usersData?.last_name?.[0]}
-                </Avatar>
-                <div>
-                    <h4 className={styles.profilename}>{usersData?.first_name + " " + usersData?.last_name}</h4>
-                    <div className={styles.iconstatus}>
-                        <Image className={styles.statusicon} alt="" src="/Completed 1.svg" width={10} height={10} />
-                        <span>{usersData?.status}</span>
+            <div className="userInfo">
+                <div className="profileGrp">
+                    <Avatar className="profileavatarIcon">
+                        {usersData?.first_name?.[0]}{usersData?.last_name?.[0]}
+                    </Avatar>
+                    <h4 className="profileName">{usersData?.first_name + " " + usersData?.last_name}</h4>
+                    <div className="status">
+                        <Image alt="" src="/Completed 1.svg" width={12} height={12} />
+                        <span>{usersData?.status?.charAt(0).toUpperCase() + usersData?.status?.slice(1)}    </span>
                     </div>
-                    <div className={styles.userinfo}>
-                        <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
-                        <span>{usersData?.updated_at}</span>
-                    </div>
-                    <div className={styles.userinfo}>
+
+                </div>
+                <div className="joiningInfo">
+                    <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
+                    <span>{usersData?.updated_at}</span>
+                </div>
+                <div className="contactDetails">
+                    <div className="contactInfo">
                         <Image alt="" src="/mail.svg" width={15} height={15} />
                         <span>{usersData?.email}</span>
                     </div>
-                    <div className={styles.userinfo}>
+                    <div className="contactInfo">
                         <Image alt="" src="/phone.svg" width={15} height={15} />
                         <span>{usersData?.phone}</span>
                     </div>
+
                 </div>
             </div>
-            <div className={styles.devicesection}>
-                <h4>Devices</h4>
-                <DeviceSection
-                    devicesData={data}
-                />
+            <div className="userDevices">
+                    <h4 className="blockHeading">Devices</h4>
+                    <DeviceSection
+                        devicesData={data}
+                    />
             </div>
+
             <LoadingComponent loading={loading} />
         </div>
     )

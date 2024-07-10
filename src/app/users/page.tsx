@@ -5,9 +5,7 @@ const Users = () => {
 
     return (
         <Suspense>
-            <div>
                 <ListUsers />
-            </div>
         </Suspense>
     );
 }

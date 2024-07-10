@@ -24,7 +24,7 @@
   }
   .formContainer {
     width: 55%;
-    margin:8vh auto 0;
+    margin: 8vh auto 0;
     .logoIcon {
       width: 110px;
       margin-bottom: 8vh;
@@ -56,7 +56,7 @@
           box-sizing: border-box;
           border-radius: 3.56227px;
           height: 38px;
-          border: 1px solid #d2dff4;
+          border: 1px solid $textFeildStroke;
 
           fieldset {
             border: 0 !important;

@@ -2,114 +2,69 @@ import {
   Button,
   FormControl,
   FormHelperText,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
   TextField
 } from "@mui/material";
-import styles from "./HeadNavbar.module.css";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 const HeadNavbar = () => {
   const router = useRouter();
   const path = usePathname();
   return (
-    <div className={styles.headnav}>
-      <h4 className={styles.pagetitle}>Devices</h4>
-      <div className={styles.searchsection}>
-        <div className={styles.searchgroup}>
-          <TextField
-            className={styles.inputtype}
+    <div className="headnav">
+      <h4 className="pagetitle"> {path.includes("/users") ? "Users" : "Devices"} </h4>
+      <div className="navActions">
+        <TextField
+          className="defaultTextFeild"
+          defaultValue="Search"
+          variant="outlined"
+          type="search"
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <Image src="/users/search-icon.svg" alt="" width={15} height={15} />
+              </InputAdornment>
+            ),
+          }}
+        />
+        <FormControl
+          className="defaultSelect"
+          variant="outlined"
+        >
+          <Select
             color="primary"
-            defaultValue="Search"
-            variant="outlined"
-            type="search"
-            sx={{ "& .MuiInputBase-root": { height: "39px" }, width: "303px" }}
-          />
-          <FormControl
-            className={styles.selectdevice}
-            variant="outlined"
-            sx={{
-              borderRadius: "0px 0px 0px 0px",
-              width: "220px",
-              height: "39px",
-              m: 0,
-              p: 0,
-              "& .MuiInputBase-root": {
-                m: 0,
-                p: 0,
-                minHeight: "39px",
-                justifyContent: "center",
-                display: "inline-flex",
-              },
-              "& .MuiInputLabel-root": {
-                m: 0,
-                p: 0,
-                minHeight: "39px",
-                display: "inline-flex",
-              },
-              "& .MuiMenuItem-root": {
-                m: 0,
-                p: 0,
-                height: "39px",
-                display: "inline-flex",
-              },
-              "& .MuiSelect-select": {
-                m: 0,
-                p: 0,
-                height: "39px",
-                alignItems: "center",
-                display: "inline-flex",
-              },
-              "& .MuiInput-input": { m: 0, p: 0 },
-              "& .MuiInputBase-input": { textAlign: "left", p: "0 !important" },
-            }}
           >
-            <InputLabel color="primary">Select Device</InputLabel>
-            <Select
-              color="primary"
-              label="Select Device"
-              disableUnderline
-              displayEmpty
-            >
-              <MenuItem value="Device 1">Device 1</MenuItem>
-              <MenuItem value="Device 2">Device 2</MenuItem>
-              <MenuItem value="Device 3">Device 3</MenuItem>
-            </Select>
-            <FormHelperText />
-          </FormControl>
-        </div>
-        {path === "/users" ? (
-          <div>
-            <Button
-              variant='contained'
-              onClick={() => router.push("/users/add")}
-            >
-              Add User
-            </Button>
-          </div>
+            <MenuItem className="menuItem" value="">Select Device</MenuItem>
+            <MenuItem className="menuItem" value="Device 1">Device 1</MenuItem>
+            <MenuItem className="menuItem" value="Device 2">Device 2</MenuItem>
+            <MenuItem className="menuItem" value="Device 3">Device 3</MenuItem>
+          </Select>
+        </FormControl>
+
+        {path?.includes("/users") ? (
+          <Button
+            className="addUserBtn"
+            variant='contained'
+            onClick={() => router.push("/users/add")}
+            startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
+          >
+            Add New User
+          </Button>
+
         ) : (
           ""
         )}
-        {path === "/devices" ? (
-          <div>
-            <Button
-              variant='contained'
-              onClick={() => router.push("/devices/add")}
-            >
-              Add Device
-            </Button>
+        <div className="profileGrp">
+          <Image alt="" src="/avatar@2x.png" height={30} width={30} />
+          <div className="profileName">
+            <h4 className="profile">Ansh Kalasannavar</h4>
+            <p className="designation">Admin</p>
           </div>
-        ) : (
-          ""
-        )}
-        <div className={styles.profilegroup}>
-          <img className={styles.avatarIcon} alt="" src="/avatar@2x.png" />
-          <div className={styles.profilename}>
-            <h4 className={styles.profile}>Ansh Kalasannavar</h4>
-            <p className={styles.designation}>Admin</p>
-          </div>
-          <img className={styles.icon} alt="" src="/icon1.svg" />
+          <Image className="icon" alt="" src="/icon1.svg" height={12} width={12} style={{ marginTop: "2px" }} />
         </div>
       </div>
     </div>

@@ -1,0 +1,117 @@
+$backBtnCOlor: #e47078;
+$labelColor: #4f4f4f;
+$inputBorderColor: #9c9c9c;
+$inputHoverBorder: #2f80ed;
+$inputTxtColor: #bdbdbd;
+
+@mixin flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+#addUser {
+  padding: 1.2rem;
+  background-color: $whiteColor;
+  border-radius: 8px;
+  width: 35%;
+  margin: 0 auto;
+  box-shadow: none;
+  box-sizing: border-box;
+  @include flex-column;
+
+  .backBtn {
+    border-radius: 4px;
+    border: 1px solid $backBtnCOlor;
+    color: $backBtnCOlor;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(11px, 0.72vw, 15px);
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 1px 2px 1px 6px;
+    margin-bottom: 1.5rem;
+  }
+  .feildBlock {
+    margin-bottom: 1rem;
+    @include flex-column;
+    gap: 5px;
+    label {
+      color: $labelColor;
+      font-family: "Inter";
+      font-size: clamp(12px, 0.72vw, 15px);
+      font-weight: 500;
+      span {
+        color: $backBtnCOlor !important;
+      }
+    }
+    .textFeild {
+      .MuiInputBase-root {
+        background: $whiteColor;
+        color: $inputTxtColor;
+        font-weight: 400;
+        font-size: 13.5px;
+        box-sizing: border-box;
+        border-radius: 3;
+        height: 32px;
+        border: 1px solid $inputBorderColor;
+        font-family: "Inter", sans-serif;
+        font-size: clamp(0.75em, 0.72vw, 1.1em);
+
+        fieldset {
+          border: 0 !important;
+        }
+        &:hover {
+          border-color: $inputHoverBorder;
+        }
+
+        &:focus-within {
+          border-color: $inputHoverBorder;
+        }
+        &.Mui-focused {
+          border-color: $inputHoverBorder;
+        }
+      }
+    }
+    .selectComponent {
+      .MuiSelect-select {
+        width: 100%;
+        font-family: "Inter", sans-serif;
+        padding: 4px 11px !important;
+        font-size: clamp(0.75em, 0.72vw, 1.1em);
+        border: 1px solid $inputBorderColor;
+        border-radius: 4px;
+        color: $inputTxtColor;
+        box-sizing: border-box;
+
+        &:hover {
+          border-color: $inputHoverBorder;
+        }
+
+        &:focus-within {
+          border-color: $inputHoverBorder;
+        }
+
+        &.Mui-focused {
+          border-color: $inputHoverBorder;
+        }
+      }
+      .MuiSvgIcon-root {
+        width: 0.9em;
+      }
+      fieldset {
+        border: 0;
+      }
+    }
+  }
+   .addUserBtn {
+      border-radius: 6px;
+      background: $primaryColor;
+      text-transform: capitalize;
+      color: $whiteColor;
+      font-family: "Inter", sans-serif;
+      font-size: clamp(12px, 0.72vw, 15px);
+      font-weight: 500;
+      padding: 6px 20px;
+      box-shadow: none;
+
+    }
+}
