@@ -5,6 +5,11 @@ $inputHoverBorder: #2f80ed;
 $inputTxtColor: #bdbdbd;
 $avatharColor: #ff7a00;
 
+@mixin align-center {
+  display: flex;
+  align-items: center;
+}
+
 #viewUserPage {
   width: 100%;
   font-family: "Inter", sans-serif !important;
@@ -22,21 +27,20 @@ $avatharColor: #ff7a00;
   }
   .userInfo {
     .profileGrp {
-      display: flex;
-      align-items: center;
+      @include align-center;
       gap: 0.6rem;
       .profileavatarIcon {
         width: 35px;
         height: 35px;
         border-radius: 50%;
         background-color: $avatharColor;
-        display: flex;
-        align-items: center;
+
         justify-content: center;
         font-size: 13px;
         color: $whiteColor;
         font-family: "Inter";
         font-weight: 500;
+        @include align-center;
       }
       .profileName {
         color: $blackColor;
@@ -47,129 +51,94 @@ $avatharColor: #ff7a00;
         padding-right: 0.5rem;
       }
       .status {
-        display: flex;
-        align-items: center;
         gap: 4px;
         color: $greenColor;
         font-size: clamp(13px, 0.83vw, 16px);
         font-weight: 400;
+        @include align-center;
+      }
+    }
+    .joiningInfo {
+      gap: 5px;
+      color: $blackColor;
+      font-size: clamp(13px, 0.83vw, 16px);
+      font-weight: 400;
+      margin: 1rem 0;
+      @include align-center;
+    }
+    .contactDetails {
+      @include align-center;
+      justify-content: flex-start;
+      gap: 0.8rem;
+      .contactInfo {
+        color: $blackColor;
+        font-size: clamp(13px, 0.83vw, 16px);
+        font-weight: 400;
+        gap: 5px;
+        border-radius: 4px;
+        border: 1px solid #00000033;
+        padding: 6px 12px;
+        @include align-center;
       }
     }
   }
-}
-
-/* User Info */
-.userinfo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  color: #6c757d;
-}
-
-/* Device Section */
-.devicesection {
-  box-shadow: 0 0 14px rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
-  background-color: #fff;
-  overflow: hidden;
-  margin-top: 16px;
-  padding: 16px;
-}
-
-.deviceheading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.devicename {
-  font-size: 16px;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.devicestatus {
-  display: flex;
-  align-items: center;
-  background-color: rgba(69, 168, 69, 0.1);
-  padding: 4px 8px;
-  border-radius: 4px;
-  color: #45a845;
-}
-
-.icondot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: #45a845;
-}
-
-.iconsetting {
-  width: 24px;
-  height: 24px;
-}
-
-.devicerow,
-.devicerow1 {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid #eeeef0;
-}
-
-.devicecolumn {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.devicerow1 {
-  border-bottom: none;
-}
-
-.averageVoltageLn,
-.averageVoltageLl,
-.averageVoltagePf,
-.totalPower {
-  font-size: 14px;
-  color: #6c757d;
-}
-
-.value {
-  font-size: 16px;
-  font-weight: 500;
-  color: #000;
-}
-
-.temperature {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  background-color: rgba(211, 217, 240, 0.4);
-  color: #e74c3c;
-}
-
-.temperature img {
-  width: 24px;
-  height: 24px;
-}
-
-.viewsection {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  background-color: #f5f5f5;
-}
-
-.view {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: #007bff;
-  cursor: pointer;
+  .userDevices {
+    box-shadow: none;
+    border-radius: 8px;
+    background-color: $whiteColor;
+    overflow: hidden;
+    margin-top: 16px;
+    border: 1px solid $textFeildStroke;
+    .blockHeading {
+      color: $blackColor;
+      font-size: clamp(14px, 0.83vw, 18px);
+      font-weight: 400;
+      margin: 0;
+      border-bottom: 1px solid $textFeildStroke;
+      padding: 12px;
+    }
+    .devicesGrp {
+      padding: 12px;
+      .eachDeviceBlock {
+        box-shadow: none;
+        border: 1px solid $textFeildStroke;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+      .headerBlock {
+        border-bottom: 1px solid $textFeildStroke;
+        padding: 10px;
+        .header {
+          @include align-center();
+          justify-content: space-between;
+          margin-bottom: 1rem;
+          .deviceTItle {
+            color: $blackColor;
+            font-family: "Inter";
+            font-size: clamp(14px, 0.93vw, 20px);
+            font-weight: 500;
+            margin: 0;
+          }
+          .settingsBlock {
+            @include align-center();
+            gap: 0.8rem;
+            .deviceStatus {
+              border-radius: 4px;
+              background: #45a8451a;
+              padding: 6px 10px;
+              gap: 4px;
+              @include align-center();
+              .statusTxt {
+                color: $primaryColor;
+                font-size: clamp(13px, 0.83vw, 16px);
+                font-weight: 500;
+                line-height: 100%;
+                margin: 0;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

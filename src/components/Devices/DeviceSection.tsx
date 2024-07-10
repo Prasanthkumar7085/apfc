@@ -4,27 +4,29 @@ import { Avatar, Button, Stack } from "@mui/material";
 import { useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const DeviceSection = ({ devicesData }: any) => {
   const router = useRouter();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   return (
-    <>
+    <div className="devicesGrp">
       {
         devicesData.map((item: any, index: number) => {
           return (
-            <div className={styles.devicesection} key={index}>
-              <div className={styles.devicegroup}>
-                <div className={styles.deviceheading}>
-                  <div className={styles.devicename}>
-                    <h4 className={styles.morocoDevice}>{item?.device_name || "--"}</h4>
-                    <div className={styles.devicestatus}>
-                      <img className={styles.icondot} alt="" src="/icondot.svg" />
-                      <p className={styles.online}>Online</p>
+            <div className="eachDeviceBlock" key={index}>
+              <div className="headerBlock">
+                
+                <div className="header">
+                    <h4 className="deviceTItle">{item?.device_name || "--"}</h4>
+                  <div className="settingsBlock">
+                    <div className="deviceStatus">
+                      <Image  alt="" src="/icondot.svg" height={5} width={5} />
+                      <p className="statusTxt">Online</p>
                     </div>
+                  <Image className={styles.iconsetting} alt="" src="/iconsetting.svg"  height={20} width={20}/>
                   </div>
-                  <img className={styles.iconsetting} alt="" src="/iconsetting.svg" />
                 </div>
                 <div className={styles.devicerow}>
                   <div className={styles.devicecolumn}>
@@ -40,6 +42,7 @@ const DeviceSection = ({ devicesData }: any) => {
                     <h5 className={styles.v}>{item?.device_parameters?.voltage_measurements?.average_current || "--"}</h5>
                   </div>
                 </div>
+             </div>
                 <div className={styles.devicerow1}>
                   <div className={styles.devicecolumn1}>
                     <p className={styles.averageVoltageLl}>Total kW</p>
@@ -106,7 +109,7 @@ const DeviceSection = ({ devicesData }: any) => {
                     </div>
                   </div>
                 </div>
-              </div>
+              
             </div>
           )
         })}
@@ -114,7 +117,7 @@ const DeviceSection = ({ devicesData }: any) => {
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
       />
-    </>
+    </div>
   );
 };
 

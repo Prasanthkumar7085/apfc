@@ -46,35 +46,39 @@ const SingleUserView = () => {
             </Button>
             <div className="userInfo">
                 <div className="profileGrp">
-                <Avatar className="profileavatarIcon">
-                    {usersData?.first_name?.[0]}{usersData?.last_name?.[0]}
-                </Avatar>
-                <h4 className="profileName">{usersData?.first_name + " " + usersData?.last_name}</h4>
-                <div className="status">
-                    <Image alt="" src="/Completed 1.svg" width={12} height={12} />
+                    <Avatar className="profileavatarIcon">
+                        {usersData?.first_name?.[0]}{usersData?.last_name?.[0]}
+                    </Avatar>
+                    <h4 className="profileName">{usersData?.first_name + " " + usersData?.last_name}</h4>
+                    <div className="status">
+                        <Image alt="" src="/Completed 1.svg" width={12} height={12} />
                         <span>{usersData?.status?.charAt(0).toUpperCase() + usersData?.status?.slice(1)}    </span>
-                </div>
+                    </div>
 
+                </div>
+                <div className="joiningInfo">
+                    <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
+                    <span>{usersData?.updated_at}</span>
+                </div>
+                <div className="contactDetails">
+                    <div className="contactInfo">
+                        <Image alt="" src="/mail.svg" width={15} height={15} />
+                        <span>{usersData?.email}</span>
+                    </div>
+                    <div className="contactInfo">
+                        <Image alt="" src="/phone.svg" width={15} height={15} />
+                        <span>{usersData?.phone}</span>
+                    </div>
+
+                </div>
             </div>
-            <div className="userinfo">
-                <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
-                <span>{usersData?.updated_at}</span>
+            <div className="userDevices">
+                    <h4 className="blockHeading">Devices</h4>
+                    <DeviceSection
+                        devicesData={data}
+                    />
             </div>
-            <div className="userinfo">
-                <Image alt="" src="/mail.svg" width={15} height={15} />
-                <span>{usersData?.email}</span>
-            </div>
-            <div className="userinfo">
-                <Image alt="" src="/phone.svg" width={15} height={15} />
-                <span>{usersData?.phone}</span>
-            </div>
-            <div className="devicesection">
-                <h4>Devices</h4>
-                <DeviceSection
-                    devicesData={data}
-                />
-            </div>
-            </div>
+
             <LoadingComponent loading={loading} />
         </div>
     )

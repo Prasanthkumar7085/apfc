@@ -38,7 +38,7 @@
         box-sizing: border-box;
         border-radius: 3;
         height: 30px;
-        border: 1px solid #d2dff4;
+        border: 1px solid $textFeildStroke;
         font-family: "Inter", sans-serif;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
 
@@ -54,7 +54,7 @@
         font-family: "Inter", sans-serif;
         padding: 3px 11px !important;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
-        border: 1px solid #d2dff4;
+        border: 1px solid $textFeildStroke;
         border-radius: 4px;
         color: #6a718599;
       }
