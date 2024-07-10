@@ -79,13 +79,25 @@ const HeadNavbar = () => {
             <FormHelperText />
           </FormControl>
         </div>
-        {path?.includes("/users") ? (
+        {path === "/users" ? (
           <div>
             <Button
               variant='contained'
               onClick={() => router.push("/users/add")}
             >
               Add User
+            </Button>
+          </div>
+        ) : (
+          ""
+        )}
+        {path === "/devices" ? (
+          <div>
+            <Button
+              variant='contained'
+              onClick={() => router.push("/devices/add")}
+            >
+              Add Device
             </Button>
           </div>
         ) : (
