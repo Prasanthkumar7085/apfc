@@ -121,7 +121,7 @@ $avatharColor: #ff7a00;
           }
           .settingsBlock {
             @include align-center();
-            gap: 0.8rem;
+            gap: 1rem;
             .deviceStatus {
               border-radius: 4px;
               background: #45a8451a;
@@ -136,6 +136,46 @@ $avatharColor: #ff7a00;
                 margin: 0;
               }
             }
+          }
+        }
+      }
+      .deviceInfo {
+        @include align-center();
+        gap: 5%;
+        .eachDeviceInfo {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          .infoTitle {
+            color: #878787;
+            font-size: clamp(11px, 0.625vw, 14px);
+            font-weight: 400;
+            margin: 0;
+          }
+          .infoValue {
+            color: $blackColor;
+            font-size: clamp(13px, 0.83vw, 18px);
+            font-weight: 500;
+            margin: 0;
+          }
+        }
+        .avarageInfo {
+          border-radius: 4px;
+          background: #e1f0dc;
+          display: flex;
+          flex-direction: column;
+          padding: 4px 8px;
+           .infoTitle {
+            color: #878787;
+            font-size: clamp(8px, 0.55vw, 12px);
+            font-weight: 400;
+            margin: 0;
+          }
+          .infoValue {
+            color: $greenColor;
+            font-size: clamp(11px, 0.72vw, 16px);
+            font-weight: 500;
+            margin: 0;
           }
         }
       }
