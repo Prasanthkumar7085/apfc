@@ -84,10 +84,9 @@ const TanStackTableComponent: FC<pageProps> = ({
         }
     };
     return (
-        <div
-            className="tableContainer patientDetailsTable"
+        <div className="mainTable">
 
-        >
+        <div className="tableContainer ">
             <table style={{ width: "100%" }}>
                 <thead
                     className="thead"
@@ -235,6 +234,8 @@ const TanStackTableComponent: FC<pageProps> = ({
                 </tbody>
             </table>
         </div>
+        </div>
+
     );
 };
 export default TanStackTableComponent;

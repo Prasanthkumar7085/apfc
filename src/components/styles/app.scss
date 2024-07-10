@@ -13,7 +13,9 @@ body {
 
 
 @import "./signin.scss";
-@import "./SideNavbar.scss";
+@import "./users/index.scss";
 
+@import "./helpers/sideNavbar";
 @import "./helpers/navbar";
 @import "./helpers/baseLayout";
+@import "./helpers/table";

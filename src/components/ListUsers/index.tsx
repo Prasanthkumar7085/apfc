@@ -77,7 +77,7 @@ const ListUsers = () => {
     ]
 
     return (
-        <div>
+        <div id="usersPage">
             <TanStackTableComponent
                 data={usersData}
                 columns={[...ListUserColumns, ...column]}
