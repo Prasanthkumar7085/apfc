@@ -97,156 +97,157 @@ $avatharColor: #ff7a00;
       border-bottom: 1px solid $textFeildStroke;
       padding: 12px;
     }
-    .devicesGrp {
-      padding: 12px;
-      .eachDeviceBlock {
-        box-shadow: none;
-        border: 1px solid $textFeildStroke;
-        border-radius: 8px;
-        margin-bottom: 1rem;
+  }
+}
+.devicesGrp {
+  padding: 12px;
+  .eachDeviceBlock {
+    background-color: $whiteColor;
+    box-shadow: none;
+    border: 1px solid $textFeildStroke;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  .headerBlock {
+    border-bottom: 1px solid $textFeildStroke;
+    padding: 10px;
+    .header {
+      @include align-center();
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      .deviceTItle {
+        color: $blackColor;
+        font-family: "Inter";
+        font-size: clamp(14px, 0.93vw, 20px);
+        font-weight: 500;
+        margin: 0;
       }
-      .headerBlock {
-        border-bottom: 1px solid $textFeildStroke;
-        padding: 10px;
-        .header {
-          @include align-center();
-          justify-content: space-between;
-          margin-bottom: 1rem;
-          .deviceTItle {
-            color: $blackColor;
-            font-family: "Inter";
-            font-size: clamp(14px, 0.93vw, 20px);
-            font-weight: 500;
-            margin: 0;
-          }
-          .settingsBlock {
-            @include align-center();
-            gap: 1rem;
-            .deviceStatus {
-              border-radius: 4px;
-              background: #45a8451a;
-              padding: 6px 10px;
-              gap: 4px;
-              @include align-center();
-              .statusTxt {
-                color: $primaryColor;
-                font-size: clamp(13px, 0.83vw, 16px);
-                font-weight: 500;
-                line-height: 100%;
-                margin: 0;
-              }
-            }
-          }
-        }
-      }
-      .deviceInfo {
+      .settingsBlock {
         @include align-center();
-        gap: 5%;
-        .eachDeviceInfo {
-          display: flex;
-          flex-direction: column;
-          gap: 5px;
-          .infoTitle {
-            color: #878787;
-            font-size: clamp(11px, 0.625vw, 14px);
-            font-weight: 400;
-            margin: 0;
-          }
-          .infoValue {
-            color: $blackColor;
-            font-size: clamp(13px, 0.83vw, 18px);
-            font-weight: 500;
-            margin: 0;
-          }
-        }
-        .avarageInfo {
+        gap: 1rem;
+        .deviceStatus {
           border-radius: 4px;
-          background: #e1f0dc;
-          display: flex;
-          flex-direction: column;
-          padding: 4px 8px;
-          .infoTitle {
-            color: #878787;
-            font-size: clamp(8px, 0.55vw, 12px);
-            font-weight: 400;
-            margin: 0;
-          }
-          .infoValue {
-            color: $greenColor;
-            font-size: clamp(11px, 0.72vw, 16px);
+          background: #45a8451a;
+          padding: 6px 10px;
+          gap: 4px;
+          @include align-center();
+          .statusTxt {
+            color: $primaryColor;
+            font-size: clamp(13px, 0.83vw, 16px);
             font-weight: 500;
+            line-height: 100%;
             margin: 0;
           }
         }
       }
-      .temparatureInfo {
-        background: #d3d9f066;
-        padding:8px 12px;
+    }
+  }
+  .deviceInfo {
+    @include align-center();
+    gap: 5%;
+    .eachDeviceInfo {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      .infoTitle {
+        color: #878787;
+        font-size: clamp(11px, 0.625vw, 14px);
+        font-weight: 400;
+        margin: 0;
+      }
+      .infoValue {
+        color: $blackColor;
+        font-size: clamp(13px, 0.83vw, 18px);
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+    .avarageInfo {
+      border-radius: 4px;
+      background: #e1f0dc;
+      display: flex;
+      flex-direction: column;
+      padding: 4px 8px;
+      .infoTitle {
+        color: #878787;
+        font-size: clamp(8px, 0.55vw, 12px);
+        font-weight: 400;
+        margin: 0;
+      }
+      .infoValue {
+        color: $greenColor;
+        font-size: clamp(11px, 0.72vw, 16px);
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+  .temparatureInfo {
+    background: #d3d9f066;
+    padding:8px 12px;
+    @include align-center();
+    justify-content: space-between;
+    .tempItems {
+      @include align-center();
+      gap: 1rem;
+      .errorBlock {
         @include align-center();
-        justify-content: space-between;
-        .tempItems {
-          @include align-center();
-          gap: 1rem;
-          .errorBlock {
-            @include align-center();
-            gap: 4px;
-            border-radius: 60px;
-            background: #d948411a;
-            padding: 4px 10px;
-            h6 {
-              color: $secondaryColor;
-              font-size: clamp(13px, 0.83vw, 16px);
-              font-weight: 500;
-              margin: 0;
-            }
-          }
+        gap: 4px;
+        border-radius: 60px;
+        background: #d948411a;
+        padding: 4px 10px;
+        h6 {
+          color: $secondaryColor;
+          font-size: clamp(13px, 0.83vw, 16px);
+          font-weight: 500;
+          margin: 0;
         }
-        .actionsList {
-          @include align-center();
-          gap: 1rem;
-          .assignUserBtn {
-            border-radius: 4px;
-            background: $whiteColor;
-            color: $blackColor;
-            font-size: clamp(12px, 0.72vw, 15px);
-            font-weight: 400;
-            text-transform: capitalize;
-            font-family: "Inter", sans-serif;
-            box-shadow: none;
-            letter-spacing: 0;
-            padding: 4px 15px;
-          }
-          .userInfo {
-            @include align-center();
-            gap: 4px;
-            .userAvathar {
-              background-color: $avatharColor;
-              height: 25px;
-              width: 25px;
-              font-size: 12px;
-            }
-            .userName {
-              color: $blackColor;
-              font-size: clamp(12px, 0.72vw, 15px);
-              font-weight: 400;
-              margin: 0;
-              letter-spacing: 0;
-            }
-          }
-          .viewBtn {
-            border-radius: 4px;
-            border: 1px solid $whiteColor;
-            background: #d948411a;
-            color: $secondaryColor;
-            font-family: "Inter", sans-serif;
-            font-size: clamp(13px, 0.83vw, 18px);
-            font-weight: 500;
-            text-transform: capitalize;
-            box-shadow: none;
-            padding: 2px 8px;
-            letter-spacing: 0;
-          }
+      }
+    }
+    .actionsList {
+      @include align-center();
+      gap: 1rem;
+      .assignUserBtn {
+        border-radius: 4px;
+        background: $whiteColor;
+        color: $blackColor;
+        font-size: clamp(12px, 0.72vw, 15px);
+        font-weight: 400;
+        text-transform: capitalize;
+        font-family: "Inter", sans-serif;
+        box-shadow: none;
+        letter-spacing: 0;
+        padding: 4px 15px;
+      }
+      .userInfo {
+        @include align-center();
+        gap: 4px;
+        .userAvathar {
+          background-color: $avatharColor;
+          height: 25px;
+          width: 25px;
+          font-size: 12px;
         }
+        .userName {
+          color: $blackColor;
+          font-size: clamp(12px, 0.72vw, 15px);
+          font-weight: 400;
+          margin: 0;
+          letter-spacing: 0;
+        }
+      }
+      .viewBtn {
+        border-radius: 4px;
+        border: 1px solid $whiteColor;
+        background: #d948411a;
+        color: $secondaryColor;
+        font-family: "Inter", sans-serif;
+        font-size: clamp(13px, 0.83vw, 18px);
+        font-weight: 500;
+        text-transform: capitalize;
+        box-shadow: none;
+        padding: 2px 8px;
+        letter-spacing: 0;
       }
     }
   }
