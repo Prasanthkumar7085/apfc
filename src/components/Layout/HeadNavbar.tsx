@@ -7,19 +7,19 @@ import {
   Select,
   TextField
 } from "@mui/material";
-import styles from "./HeadNavbar.module.css";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 
 const HeadNavbar = () => {
   const router = useRouter();
   const path = usePathname();
   return (
-    <div className={styles.headnav}>
-      <h4 className={styles.pagetitle}>Devices</h4>
-      <div className={styles.searchsection}>
-        <div className={styles.searchgroup}>
+    <div className="headnav">
+      <h4 className="pagetitle"> {path.includes("/users") ? "Users" :"Devices"} </h4>
+      <div className="searchsection">
+        <div className="searchgroup">
           <TextField
-            className={styles.inputtype}
+            className="inputtype"
             color="primary"
             defaultValue="Search"
             variant="outlined"
@@ -27,7 +27,7 @@ const HeadNavbar = () => {
             sx={{ "& .MuiInputBase-root": { height: "39px" }, width: "303px" }}
           />
           <FormControl
-            className={styles.selectdevice}
+            className="selectdevice"
             variant="outlined"
             sx={{
               borderRadius: "0px 0px 0px 0px",
@@ -91,13 +91,13 @@ const HeadNavbar = () => {
         ) : (
           ""
         )}
-        <div className={styles.profilegroup}>
-          <img className={styles.avatarIcon} alt="" src="/avatar@2x.png" />
-          <div className={styles.profilename}>
-            <h4 className={styles.profile}>Ansh Kalasannavar</h4>
-            <p className={styles.designation}>Admin</p>
+        <div className="profilegroup">
+          <Image className="avatarIcon" alt="" src="/avatar@2x.png" height={30} width={30} />
+          <div className="profilename">
+            <h4 className="profile">Ansh Kalasannavar</h4>
+            <p className="designation">Admin</p>
           </div>
-          <img className={styles.icon} alt="" src="/icon1.svg" />
+          <Image className="icon" alt="" src="/icon1.svg" height={30} width={30} />
         </div>
       </div>
     </div>

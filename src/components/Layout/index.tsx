@@ -12,7 +12,7 @@ const LayoutNavbar: FC<pageProps> = ({ children }) => {
     return (
         <div style={{ display: "flex", flexDirection: "row",height:"100vh",overflow:"auto" ,marginLeft:"12rem"}}>
             <SideNavBar />
-            <div>
+            <div style={{width:"100%"}}>
                 <HeadNavbar />
                 <div className={styles.main}>
                     {children}
