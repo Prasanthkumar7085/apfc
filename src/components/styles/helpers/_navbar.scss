@@ -32,14 +32,14 @@
       width: 250px;
       .MuiInputBase-root {
         background: $whiteColor;
-        color: $blackColor;
+        color: #6a718599;
         font-weight: 400;
         font-size: 13.5px;
         box-sizing: border-box;
         border-radius: 3;
         height: 30px;
         border: 1px solid #d2dff4;
-        font-family: "Poppins", sans-serif;
+        font-family: "Inter", sans-serif;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
 
         fieldset {
@@ -51,11 +51,12 @@
       width: 150px;
       .MuiSelect-select {
         width: 100%;
-        font-family: "Poppins", sans-serif;
+        font-family: "Inter", sans-serif;
         padding: 3px 11px !important;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
         border: 1px solid #d2dff4;
         border-radius: 4px;
+        color: #6a718599;
       }
       .MuiSvgIcon-root {
         width: 0.9em;
@@ -111,4 +112,10 @@
       }
     }
   }
+}
+
+.menuItem {
+  font-size: clamp(0.75em, 0.72vw, 1.1em);
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
 }

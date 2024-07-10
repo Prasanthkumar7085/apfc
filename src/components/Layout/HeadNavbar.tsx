@@ -38,10 +38,10 @@ const HeadNavbar = () => {
           <Select
             color="primary"
           >
-            <MenuItem value="">Select Device</MenuItem>
-            <MenuItem value="Device 1">Device 1</MenuItem>
-            <MenuItem value="Device 2">Device 2</MenuItem>
-            <MenuItem value="Device 3">Device 3</MenuItem>
+            <MenuItem className="menuItem" value="">Select Device</MenuItem>
+            <MenuItem className="menuItem" value="Device 1">Device 1</MenuItem>
+            <MenuItem className="menuItem" value="Device 2">Device 2</MenuItem>
+            <MenuItem className="menuItem" value="Device 3">Device 3</MenuItem>
           </Select>
         </FormControl>
 

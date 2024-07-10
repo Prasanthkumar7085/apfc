@@ -1,0 +1,17 @@
+.mainBodyContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  overflow: auto;
+  margin-left: 12rem;
+  .mainContainer {
+    width: 100%;
+    .mainChlidren {
+      background: $whiteColor;
+      height: 100vh;
+      position: relative;
+      box-sizing: border-box;
+      padding: 2rem;
+    }
+  }
+}
