@@ -64,48 +64,49 @@ const DeviceSection = ({ devicesData }: any) => {
                   <h5 className="infoValue">{item?.device_parameters?.power_measurements?.kwh || "--"}</h5>
                 </div>
               </div>
-              <div className={styles.devicetemperature}>
-                <div className={styles.temperaturecolumn}>
-                  <img
-                    className={styles.icontemperature}
+
+              <div className="temparatureInfo">
+                <div className="tempItems">
+                  <Image
+                    className="icontemperature"
                     alt=""
                     src="/icontemperature.svg"
+                    height={24}
+                    width={50}
                   />
                   {item?.device_parameters?.errors?.under_compensate_error === true ? (
-                    <div className={styles.errormessage}>
-                      <img className={styles.iconinfo} alt="" src="/iconinfo.svg" />
-                      <h6 className={styles.noVoltageError}>Under Compensate Error</h6>
+                    <div className="errorBlock">
+                      <Image  alt="" src="/iconinfo.svg" height={18} width={18} />
+                      <h6 >Under Compensate Error</h6>
                     </div>
                   ) : (
                     ""
-                  )}
+                  )} 
                 </div>
-                <div className={styles.profilecolumn}>
-                  <Button variant="outlined" onClick={() => setDialogOpen(true)}>
+                <div className="actionsList">
+                  <Button className="assignUserBtn" variant="contained" startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14}/>} onClick={() => setDialogOpen(true)}>
                     Assign User
                   </Button>
-                  <div className={styles.profilegroup}>
-                    <Stack direction="row" spacing={2}>
-                      <Avatar sx={{ bgcolor: "orange" }}>
-                        {item?.user?.first_name?.[0]}{item?.user?.last_name?.[0] || "--"}
-                      </Avatar>
-                    </Stack>
-                    {/* <img
-                        className={styles.profileavatarIcon}
-                        alt=""
-                        src="/profileavatar@2x.png"
-                      /> */}
-                    <h4 className={styles.profilename}>{item?.user?.first_name + " " + item?.user?.last_name || "--"}</h4>
+                  <div className="userInfo">
+                      <Avatar className="userAvathar" >
+                      {/* {item?.user?.first_name?.[0]}{item?.user?.last_name?.[0] || "--"} */}
+                      P
+                      </Avatar>                   
+                    <h4 className="userName">
+                      {/* {item?.user?.first_name + " " + item?.user?.last_name || "--"} */}
+                      Priscilla Schmidt
+                    </h4>
                   </div>
-                  <div
-                    className={styles.devicestatus1}
+                  <Button
+                    variant="outlined"
+                    className="viewBtn"
                     onClick={() => {
                       router.push(`/devices/${item?.id}`)
                     }}
+                    startIcon={<Image alt="" src="/icon2.svg" height={15} width={15} />}
                   >
-                    <img className={styles.icon} alt="" src="/icon2.svg" />
-                    <h6 className={styles.noVoltageError}>View</h6>
-                  </div>
+                    View
+                  </Button>
                 </div>
               </div>
 
