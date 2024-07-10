@@ -87,16 +87,10 @@ const TanStackTableComponent: FC<pageProps> = ({
         <div className="mainTable">
 
         <div className="tableContainer ">
-            <table style={{ width: "100%" }}>
+            <table className="table">
                 <thead
                     className="thead"
-                    style={{
-                        height: "32px",
-                        position: "sticky",
-                        top: "0px",
-                        zIndex: "2",
-                        color: "white",
-                    }}
+
                 >
                     {table
                         .getHeaderGroups()
@@ -111,8 +105,6 @@ const TanStackTableComponent: FC<pageProps> = ({
                                             style={{
                                                 minWidth: getWidth(header.id),
                                                 width: getWidth(header.id),
-                                                color: "#000",
-                                                background: "#F0EDFF",
                                             }}
                                         >
                                             {header.isPlaceholder ? null : (
