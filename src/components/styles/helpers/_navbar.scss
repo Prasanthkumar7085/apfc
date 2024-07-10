@@ -1,85 +1,3 @@
-.pagetitle {
-  margin: 0;
-  position: relative;
-  font-size: inherit;
-  line-height: 100%;
-  font-weight: 500;
-  font-family: inherit;
-}
-.inputtype,
-.selectdevice {
-  font-family: var(--font-inter);
-  font-size: var(--font-size-sm);
-  color: var(--color-slategray);
-}
-.inputtype {
-  border: 0;
-  background-color: transparent;
-  width: 303px;
-}
-.selectdevice {
-  width: 220px;
-}
-.searchgroup {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 16px;
-}
-.avatarIcon {
-  width: 36px;
-  position: relative;
-  border-radius: 50%;
-  height: 36px;
-  object-fit: cover;
-}
-.designation,
-.profile {
-  margin: 0;
-  position: relative;
-  line-height: 100%;
-}
-.profile {
-  font-size: inherit;
-  font-weight: 400;
-  font-family: inherit;
-}
-.designation {
-  font-size: 12px;
-  color: var(--green-gradient);
-}
-.profilename {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  padding: 3px 0;
-  gap: var(--gap-9xs);
-}
-.icon {
-  width: 14px;
-  height: 14px;
-}
-.profilegroup {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: center;
-  gap: var(--gap-5xs);
-}
-.headnav,
-.searchsection {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.searchsection {
-  justify-content: flex-start;
-  gap: var(--gap-13xl);
-  font-size: var(--font-size-sm);
-  color: #252525;
-}
 .headnav {
   width: 100%;
   background-color: $whiteColor;
@@ -87,11 +5,22 @@
   max-width: 100%;
   overflow: hidden;
   justify-content: space-between;
-  padding: var(--padding-base) var(--padding-5xl);
+  padding: 0.6rem 1rem;
   position: sticky;
   top: 0;
   z-index: 999;
   border-bottom: 1px solid #d5d9dd;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  .pagetitle {
+    margin: 0;
+    color: #000;
+    font-family: "Inter";
+    font-size: clamp(14.5px, 0.93vw, 20px);
+    font-weight: 500;
+    line-height: 100%; /* 18px */
+  }
   .navActions {
     display: flex;
     align-items: center;
@@ -146,6 +75,40 @@
       font-weight: 500;
       padding: 5px 10px;
       box-shadow: none;
+    }
+    .profileGrp {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 6px;
+      margin-left: 0.5rem;
+      .profileName {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 3px 0;
+        gap: 4px;
+
+        .profile {
+          color: #252525;
+          letter-spacing: 0;
+          font-family: "Inter", sans-serif;
+          font-size: clamp(12px, 0.72vw, 15px);
+          font-weight: 400;
+          line-height: 100%;
+          margin: 0;
+        }
+        .designation {
+          color: #05a155;
+          font-family: "Inter";
+          font-size: clamp(10px, 0.625vw, 14px);
+          font-weight: 400;
+          line-height: 100%;
+          margin: 0;
+        }
+      }
     }
   }
 }

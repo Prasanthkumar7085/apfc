@@ -58,13 +58,13 @@ const HeadNavbar = () => {
         ) : (
           ""
         )}
-        <div className="profilegroup">
-          <Image className="avatarIcon" alt="" src="/avatar@2x.png" height={20} width={20} />
-          <div className="profilename">
+        <div className="profileGrp">
+          <Image alt="" src="/avatar@2x.png" height={30} width={30} />
+          <div className="profileName">
             <h4 className="profile">Ansh Kalasannavar</h4>
             <p className="designation">Admin</p>
           </div>
-          <Image className="icon" alt="" src="/icon1.svg" height={10} width={10} />
+          <Image className="icon" alt="" src="/icon1.svg" height={12} width={12} style={{marginTop:"2px"}} />
         </div>
       </div>
     </div>
