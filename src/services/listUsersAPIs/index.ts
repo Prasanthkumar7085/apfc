@@ -1,9 +1,10 @@
+import { ListUsersApiProps } from "@/interfaces/listUserAPITypes";
 import { $fetch } from "@/lib/fetch";
 import { handleAPIErrorResponse } from "@/lib/httpErrorHandler";
 
-export const getAllListUsersAPI = async () => {
+export const getAllListUsersAPI = async (params: Partial<ListUsersApiProps>) => {
     try {
-        const { success, data } = await $fetch.get("/users");
+        const { success, data } = await $fetch.get("/users", params);
         if (!success) {
             return handleAPIErrorResponse(data);
         }

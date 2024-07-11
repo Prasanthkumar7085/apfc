@@ -34,7 +34,7 @@ const ListUsers = () => {
             let queryString = new URLSearchParams(queryParams).toString();
 
             router.push(`${pathname}?${queryString}`);
-            const response = await getAllListUsersAPI();
+            const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
             setUsersData(data);
             setPaginationDetails(rest);
