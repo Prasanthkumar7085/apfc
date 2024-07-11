@@ -1,11 +1,14 @@
 import AddDevice from "@/components/Devices/AddDevice";
+import { Suspense } from "react";
 
 const AddDevicePage = () => {
 
     return (
-        <div>
-            <AddDevice />
-        </div>
+        <Suspense>
+            <div>
+                <AddDevice />
+            </div>
+        </Suspense>
     );
 }
 export default AddDevicePage;

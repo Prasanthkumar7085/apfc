@@ -1,26 +1,48 @@
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
+import { removeUserDetails } from "@/redux/Modules/userlogin";
 import {
+  Avatar,
   Button,
   FormControl,
   FormHelperText,
   InputAdornment,
   InputLabel,
+  Menu,
   MenuItem,
   Select,
   TextField
 } from "@mui/material";
+import Cookies from "js-cookie";
 import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeadNavbar = () => {
   const router = useRouter();
   const path = usePathname();
   const params = useSearchParams();
+  const dispatch = useDispatch();
+
+  const userDetails = useSelector(
+    (state: any) => state.auth.user?.data?.user_details
+  );
+
   const [searchParams, setSearchParams] = useState(
     Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
   );
   const [searchString, setSearchString] = useState(params.get("search_string") || "");
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
   const handleSearchChange = (event: any) => {
     const newSearchString = event.target.value;
@@ -37,6 +59,12 @@ const HeadNavbar = () => {
       Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
     );
   }, [params]);
+
+  const logout = () => {
+    Cookies.remove("user");
+    dispatch(removeUserDetails());
+    router.push("/");
+  };
 
   return (
     <div className="headnav">
@@ -58,7 +86,7 @@ const HeadNavbar = () => {
             ),
           }}
         />
-        <FormControl
+        {/* <FormControl
           className="defaultSelect"
           variant="outlined"
         >
@@ -70,7 +98,7 @@ const HeadNavbar = () => {
             <MenuItem className="menuItem" value="Device 2">Device 2</MenuItem>
             <MenuItem className="menuItem" value="Device 3">Device 3</MenuItem>
           </Select>
-        </FormControl>
+        </FormControl> */}
 
         {path == "/users" ? (
           <Button
@@ -98,15 +126,50 @@ const HeadNavbar = () => {
         ) : (
           ""
         )}
-        <div className="profileGrp">
-          <Image alt="" src="/avatar@2x.png" height={30} width={30} />
+        <div
+          className="profileGrp"
+          onClick={handleOpenUserMenu}
+          style={{ cursor: "pointer" }}
+        >
+          {/* <Image alt="" src="/avatar@2x.png" height={30} width={30} /> */}
+          <Avatar sx={{ bgcolor: "orange" }}>
+            {userDetails?.full_name?.slice(0, 1).toUpperCase()}
+          </Avatar>
           <div className="profileName">
-            <h4 className="profile">Ansh Kalasannavar</h4>
-            <p className="designation">Admin</p>
+            <h4 className="profile">{userDetails?.full_name}</h4>
+            <p className="designation">{userDetails?.user_type}</p>
           </div>
           <Image className="icon" alt="" src="/icon1.svg" height={12} width={12} style={{ marginTop: "2px" }} />
         </div>
       </div>
+      <Menu
+        sx={{
+          mt: "45px",
+          "& .MuiPaper-root": {
+            boxShadow: "none",
+            border: "1px solid  #CECECE",
+            borderRadius: "8px",
+            paddingInline: "1rem",
+          },
+        }}
+        id="menu-appbar"
+        anchorEl={anchorElUser}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        open={Boolean(anchorElUser)}
+        onClose={handleCloseUserMenu}
+      >
+        <MenuItem onClick={logout}>
+          Log Out
+        </MenuItem>
+      </Menu>
     </div>
   );
 };

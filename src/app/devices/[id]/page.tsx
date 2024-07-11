@@ -1,11 +1,14 @@
 import SingleDeviceView from "@/components/Devices/SingleDeviceView";
+import { Suspense } from "react";
 
 const SingleDeviceViewPage = () => {
 
     return (
-        <div>
-            <SingleDeviceView />
-        </div>
+        <Suspense>
+            <div>
+                <SingleDeviceView />
+            </div>
+        </Suspense>
     );
 }
 export default SingleDeviceViewPage;
