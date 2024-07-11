@@ -27,7 +27,6 @@ class FetchService {
   configureAuthorization(config: any) {
     const state = store.getState();
     const accessToken = state?.auth?.user?.data?.access_token
-    console.log(accessToken);
 
     config.headers["Authorization"] = accessToken; // we need to
   }

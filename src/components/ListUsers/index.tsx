@@ -20,7 +20,6 @@ const ListUsers = () => {
     const [searchParams, setSearchParams] = useState(
         Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
     );
-    console.log(paginationDetails);
 
     const getPatientResults = async ({
         page = searchParams?.page,
@@ -37,7 +36,6 @@ const ListUsers = () => {
             router.push(`${pathname}?${queryString}`);
             const response = await getAllListUsersAPI();
             const { data, ...rest } = response;
-            console.log(response);
             setUsersData(data);
             setPaginationDetails(rest);
         } catch (err) {

@@ -40,8 +40,6 @@ const LoginPage = () => {
         password: password,
       };
       let response: any = await signInAPI(payload);
-      console.log(response);
-
 
       if (response.success) {
         toast.success(response?.message);
