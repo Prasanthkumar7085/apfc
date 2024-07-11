@@ -6,7 +6,7 @@ export const signInAPI = async (payload: {
     password: string;
 }) => {
     try {
-        const { success, data } = await $fetch.post("/users/signin", payload);
+        const { success, data } = await $fetch.post("/users/sign-in", payload);
 
         if (!success) {
             return handleAPIErrorResponse(data);

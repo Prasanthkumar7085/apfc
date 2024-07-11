@@ -1,0 +1,24 @@
+.tablePagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    color: #000000 !important;
+    /* margin-right: 5px !important; */
+    border-radius: 0 !important;
+    width: 100% !important;
+}
+
+.tablePagination * {
+    font-size: clamp(0.8125rem, 0.72vw, 1.25rem);
+    /* padding-right: 1rem; */
+}
+
+.label {
+    margin-right: 10px;
+}
+
+.tablePagenationBlock {
+    padding: 0.625rem 0.625rem 0.625rem 0.9375rem !important;
+    box-shadow: none !important;
+    border: 1px solid #efefef !important;
+}

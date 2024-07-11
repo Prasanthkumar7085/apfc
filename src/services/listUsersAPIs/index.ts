@@ -3,7 +3,7 @@ import { handleAPIErrorResponse } from "@/lib/httpErrorHandler";
 
 export const getAllListUsersAPI = async () => {
     try {
-        const { success, data } = await $fetch.get("/6682aad4ad19ca34f8815673");
+        const { success, data } = await $fetch.get("/users");
         if (!success) {
             return handleAPIErrorResponse(data);
         }
