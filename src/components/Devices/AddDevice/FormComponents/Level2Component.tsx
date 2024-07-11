@@ -12,14 +12,17 @@ import styles from "./Level2Component.module.css";
 import { Switch } from "@mui/material";
 import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import PasswordFormFields from "@/components/Core/FormFields/PasswordFormFields";
+import SaveAndConfirmationButtons from "../SaveAndConfirmation";
 
-const Level2Component = () => {
-  const [level2Data, setLevel2Data] = useState<any>({});
-
+const Level2Component = ({
+  levelBasedData,
+  setLevelBasedData,
+  getLevelBasedDeviceDetails,
+}: any) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
-    setLevel2Data({
-      ...level2Data,
+    setLevelBasedData({
+      ...levelBasedData,
       [name]: type === "checkbox" ? checked : value,
     });
   };
@@ -33,7 +36,7 @@ const Level2Component = () => {
               {setting.label}
               <Switch
                 name={setting.name}
-                checked={level2Data[setting.name] || false}
+                checked={levelBasedData[setting.name] || false}
                 onChange={handleChange}
                 inputProps={{ "aria-label": setting.label }}
               />
@@ -46,7 +49,7 @@ const Level2Component = () => {
             <label className={styles.label}>{setting.label}</label>
             <RangeWithUnits
               setting={setting}
-              value={level2Data}
+              value={levelBasedData}
               handleChange={handleChange}
             />
           </div>
@@ -57,7 +60,7 @@ const Level2Component = () => {
             <label className={styles.label}>{setting.label}</label>
             <PasswordFormFields
               name={setting.name}
-              value={level2Data}
+              value={levelBasedData}
               handleChange={handleChange}
             />
           </div>
@@ -90,17 +93,10 @@ const Level2Component = () => {
           {factoryAndEnergySettings.map(renderField)}
         </section>
       </form>
-      <div className={styles.buttonGroup}>
-        <button
-          type="button"
-          className={`${styles.button} ${styles.cancelButton}`}
-        >
-          Cancel
-        </button>
-        <button type="submit" className={styles.button}>
-          Save & Continue
-        </button>
-      </div>
+      <SaveAndConfirmationButtons
+        levelBasedData={levelBasedData}
+        getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+      />
     </>
   );
 };

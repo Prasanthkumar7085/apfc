@@ -58,20 +58,30 @@ export const CompensationSettings = [
   {
     label: "Auto Initialization",
     type: "radio",
-    options: ["Yes", "No"],
+    options: [
+      { label: "Yes", value: "YES" },
+      { label: "No", value: "NO" },
+    ],
     name: "auto_initialization",
   },
   { label: "Relays Count", type: "number", name: "relays_count" },
   {
     label: "Control Mode",
     type: "radio",
-    options: ["Auto", "Manul"],
+    options: [
+      { label: "Auto", value: "AUTO" },
+      { label: "Manul", value: "MANUL" },
+    ],
     name: "control_mode",
   },
   {
     label: "Switching program",
     type: "radio",
-    options: ["Auto", "Linear", "Rational"],
+    options: [
+      { label: "Auto", value: "AUTO" },
+      { label: "Linear", value: "LINEAR" },
+      { label: "Rational", value: "RATIONAL" },
+    ],
     name: "switching_program",
   },
   { label: "Target Power Factor", type: "number", name: "target_pf" },
@@ -105,13 +115,20 @@ export const CommunicationSettings = [
   {
     label: "Parity",
     type: "radio",
-    options: ["None", "Odd", "Even"],
+    options: [
+      { label: "None", value: "NONE" },
+      { label: "Odd", value: "ODD" },
+      { label: "Even", value: "EVEN" },
+    ],
     name: "parity",
   },
   {
     label: "Stop Bits",
     type: "radio",
-    options: ["1", "2"],
+    options: [
+      { label: "1", value: "1" },
+      { label: "2", value: "2" },
+    ],
     name: "stop_bits",
   },
 ];
