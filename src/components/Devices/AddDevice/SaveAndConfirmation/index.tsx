@@ -1,4 +1,9 @@
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import styles from "../FormComponents/Level1Component.module.css";
 import { useState } from "react";
 import {
@@ -17,21 +22,26 @@ const SaveAndConfirmationButtons = ({
   const params = useSearchParams();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
+  const pathName = usePathname();
 
   const getLevelBasedAPI = (payload: any) => {
     let responseData: any;
 
     if (params?.get("state") == "Level1") {
       responseData = addLeve1DeviceSettingsAPI(id, payload);
+      router.push(`${pathName}?state=Level2`);
     }
     if (params?.get("state") == "Level2") {
       responseData = addLeve2DeviceSettingsAPI(id, payload);
+      router.push(`${pathName}?state=Level3`);
     }
     if (params?.get("state") == "Level3") {
       responseData = addLeve3DeviceSettingsAPI(id, payload);
+      router.push(`${pathName}?state=Level4`);
     }
     if (params?.get("state") == "Level4") {
       responseData = addfanDeviceSettingsAPI(id, payload);
+      router.back();
     }
     return responseData;
   };

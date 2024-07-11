@@ -132,3 +132,15 @@ export const getfanDeviceSettingsAPI = async (id: any) => {
     throw err;
   }
 };
+
+export const addDeviceAPI = async (payload: any) => {
+  try {
+    const { success, data } = await $fetch.post(`/devices`, payload);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
