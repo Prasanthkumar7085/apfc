@@ -14,23 +14,23 @@ const AssignUserDialog = ({ open, onClose }: any) => {
     const [search, setSearch] = useState('');
     const [selectedUser, setSelectedUser] = useState(null);
 
-    const getPatientResults = async () => {
-        setLoading(true);
-        try {
-            const response = await getAllListUsersAPI();
-            setUsersData(response?.record || []);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const getPatientResults = async () => {
+    //     setLoading(true);
+    //     try {
+    //         const response = await getAllListUsersAPI();
+    //         setUsersData(response?.record || []);
+    //     } catch (err) {
+    //         console.error(err);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
-    useEffect(() => {
-        if (open) {
-            getPatientResults();
-        }
-    }, [open]);
+    // useEffect(() => {
+    //     if (open) {
+    //         getPatientResults();
+    //     }
+    // }, [open]);
     return (
         <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
             <DialogTitle>
