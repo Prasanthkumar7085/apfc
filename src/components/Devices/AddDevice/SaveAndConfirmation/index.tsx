@@ -7,6 +7,7 @@ import {
   addLeve2DeviceSettingsAPI,
   addLeve3DeviceSettingsAPI,
 } from "@/services/devicesAPIs";
+import { toast } from "sonner";
 
 const SaveAndConfirmationButtons = ({
   levelBasedData,
@@ -42,6 +43,7 @@ const SaveAndConfirmationButtons = ({
       const response = await getLevelBasedAPI(payload);
       if (response?.status == 200 || response?.status == 201) {
         getLevelBasedDeviceDetails();
+        toast.success(response?.message);
       }
     } catch (err) {
       console.error(err);

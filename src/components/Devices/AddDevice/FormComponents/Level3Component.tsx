@@ -13,7 +13,7 @@ const Level3Component = ({
     const { name, value, type, checked } = event.target;
     setLevelBasedData({
       ...levelBasedData,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "checkbox" ? (checked ? "ON" : "OFF") : value,
     });
   };
 
@@ -26,7 +26,7 @@ const Level3Component = ({
               {setting.label}
               <Switch
                 name={setting.name}
-                checked={levelBasedData[setting.name] || false}
+                checked={levelBasedData[setting.name] == "ON" ? true : false}
                 onChange={handleChange}
                 inputProps={{ "aria-label": setting.label }}
               />

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 import LayoutNavbar from "@/components/Layout";
 import { Providers } from "@/redux/Provider";
 import { usePathname } from "next/navigation";
 import "./globals.css";
-import "@/components/styles/app.scss"
-
+import "@/components/styles/app.scss";
+import { Toaster } from "sonner";
 
 export default function RootLayout({
   children,
@@ -19,6 +19,7 @@ export default function RootLayout({
           {pathname == "/" ? children : <LayoutNavbar>{children}</LayoutNavbar>}
         </Providers>
       </body>
+      <Toaster richColors closeButton position="top-right" />
     </html>
   );
 }
