@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
-import { TextField, Select, MenuItem, Button, Box, Typography } from "@mui/material";
+import { TextField, Select, MenuItem, Button, Box, Typography, InputAdornment, IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { addUserAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import ErrorMessagesComponent from "../Core/ErrorMessagesComponent";
 
 const AddUser = () => {
     const router = useRouter();
@@ -12,27 +14,32 @@ const AddUser = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
-    const [status, setStatus] = useState("");
+    const [password, setPassword] = useState("");
+    const [userType, setUserType] = useState("");
     const [loading, setLoading] = useState(false);
     const [errorMessages, setErrorMessages] = useState<any>();
+    const [showPassword, setShowPassword] = useState(false);
 
     const addUser = async (e: any) => {
         e.preventDefault();
         setLoading(true);
         try {
             const payload = {
-                name: name,
+                full_name: name,
                 email: email,
                 phone: phone,
-                status: status,
+                password: password,
+                user_type: userType,
             };
             let response: any = await addUserAPI(payload);
+            console.log(response);
 
             if (response.success) {
+                router.push('/users');
+                setErrorMessages(null);
 
-            } else if (response.status == 422) {
+            } else if (response.status === 422) {
                 setErrorMessages(response.error_data);
-                setLoading(false);
                 throw response;
             }
         } catch (err) {
@@ -40,6 +47,27 @@ const AddUser = () => {
         } finally {
             setLoading(false);
         }
+    };
+
+    const handlePhoneChange = (e: any) => {
+        const value = e.target.value;
+        if (/^\d{0,10}$/.test(value)) {
+            setPhone(value);
+        }
+    };
+
+    const handleNameChange = (e: any) => {
+        const value = e.target.value.replace(/^\s+/, '');
+        setName(value);
+    };
+
+    const handlePasswordChange = (e: any) => {
+        const value = e.target.value.replace(/^\s+/, '');
+        setPassword(value);
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
     return (
@@ -54,14 +82,15 @@ const AddUser = () => {
                 Back
             </Button>
             <div className="feildBlock">
-                <label className="label">Name <span>*</span></label>
+                <label className="label">Full Name <span>*</span></label>
                 <TextField
                     className="textFeild"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="User Name"
+                    onChange={(e) => handleNameChange(e)}
+                    placeholder="User Full Name"
                     fullWidth
                 />
+                <ErrorMessagesComponent errorMessage={errorMessages?.full_name} />
             </div>
             <div className="feildBlock">
                 <label className="label">Email <span>*</span></label>
@@ -72,36 +101,60 @@ const AddUser = () => {
                     placeholder="User Email"
                     fullWidth
                 />
+                <ErrorMessagesComponent errorMessage={errorMessages?.email} />
             </div>
             <div className="feildBlock">
-                <label className="label">Mobile <span>*</span></label>
+                <label className="label">Mobile</label>
                 <TextField
                     className="textFeild"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => handlePhoneChange(e)}
                     placeholder="User Mobile"
                     fullWidth
                 />
+                <ErrorMessagesComponent errorMessage={errorMessages?.phone} />
             </div>
             <div className="feildBlock">
-                <label className="label">Status <span>*</span></label>
+                <label className="label">Password <span>*</span></label>
+                <TextField
+                    className="textFeild"
+                    value={password}
+                    type={showPassword ? "text" : "password"}
+                    onChange={(e) => handlePasswordChange(e)}
+                    placeholder="User Password"
+                    fullWidth
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton onClick={togglePasswordVisibility} edge="end">
+                                    {showPassword ? <VisibilityOff sx={{ fontSize: "1.2rem" }} /> : <Visibility sx={{ fontSize: "1.2rem" }} />}
+                                </IconButton>
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+                <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+            </div>
+            <div className="feildBlock">
+                <label className="label">User Type <span>*</span></label>
                 <Select
                     className="selectComponent"
-                    value={status}
-                    onChange={(e) => setStatus(e.target.value)}
+                    value={userType}
+                    onChange={(e) => setUserType(e.target.value)}
                     displayEmpty
                     fullWidth
                 >
-                    <MenuItem className="menuItem" value="active">Active</MenuItem>
-                    <MenuItem className="menuItem" value="inactive">Inactive</MenuItem>
+                    <MenuItem className="menuItem" value="USER">User</MenuItem>
+                    <MenuItem className="menuItem" value="ADMIN">Admin</MenuItem>
                 </Select>
+                <ErrorMessagesComponent errorMessage={errorMessages?.user_type} />
             </div>
             <Button
                 className="addUserBtn"
                 variant="contained"
                 color="success"
-                sx={{alignSelf:"flex-end" }}
-                
+                sx={{ alignSelf: "flex-end" }}
+                onClick={addUser}
             >
                 Add User
             </Button>

@@ -16,13 +16,14 @@ export const getAllListUsersAPI = async (params: Partial<ListUsersApiProps>) => 
 
 
 export const addUserAPI = async (payload: {
-    name: string,
+    full_name: string,
     email: string,
     phone: string,
-    status: string,
+    password: string,
+    user_type: string,
 }) => {
     try {
-        const { success, data } = await $fetch.post("", payload);
+        const { success, data } = await $fetch.post("/users/sign-up", payload);
 
         if (!success) {
             return handleAPIErrorResponse(data);
@@ -34,9 +35,9 @@ export const addUserAPI = async (payload: {
     }
 };
 
-export const getSigleUserAPI = async () => {
+export const getSigleUserAPI = async (id: any) => {
     try {
-        const { success, data } = await $fetch.get(`/6683a734e41b4d34e40bed62 `);
+        const { success, data } = await $fetch.get(`/users/${id} `);
         if (!success) {
             return handleAPIErrorResponse(data);
         }
