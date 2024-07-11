@@ -105,3 +105,17 @@ export const factoryAndEnergySettings: Setting[] = [
     { name: 'reset_kvah', label: 'Reset kVAh', type: 'switch' },
     { name: 'reset_kvarh', label: 'Reset kVARh', type: 'switch' },
 ];
+
+export type Level3 = {
+    name: string;
+    label: string;
+    type: 'switch';
+};
+
+export const factoryEnergySettings: any = [
+    ...Array.from({ length: 14 }, (_, i) => ({
+        label: `RLY${i + 1}`,
+        type: 'switch',
+        name: `rly${i + 1}`,
+    })),
+];

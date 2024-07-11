@@ -45,7 +45,7 @@ const HeadNavbar = () => {
           </Select>
         </FormControl>
 
-        {path?.includes("/users") ? (
+        {path == "/users" ? (
           <Button
             className="addUserBtn"
             variant='contained'
@@ -53,6 +53,19 @@ const HeadNavbar = () => {
             startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
           >
             Add New User
+          </Button>
+
+        ) : (
+          ""
+        )}
+        {path == "/devices" ? (
+          <Button
+            className="addUserBtn"
+            variant='contained'
+            onClick={() => router.push("/devices/add")}
+            startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
+          >
+            Add New Device
           </Button>
 
         ) : (
