@@ -7,6 +7,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import ErrorMessagesComponent from "../Core/ErrorMessagesComponent";
+import { toast, Toaster } from "sonner";
 
 const AddUser = () => {
     const router = useRouter();
@@ -21,22 +22,16 @@ const AddUser = () => {
     const [errorMessages, setErrorMessages] = useState<any>();
     const [showPassword, setShowPassword] = useState(false);
 
-
     const getSingleUser = async () => {
         setLoading(true);
         try {
             const response = await getSigleUserAPI(params?.id);
-            console.log(response);
-
-
             if (response.status === 200) {
                 setName(response?.data?.full_name)
                 setEmail(response?.data?.email)
                 setPhone(response?.data?.phone)
                 setUserType(response?.data?.user_type)
             }
-
-
         } catch (err) {
             console.error(err);
         } finally {
@@ -55,11 +50,13 @@ const AddUser = () => {
                 user_type: userType,
             };
             let response: any = await addUserAPI(payload);
-            console.log(response);
 
             if (response.success) {
-                router.push('/users');
                 setErrorMessages(null);
+                toast.success(response.message);
+                setTimeout(() => {
+                    router.push('/users');
+                }, 1000)
 
             } else if (response.status === 422) {
                 setErrorMessages(response.error_data);
@@ -82,12 +79,13 @@ const AddUser = () => {
                 user_type: userType,
             };
             let response: any = await updateUserAPI(payload, params?.id);
-            console.log(response);
 
             if (response.success) {
-                router.push('/users');
                 setErrorMessages(null);
-
+                toast.success(response.message);
+                setTimeout(() => {
+                    router.push('/users');
+                }, 1000)
             } else if (response.status === 422) {
                 setErrorMessages(response.error_data);
                 throw response;
@@ -227,6 +225,7 @@ const AddUser = () => {
                 {params?.id ? "Update User" : "Add User"}
             </Button>
             <LoadingComponent loading={loading} />
+            <Toaster richColors closeButton position="top-right" />
         </Box>
     );
 }
