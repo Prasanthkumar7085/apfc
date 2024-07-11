@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styles from "./Level1Component.module.css";
+import GroupRadioButtons from "@/components/Core/FormFields/GroupRadioButtons";
+import PasswordFormFields from "@/components/Core/FormFields/PasswordFormFields";
+import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import {
   AuthenticationSettings,
   CommunicationSettings,
@@ -11,19 +12,20 @@ import {
   PotentialTransformerSettings,
   TimingSettings,
 } from "@/lib/constants/addDevicesConstants";
-import PasswordFormFields from "@/components/Core/FormFields/PasswordFormFields";
-import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
+import React from "react";
+import SaveAndConfirmationButtons from "../SaveAndConfirmation";
+import styles from "./Level1Component.module.css";
 
-const Level1Component = () => {
-  const [formData, setFormData] = useState<{ [key: string]: string | number }>(
-    {}
-  );
-
+const Level1Component = ({
+  levelBasedData,
+  setLevelBasedData,
+  getLevelBasedDeviceDetails,
+}: any) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
+    setLevelBasedData((prevState: any) => ({
       ...prevState,
       [name]: value,
     }));
@@ -39,7 +41,7 @@ const Level1Component = () => {
               {setting.label}
               <RangeWithUnits
                 setting={setting}
-                value={formData}
+                value={levelBasedData}
                 handleChange={handleChange}
               />
             </label>
@@ -53,7 +55,7 @@ const Level1Component = () => {
               <PasswordFormFields
                 name={setting.name}
                 handleChange={handleChange}
-                value={formData}
+                value={levelBasedData}
               />
             </label>
           </div>
@@ -67,6 +69,7 @@ const Level1Component = () => {
                 className={styles.select}
                 onChange={handleChange}
                 name={setting.name}
+                value={levelBasedData?.[setting.name]}
               >
                 {setting.options?.map((option: any) => (
                   <option key={option} value={option}>
@@ -80,22 +83,11 @@ const Level1Component = () => {
       case "radio":
         return (
           <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
-              {setting.label}
-              <div className={styles.radioGroup}>
-                {setting.options?.map((option: any) => (
-                  <label key={option}>
-                    <input
-                      type="radio"
-                      name={setting.name}
-                      value={option}
-                      onChange={handleChange}
-                    />
-                    {option}
-                  </label>
-                ))}
-              </div>
-            </label>
+            <GroupRadioButtons
+              setting={setting}
+              handleChange={handleChange}
+              formData={levelBasedData}
+            />
           </div>
         );
       default:
@@ -134,17 +126,10 @@ const Level1Component = () => {
         </section>
       </form>
 
-      <div className={styles.buttonGroup}>
-        <button
-          type="button"
-          className={`${styles.button} ${styles.cancelButton}`}
-        >
-          Cancel
-        </button>
-        <button type="submit" className={styles.button}>
-          Save & Continue
-        </button>
-      </div>
+      <SaveAndConfirmationButtons
+        levelBasedData={levelBasedData}
+        getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+      />
     </>
   );
 };

@@ -1,14 +1,12 @@
-import AddDevice from "@/components/Devices/AddDevice";
+"use client";
+import AddDevice from "@/components/Devices/AddDevice/AddDevice";
 import { Suspense } from "react";
 
 const AddDevicePage = () => {
-
     return (
         <Suspense>
-            <div>
-                <AddDevice />
-            </div>
+            <AddDevice />
         </Suspense>
     );
-}
+};
 export default AddDevicePage;

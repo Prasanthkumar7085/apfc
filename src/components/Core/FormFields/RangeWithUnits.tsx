@@ -6,7 +6,7 @@ const RangeWithUnits = ({ setting, value, handleChange }: any) => {
       <TextField
         type={setting?.type}
         name={setting.name}
-        value={value[setting.name] || ""}
+        value={value[setting.name]}
         onChange={handleChange}
         InputProps={{
           endAdornment: (

@@ -3,10 +3,13 @@ import styles from "./Level2Component.module.css";
 import { useState } from "react";
 import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import { fanSettings } from "@/lib/constants/addDevicesConstants";
+import SaveAndConfirmationButtons from "../SaveAndConfirmation";
 
-const Level4Component = () => {
-  const [level4Data, setLevel4Data] = useState<any>({});
-
+const Level4Component = ({
+  levelBasedData,
+  setLevelBasedData,
+  getLevelBasedDeviceDetails,
+}: any) => {
   const renderField = (setting: any) => {
     switch (setting.type) {
       case "select":
@@ -18,6 +21,7 @@ const Level4Component = () => {
                 className={styles.select}
                 onChange={handleChange}
                 name={setting.name}
+                value={levelBasedData?.[setting.name]}
               >
                 {setting.options?.map((option: any) => (
                   <option key={option} value={option}>
@@ -35,7 +39,7 @@ const Level4Component = () => {
             <label className={styles.label}>{setting.label}</label>
             <RangeWithUnits
               setting={setting}
-              value={level4Data}
+              value={levelBasedData}
               handleChange={handleChange}
             />
           </div>
@@ -44,7 +48,13 @@ const Level4Component = () => {
         return null;
     }
   };
-  const handleChange = () => {};
+  const handleChange = (event: any) => {
+    const { name, value, type, checked } = event.target;
+    setLevelBasedData({
+      ...levelBasedData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
   return (
     <>
       <form className={styles.form}>
@@ -57,6 +67,10 @@ const Level4Component = () => {
           </div>
         </section>
       </form>
+      <SaveAndConfirmationButtons
+        levelBasedData={levelBasedData}
+        getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+      />
     </>
   );
 };

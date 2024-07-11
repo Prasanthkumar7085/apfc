@@ -2,15 +2,18 @@ import { useState } from "react";
 import styles from "./Level2Component.module.css";
 import { Switch } from "@mui/material";
 import { factoryEnergySettings } from "@/lib/constants/addDevicesConstants";
+import SaveAndConfirmationButtons from "../SaveAndConfirmation";
 
-const Level3Component = () => {
-  const [level3Data, setLevel3Data] = useState<any>({});
-
+const Level3Component = ({
+  levelBasedData,
+  setLevelBasedData,
+  getLevelBasedDeviceDetails,
+}: any) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
-    setLevel3Data({
-      ...level3Data,
-      [name]: type === "checkbox" ? checked : value,
+    setLevelBasedData({
+      ...levelBasedData,
+      [name]: type === "checkbox" ? (checked ? "ON" : "OFF") : value,
     });
   };
 
@@ -23,7 +26,7 @@ const Level3Component = () => {
               {setting.label}
               <Switch
                 name={setting.name}
-                checked={level3Data[setting.name] || false}
+                checked={levelBasedData[setting.name] == "ON" ? true : false}
                 onChange={handleChange}
                 inputProps={{ "aria-label": setting.label }}
               />
@@ -41,7 +44,7 @@ const Level3Component = () => {
               min={setting.min}
               max={setting.max}
               step={setting.step || 1}
-              value={level3Data[setting.name] || ""}
+              value={levelBasedData[setting.name] || ""}
               onChange={handleChange}
             />
             {setting.unit && <span>{setting.unit}</span>}
@@ -60,17 +63,10 @@ const Level3Component = () => {
           {factoryEnergySettings.map(renderField)}
         </section>
       </form>
-      <div className={styles.buttonGroup}>
-        <button
-          type="button"
-          className={`${styles.button} ${styles.cancelButton}`}
-        >
-          Cancel
-        </button>
-        <button type="submit" className={styles.button}>
-          Save & Continue
-        </button>
-      </div>
+      <SaveAndConfirmationButtons
+        levelBasedData={levelBasedData}
+        getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+      />
     </>
   );
 };
