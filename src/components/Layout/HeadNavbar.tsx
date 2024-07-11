@@ -1,3 +1,4 @@
+import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
 import {
   Button,
   FormControl,
@@ -9,11 +10,34 @@ import {
   TextField
 } from "@mui/material";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const HeadNavbar = () => {
   const router = useRouter();
   const path = usePathname();
+  const params = useSearchParams();
+  const [searchParams, setSearchParams] = useState(
+    Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
+  );
+  const [searchString, setSearchString] = useState(params.get("search_string") || "");
+
+  const handleSearchChange = (event: any) => {
+    const newSearchString = event.target.value;
+    setSearchString(newSearchString);
+    let queryParams = {
+      ...searchParams,
+      search_string: newSearchString
+    }
+    let queryString = prepareURLEncodedParams("", queryParams)
+    router.push(`${path}${queryString}`);
+  };
+  useEffect(() => {
+    setSearchParams(
+      Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
+    );
+  }, [params]);
+
   return (
     <div className="headnav">
       <h4 className="pagetitle"> {path.includes("/users") ? "Users" : "Devices"} </h4>
@@ -23,6 +47,9 @@ const HeadNavbar = () => {
           defaultValue="Search"
           variant="outlined"
           type="search"
+          value={searchString}
+          onChange={handleSearchChange}
+          placeholder="Search"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
