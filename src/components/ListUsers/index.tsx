@@ -35,7 +35,7 @@ const ListUsers = () => {
             };
             let queryString = prepareURLEncodedParams("", queryParams)
 
-            router.push(`${pathname}?${queryString}`);
+            router.push(`${pathname}${queryString}`);
             const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
             setUsersData(data);

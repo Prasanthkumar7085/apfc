@@ -1,15 +1,43 @@
 import type { NextPage } from "next";
 import styles from "./DeviceSection.module.css";
 import { Avatar, Button, Stack } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
+import TablePaginationComponent from "../Core/TablePaginationComponent";
 
-const DeviceSection = ({ devicesData }: any) => {
+const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
   const router = useRouter();
 
   const [dialogOpen, setDialogOpen] = useState(false);
+  const useParams = useSearchParams();
+  const [searchParams, setSearchParams] = useState(
+    Object.fromEntries(new URLSearchParams(Array.from(useParams.entries())))
+  );
+
+  useEffect(() => {
+    setSearchParams(
+      Object.fromEntries(new URLSearchParams(Array.from(useParams.entries())))
+    );
+  }, [useParams]);
+
+  const capturePageNum = (value: number) => {
+    getData({
+      ...searchParams,
+      limit: searchParams.limit as string,
+      page: value,
+    });
+  };
+
+  const captureRowPerItems = (value: number) => {
+    getData({
+      ...searchParams,
+      limit: value,
+      page: 1,
+    });
+  };
+
   return (
     <div className="devicesGrp">
       {
@@ -42,7 +70,7 @@ const DeviceSection = ({ devicesData }: any) => {
                   </div>
                 </div>
               </div>
-              <div className="deviceInfo" style={{padding:"16px 12px"}}>
+              <div className="deviceInfo" style={{ padding: "16px 12px" }}>
                 <div className="eachDeviceInfo">
                   <p className="infoTitle">Total kW</p>
                   <h5 className="infoValue">{item?.device_parameters?.power_measurements?.total_kw || "--"}</h5>
@@ -76,27 +104,29 @@ const DeviceSection = ({ devicesData }: any) => {
                   />
                   {item?.device_parameters?.errors?.under_compensate_error === true ? (
                     <div className="errorBlock">
-                      <Image  alt="" src="/iconinfo.svg" height={18} width={18} />
+                      <Image alt="" src="/iconinfo.svg" height={18} width={18} />
                       <h6 >Under Compensate Error</h6>
                     </div>
                   ) : (
                     ""
-                  )} 
+                  )}
                 </div>
                 <div className="actionsList">
-                  <Button className="assignUserBtn" variant="contained" startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14}/>} onClick={() => setDialogOpen(true)}>
+                  <Button className="assignUserBtn" variant="contained" startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />} onClick={() => setDialogOpen(true)}>
                     Assign User
                   </Button>
-                  <div className="userInfo">
+                  {item?.user_full_name ? (
+                    <div className="userInfo">
                       <Avatar className="userAvathar" >
-                      {/* {item?.user?.first_name?.[0]}{item?.user?.last_name?.[0] || "--"} */}
-                      P
-                      </Avatar>                   
-                    <h4 className="userName">
-                      {/* {item?.user?.first_name + " " + item?.user?.last_name || "--"} */}
-                      Priscilla Schmidt
-                    </h4>
-                  </div>
+                        {item?.user_full_name?.[0] || "--"}
+                      </Avatar>
+                      <h4 className="userName">
+                        {item?.user_full_name || "--"}
+                      </h4>
+                    </div>
+                  ) : (
+                    ""
+                  )}
                   <Button
                     variant="outlined"
                     className="viewBtn"
@@ -117,6 +147,14 @@ const DeviceSection = ({ devicesData }: any) => {
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
       />
+      <div>
+        <TablePaginationComponent
+          paginationDetails={paginationDetails}
+          capturePageNum={capturePageNum}
+          captureRowPerItems={captureRowPerItems}
+          values="Devices"
+        />
+      </div>
     </div>
   );
 };
