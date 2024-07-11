@@ -4,38 +4,34 @@ declare namespace IReduxUserLogin {
   }
 
   export interface UserDetails {
-    id: string;
-    scope: string;
-    access_token: string;
-    token_type: string;
-  }
-
-  export interface IInitialLoginState {
-    user: Partial<UserDetails>;
-    emailWhilePasswordReset: string
+    id: number;
+    status: string;
+    user_type: string;
+    phone: boolean;
+    email: string;
+    full_name: string;
+    last_active_at: any;
+    created_at: string;
+    updated_at: string;
   }
 
   export interface IUserResponse {
-    _id: string;
-    avatar: string;
-    status: string;
-    user_type: string;
-    password_expired_at: string;
-    email_verified: boolean;
-    phone_verified: boolean;
-    email: string;
-    name: string;
-    gender: string;
+    userDetails: UserDetails
     access_token: string;
     refresh_token: string;
-    message: string;
-    phone: string;
+    message?: string;
   }
+
+  export interface IInitialLoginState {
+    user: Partial<IUserResponse>;
+    emailWhilePasswordReset: string
+  }
+
 
   export interface IUserErrorResponse {
     success: boolean;
     message: string;
-    status_code?: string;
+    status?: string;
   }
 
   export interface ICreateUserPayload {
@@ -44,7 +40,7 @@ declare namespace IReduxUserLogin {
     password: string;
   }
   export interface IUser {
-    _id: number;
+    id: number;
     email: string;
     first_name: string;
     last_name: string;

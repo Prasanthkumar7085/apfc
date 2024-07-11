@@ -5,20 +5,39 @@ import { ListUserColumns } from "./ListUsersColumns";
 import { getAllListUsersAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ListUsersApiProps } from "@/interfaces/listUserAPITypes";
 
 const ListUsers = () => {
+    const params = useParams();
+    const useParam = useSearchParams();
     const router = useRouter();
+    const pathname = usePathname();
 
     const [loading, setLoading] = useState(false);
     const [usersData, setUsersData] = useState<any[]>([]);
+    const [paginationDetails, setPaginationDetails] = useState({});
+    const [searchParams, setSearchParams] = useState(
+        Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
+    );
 
-    const getPatientResults = async () => {
+    const getPatientResults = async ({
+        page = searchParams?.page,
+        limit = searchParams?.limit,
+    }: Partial<ListUsersApiProps>) => {
         setLoading(true);
         try {
-            const response = await getAllListUsersAPI();
-            setUsersData(response?.record)
+            let queryParams: any = {
+                page: page ? page : 1,
+                limit: limit ? limit : 10,
+            };
+            let queryString = new URLSearchParams(queryParams).toString();
 
+            router.push(`${pathname}?${queryString}`);
+            const response = await getAllListUsersAPI(queryParams);
+            const { data, ...rest } = response;
+            setUsersData(data);
+            setPaginationDetails(rest);
         } catch (err) {
             console.error(err);
         } finally {
@@ -27,7 +46,10 @@ const ListUsers = () => {
     };
 
     useEffect(() => {
-        getPatientResults();
+        getPatientResults({
+            page: 1,
+            limit: 10,
+        });
     }, [])
 
     const column = [
@@ -82,6 +104,8 @@ const ListUsers = () => {
                 data={usersData}
                 columns={[...ListUserColumns, ...column]}
                 loading={loading}
+                paginationDetails={paginationDetails}
+                getData={getPatientResults}
             />
             <LoadingComponent loading={loading} />
         </div>

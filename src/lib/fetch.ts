@@ -9,7 +9,7 @@ interface IAPIResponse {
   data: any;
 }
 class FetchService {
-  authStatusCodes: number[] = [401, 403];
+  authStatusCodes: number[] = [403];
   authErrorURLs: string[] = [
     "/user/login",
     "/forgot-password",
@@ -26,7 +26,8 @@ class FetchService {
 
   configureAuthorization(config: any) {
     const state = store.getState();
-    const accessToken = state?.auth?.user?.access_token;
+    const accessToken = state?.auth?.user?.data?.access_token
+
     config.headers["Authorization"] = accessToken; // we need to
   }
   setHeader(config: any) {

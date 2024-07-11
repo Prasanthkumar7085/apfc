@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const ListUserColumns = [
     {
-        accessorFn: (row: any) => row.first_name,
+        accessorFn: (row: any) => row.full_name,
         id: "first_name",
         header: () => <span>Name</span>,
         cell: (info: any) => {
@@ -44,11 +44,11 @@ export const ListUserColumns = [
     {
         accessorFn: (row: any) => row.status,
         id: "status",
-        header: () => <span>Status</span>,
+        header: () => <span>status</span>,
         cell: (info: any) => {
             const value = info.getValue();
             const capitalizedValue = value ? value.charAt(0).toUpperCase() + value.slice(1) : "--";
-            return <span className={value === "active" ? "status active" : "status inactive"}>{capitalizedValue}</span>;
+            return <span className={value === "active" ? "status inactive" : "status active"}>{capitalizedValue}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "100px",
@@ -64,11 +64,11 @@ export const ListUserColumns = [
         width: "150px",
     },
     {
-        accessorFn: (row: any) => row.device_ids,
+        accessorFn: (row: any) => row.device_count,
         id: "device_ids",
         header: () => <span>Devices Assigend</span>,
         cell: (info: any) => {
-            return <span className="assignDeviceText">{info.getValue() ? info.getValue()?.length : "--"}</span>;
+            return <span className="assignDeviceText">{info.getValue() || "0"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",

@@ -24,8 +24,8 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const [email, setEmail] = useState<any>();
-  const [password, setPassword] = useState<any>();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessages, setErrorMessages] = useState<any>();
@@ -33,7 +33,6 @@ const LoginPage = () => {
 
   const signIn = async (e: any) => {
     e.preventDefault();
-    setInvalid(false);
     setLoading(true);
     try {
       const payload = {
@@ -46,13 +45,15 @@ const LoginPage = () => {
         toast.success(response?.message);
         Cookies.set("user", response?.data?.user_details?.user_type);
         dispatch(setUserDetails(response));
+        setInvalid(null);
         router.push("/devices")
       } else if (response.status == 422) {
         setErrorMessages(response.error_data);
-        setLoading(false);
+        setInvalid(null);
         throw response;
       } else if (response.status === 401) {
         setInvalid(response.message);
+        setErrorMessages(null);
       } else {
         toast.error(response.message || 'Error while login')
       }
@@ -95,6 +96,7 @@ const LoginPage = () => {
                   onChange={(e) => {
                     setEmail(e.target.value);
                     setErrorMessages(null);
+                    setInvalid(null);
                   }}
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.email} />
@@ -110,6 +112,7 @@ const LoginPage = () => {
                   onChange={(e) => {
                     setPassword(e.target.value);
                     setErrorMessages(null);
+                    setInvalid(null);
                   }}
                   InputProps={{
                     endAdornment: (
@@ -122,6 +125,7 @@ const LoginPage = () => {
                   }}
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+                <p style={{ color: "red" }}>{invalid}</p>
                 <div className="forgotBtnGrp">
 
                   <Button variant="text" className="forgotBtn">
@@ -133,7 +137,7 @@ const LoginPage = () => {
                 className="loginBtn"
                 variant="contained"
                 fullWidth
-                onClick={() => router.push("/devices")}
+                onClick={signIn}
               >
                 {loading ? (
                   <CircularProgress color="inherit" size={"1.8rem"} />
