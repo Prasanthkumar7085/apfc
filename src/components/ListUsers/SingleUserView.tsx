@@ -12,13 +12,12 @@ import dayjs from "dayjs";
 const SingleUserView = () => {
     const params = useParams();
     const router = useRouter();
-    console.log(params);
 
     const [loading, setLoading] = useState(false);
     const [usersData, setUsersData] = useState<any>({});
     const [data, setData] = useState<any[]>([]);
 
-    const getPatientResults = async () => {
+    const getSinleUser = async () => {
         setLoading(true);
         try {
             const response = await getSigleUserAPI(params?.id);
@@ -33,7 +32,7 @@ const SingleUserView = () => {
     };
 
     useEffect(() => {
-        getPatientResults();
+        getSinleUser();
     }, [])
 
     return (

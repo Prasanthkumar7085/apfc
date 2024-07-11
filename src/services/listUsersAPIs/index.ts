@@ -46,3 +46,22 @@ export const getSigleUserAPI = async (id: any) => {
         throw err;
     }
 };
+
+export const updateUserAPI = async (payload: {
+    full_name: string,
+    email: string,
+    phone: string,
+    user_type: string,
+}, id: any) => {
+    try {
+        const { success, data } = await $fetch.patch(`/users/${id}`, payload);
+
+        if (!success) {
+            return handleAPIErrorResponse(data);
+        }
+
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
+};

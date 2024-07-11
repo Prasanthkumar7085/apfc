@@ -1,15 +1,16 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TextField, Select, MenuItem, Button, Box, Typography, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { addUserAPI } from "@/services/listUsersAPIs";
+import { addUserAPI, getSigleUserAPI, updateUserAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import ErrorMessagesComponent from "../Core/ErrorMessagesComponent";
 
 const AddUser = () => {
     const router = useRouter();
+    const params = useParams();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -20,8 +21,30 @@ const AddUser = () => {
     const [errorMessages, setErrorMessages] = useState<any>();
     const [showPassword, setShowPassword] = useState(false);
 
-    const addUser = async (e: any) => {
-        e.preventDefault();
+
+    const getSingleUser = async () => {
+        setLoading(true);
+        try {
+            const response = await getSigleUserAPI(params?.id);
+            console.log(response);
+
+
+            if (response.status === 200) {
+                setName(response?.data?.full_name)
+                setEmail(response?.data?.email)
+                setPhone(response?.data?.phone)
+                setUserType(response?.data?.user_type)
+            }
+
+
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const addUser = async () => {
         setLoading(true);
         try {
             const payload = {
@@ -32,6 +55,33 @@ const AddUser = () => {
                 user_type: userType,
             };
             let response: any = await addUserAPI(payload);
+            console.log(response);
+
+            if (response.success) {
+                router.push('/users');
+                setErrorMessages(null);
+
+            } else if (response.status === 422) {
+                setErrorMessages(response.error_data);
+                throw response;
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const updateUser = async () => {
+        setLoading(true);
+        try {
+            const payload = {
+                full_name: name,
+                email: email,
+                phone: phone,
+                user_type: userType,
+            };
+            let response: any = await updateUserAPI(payload, params?.id);
             console.log(response);
 
             if (response.success) {
@@ -69,6 +119,20 @@ const AddUser = () => {
     const togglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
+
+    const sendButton = () => {
+        if (params?.id) {
+            updateUser();
+        } else {
+            addUser();
+        }
+    }
+
+    useEffect(() => {
+        if (params?.id) {
+            getSingleUser();
+        }
+    }, [])
 
     return (
         <Box id="addUser">
@@ -114,27 +178,31 @@ const AddUser = () => {
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.phone} />
             </div>
-            <div className="feildBlock">
-                <label className="label">Password <span>*</span></label>
-                <TextField
-                    className="textFeild"
-                    value={password}
-                    type={showPassword ? "text" : "password"}
-                    onChange={(e) => handlePasswordChange(e)}
-                    placeholder="User Password"
-                    fullWidth
-                    InputProps={{
-                        endAdornment: (
-                            <InputAdornment position="end">
-                                <IconButton onClick={togglePasswordVisibility} edge="end">
-                                    {showPassword ? <VisibilityOff sx={{ fontSize: "1.2rem" }} /> : <Visibility sx={{ fontSize: "1.2rem" }} />}
-                                </IconButton>
-                            </InputAdornment>
-                        ),
-                    }}
-                />
-                <ErrorMessagesComponent errorMessage={errorMessages?.password} />
-            </div>
+            {!params?.id ? (
+                <div className="feildBlock">
+                    <label className="label">Password <span>*</span></label>
+                    <TextField
+                        className="textFeild"
+                        value={password}
+                        type={showPassword ? "text" : "password"}
+                        onChange={(e) => handlePasswordChange(e)}
+                        placeholder="User Password"
+                        fullWidth
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={togglePasswordVisibility} edge="end">
+                                        {showPassword ? <VisibilityOff sx={{ fontSize: "1.2rem" }} /> : <Visibility sx={{ fontSize: "1.2rem" }} />}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        }}
+                    />
+                    <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+                </div>
+            ) : (
+                ""
+            )}
             <div className="feildBlock">
                 <label className="label">User Type <span>*</span></label>
                 <Select
@@ -154,9 +222,9 @@ const AddUser = () => {
                 variant="contained"
                 color="success"
                 sx={{ alignSelf: "flex-end" }}
-                onClick={addUser}
+                onClick={sendButton}
             >
-                Add User
+                {params?.id ? "Update User" : "Add User"}
             </Button>
             <LoadingComponent loading={loading} />
         </Box>
