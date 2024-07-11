@@ -64,11 +64,11 @@ export const ListUserColumns = [
         width: "150px",
     },
     {
-        accessorFn: (row: any) => row.device_ids,
+        accessorFn: (row: any) => row.device_count,
         id: "device_ids",
         header: () => <span>Devices Assigend</span>,
         cell: (info: any) => {
-            return <span className="assignDeviceText">{info.getValue() ? info.getValue()?.length : "--"}</span>;
+            return <span className="assignDeviceText">{info.getValue() || "0"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",
