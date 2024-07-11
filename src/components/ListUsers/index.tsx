@@ -74,7 +74,13 @@ const ListUsers = () => {
                                 height={15}
                             />
                         </div>
-                        <div title="User Edit" style={{ cursor: "pointer" }}>
+                        <div
+                            title="User Edit"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                                router.push(`/users/${info?.row?.original?.id}/edit`)
+                            }}
+                        >
                             <Image
                                 alt=""
                                 src="/edit-user.svg"
