@@ -11,6 +11,8 @@ import {
   PotentialTransformerSettings,
   TimingSettings,
 } from "@/lib/constants/addDevicesConstants";
+import PasswordFormFields from "@/components/Core/FormFields/PasswordFormFields";
+import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 
 const Level1Component = () => {
   const [formData, setFormData] = useState<{ [key: string]: string | number }>(
@@ -30,19 +32,28 @@ const Level1Component = () => {
   const renderField = (setting: any) => {
     switch (setting.type) {
       case "text":
-      case "password":
       case "number":
         return (
           <div className={styles.fieldGroup} key={setting.name}>
             <label className={styles.label}>
               {setting.label}
-              <input
-                type={setting.type}
-                min={setting.min}
-                max={setting.max}
-                className={styles.input}
-                onChange={handleChange}
+              <RangeWithUnits
+                setting={setting}
+                value={formData}
+                handleChange={handleChange}
+              />
+            </label>
+          </div>
+        );
+      case "password":
+        return (
+          <div className={styles.fieldGroup} key={setting.name}>
+            <label className={styles.label}>
+              {setting.label}
+              <PasswordFormFields
                 name={setting.name}
+                handleChange={handleChange}
+                value={formData}
               />
             </label>
           </div>

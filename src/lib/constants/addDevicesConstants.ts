@@ -9,7 +9,7 @@ export interface FormField {
 
 export const AuthenticationSettings = [
   { label: "Password", type: "password", name: "password" },
-  { label: "Confirm Password", type: "password", name: "confiram_password" },
+  { label: "Confirm Password", type: "password", name: "confirm_password" },
 ];
 
 export const DeviceConfiguration = [
@@ -27,6 +27,7 @@ export const CurrentTransformerSettings = [
     type: "select",
     options: ["5A", "10A"],
     name: "ct_secondary",
+    unit: "A",
   },
   {
     label: "CT Primary",
@@ -34,20 +35,26 @@ export const CurrentTransformerSettings = [
     min: 1,
     max: 100,
     name: "ct_primary",
+    unit: "A",
   },
 ];
 export const PotentialTransformerSettings = [
-  { label: "PT Secondary", type: "number", name: "pt_secondary" },
-  { label: "PT Primary", type: "number", name: "pt_primary" },
+  { label: "PT Secondary", type: "number", name: "pt_secondary", unit: "V" },
+  { label: "PT Primary", type: "number", name: "pt_primary", unit: "V" },
 ];
 export const CompensationSettings = [
   {
     label: "Phase Compensation Angle",
     type: "number",
-    name: "phase_coompansation_angle",
+    name: "phase_compensation_angel",
   },
-  { label: "Nominal Voltage", type: "text", name: "npminal_voltage" },
-  { label: "Threshold Voltage", type: "number", name: "threshold_voltage" },
+  { label: "Nominal Voltage", type: "text", name: "nominal_voltage" },
+  {
+    label: "Threshold Voltage",
+    type: "number",
+    name: "threshold_voltage",
+    unit: "%",
+  },
   {
     label: "Auto Initialization",
     type: "radio",
@@ -67,14 +74,15 @@ export const CompensationSettings = [
     options: ["Auto", "Linear", "Rational"],
     name: "switching_program",
   },
-  { label: "Target Power Factor", type: "number", name: "relays_count" },
+  { label: "Target Power Factor", type: "number", name: "target_pf" },
 ];
 export const TimingSettings = [
-  { label: "Step Time", type: "number", name: "step_time" },
+  { label: "Step Time", type: "number", name: "step_time", unit: "S" },
   {
     label: "Discharge Time(Reconnection Time)",
     type: "number",
-    name: "discharge_time",
+    name: "discharging_time",
+    unit: "S",
   },
 ];
 export const ControlSensitivitySettings = [
@@ -82,11 +90,12 @@ export const ControlSensitivitySettings = [
     label: "Control Sensitivity",
     type: "number",
     name: "control_sensitivity",
+    unit: "%",
   },
-  { label: "Low Current", type: "number", name: "low_current" },
+  { label: "Low Current", type: "number", name: "low_current", unit: "%" },
 ];
 export const CommunicationSettings = [
-  { label: "Slave ID", type: "number", name: "slava_id" },
+  { label: "Slave ID", type: "text", name: "slave_id" },
   {
     label: "Baud Rate",
     type: "select",
@@ -107,7 +116,7 @@ export const CommunicationSettings = [
   },
 ];
 export const DisplaySettings = [
-  { label: "Back Light", type: "number", name: "back_light" },
+  { label: "Back Light", type: "number", name: "back_light", unit: "S" },
 ];
 
 export type Setting = {
@@ -126,7 +135,7 @@ export const voltageSettings: Setting[] = [
   { name: "no_volt", label: "NO VOLT", type: "switch" },
   { name: "over_volt", label: "OVER VOLT", type: "switch" },
   {
-    name: "over_volt_min",
+    name: "set_min_over_volt",
     label: "Set Over Voltage Min",
     type: "input",
     min: 0,
@@ -134,7 +143,7 @@ export const voltageSettings: Setting[] = [
     unit: "V",
   },
   {
-    name: "over_volt_max",
+    name: "set_max_over_volt",
     label: "Set Over Voltage Max",
     type: "input",
     min: 0,
@@ -151,7 +160,7 @@ export const harmonicDistortionSettings: Setting[] = [
     type: "switch",
   },
   {
-    name: "thd_range",
+    name: "thd_i_range",
     label: "THD I Range",
     type: "input",
     min: 0,
@@ -190,7 +199,7 @@ export const errorHandlingSettings: Setting[] = [
 export const fanAndHysteresisSettings: Setting[] = [
   { name: "fan_setting", label: "Fan Setting", type: "switch" },
   {
-    name: "hysteresis_voltage",
+    name: "histeresis_voltage",
     label: "Hysteresis Voltage",
     type: "input",
     min: 0,
@@ -198,7 +207,7 @@ export const fanAndHysteresisSettings: Setting[] = [
     unit: "%",
   },
   {
-    name: "hysteresis_pf",
+    name: "histeresis_pf",
     label: "Hysteresis PF",
     type: "input",
     min: 0,
@@ -224,8 +233,16 @@ export const factoryEnergySettings: any = [
   ...Array.from({ length: 14 }, (_, i) => ({
     label: `RLY${i + 1}`,
     type: "switch",
-    name: `rly${i + 1}`,
+    name: `relay${i + 1}`,
   })),
+];
+export const fanSettings: any = [
+  {
+    name: "set_status",
+    type: "select",
+    options: ["None", "Fixed ON", "Temprerature"],
+  },
+  { name: "temperature", label: "Temperature", type: "number", unit: "c" },
 ];
 export const steppersConstansts = [
   { title: "Level1", sub_title: "Short step description" },

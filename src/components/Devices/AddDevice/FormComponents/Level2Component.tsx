@@ -10,6 +10,8 @@ import {
 import React, { useState } from "react";
 import styles from "./Level2Component.module.css";
 import { Switch } from "@mui/material";
+import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
+import PasswordFormFields from "@/components/Core/FormFields/PasswordFormFields";
 
 const Level2Component = () => {
   const [level2Data, setLevel2Data] = useState<any>({});
@@ -42,29 +44,21 @@ const Level2Component = () => {
         return (
           <div className={styles.fieldGroup} key={setting.name}>
             <label className={styles.label}>{setting.label}</label>
-            <input
-              type="number"
-              className={styles.input}
-              name={setting.name}
-              min={setting.min}
-              max={setting.max}
-              step={setting.step || 1}
-              value={level2Data[setting.name] || ""}
-              onChange={handleChange}
+            <RangeWithUnits
+              setting={setting}
+              value={level2Data}
+              handleChange={handleChange}
             />
-            {setting.unit && <span>{setting.unit}</span>}
           </div>
         );
       case "password":
         return (
           <div className={styles.fieldGroup} key={setting.name}>
             <label className={styles.label}>{setting.label}</label>
-            <input
-              type="password"
-              className={styles.input}
+            <PasswordFormFields
               name={setting.name}
-              value={level2Data[setting.name] || ""}
-              onChange={handleChange}
+              value={level2Data}
+              handleChange={handleChange}
             />
           </div>
         );
