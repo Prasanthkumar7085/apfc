@@ -1,69 +1,74 @@
 .form {
-    display: flex;
-    gap: 1rem;
-}
-
-.formSection {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  .eachFormContainer {
     flex: 1 1 calc(33.333% - 1rem);
-    background-color: #fff;
-    padding: 1rem;
+    background-color: $whiteColor;
+    padding:0 0.5rem 1rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
-}
-
-.formSection h3 {
-    margin-top: 0;
+    .eachBlockHeading {
+      margin: 0;
+      padding: 0.6rem 0.5rem;
+      color: $blackColor;
+      font-family: "Inter", sans-serif;
+      font-size: clamp(12px, 0.72vw, 15px);
+      font-weight: 500;
+      letter-spacing: 0;
+      border-bottom: 1px solid  #D5D9DD;
+    }
+  }
 }
 
 .fieldGroup {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
 }
 
 .input,
 .select,
 .radioGroup {
-    width: 100%;
-    padding: 0.5rem;
-    margin-bottom: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .radioGroup {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .buttonGroup {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
 .button {
-    padding: 0.75rem 1.5rem;
-    background-color: #0070f3;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  padding: 0.75rem 1.5rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .button:hover {
-    background-color: #005bb5;
+  background-color: #005bb5;
 }
 
 .cancelButton {
-    background-color: #f44336;
+  background-color: #f44336;
 }
 
 .cancelButton:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }

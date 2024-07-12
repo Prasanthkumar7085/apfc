@@ -95,32 +95,32 @@ const Level1Component = ({
   };
 
   return (
-    <>
+    <div>
       <form className="form">
-        <section className="formSection">
-          <h3>Authetication Settings</h3>
+        <section className="eachFormContainer">
+          <h3 className="eachBlockHeading">Authetication Settings</h3>
           {AuthenticationSettings.map(renderField)}
-          <h3>Device Configuration</h3>
+          <h3 className="eachBlockHeading">Device Configuration</h3>
           {DeviceConfiguration.map(renderField)}
-          <h3>Current Transformer (CT) Settings</h3>
+          <h3 className="eachBlockHeading">Current Transformer (CT) Settings</h3>
           {CurrentTransformerSettings.map(renderField)}
-          <h3>Potential Transformer (PT) Settings</h3>
+          <h3 className="eachBlockHeading">Potential Transformer (PT) Settings</h3>
           {PotentialTransformerSettings.map(renderField)}
         </section>
 
-        <section className="formSection">
-          <h3>Compensation Settings</h3>
+        <section className="eachFormContainer">
+          <h3 className="eachBlockHeading">Compensation Settings</h3>
           {CompensationSettings.map(renderField)}
-          <h3>Timing Settings</h3>
+          <h3 className="eachBlockHeading">Timing Settings</h3>
           {TimingSettings.map(renderField)}
         </section>
 
-        <section className="formSection">
-          <h3>Control Sensitivity Settings</h3>
+        <section className="eachFormContainer">
+          <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
           {ControlSensitivitySettings.map(renderField)}
-          <h3>Commnunication Settings</h3>
+          <h3 className="eachBlockHeading">Commnunication Settings</h3>
           {CommunicationSettings.map(renderField)}
-          <h3>Display Settings</h3>
+          <h3 className="eachBlockHeading">Display Settings</h3>
           {DisplaySettings.map(renderField)}
         </section>
       </form>
@@ -129,7 +129,7 @@ const Level1Component = ({
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
       />
-    </>
+    </div>
   );
 };
 
