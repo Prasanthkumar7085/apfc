@@ -1,43 +1,72 @@
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, List, ListItem, ListItemText, ListItemIcon, Radio, IconButton } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, List, ListItem, ListItemText, ListItemIcon, Radio, IconButton, InputAdornment } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
-import { getAllListUsersAPI } from "@/services/listUsersAPIs";
 import { useRouter } from "next/navigation";
 import LoadingComponent from "../Core/LoadingComponent";
+import { assignUserAPI, getAllListUsersAPI } from "@/services/devicesAPIs";
+import Image from "next/image";
+import { toast } from "sonner";
 
-const AssignUserDialog = ({ open, onClose }: any) => {
+const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
     const router = useRouter();
-
     const [usersData, setUsersData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState('');
-    const [selectedUser, setSelectedUser] = useState(null);
+    const [selectedUser, setSelectedUser] = useState<any>({});
 
-    // const getPatientResults = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const response = await getAllListUsersAPI();
-    //         setUsersData(response?.record || []);
-    //     } catch (err) {
-    //         console.error(err);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    const getAllUsers = async () => {
+        setLoading(true);
+        try {
+            let queryParams: any = {
+                search_string: search ? search : ""
+            };
+            if (search) {
+                queryParams["search_string"] = search;
+            }
+            const response = await getAllListUsersAPI(queryParams);
+            setUsersData(response?.data || []);
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+    const updateUser = async (id: any) => {
+        setLoading(true);
+        try {
+            const payload = {
+                user: id,
+            };
+            let response: any = await assignUserAPI(payload, devicesId);
 
-    // useEffect(() => {
-    //     if (open) {
-    //         getPatientResults();
-    //     }
-    // }, [open]);
+            if (response.success) {
+                onClose();
+                toast.success(response.message);
+                getData({});
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        getAllUsers();
+    }, [search]);
+
     return (
         <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
             <DialogTitle>
                 Select User
                 <IconButton
                     aria-label="close"
-                    onClick={onClose}
+                    onClick={() => {
+                        onClose();
+                        setSearch("")
+                        setSelectedUser({});
+                    }}
                     sx={{ position: 'absolute', right: 8, top: 8 }}
                 >
                     <CloseIcon />
@@ -45,34 +74,38 @@ const AssignUserDialog = ({ open, onClose }: any) => {
             </DialogTitle>
             <DialogContent dividers>
                 <TextField
-                    label="Search"
+                    className="defaultTextFeild"
                     variant="outlined"
+                    type="search"
+                    placeholder="Search User"
                     fullWidth
                     margin="dense"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
+                    InputProps={{
+                        startAdornment: (
+                            <InputAdornment position="start">
+                                <Image src="/users/search-icon.svg" alt="" width={15} height={15} />
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <List>
-                    {usersData.map((user: any, index: number) => {
-                        console.log(user);
-
-                        return (
-                            <ListItem
-                                key={index}
-                            // onClick={() => setSelectedUser(user)}
-                            // selected={user === selectedUser}
-                            >
-                                <ListItemIcon>
-                                    <Radio
-                                    // checked={user === selectedUser}
-                                    />
-                                </ListItemIcon>
-
-                                <p> {user?.first_name + " " + user?.last_name}</p>
-
-                            </ListItem>
-                        )
-                    })}
+                    {usersData.map((user: any, index: number) => (
+                        <ListItem
+                            key={index}
+                            onClick={() => setSelectedUser(user)}
+                            selected={user === selectedUser}
+                        >
+                            <ListItemIcon>
+                                <Radio
+                                    checked={user === selectedUser}
+                                    onChange={() => setSelectedUser(user)}
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary={user?.full_name} />
+                        </ListItem>
+                    ))}
                 </List>
 
             </DialogContent>
@@ -90,6 +123,10 @@ const AssignUserDialog = ({ open, onClose }: any) => {
                 <Button
                     color="primary"
                     variant="contained"
+                    disabled={!selectedUser.id}
+                    onClick={() => {
+                        updateUser(selectedUser.id);
+                    }}
                 >
                     Confirm
                 </Button>
