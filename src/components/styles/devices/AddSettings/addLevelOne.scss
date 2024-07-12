@@ -5,7 +5,7 @@
   .eachFormContainer {
     flex: 1 1 calc(33.333% - 1rem);
     background-color: $whiteColor;
-    padding:0 0.5rem 1rem;
+    padding: 0 0.5rem 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
     .eachBlockHeading {
@@ -16,19 +16,60 @@
       font-size: clamp(12px, 0.72vw, 15px);
       font-weight: 500;
       letter-spacing: 0;
-      border-bottom: 1px solid  #D5D9DD;
+      border-bottom: 1px solid #d5d9dd;
+    }
+    .fieldGroup {
+      padding: 0 0.5rem;
+      margin-top: 0.6rem;
+
+      .label {
+        margin-bottom: 0.5rem;
+        color: rgba(0, 0, 0, 0.7);
+        font-family: "Inter";
+        font-size: clamp(11px, 0.625vw, 14px);
+        font-weight: 400;
+      }
+      .settingsTextFeild {
+        width: 100%;
+        .MuiInputBase-root {
+          background: $whiteColor;
+          color: #6a718599;
+          font-weight: 400;
+          font-size: 13.5px;
+          box-sizing: border-box;
+          border-radius: 3;
+          height: 30px;
+          border: 1px solid $textFeildStroke;
+          font-family: "Inter", sans-serif;
+          font-size: clamp(0.75em, 0.72vw, 1.1em);
+
+          fieldset {
+            border: 0 !important;
+          }
+        }
+      }
+
+      .settingSelectFeild {
+        width: 100%;
+        .MuiSelect-select {
+          width: 100%;
+          font-family: "Inter", sans-serif;
+          padding: 3px 11px !important;
+          font-size: clamp(0.75em, 0.72vw, 1.1em);
+          border: 1px solid $textFeildStroke;
+          border-radius: 4px;
+          color: #6a718599;
+        }
+        .MuiSvgIcon-root {
+          width: 0.9em;
+        }
+        fieldset {
+          border: 0;
+          border-radius: 4px;
+        }
+      }
     }
   }
-}
-
-.fieldGroup {
-  margin-bottom: 1rem;
-}
-
-.label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
 }
 
 .input,

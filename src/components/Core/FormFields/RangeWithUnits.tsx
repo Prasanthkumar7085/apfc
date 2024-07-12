@@ -2,8 +2,9 @@ import { InputAdornment, TextField } from "@mui/material";
 
 const RangeWithUnits = ({ setting, value, handleChange }: any) => {
   return (
-    <div>
-      <TextField
+   
+    <TextField
+      className="settingsTextFeild"
         type={setting?.type}
         name={setting.name}
         value={value[setting.name]}
@@ -14,7 +15,7 @@ const RangeWithUnits = ({ setting, value, handleChange }: any) => {
           ),
         }}
       />
-    </div>
+   
   );
 };
 export default RangeWithUnits;

@@ -10,6 +10,7 @@ const PasswordFormFields = ({ name, handleChange, value }: any) => {
 
   return (
     <TextField
+      className="settingsTextFeild"
       autoComplete="new-password"
       variant="outlined"
       name={name}

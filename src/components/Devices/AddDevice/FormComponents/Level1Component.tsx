@@ -12,8 +12,10 @@ import {
   PotentialTransformerSettings,
   TimingSettings,
 } from "@/lib/constants/addDevicesConstants";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+type CombinedEvent = ChangeEvent<HTMLInputElement> | SelectChangeEvent<any>;
 
 const Level1Component = ({
   levelBasedData,
@@ -21,8 +23,7 @@ const Level1Component = ({
   getLevelBasedDeviceDetails,
 }: any) => {
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-  ) => {
+    e: CombinedEvent  ) => {
     const { name, value } = e.target;
     setLevelBasedData((prevState: any) => ({
       ...prevState,
@@ -38,12 +39,12 @@ const Level1Component = ({
           <div className="fieldGroup" key={setting.name}>
             <label className="label">
               {setting.label}
+            </label>
               <RangeWithUnits
                 setting={setting}
                 value={levelBasedData}
                 handleChange={handleChange}
               />
-            </label>
           </div>
         );
       case "password":
@@ -51,12 +52,12 @@ const Level1Component = ({
           <div className="fieldGroup" key={setting.name}>
             <label className="label">
               {setting.label}
+            </label>
               <PasswordFormFields
                 name={setting.name}
                 handleChange={handleChange}
                 value={levelBasedData}
               />
-            </label>
           </div>
         );
       case "select":
@@ -64,19 +65,19 @@ const Level1Component = ({
           <div className="fieldGroup" key={setting.name}>
             <label className="label">
               {setting.label}
-              <select
-                className="select"
+            </label>
+              <Select
+                className="settingSelectFeild"
                 onChange={handleChange}
                 name={setting.name}
                 value={levelBasedData?.[setting.name]}
               >
                 {setting.options?.map((option: any) => (
-                  <option key={option} value={option}>
+                  <MenuItem className="menuItem" key={option} value={option}>
                     {option}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </label>
+              </Select>
           </div>
         );
       case "radio":
