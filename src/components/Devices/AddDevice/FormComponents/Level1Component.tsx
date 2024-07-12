@@ -83,6 +83,9 @@ const Level1Component = ({
       case "radio":
         return (
           <div className="fieldGroup" key={setting.name}>
+            <label className="label">
+              {setting.label}
+            </label>
             <GroupRadioButtons
               setting={setting}
               handleChange={handleChange}

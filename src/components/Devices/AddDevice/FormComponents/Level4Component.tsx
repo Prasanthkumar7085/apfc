@@ -1,9 +1,8 @@
-import Image from "next/image";
-import styles from "./Level2Component.module.css";
-import { useState } from "react";
 import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import { fanSettings } from "@/lib/constants/addDevicesConstants";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
+import Image from "next/image";
+import { MenuItem, Select } from "@mui/material";
 
 const Level4Component = ({
   levelBasedData,
@@ -14,29 +13,30 @@ const Level4Component = ({
     switch (setting.type) {
       case "select":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
-              {setting.label}
-              <select
-                className={styles.select}
+          <div className="fieldGroup" key={setting.name}>
+            {setting.label ?
+              <label className="label">
+                {setting.label}
+              </label> : ""}
+              <Select
+                className="settingSelectFeild"
                 onChange={handleChange}
                 name={setting.name}
                 value={levelBasedData?.[setting.name]}
               >
                 {setting.options?.map((option: any) => (
-                  <option key={option} value={option}>
+                  <MenuItem className="menuItem" key={option} value={option}>
                     {option}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </label>
+              </Select>
           </div>
         );
       case "input":
       case "number":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>{setting.label}</label>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">{setting.label}</label>
             <RangeWithUnits
               setting={setting}
               value={levelBasedData}
@@ -56,13 +56,12 @@ const Level4Component = ({
     });
   };
   return (
-    <>
-      <form className={styles.form}>
-        <section className={styles.formSection}>
+    <div>
+      <form className="form">
+        <section className="eachFormCard">
+          
+            <Image  alt="" src="/car-radiator.svg" height={70} width={70} />
           <div>
-            <img className={styles.arroIcon} alt="" src="/car-radiator.svg" />
-          </div>
-          <div className={styles.fieldGroup}>
             {fanSettings.map(renderField)}
           </div>
         </section>
@@ -71,7 +70,7 @@ const Level4Component = ({
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
       />
-    </>
+    </div>
   );
 };
 export default Level4Component;

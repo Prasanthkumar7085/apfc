@@ -8,7 +8,6 @@ import {
   voltageSettings,
 } from "@/lib/constants/addDevicesConstants";
 import React, { useState } from "react";
-import styles from "./Level2Component.module.css";
 import { Switch } from "@mui/material";
 import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import PasswordFormFields from "@/components/Core/FormFields/PasswordFormFields";
@@ -32,22 +31,24 @@ const Level2Component = ({
     switch (setting.type) {
       case "switch":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
+          <div className="radioFeildGrp" key={setting.name}>
+            <label className="label">
               {setting.label}
-              <Switch
+            </label>
+            <Switch
+              className="switchComponent"
+              size="small" 
                 name={setting.name}
                 checked={levelBasedData[setting.name] == "ON" ? true : false}
                 onChange={handleChange}
                 inputProps={{ "aria-label": setting.label }}
               />
-            </label>
           </div>
         );
       case "input":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>{setting.label}</label>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">{setting.label}</label>
             <RangeWithUnits
               setting={setting}
               value={levelBasedData}
@@ -57,8 +58,8 @@ const Level2Component = ({
         );
       case "password":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>{setting.label}</label>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">{setting.label}</label>
             <PasswordFormFields
               name={setting.name}
               value={levelBasedData}
@@ -72,25 +73,25 @@ const Level2Component = ({
   };
 
   return (
-    <>
-      <form className={styles.form}>
-        <section className={styles.formSection}>
-          <h3>Voltage Settings</h3>
+    <div>
+      <form className="form">
+        <section className="eachFormContainer">
+          <h3 className="eachBlockHeading">Voltage Settings</h3>
           {voltageSettings.map(renderField)}
-          <h3>Harmonic Distortion Settings</h3>
+          <h3 className="eachBlockHeading">Harmonic Distortion Settings</h3>
           {harmonicDistortionSettings.map(renderField)}
-          <h3>Compensation Settings</h3>
+          <h3 className="eachBlockHeading">Compensation Settings</h3>
           {compensationSettings.map(renderField)}
         </section>
 
-        <section className={styles.formSection}>
-          <h3>Error Handling</h3>
+        <section className="eachFormContainer">
+          <h3 className="eachBlockHeading">Error Handling</h3>
           {errorHandlingSettings.map(renderField)}
-          <h3>Fan and Hysteresis Settings</h3>
+          <h3 className="eachBlockHeading">Fan and Hysteresis Settings</h3>
           {fanAndHysteresisSettings.map(renderField)}
         </section>
-        <section className={styles.formSection}>
-          <h3>Factory and Energy Settings</h3>
+        <section className="eachFormContainer">
+          <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
           {factoryAndEnergySettings.map(renderField)}
         </section>
       </form>
@@ -98,7 +99,7 @@ const Level2Component = ({
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
       />
-    </>
+    </div>
   );
 };
 

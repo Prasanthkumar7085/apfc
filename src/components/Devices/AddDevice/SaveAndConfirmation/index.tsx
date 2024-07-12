@@ -12,6 +12,7 @@ import {
   addLeve3DeviceSettingsAPI,
 } from "@/services/devicesAPIs";
 import { toast } from "sonner";
+import { Button } from "@mui/material";
 
 const SaveAndConfirmationButtons = ({
   levelBasedData,
@@ -62,20 +63,22 @@ const SaveAndConfirmationButtons = ({
   };
   return (
     <div className="buttonGroup">
-      <button
+      <Button
+        variant="text"
         type="button"
-        // className={`${styles.button} ${styles.cancelButton}`}
+        className="btn cancelBtn"
         onClick={() => router.back()}
       >
         Cancel
-      </button>
-      <button
+      </Button>
+      <Button
+        variant="contained"
         type="submit"
-        className="button"
+        className="btn saveBtn"
         onClick={() => addLevelBasedSettings()}
       >
         Save & Continue
-      </button>
+      </Button>
     </div>
   );
 };
