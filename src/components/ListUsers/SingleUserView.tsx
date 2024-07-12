@@ -1,5 +1,5 @@
 "use client"
-import { getSigleUserAPI } from "@/services/listUsersAPIs";
+import { getSigleUserAPI, getSigleUserDevicesAPI } from "@/services/listUsersAPIs";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../Core/LoadingComponent";
@@ -30,8 +30,21 @@ const SingleUserView = () => {
         }
     };
 
+    const getSinleUserDevices = async () => {
+        setLoading(true);
+        try {
+            const response = await getSigleUserDevicesAPI(params?.id);
+            setData(response?.data)
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         getSinleUser();
+        getSinleUserDevices();
     }, [])
 
     return (

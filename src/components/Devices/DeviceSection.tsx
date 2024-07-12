@@ -3,26 +3,27 @@ import styles from "./DeviceSection.module.css";
 import { Avatar, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
 import { Toaster } from "sonner";
 
 const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
+  const { id } = useParams();
   const router = useRouter();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
-  const useParams = useSearchParams();
+  const params = useSearchParams();
   const [searchParams, setSearchParams] = useState(
-    Object.fromEntries(new URLSearchParams(Array.from(useParams.entries())))
+    Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
   );
 
   useEffect(() => {
     setSearchParams(
-      Object.fromEntries(new URLSearchParams(Array.from(useParams.entries())))
+      Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
     );
-  }, [useParams]);
+  }, [params]);
 
   const capturePageNum = (value: number) => {
     getData({
@@ -158,14 +159,16 @@ const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
         getData={getData}
         devicesId={devicesId}
       />
-      <div>
-        <TablePaginationComponent
-          paginationDetails={paginationDetails}
-          capturePageNum={capturePageNum}
-          captureRowPerItems={captureRowPerItems}
-          values="Devices"
-        />
-      </div>
+      {id ? "" :
+        <div>
+          <TablePaginationComponent
+            paginationDetails={paginationDetails}
+            capturePageNum={capturePageNum}
+            captureRowPerItems={captureRowPerItems}
+            values="Devices"
+          />
+        </div>
+      }
       <Toaster richColors closeButton position="top-right" />
     </div>
   );
