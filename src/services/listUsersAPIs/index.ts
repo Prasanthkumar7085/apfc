@@ -77,3 +77,30 @@ export const getSigleUserDevicesAPI = async (id: any) => {
         throw err;
     }
 };
+
+export const getAllListDevicesAPI = async (params: any) => {
+    try {
+        const { success, data } = await $fetch.get("/devices", params);
+        if (!success) {
+            return handleAPIErrorResponse(data);
+        }
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
+
+export const assignDeviceAPI = async (payload: {
+    device: number,
+
+}, id: any) => {
+    try {
+        const { success, data } = await $fetch.patch(`/users/${id}/assign-device`, payload);
+        if (!success) {
+            return handleAPIErrorResponse(data);
+        }
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};
