@@ -104,3 +104,15 @@ export const assignDeviceAPI = async (payload: {
         throw err;
     }
 };
+
+export const deleteUserAPI = async (id: any) => {
+    try {
+        const { success, data } = await $fetch.delete(`/users/${id}`);
+        if (!success) {
+            return handleAPIErrorResponse(data);
+        }
+        return data;
+    } catch (err) {
+        throw err;
+    }
+};

@@ -4,10 +4,12 @@ import { useParams, usePathname, useRouter, useSearchParams } from "next/navigat
 import { useEffect, useState } from "react";
 import TanStackTableComponent from "../Core/TanStackTableComponent";
 import { ListUserColumns } from "./ListUsersColumns";
-import { getAllListUsersAPI } from "@/services/listUsersAPIs";
+import { deleteUserAPI, getAllListUsersAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
 import { ListUsersApiProps } from "@/interfaces/listUserAPITypes";
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
+import { toast, Toaster } from "sonner";
+import DeleteDialog from "../Core/DeleteDialog";
 
 const ListUsers = () => {
     const params = useParams();
@@ -16,6 +18,8 @@ const ListUsers = () => {
     const pathname = usePathname();
 
     const [loading, setLoading] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [userId, setUserId] = useState<any>();
     const [usersData, setUsersData] = useState<any[]>([]);
     const [paginationDetails, setPaginationDetails] = useState({});
     const [searchParams, setSearchParams] = useState(
@@ -47,6 +51,22 @@ const ListUsers = () => {
         }
     };
 
+    const deleteUser = async () => {
+        setLoading(true);
+        try {
+            const response = await deleteUserAPI(userId);
+            if (response.success) {
+                closeDialog();
+                toast.success(response.message);
+                getPatientResults({});
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         getPatientResults({
             page: 1,
@@ -60,6 +80,15 @@ const ListUsers = () => {
             Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
         );
     }, [useParam]);
+
+    const openDialog = (id: any) => {
+        setDialogOpen(true);
+        setUserId(id)
+    }
+
+    const closeDialog = () => {
+        setDialogOpen(false)
+    }
 
     const column = [
         {
@@ -97,7 +126,12 @@ const ListUsers = () => {
                                 height={13}
                             />
                         </div>
-                        <div title="User Delete" style={{ cursor: "pointer" }}>
+                        <div title="User Delete"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => {
+                                openDialog(info?.row?.original?.id)
+                            }}
+                        >
                             <Image
                                 alt=""
                                 src="/delete-user.svg"
@@ -122,7 +156,14 @@ const ListUsers = () => {
                 paginationDetails={paginationDetails}
                 getData={getPatientResults}
             />
+            <DeleteDialog
+                deleteUser={deleteUser}
+                lable="You Wan't Delete User"
+                open={dialogOpen}
+                closeDialog={closeDialog}
+            />
             <LoadingComponent loading={loading} />
+            <Toaster richColors closeButton position="top-right" />
         </div>
     );
 }

@@ -123,10 +123,9 @@ class FetchService {
       method: "GET",
     });
   }
-  async delete(url: string, payload = {}) {
+  async delete(url: string) {
     return this.hit(url, {
       method: "DELETE",
-      body: JSON.stringify(payload),
     });
   }
   async put(url: string, payload = {}) {
