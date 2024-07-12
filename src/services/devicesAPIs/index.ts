@@ -1,9 +1,10 @@
+import { ListDevicesApiProps } from "@/interfaces/listDeviesAPITypes";
 import { $fetch } from "@/lib/fetch";
 import { handleAPIErrorResponse } from "@/lib/httpErrorHandler";
 
-export const getAllDevicesAPI = async () => {
+export const getAllDevicesAPI = async (params: Partial<ListDevicesApiProps>) => {
   try {
-    const { success, data } = await $fetch.get("/6683cc84ad19ca34f881ba0a");
+    const { success, data } = await $fetch.get("/devices", params);
     if (!success) {
       return handleAPIErrorResponse(data);
     }
@@ -13,9 +14,9 @@ export const getAllDevicesAPI = async () => {
   }
 };
 
-export const getSigleDeviceAPI = async () => {
+export const getSigleDeviceAPI = async (id: any) => {
   try {
-    const { success, data } = await $fetch.get(`/6682b8d9acd3cb34a85fd743`);
+    const { success, data } = await $fetch.get(`/devices/${id}/parameters`);
     if (!success) {
       return handleAPIErrorResponse(data);
     }

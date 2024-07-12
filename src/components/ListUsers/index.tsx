@@ -7,6 +7,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import Image from "next/image";
 import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ListUsersApiProps } from "@/interfaces/listUserAPITypes";
+import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
 
 const ListUsers = () => {
     const params = useParams();
@@ -20,20 +21,21 @@ const ListUsers = () => {
     const [searchParams, setSearchParams] = useState(
         Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
     );
-
     const getPatientResults = async ({
         page = searchParams?.page,
         limit = searchParams?.limit,
+        search_string = searchParams?.search_string
     }: Partial<ListUsersApiProps>) => {
         setLoading(true);
         try {
             let queryParams: any = {
                 page: page ? page : 1,
                 limit: limit ? limit : 10,
+                search_string: search_string ? search_string : ""
             };
-            let queryString = new URLSearchParams(queryParams).toString();
+            let queryString = prepareURLEncodedParams("", queryParams)
 
-            router.push(`${pathname}?${queryString}`);
+            router.push(`${pathname}${queryString}`);
             const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
             setUsersData(data);
@@ -49,8 +51,15 @@ const ListUsers = () => {
         getPatientResults({
             page: 1,
             limit: 10,
+            search_string: searchParams?.search_string,
         });
-    }, [])
+    }, [searchParams?.search_string]);
+
+    useEffect(() => {
+        setSearchParams(
+            Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
+        );
+    }, [params]);
 
     const column = [
         {

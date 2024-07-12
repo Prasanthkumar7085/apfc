@@ -23,7 +23,6 @@ const SingleUserView = () => {
             const response = await getSigleUserAPI(params?.id);
             setUsersData(response?.data)
             setData(response?.data?.device_ids)
-
         } catch (err) {
             console.error(err);
         } finally {
