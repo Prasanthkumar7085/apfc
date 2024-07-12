@@ -1,5 +1,6 @@
 "use client"
 import { getSigleUserAPI, getSigleUserDevicesAPI } from "@/services/listUsersAPIs";
+import AddIcon from "@mui/icons-material/Add";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../Core/LoadingComponent";
@@ -8,6 +9,8 @@ import Image from "next/image";
 import styles from "./SingleUserView.module.css"
 import DeviceSection from "../Devices/DeviceSection";
 import dayjs from "dayjs";
+import AssignDeviceDialog from "./AssignDeviceDialog";
+import { Toaster } from "sonner";
 
 const SingleUserView = () => {
     const params = useParams();
@@ -16,6 +19,8 @@ const SingleUserView = () => {
     const [loading, setLoading] = useState(false);
     const [usersData, setUsersData] = useState<any>({});
     const [data, setData] = useState<any[]>([]);
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [userId, setUserId] = useState<any>();
 
     const getSinleUser = async () => {
         setLoading(true);
@@ -96,11 +101,26 @@ const SingleUserView = () => {
                         <Image src="/No data Image.svg" alt="" width={300} height={300} />
                         <p>{"It looks like you haven't added any devices yet."}</p>
                         <p>{"add a new device to monitor your agricultural operations."}</p>
+                        <Button
+                            className="addUserBtn"
+                            variant='outlined'
+                            onClick={() => setDialogOpen(true)}
+                            startIcon={<AddIcon />}
+                        >
+                            Add New Device
+                        </Button>
                     </div>
                 )}
             </div>
+            <AssignDeviceDialog
+                open={dialogOpen}
+                onClose={() => setDialogOpen(false)}
+                getSinleUser={getSinleUser}
+                getSinleUserDevices={getSinleUserDevices}
+            />
 
             <LoadingComponent loading={loading} />
+            <Toaster richColors closeButton position="top-right" />
         </div>
     )
 }
