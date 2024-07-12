@@ -99,6 +99,22 @@
         }
       }
     }
+    .radioFeildGrp {
+      padding: 0 0.5rem;
+      margin-top: 9.6px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+
+      .label {
+        margin-bottom: 4px;
+        color: $blackColor;
+        font-family: "Inter", sans-serif;
+        font-size: clamp(12px, 0.72vw, 15px);
+        font-weight: 500;
+      }
+    }
   }
 }
 

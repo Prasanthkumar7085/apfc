@@ -31,16 +31,16 @@ const Level2Component = ({
     switch (setting.type) {
       case "switch":
         return (
-          <div className="fieldGroup" key={setting.name}>
+          <div className="radioFeildGrp" key={setting.name}>
             <label className="label">
               {setting.label}
+            </label>
               <Switch
                 name={setting.name}
                 checked={levelBasedData[setting.name] == "ON" ? true : false}
                 onChange={handleChange}
                 inputProps={{ "aria-label": setting.label }}
               />
-            </label>
           </div>
         );
       case "input":
@@ -74,22 +74,22 @@ const Level2Component = ({
     <div>
       <form className="form">
         <section className="eachFormContainer">
-          <h3>Voltage Settings</h3>
+          <h3 className="eachBlockHeading">Voltage Settings</h3>
           {voltageSettings.map(renderField)}
-          <h3>Harmonic Distortion Settings</h3>
+          <h3 className="eachBlockHeading">Harmonic Distortion Settings</h3>
           {harmonicDistortionSettings.map(renderField)}
-          <h3>Compensation Settings</h3>
+          <h3 className="eachBlockHeading">Compensation Settings</h3>
           {compensationSettings.map(renderField)}
         </section>
 
         <section className="eachFormContainer">
-          <h3>Error Handling</h3>
+          <h3 className="eachBlockHeading">Error Handling</h3>
           {errorHandlingSettings.map(renderField)}
-          <h3>Fan and Hysteresis Settings</h3>
+          <h3 className="eachBlockHeading">Fan and Hysteresis Settings</h3>
           {fanAndHysteresisSettings.map(renderField)}
         </section>
         <section className="eachFormContainer">
-          <h3>Factory and Energy Settings</h3>
+          <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
           {factoryAndEnergySettings.map(renderField)}
         </section>
       </form>

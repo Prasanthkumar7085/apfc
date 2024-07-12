@@ -58,7 +58,7 @@ const Level3Component = ({
     <div>
       <form className="form">
         <section className="eachFormContainer">
-          <h3>Factory and Energy Settings</h3>
+          <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
           {factoryEnergySettings.map(renderField)}
         </section>
       </form>
