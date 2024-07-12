@@ -20,10 +20,12 @@
     }
     .fieldGroup {
       padding: 0 0.5rem;
-      margin-top: 0.6rem;
+      margin-top: 9.6px;
+      display: flex;
+      flex-direction: column;
 
       .label {
-        margin-bottom: 0.5rem;
+        margin-bottom: 4px;
         color: rgba(0, 0, 0, 0.7);
         font-family: "Inter";
         font-size: clamp(11px, 0.625vw, 14px);
@@ -68,48 +70,59 @@
           border-radius: 4px;
         }
       }
+      .radioGrp {
+        .MuiFormGroup-root {
+          display: flex;
+          flex-direction: row;
+          gap: 1rem;
+          margin: 0.5rem 0 0;
+          .MuiFormControlLabel-root {
+            margin: 0;
+          }
+          .MuiButtonBase-root {
+            color: #d9d9d9;
+            padding: 0;
+            &.Mui-checked {
+              color: $primaryColor;
+            }
+          }
+          .MuiTypography-root {
+            color: rgba(0, 0, 0, 0.7);
+            font-family: "Inter";
+            font-size: clamp(11px, 0.625vw, 14px);
+            font-weight: 400;
+            padding-left: 4px;
+          }
+        }
+        .MuiSvgIcon-root {
+          font-size: 16px;
+        }
+      }
     }
   }
-}
-
-.input,
-.select,
-.radioGroup {
-  width: 100%;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.radioGroup {
-  display: flex;
-  gap: 1rem;
 }
 
 .buttonGroup {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 1rem;
-}
-
-.button {
-  padding: 0.75rem 1.5rem;
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.button:hover {
-  background-color: #005bb5;
-}
-
-.cancelButton {
-  background-color: #f44336;
-}
-
-.cancelButton:hover {
-  background-color: #c0392b;
+  margin-top: 0.5rem;
+  .btn {
+    border-radius: 8px;
+    text-transform: capitalize;
+    font-family: "Inter";
+    font-size: clamp(13px, 0.83vw, 18px);
+    font-weight: 500;
+    box-shadow: none;
+    min-width: inherit;
+    &.cancelBtn {
+      color: $secondaryColor;
+    }
+    &.saveBtn {
+      background-color: $secondaryColor;
+      color: $whiteColor;
+      padding: 6px 2rem;
+    }
+  }
 }

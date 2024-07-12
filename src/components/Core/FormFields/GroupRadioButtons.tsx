@@ -8,12 +8,9 @@ import {
 
 const GroupRadioButtons = ({ setting, handleChange, formData }: any) => {
   return (
-    <div>
+    <div className="radioGrp">
       {formData?.[setting?.name] ? (
         <FormControl>
-          <FormLabel id="demo-controlled-radio-buttons-group">
-            {setting.label}
-          </FormLabel>
           <RadioGroup
             aria-labelledby="demo-controlled-radio-buttons-group"
             name={setting?.name}

@@ -15,7 +15,7 @@ $bodyBorderColor: #edf2f7;
 
 .mainTable {
   .tableContainer {
-    height: calc(-150px + 100vh);
+    max-height: calc(-150px + 100vh);
     overflow: auto;
     background: transparent;
     border-radius: 8px;
