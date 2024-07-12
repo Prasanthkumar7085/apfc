@@ -1,6 +1,7 @@
 import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import { fanSettings } from "@/lib/constants/addDevicesConstants";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
+import Image from "next/image";
 
 const Level4Component = ({
   levelBasedData,
@@ -57,7 +58,7 @@ const Level4Component = ({
       <form className="form">
         <section className="eachFormContainer">
           <div>
-            <img className="arroIcon" alt="" src="/car-radiator.svg" />
+            <Image className="arroIcon" alt="" src="/car-radiator.svg" height={50} width={50} />
           </div>
           <div className="fieldGroup">
             {fanSettings.map(renderField)}

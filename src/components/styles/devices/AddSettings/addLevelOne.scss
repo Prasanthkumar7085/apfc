@@ -1,9 +1,10 @@
 .form {
-  width: 100%;
+  width: 90%;
+  
   display: flex;
   gap: 1rem;
   .eachFormContainer {
-    flex: 1 1 calc(33.333% - 1rem);
+    flex: 0 1 calc(33.333% - 1rem);
     background-color: $whiteColor;
     padding: 0 0.5rem 1rem;
     border-radius: 8px;
@@ -47,6 +48,9 @@
 
           fieldset {
             border: 0 !important;
+          }
+          .MuiTypography-root {
+            font-size: clamp(0.75em, 0.72vw, 1.1em);
           }
         }
       }
@@ -106,6 +110,11 @@
       flex-direction: row;
       align-items: center;
       gap: 1rem;
+      &.sameLine {
+        min-width: 100px;
+        max-width: 150px;
+        justify-content: space-between;
+      }
 
       .label {
         margin-bottom: 4px;
@@ -113,6 +122,22 @@
         font-family: "Inter", sans-serif;
         font-size: clamp(12px, 0.72vw, 15px);
         font-weight: 500;
+      }
+      .switchComponent {
+        .MuiSwitch-thumb {
+          color: #e47078;
+        }
+        .Mui-checked {
+          .MuiSwitch-thumb {
+            color: $greenColor !important;
+          }
+        }
+        .MuiSwitch-track {
+          background-color: #e47078;
+        }
+        .Mui-checked + .MuiSwitch-track {
+          background-color: $greenColor !important;
+        }
       }
     }
   }

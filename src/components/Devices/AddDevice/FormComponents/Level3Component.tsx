@@ -20,16 +20,18 @@ const Level3Component = ({
     switch (setting.type) {
       case "switch":
         return (
-          <div className="fieldGroup" key={setting.name}>
+          <div className="radioFeildGrp sameLine" key={setting.name}>
             <label className="label">
-              {setting.label}
-              <Switch
+              {setting.label} :
+            </label>
+            <Switch
+              className="switchComponent"
+size="small"
                 name={setting.name}
                 checked={levelBasedData[setting.name] == "ON" ? true : false}
                 onChange={handleChange}
                 inputProps={{ "aria-label": setting.label }}
               />
-            </label>
           </div>
         );
       case "input":
@@ -61,6 +63,7 @@ const Level3Component = ({
           <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
           {factoryEnergySettings.map(renderField)}
         </section>
+      
       </form>
       <SaveAndConfirmationButtons
         levelBasedData={levelBasedData}

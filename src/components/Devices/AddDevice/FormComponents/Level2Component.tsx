@@ -35,7 +35,9 @@ const Level2Component = ({
             <label className="label">
               {setting.label}
             </label>
-              <Switch
+            <Switch
+              className="switchComponent"
+              size="small" 
                 name={setting.name}
                 checked={levelBasedData[setting.name] == "ON" ? true : false}
                 onChange={handleChange}
