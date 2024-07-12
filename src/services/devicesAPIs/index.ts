@@ -14,9 +14,9 @@ export const getAllDevicesAPI = async (params: Partial<ListDevicesApiProps>) => 
   }
 };
 
-export const getSigleDeviceAPI = async () => {
+export const getSigleDeviceAPI = async (id: any) => {
   try {
-    const { success, data } = await $fetch.get(`/6682b8d9acd3cb34a85fd743`);
+    const { success, data } = await $fetch.get(`/devices/${id}/parameters`);
     if (!success) {
       return handleAPIErrorResponse(data);
     }
