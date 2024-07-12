@@ -2,6 +2,7 @@ import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import { fanSettings } from "@/lib/constants/addDevicesConstants";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
 import Image from "next/image";
+import { MenuItem, Select } from "@mui/material";
 
 const Level4Component = ({
   levelBasedData,
@@ -13,21 +14,22 @@ const Level4Component = ({
       case "select":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">
-              {setting.label}
-              <select
-
+            {setting.label ?
+              <label className="label">
+                {setting.label}
+              </label> : ""}
+              <Select
+                className="settingSelectFeild"
                 onChange={handleChange}
                 name={setting.name}
                 value={levelBasedData?.[setting.name]}
               >
                 {setting.options?.map((option: any) => (
-                  <option key={option} value={option}>
+                  <MenuItem className="menuItem" key={option} value={option}>
                     {option}
-                  </option>
+                  </MenuItem>
                 ))}
-              </select>
-            </label>
+              </Select>
           </div>
         );
       case "input":
@@ -56,11 +58,10 @@ const Level4Component = ({
   return (
     <div>
       <form className="form">
-        <section className="eachFormContainer">
+        <section className="eachFormCard">
+          
+            <Image  alt="" src="/car-radiator.svg" height={70} width={70} />
           <div>
-            <Image className="arroIcon" alt="" src="/car-radiator.svg" height={50} width={50} />
-          </div>
-          <div className="fieldGroup">
             {fanSettings.map(renderField)}
           </div>
         </section>
