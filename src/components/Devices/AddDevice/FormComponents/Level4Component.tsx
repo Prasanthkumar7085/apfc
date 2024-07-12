@@ -1,6 +1,3 @@
-import Image from "next/image";
-import styles from "./Level2Component.module.css";
-import { useState } from "react";
 import RangeWithUnits from "@/components/Core/FormFields/RangeWithUnits";
 import { fanSettings } from "@/lib/constants/addDevicesConstants";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
@@ -14,11 +11,11 @@ const Level4Component = ({
     switch (setting.type) {
       case "select":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">
               {setting.label}
               <select
-                className={styles.select}
+
                 onChange={handleChange}
                 name={setting.name}
                 value={levelBasedData?.[setting.name]}
@@ -35,8 +32,8 @@ const Level4Component = ({
       case "input":
       case "number":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>{setting.label}</label>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">{setting.label}</label>
             <RangeWithUnits
               setting={setting}
               value={levelBasedData}
@@ -56,13 +53,13 @@ const Level4Component = ({
     });
   };
   return (
-    <>
-      <form className={styles.form}>
-        <section className={styles.formSection}>
+    <div>
+      <form className="form">
+        <section className="eachFormContainer">
           <div>
-            <img className={styles.arroIcon} alt="" src="/car-radiator.svg" />
+            <img className="arroIcon" alt="" src="/car-radiator.svg" />
           </div>
-          <div className={styles.fieldGroup}>
+          <div className="fieldGroup">
             {fanSettings.map(renderField)}
           </div>
         </section>
@@ -71,7 +68,7 @@ const Level4Component = ({
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
       />
-    </>
+    </div>
   );
 };
 export default Level4Component;

@@ -1,5 +1,4 @@
 import { useState } from "react";
-import styles from "./Level2Component.module.css";
 import { Switch } from "@mui/material";
 import { factoryEnergySettings } from "@/lib/constants/addDevicesConstants";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
@@ -21,8 +20,8 @@ const Level3Component = ({
     switch (setting.type) {
       case "switch":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">
               {setting.label}
               <Switch
                 name={setting.name}
@@ -35,11 +34,11 @@ const Level3Component = ({
         );
       case "input":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>{setting.label}</label>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">{setting.label}</label>
             <input
               type="number"
-              className={styles.input}
+              className="input"
               name={setting.name}
               min={setting.min}
               max={setting.max}
@@ -56,9 +55,9 @@ const Level3Component = ({
   };
 
   return (
-    <>
-      <form className={styles.form}>
-        <section className={styles.formSection}>
+    <div>
+      <form className="form">
+        <section className="eachFormContainer">
           <h3>Factory and Energy Settings</h3>
           {factoryEnergySettings.map(renderField)}
         </section>
@@ -67,7 +66,7 @@ const Level3Component = ({
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
       />
-    </>
+    </div>
   );
 };
 export default Level3Component;
