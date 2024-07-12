@@ -6,10 +6,12 @@ import {
     getSortedRowModel,
     useReactTable,
 } from "@tanstack/react-table";
+import AddIcon from "@mui/icons-material/Add";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import TablePaginationComponent from "./TablePaginationComponent";
+import { Button } from "@mui/material";
 
 interface pageProps {
     columns: any[];
@@ -25,6 +27,7 @@ const TanStackTableComponent: FC<pageProps> = ({
     paginationDetails,
     getData
 }) => {
+    const router = useRouter();
     const [sorting, setSorting] = useState<SortingState>([]);
     const useParams = useSearchParams();
     const [searchParams, setSearchParams] = useState(
@@ -229,15 +232,24 @@ const TanStackTableComponent: FC<pageProps> = ({
                                         style={{
                                             display: "flex",
                                             justifyContent: "center",
-                                            alignItems: "center",
+                                            flexDirection: "column",
+                                            alignItems: "center"
                                         }}
                                     >
-                                        {/* <Image
-                                        src="/NoDataImageAnalytics.svg"
-                                        alt=""
-                                        height={110}
-                                        width={210}
-                                    /> */}
+                                        <Image
+                                            src="/No data Image.svg"
+                                            alt=""
+                                            height={300}
+                                            width={300}
+                                        />
+                                        <Button
+                                            className="addUserBtn"
+                                            variant='outlined'
+                                            onClick={() => router.push('/users/add')}
+                                            startIcon={<AddIcon />}
+                                        >
+                                            Add New User
+                                        </Button>
                                     </div>
                                 </td>
                             </tr>
@@ -248,12 +260,16 @@ const TanStackTableComponent: FC<pageProps> = ({
                 </table>
             </div>
             <div />
-            <TablePaginationComponent
-                paginationDetails={paginationDetails}
-                capturePageNum={capturePageNum}
-                captureRowPerItems={captureRowPerItems}
-                values="Users"
-            />
+            {data?.length ? (
+                <TablePaginationComponent
+                    paginationDetails={paginationDetails}
+                    capturePageNum={capturePageNum}
+                    captureRowPerItems={captureRowPerItems}
+                    values="Users"
+                />
+            ) : (
+                ""
+            )}
         </div>
 
     );

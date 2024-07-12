@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, List, ListItem, ListItemText, ListItemIcon, Radio, IconButton, InputAdornment } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
-import { useParams, useRouter } from "next/navigation";
-import LoadingComponent from "../Core/LoadingComponent";
-import { assignUserAPI, getAllListUsersAPI } from "@/services/devicesAPIs";
+import CloseIcon from "@mui/icons-material/Close";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, List, ListItem, ListItemIcon, ListItemText, Radio, TextField } from "@mui/material";
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { assignDeviceAPI, getAllListDevicesAPI } from "@/services/listUsersAPIs";
+import LoadingComponent from "../Core/LoadingComponent";
 
 const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }: any) => {
     const router = useRouter();

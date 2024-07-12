@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export const ListUserColumns = [
     {
         accessorFn: (row: any) => row.full_name,

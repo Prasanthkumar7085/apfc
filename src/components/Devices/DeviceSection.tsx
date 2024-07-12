@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import AddIcon from "@mui/icons-material/Add";
 import styles from "./DeviceSection.module.css";
 import { Avatar, Button, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
 import { Toaster } from "sonner";
 
-const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
+const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any) => {
   const { id } = useParams();
   const router = useRouter();
 
@@ -43,7 +43,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
 
   return (
     <div className="devicesGrp">
-      {
+      {devicesData?.length ?
         devicesData.map((item: any, index: number) => {
           return (
             <div className="eachDeviceBlock" key={index}>
@@ -152,7 +152,33 @@ const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
 
             </div>
           )
-        })}
+        }) : (
+          !loading ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                alignItems: "center"
+              }}
+            >
+              <Image
+                src="/No data Image.svg"
+                alt=""
+                height={300}
+                width={300}
+              />
+              <Button
+                className="addUserBtn"
+                variant='outlined'
+                onClick={() => router.push('/devices/add')}
+                startIcon={<AddIcon />}
+              >
+                Add New Device
+              </Button>
+            </div>
+          ) : ""
+        )}
       <AssignUserDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}

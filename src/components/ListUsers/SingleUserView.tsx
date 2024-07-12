@@ -1,16 +1,15 @@
 "use client"
-import { getSigleUserAPI, getSigleUserDevicesAPI } from "@/services/listUsersAPIs";
 import AddIcon from "@mui/icons-material/Add";
+import { Avatar, Button } from "@mui/material";
+import dayjs from "dayjs";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import LoadingComponent from "../Core/LoadingComponent";
-import { Avatar, Button, Stack } from "@mui/material";
-import Image from "next/image";
-import styles from "./SingleUserView.module.css"
-import DeviceSection from "../Devices/DeviceSection";
-import dayjs from "dayjs";
-import AssignDeviceDialog from "./AssignDeviceDialog";
 import { Toaster } from "sonner";
+import { getSigleUserAPI, getSigleUserDevicesAPI } from "@/services/listUsersAPIs";
+import LoadingComponent from "../Core/LoadingComponent";
+import DeviceSection from "../Devices/DeviceSection";
+import AssignDeviceDialog from "./AssignDeviceDialog";
 
 const SingleUserView = () => {
     const params = useParams();
@@ -20,14 +19,12 @@ const SingleUserView = () => {
     const [usersData, setUsersData] = useState<any>({});
     const [data, setData] = useState<any[]>([]);
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [userId, setUserId] = useState<any>();
 
     const getSinleUser = async () => {
         setLoading(true);
         try {
             const response = await getSigleUserAPI(params?.id);
             setUsersData(response?.data)
-            setData(response?.data?.device_ids)
         } catch (err) {
             console.error(err);
         } finally {
@@ -95,21 +92,24 @@ const SingleUserView = () => {
                 {data?.length ? (
                     <DeviceSection
                         devicesData={data}
+                        loading={loading}
                     />
                 ) : (
-                    <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                        <Image src="/No data Image.svg" alt="" width={300} height={300} />
-                        <p>{"It looks like you haven't added any devices yet."}</p>
-                        <p>{"add a new device to monitor your agricultural operations."}</p>
-                        <Button
-                            className="addUserBtn"
-                            variant='outlined'
-                            onClick={() => setDialogOpen(true)}
-                            startIcon={<AddIcon />}
-                        >
-                            Add New Device
-                        </Button>
-                    </div>
+                    !loading ? (
+                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
+                            <Image src="/No data Image.svg" alt="" width={300} height={300} />
+                            <p>{"It looks like you haven't added any devices yet."}</p>
+                            <p>{"add a new device to monitor your agricultural operations."}</p>
+                            <Button
+                                className="addUserBtn"
+                                variant='outlined'
+                                onClick={() => setDialogOpen(true)}
+                                startIcon={<AddIcon />}
+                            >
+                                Add New Device
+                            </Button>
+                        </div>
+                    ) : ""
                 )}
             </div>
             <AssignDeviceDialog

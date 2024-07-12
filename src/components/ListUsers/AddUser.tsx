@@ -1,13 +1,13 @@
 "use client";
-import { useEffect, useState } from "react";
-import { TextField, Select, MenuItem, Button, Box, Typography, InputAdornment, IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { addUserAPI, getSigleUserAPI, updateUserAPI } from "@/services/listUsersAPIs";
-import LoadingComponent from "../Core/LoadingComponent";
-import { useParams, useRouter } from "next/navigation";
+import { Box, Button, IconButton, InputAdornment, MenuItem, Select, TextField } from "@mui/material";
 import Image from "next/image";
-import ErrorMessagesComponent from "../Core/ErrorMessagesComponent";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
+import { addUserAPI, getSigleUserAPI, updateUserAPI } from "@/services/listUsersAPIs";
+import ErrorMessagesComponent from "../Core/ErrorMessagesComponent";
+import LoadingComponent from "../Core/LoadingComponent";
 
 const AddUser = () => {
     const router = useRouter();

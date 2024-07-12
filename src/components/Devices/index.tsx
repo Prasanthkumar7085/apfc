@@ -66,6 +66,7 @@ const Devices = () => {
                 devicesData={devicesData}
                 paginationDetails={paginationDetails}
                 getData={getPatientResults}
+                loading={loading}
             />
             <LoadingComponent loading={loading} />
         </div>
