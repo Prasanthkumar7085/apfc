@@ -6,11 +6,13 @@ import AssignUserDialog from "./AssignUserDialog";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
+import { Toaster } from "sonner";
 
 const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
   const router = useRouter();
 
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [devicesId, setDeviceId] = useState<any>();
   const useParams = useSearchParams();
   const [searchParams, setSearchParams] = useState(
     Object.fromEntries(new URLSearchParams(Array.from(useParams.entries())))
@@ -112,9 +114,16 @@ const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
                   )}
                 </div>
                 <div className="actionsList">
-                  <Button className="assignUserBtn" variant="contained" startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />} onClick={() => setDialogOpen(true)}>
-                    Assign User
-                  </Button>
+                  {!item?.user_full_name ? (
+                    <Button className="assignUserBtn" variant="contained" startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />} onClick={() => {
+                      setDialogOpen(true)
+                      setDeviceId(item?.id)
+                    }}>
+                      Assign User
+                    </Button>
+                  ) : (
+                    ""
+                  )}
                   {item?.user_full_name ? (
                     <div className="userInfo">
                       <Avatar className="userAvathar" >
@@ -146,6 +155,8 @@ const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
       <AssignUserDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
+        getData={getData}
+        devicesId={devicesId}
       />
       <div>
         <TablePaginationComponent
@@ -155,6 +166,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData }: any) => {
           values="Devices"
         />
       </div>
+      <Toaster richColors closeButton position="top-right" />
     </div>
   );
 };

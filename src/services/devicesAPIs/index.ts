@@ -145,3 +145,30 @@ export const addDeviceAPI = async (payload: any) => {
     throw err;
   }
 };
+
+export const getAllListUsersAPI = async (params: any) => {
+  try {
+    const { success, data } = await $fetch.get("/users", params);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const assignUserAPI = async (payload: {
+  user: number,
+
+}, id: any) => {
+  try {
+    const { success, data } = await $fetch.patch(`/devices/${id}/assign-user`, payload);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
