@@ -59,7 +59,7 @@ const ListUsers = () => {
         setSearchParams(
             Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
         );
-    }, [params]);
+    }, [useParam]);
 
     const column = [
         {
