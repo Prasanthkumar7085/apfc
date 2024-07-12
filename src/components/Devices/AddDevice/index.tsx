@@ -58,7 +58,7 @@ const UpdateLevelBasedSettings = () => {
   }, [params]);
 
   return (
-    <div>
+    <div id="settingsPage">
       <ArrowSteppers
         selectedStep={selectedStep}
         setSelectedStep={setSelectedStep}

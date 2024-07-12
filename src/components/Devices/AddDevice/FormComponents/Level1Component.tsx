@@ -14,7 +14,6 @@ import {
 } from "@/lib/constants/addDevicesConstants";
 import React from "react";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
-import styles from "./Level1Component.module.css";
 
 const Level1Component = ({
   levelBasedData,
@@ -36,8 +35,8 @@ const Level1Component = ({
       case "text":
       case "number":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">
               {setting.label}
               <RangeWithUnits
                 setting={setting}
@@ -49,8 +48,8 @@ const Level1Component = ({
         );
       case "password":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">
               {setting.label}
               <PasswordFormFields
                 name={setting.name}
@@ -62,11 +61,11 @@ const Level1Component = ({
         );
       case "select":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
-            <label className={styles.label}>
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">
               {setting.label}
               <select
-                className={styles.select}
+                className="select"
                 onChange={handleChange}
                 name={setting.name}
                 value={levelBasedData?.[setting.name]}
@@ -82,7 +81,7 @@ const Level1Component = ({
         );
       case "radio":
         return (
-          <div className={styles.fieldGroup} key={setting.name}>
+          <div className="fieldGroup" key={setting.name}>
             <GroupRadioButtons
               setting={setting}
               handleChange={handleChange}
@@ -97,8 +96,8 @@ const Level1Component = ({
 
   return (
     <>
-      <form className={styles.form}>
-        <section className={styles.formSection}>
+      <form className="form">
+        <section className="formSection">
           <h3>Authetication Settings</h3>
           {AuthenticationSettings.map(renderField)}
           <h3>Device Configuration</h3>
@@ -109,14 +108,14 @@ const Level1Component = ({
           {PotentialTransformerSettings.map(renderField)}
         </section>
 
-        <section className={styles.formSection}>
+        <section className="formSection">
           <h3>Compensation Settings</h3>
           {CompensationSettings.map(renderField)}
           <h3>Timing Settings</h3>
           {TimingSettings.map(renderField)}
         </section>
 
-        <section className={styles.formSection}>
+        <section className="formSection">
           <h3>Control Sensitivity Settings</h3>
           {ControlSensitivitySettings.map(renderField)}
           <h3>Commnunication Settings</h3>

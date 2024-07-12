@@ -4,7 +4,6 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import styles from "../FormComponents/Level1Component.module.css";
 import { useState } from "react";
 import {
   addfanDeviceSettingsAPI,
@@ -62,17 +61,17 @@ const SaveAndConfirmationButtons = ({
     }
   };
   return (
-    <div className={styles.buttonGroup}>
+    <div className="buttonGroup">
       <button
         type="button"
-        className={`${styles.button} ${styles.cancelButton}`}
+        // className={`${styles.button} ${styles.cancelButton}`}
         onClick={() => router.back()}
       >
         Cancel
       </button>
       <button
         type="submit"
-        className={styles.button}
+        className="button"
         onClick={() => addLevelBasedSettings()}
       >
         Save & Continue

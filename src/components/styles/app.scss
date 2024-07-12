@@ -31,13 +31,18 @@ body {
   }
 }
 
-
-@import "./signin.scss";
-@import "./users/index.scss";
-@import "./users/addUser.scss";
-@import "./users/viewUser.scss";
-
 @import "./helpers/sideNavbar";
 @import "./helpers/navbar";
 @import "./helpers/baseLayout";
 @import "./helpers/table";
+//auth module
+@import "./signin.scss";
+//users module
+@import "./users/index.scss";
+@import "./users/addUser.scss";
+@import "./users/viewUser.scss";
+//devices module
+@import "./devices/AddSettings/index.scss";
+@import "./devices/AddSettings/addLevelOne.scss";
+
+
