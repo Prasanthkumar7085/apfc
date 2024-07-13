@@ -232,14 +232,16 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
         devicesId={devicesId}
       />
       {id ? "" :
-        <div>
-          <TablePaginationComponent
-            paginationDetails={paginationDetails}
-            capturePageNum={capturePageNum}
-            captureRowPerItems={captureRowPerItems}
-            values="Devices"
-          />
-        </div>
+        devicesData?.length ? (
+          <div>
+            <TablePaginationComponent
+              paginationDetails={paginationDetails}
+              capturePageNum={capturePageNum}
+              captureRowPerItems={captureRowPerItems}
+              values="Devices"
+            />
+          </div>
+        ) : ""
       }
       <Toaster richColors closeButton position="top-right" />
     </div>
