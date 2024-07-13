@@ -53,7 +53,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                   <div className="settingsBlock">
                     <div className="deviceStatus">
                       <Image alt="" src="/icondot.svg" height={5} width={5} />
-                      <p className="statusTxt">Online</p>
+                      <p className="statusTxt">{item?.status == "ACTIVE" ? "Online" : "Ofline"}</p>
                     </div>
                     <Image alt="" src="/iconsetting.svg" height={25} width={25} />
                   </div>
