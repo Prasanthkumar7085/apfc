@@ -61,7 +61,7 @@ const Devices = () => {
     }, [params]);
 
     return (
-        <div>
+        <div >
             <DeviceSection
                 devicesData={devicesData}
                 paginationDetails={paginationDetails}
