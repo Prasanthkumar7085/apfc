@@ -57,22 +57,26 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
     }, [search]);
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-            <DialogTitle>
+        <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth id="assignUserDialog">
+            <DialogTitle className="dialogHeader">
+                <span className="dialogHeading">
+
                 Select User
+                </span>
                 <IconButton
+                    className="closeBtn"
                     aria-label="close"
                     onClick={() => {
                         onClose();
                         setSearch("")
                         setSelectedUser({});
                     }}
-                    sx={{ position: 'absolute', right: 8, top: 8 }}
+                   
                 >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent dividers>
+            <DialogContent className="dialogContent" >
                 <TextField
                     className="defaultTextFeild"
                     variant="outlined"
@@ -90,37 +94,37 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                         ),
                     }}
                 />
-                <List>
+                <List className="usersList">
                     {usersData.map((user: any, index: number) => (
                         <ListItem
                             key={index}
                             onClick={() => setSelectedUser(user)}
                             selected={user === selectedUser}
                         >
-                            <ListItemIcon>
-                                <Radio
+                            <ListItemIcon className="radioBtn">
+                                <Radio 
                                     checked={user === selectedUser}
                                     onChange={() => setSelectedUser(user)}
                                 />
                             </ListItemIcon>
-                            <ListItemText primary={user?.full_name} />
+                            <ListItemText className="listText" primary={user?.full_name} />
                         </ListItem>
                     ))}
                 </List>
 
             </DialogContent>
-            <DialogActions>
+            <DialogActions className="dialogActions">
                 <Button
-                    variant="outlined"
+                    className="addUserBtn"
+                    variant="contained"
                     color="primary"
-                    startIcon={<AddIcon />}
-                    fullWidth
-                    sx={{ mt: 2 }}
+                    startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />}
                     onClick={() => router.push("/users/add")}
                 >
                     Add New User
                 </Button>
                 <Button
+                    className="confirmbtn"
                     color="primary"
                     variant="contained"
                     disabled={!selectedUser.id}
