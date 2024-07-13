@@ -3,7 +3,7 @@ import styles from "./DeviceSection.module.css";
 import { Avatar, Button, MenuItem, Stack, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
 import { toast, Toaster } from "sonner";
@@ -12,6 +12,7 @@ import { updateDeviceStatusAPI } from "@/services/devicesAPIs";
 const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any) => {
   const { id } = useParams();
   const router = useRouter();
+  const pathname = usePathname();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
@@ -65,7 +66,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
   return (
     <div >
 
-      <div className="devicesGrp" style={{ maxHeight: "calc(100vh - 160px)", overflowY: "auto", padding: "0" }}>
+      <div className="devicesGrp" style={{ padding: pathname.includes("users/") ? "12px" : "0" }}>
         {devicesData?.length ?
           devicesData.map((item: any, index: number) => {
             return (
