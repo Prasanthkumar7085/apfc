@@ -104,14 +104,15 @@ const SingleDeviceSettings = () => {
 
       <div className="headerBlock" >
         <Tabs
+          className="levelTabs"
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Level1" />
-          <Tab label="Level2" />
-          <Tab label="Level3" />
-          <Tab label="Fan Settings" />
+          <Tab label="Level1"  className="tabBtn"/>
+          <Tab label="Level2" className="tabBtn" />
+          <Tab label="Level3" className="tabBtn" />
+          <Tab label="Fan Settings" className="tabBtn" />
         </Tabs>
         <div className="userInfo">
           <div className="userProfile">

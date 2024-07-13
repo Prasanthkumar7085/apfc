@@ -18,26 +18,6 @@
   width: 35%;
 }
 
-.tab-content {
-  padding: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.settings-group {
-  margin-bottom: 20px;
-}
-
 #viewSettings {
   .headerBlock {
     width: 100%;
@@ -72,5 +52,24 @@
         }
       }
     }
+    .levelTabs {
+      .tabBtn {
+        text-transform: capitalize;
+        color: $blackColor;
+        font-family: "Inter";
+        font-size: clamp(13px, 0.83vw, 17px);
+        font-weight: 400;
+        padding: 0;
+        &.Mui-selected {
+          color: #ff7a00;
+        }
+      }
+      .MuiTabs-indicator {
+        background-color: #ff7a00;
+      }
+    }
+  }
+  .tab-content {
+    
   }
 }
