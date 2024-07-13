@@ -294,18 +294,19 @@ const DeviceSection = ({
         getData={getData}
         devicesId={devicesId}
       />
-      {id && !devicesData?.length ? (
-        ""
-      ) : (
-        <div>
-          <TablePaginationComponent
-            paginationDetails={paginationDetails}
-            capturePageNum={capturePageNum}
-            captureRowPerItems={captureRowPerItems}
-            values="Devices"
-          />
-        </div>
-      )}
+      {id ?
+        "" :
+        devicesData?.length ? (
+          <div>
+            <TablePaginationComponent
+              paginationDetails={paginationDetails}
+              capturePageNum={capturePageNum}
+              captureRowPerItems={captureRowPerItems}
+              values="Devices"
+            />
+          </div>
+        ) : ""
+      }
       <Toaster richColors closeButton position="top-right" />
     </div>
   );
