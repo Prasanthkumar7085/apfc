@@ -4,12 +4,13 @@ import { useParams, usePathname, useRouter, useSearchParams } from "next/navigat
 import { useEffect, useState } from "react";
 import TanStackTableComponent from "../Core/TanStackTableComponent";
 import { ListUserColumns } from "./ListUsersColumns";
-import { deleteUserAPI, getAllListUsersAPI } from "@/services/listUsersAPIs";
+import { deleteUserAPI, getAllListUsersAPI, updateUserStatusAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
 import { ListUsersApiProps } from "@/interfaces/listUserAPITypes";
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
 import { toast, Toaster } from "sonner";
 import DeleteDialog from "../Core/DeleteDialog";
+import { MenuItem, Tooltip } from "@mui/material";
 
 const ListUsers = () => {
     const params = useParams();
@@ -22,6 +23,7 @@ const ListUsers = () => {
     const [userId, setUserId] = useState<any>();
     const [usersData, setUsersData] = useState<any[]>([]);
     const [paginationDetails, setPaginationDetails] = useState({});
+    const [status, setStatus] = useState("");
     const [searchParams, setSearchParams] = useState(
         Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
     );
@@ -67,6 +69,25 @@ const ListUsers = () => {
         }
     };
 
+    const updateUserStatus = async (id: any, statusValue: string) => {
+        setLoading(true);
+        try {
+            const payload = {
+                status: statusValue,
+            };
+            let response: any = await updateUserStatusAPI(payload, id);
+
+            if (response.success) {
+                toast.success(response.message);
+                getPatientResults({});
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         getPatientResults({
             page: 1,
@@ -91,6 +112,44 @@ const ListUsers = () => {
     }
 
     const column = [
+        {
+            accessorFn: (row: any) => row.status,
+            id: "status",
+            header: () => <span>status</span>,
+            cell: (info: any) => {
+                const value = info.getValue();
+                const capitalizedValue = value ? value.charAt(0).toUpperCase() + value.slice(1) : "--";
+                return (
+                    <Tooltip
+                        arrow
+                        title={
+                            <span style={{ fontSize: "16px" }}>
+                                <MenuItem
+                                    disabled={info.getValue() == "ACTIVE"}
+                                    onClick={() => {
+                                        updateUserStatus(info?.row?.original?.id, "ACTIVE");
+                                    }}
+                                >
+                                    Active
+                                </MenuItem>
+                                <MenuItem
+                                    disabled={info.getValue() == "INACTIVE"}
+                                    onClick={() => {
+                                        updateUserStatus(info?.row?.original?.id, "INACTIVE");
+                                    }}
+                                >
+                                    Inactive
+                                </MenuItem>
+                            </span>
+                        }
+                    >
+                        <span className={value === "active" ? "status inactive" : "status active"} style={{ cursor: "pointer" }}>{capitalizedValue}</span>
+                    </Tooltip>
+                );
+            },
+            footer: (props: any) => props.column.id,
+            width: "100px",
+        },
         {
             accessorFn: (row: any) => row.actions,
             id: "actions",

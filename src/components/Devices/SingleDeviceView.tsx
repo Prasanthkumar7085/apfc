@@ -47,9 +47,9 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Voltage Measurements</Typography>
-                        {Object.keys(deviceData).length
+                        {deviceData?.length
                             ?
-                            Object?.keys(deviceData?.voltage_measurements).map((item, index) => (
+                            Object?.keys(deviceData?.voltage_measurements)?.map((item, index) => (
                                 <div key={index}>
                                     <Typography>{item}: {deviceData?.voltage_measurements[item] || '--'}</Typography>
                                 </div>
@@ -61,7 +61,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Power Measurements</Typography>
-                        {Object.keys(deviceData).length
+                        {deviceData?.length
                             ?
                             Object?.keys(deviceData?.power_measurements).map((item, index) => (
                                 <div key={index}>
@@ -75,7 +75,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Errors</Typography>
-                        {Object.keys(deviceData).length
+                        {deviceData?.length
                             ?
                             Object?.keys(deviceData?.errors).map((item, index) => (
                                 <div key={index}>
@@ -89,7 +89,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Relay Status</Typography>
-                        {Object.keys(deviceData).length
+                        {deviceData?.length
                             ?
                             Object?.keys(deviceData?.relay_status).map((item, index) => (
                                 <div key={index}>
@@ -103,7 +103,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Bank Values</Typography>
-                        {Object.keys(deviceData).length
+                        {deviceData?.length
                             ?
                             Object?.keys(deviceData?.bank_values).map((item, index) => (
                                 <div key={index}>
@@ -117,7 +117,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Total Harmonic Distortion (THD)</Typography>
-                        {Object.keys(deviceData).length
+                        {deviceData?.length
                             ?
                             Object?.keys(deviceData?.total_harmonic_distortion).map((item, index) => (
                                 <div key={index}>
