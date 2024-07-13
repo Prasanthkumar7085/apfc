@@ -7,6 +7,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import { assignUserAPI, getAllListUsersAPI } from "@/services/devicesAPIs";
 import Image from "next/image";
 import { toast } from "sonner";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
     const router = useRouter();
@@ -103,7 +104,7 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                                     onChange={() => setSelectedUser(user)}
                                 />
                             </ListItemIcon>
-                            <ListItemText primary={user?.full_name} />
+                            <ListItemText primary={capitalizeFirstTwoWords(user?.full_name)} />
                         </ListItem>
                     ))}
                 </List>

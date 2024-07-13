@@ -5,6 +5,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import { Grid, Typography, Paper, Button } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const SingleDeviceView = () => {
     const params = useParams();
@@ -39,7 +40,7 @@ const SingleDeviceView = () => {
                 startIcon={<Image src="/users/back-icon.svg" alt="" width={13} height={13} />}  >
                 Back
             </Button>
-            <p>{deviceData?.device_name || '--'}</p>
+            <p>{capitalizeFirstTwoWords(deviceData?.device_name) || '--'}</p>
             <Grid container spacing={2} sx={{ padding: 2 }}>
                 <Grid item xs={12}>
                     <Typography variant="h6">Device Number: {deviceData?.device_id || '--'}</Typography>
@@ -47,7 +48,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Voltage Measurements</Typography>
-                        {deviceData?.length
+                        {Object?.keys(deviceData)?.length
                             ?
                             Object?.keys(deviceData?.voltage_measurements)?.map((item, index) => (
                                 <div key={index}>
@@ -61,7 +62,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Power Measurements</Typography>
-                        {deviceData?.length
+                        {Object?.keys(deviceData)?.length
                             ?
                             Object?.keys(deviceData?.power_measurements).map((item, index) => (
                                 <div key={index}>
@@ -75,7 +76,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Errors</Typography>
-                        {deviceData?.length
+                        {Object?.keys(deviceData)?.length
                             ?
                             Object?.keys(deviceData?.errors).map((item, index) => (
                                 <div key={index}>
@@ -89,7 +90,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Relay Status</Typography>
-                        {deviceData?.length
+                        {Object?.keys(deviceData)?.length
                             ?
                             Object?.keys(deviceData?.relay_status).map((item, index) => (
                                 <div key={index}>
@@ -103,7 +104,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12} md={6}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Bank Values</Typography>
-                        {deviceData?.length
+                        {Object?.keys(deviceData)?.length
                             ?
                             Object?.keys(deviceData?.bank_values).map((item, index) => (
                                 <div key={index}>
@@ -117,7 +118,7 @@ const SingleDeviceView = () => {
                 <Grid item xs={12}>
                     <Paper sx={{ padding: 2 }}>
                         <Typography variant="subtitle1">Total Harmonic Distortion (THD)</Typography>
-                        {deviceData?.length
+                        {Object?.keys(deviceData)?.length
                             ?
                             Object?.keys(deviceData?.total_harmonic_distortion).map((item, index) => (
                                 <div key={index}>

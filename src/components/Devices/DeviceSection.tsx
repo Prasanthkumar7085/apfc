@@ -8,6 +8,7 @@ import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
 import { toast, Toaster } from "sonner";
 import { updateDeviceStatusAPI } from "@/services/devicesAPIs";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any) => {
   const { id } = useParams();
@@ -70,7 +71,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
             <div className="eachDeviceBlock" key={index}>
               <div className="headerBlock">
                 <div className="header">
-                  <h4 className="deviceTItle">{item?.device_name || "--"}</h4>
+                  <h4 className="deviceTItle">{capitalizeFirstTwoWords(item?.device_name) || "--"}</h4>
                   <div className="settingsBlock">
                     <div className="deviceStatus" style={{ cursor: "pointer" }}>
                       <Image alt="" src="/icondot.svg" height={5} width={5} />
@@ -174,10 +175,10 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                   {item?.user_full_name ? (
                     <div className="userInfo">
                       <Avatar className="userAvathar" >
-                        {item?.user_full_name?.[0] || "--"}
+                        {item?.user_full_name?.[0].toUpperCase() || "--"}
                       </Avatar>
                       <h4 className="userName">
-                        {item?.user_full_name || "--"}
+                        {capitalizeFirstTwoWords(item?.user_full_name) || "--"}
                       </h4>
                     </div>
                   ) : (
