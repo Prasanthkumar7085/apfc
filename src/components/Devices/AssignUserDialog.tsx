@@ -81,7 +81,7 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                     className="defaultTextFeild"
                     variant="outlined"
                     type="search"
-                    placeholder="Search User"
+                    placeholder="Search "
                     fullWidth
                     margin="dense"
                     value={search}
@@ -117,7 +117,6 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                 <Button
                     className="addUserBtn"
                     variant="contained"
-                    color="primary"
                     startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />}
                     onClick={() => router.push("/users/add")}
                 >
@@ -125,7 +124,6 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                 </Button>
                 <Button
                     className="confirmbtn"
-                    color="primary"
                     variant="contained"
                     disabled={!selectedUser.id}
                     onClick={() => {

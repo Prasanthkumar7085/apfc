@@ -59,27 +59,29 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
     }, [search]);
 
     return (
-        <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth>
-            <DialogTitle>
-                Select User
+        <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth id="assignUserDialog">
+            <DialogTitle className="dialogHeader">
+                <span className="dialogHeading">
+                Select Device
+                </span>
                 <IconButton
+                    className="closeBtn"
                     aria-label="close"
                     onClick={() => {
                         onClose();
                         setSearch("")
                         setSelectedUser({});
                     }}
-                    sx={{ position: 'absolute', right: 8, top: 8 }}
                 >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent dividers>
+            <DialogContent className="dialogContent">
                 <TextField
                     className="defaultTextFeild"
                     variant="outlined"
                     type="search"
-                    placeholder="Search User"
+                    placeholder="Search "
                     fullWidth
                     margin="dense"
                     value={search}
@@ -92,38 +94,36 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                         ),
                     }}
                 />
-                <List>
+                <List className="usersList">
                     {deviceData.map((device: any, index: number) => (
                         <ListItem
                             key={index}
                             onClick={() => setSelectedUser(device)}
                             selected={device === selectedUser}
                         >
-                            <ListItemIcon>
+                            <ListItemIcon className="radioBtn">
                                 <Radio
                                     checked={device === selectedUser}
                                     onChange={() => setSelectedUser(device)}
                                 />
                             </ListItemIcon>
-                            <ListItemText primary={device?.device_name} />
+                            <ListItemText className="listText" primary={device?.device_name} />
                         </ListItem>
                     ))}
                 </List>
 
             </DialogContent>
-            <DialogActions>
+            <DialogActions className="dialogActions">
                 <Button
-                    variant="outlined"
-                    color="primary"
-                    startIcon={<AddIcon />}
-                    fullWidth
-                    sx={{ mt: 2 }}
+                    className="addUserBtn"
+                    variant="contained"
+                    startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />}
                     onClick={() => router.push("/devices/add")}
                 >
                     Add New Device
                 </Button>
                 <Button
-                    color="primary"
+                    className="confirmbtn"
                     variant="contained"
                     disabled={!selectedUser.id}
                     onClick={() => {

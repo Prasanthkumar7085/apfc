@@ -1,7 +1,7 @@
 "use client"
 import AddIcon from "@mui/icons-material/Add";
 import { Avatar, Button } from "@mui/material";
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -73,7 +73,7 @@ const SingleUserView = () => {
                 </div>
                 <div className="joiningInfo">
                     <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
-                    <span>Joined {dayjs(usersData?.updated_at).format("MMM YY")}</span>
+                    {/* <span>Joined {dayjs(usersData?.updated_at).format("MMM YY")}</span> */}
                 </div>
                 <div className="contactDetails">
                     <div className="contactInfo">
