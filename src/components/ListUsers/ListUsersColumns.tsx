@@ -30,26 +30,14 @@ export const ListUserColumns = [
         width: "150px",
     },
     {
-        accessorFn: (row: any) => row.device_ids,
-        id: "device_ids",
+        accessorFn: (row: any) => row.device_name,
+        id: "device_name",
         header: () => <span>Devices</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? info.getValue()[0]?.device_name : "--"}</span>;
+            return <span>{info.getValue() ? info.getValue() : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",
-    },
-    {
-        accessorFn: (row: any) => row.status,
-        id: "status",
-        header: () => <span>status</span>,
-        cell: (info: any) => {
-            const value = info.getValue();
-            const capitalizedValue = value ? value.charAt(0).toUpperCase() + value.slice(1) : "--";
-            return <span className={value === "active" ? "status inactive" : "status active"}>{capitalizedValue}</span>;
-        },
-        footer: (props: any) => props.column.id,
-        width: "100px",
     },
     {
         accessorFn: (row: any) => row.last_login,
@@ -63,7 +51,7 @@ export const ListUserColumns = [
     },
     {
         accessorFn: (row: any) => row.device_count,
-        id: "device_ids",
+        id: "device_count",
         header: () => <span>Devices Assigend</span>,
         cell: (info: any) => {
             return <span className="assignDeviceText">{info.getValue() || "0"}</span>;

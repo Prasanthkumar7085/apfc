@@ -55,10 +55,10 @@ const TanStackTableComponent: FC<pageProps> = ({
         "first_name",
         "email",
         "phone",
-        "device_ids",
+        "device_name",
         "status",
         "last_login",
-        "devices_assigend"
+        "device_count"
     ];
 
     const table = useReactTable({

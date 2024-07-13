@@ -1,12 +1,13 @@
 import AddIcon from "@mui/icons-material/Add";
 import styles from "./DeviceSection.module.css";
-import { Avatar, Button, Stack } from "@mui/material";
+import { Avatar, Button, MenuItem, Stack, Tooltip } from "@mui/material";
 import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
-import { Toaster } from "sonner";
+import { toast, Toaster } from "sonner";
+import { updateDeviceStatusAPI } from "@/services/devicesAPIs";
 
 const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any) => {
   const { id } = useParams();
@@ -14,10 +15,30 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
+  const [showLoading, setShowLoading] = useState(false);
   const params = useSearchParams();
   const [searchParams, setSearchParams] = useState(
     Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
   );
+
+  const updateDeviceStatus = async (id: any, statusValue: string) => {
+    setShowLoading(true);
+    try {
+      const payload = {
+        status: statusValue,
+      };
+      let response: any = await updateDeviceStatusAPI(payload, id);
+
+      if (response.success) {
+        toast.success(response.message);
+        getData({});
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setShowLoading(false);
+    }
+  };
 
   useEffect(() => {
     setSearchParams(
@@ -51,9 +72,34 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                 <div className="header">
                   <h4 className="deviceTItle">{item?.device_name || "--"}</h4>
                   <div className="settingsBlock">
-                    <div className="deviceStatus">
+                    <div className="deviceStatus" style={{ cursor: "pointer" }}>
                       <Image alt="" src="/icondot.svg" height={5} width={5} />
-                      <p className="statusTxt">{item?.status == "ACTIVE" ? "Online" : "Ofline"}</p>
+                      {/* <p className="statusTxt">{item?.status == "ACTIVE" ? "Online" : "Ofline"}</p> */}
+                      <Tooltip
+                        arrow
+                        title={
+                          <span style={{ fontSize: "16px" }}>
+                            <MenuItem
+                              disabled={item?.status == "ACTIVE"}
+                              onClick={() => {
+                                updateDeviceStatus(item.id, "ACTIVE");
+                              }}
+                            >
+                              Online
+                            </MenuItem>
+                            <MenuItem
+                              disabled={item?.status == "INACTIVE"}
+                              onClick={() => {
+                                updateDeviceStatus(item.id, "INACTIVE");
+                              }}
+                            >
+                              Ofline
+                            </MenuItem>
+                          </span>
+                        }
+                      >
+                        <span className="statusTxt">{item?.status == "ACTIVE" ? "Online" : "Ofline"}</span>
+                      </Tooltip>
                     </div>
                     <Image alt="" src="/iconsetting.svg" height={25} width={25} />
                   </div>

@@ -172,3 +172,17 @@ export const assignUserAPI = async (payload: {
     throw err;
   }
 };
+
+export const updateDeviceStatusAPI = async (payload: {
+  status: string,
+}, id: any) => {
+  try {
+    const { success, data } = await $fetch.patch(`/devices/${id}/status`, payload);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
