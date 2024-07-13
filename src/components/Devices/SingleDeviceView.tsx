@@ -5,6 +5,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import { Grid, Typography, Paper, Button } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const SingleDeviceView = () => {
     const params = useParams();
@@ -40,7 +41,7 @@ const SingleDeviceView = () => {
                 Back
             </Button>
             <div className="deviceinfo">
-                <Typography className="deviceName">{deviceData?.device_name || '--'}</Typography>
+                <Typography className="deviceName">{capitalizeFirstTwoWords(deviceData?.device_name) || '--'}</Typography>
                 <Typography className="deviceNum">Device Number: <span className="deviceName">{deviceData?.device_id || '--'}</span> </Typography>
             </div>
             <Grid container spacing={2} className="deviceInfoContainer">

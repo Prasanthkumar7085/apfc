@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { assignDeviceAPI, getAllListDevicesAPI } from "@/services/listUsersAPIs";
 import LoadingComponent from "../Core/LoadingComponent";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }: any) => {
     const router = useRouter();
@@ -62,7 +63,7 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
         <Dialog open={open} onClose={onClose} maxWidth="xs" fullWidth id="assignUserDialog">
             <DialogTitle className="dialogHeader">
                 <span className="dialogHeading">
-                Select Device
+                    Select Device
                 </span>
                 <IconButton
                     className="closeBtn"
@@ -107,7 +108,7 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                                     onChange={() => setSelectedUser(device)}
                                 />
                             </ListItemIcon>
-                            <ListItemText className="listText" primary={device?.device_name} />
+                            <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name)} />
                         </ListItem>
                     ))}
                 </List>
