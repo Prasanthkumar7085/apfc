@@ -1,0 +1,80 @@
+#deviceViewPage {
+  .backBtn {
+    border-radius: 4px;
+    border: 1px solid $backBtnCOlor;
+    color: $backBtnCOlor;
+    font-family: "Inter", sans-serif;
+    font-size: clamp(11px, 0.72vw, 15px);
+    font-weight: 500;
+    text-transform: capitalize;
+    padding: 1px 2px 1px 6px;
+    margin-bottom: 1.5rem;
+  }
+  .deviceinfo {
+    .deviceName {
+      color: $blackColor;
+      font-family: "Inter";
+      font-size: clamp(14px, 0.93vw, 18px);
+      font-weight: 500;
+      line-height: 100%;
+      margin-bottom: 0.5rem;
+    }
+    .deviceNum {
+      color: #000000b3;
+      font-family: "Inter";
+      font-size: clamp(14px, 0.93vw, 18px);
+      font-weight: 500;
+      line-height: 100%;
+    }
+  }
+  .deviceInfoContainer {
+    margin-top: 1px;
+    align-self: stretch;
+    .eachDetailsCard {
+      box-shadow: none;
+      border-radius: 8px;
+      border: 1px solid #e6e9f2;
+      .cardHeader {
+        border-bottom: 1px solid #e6e9f2;
+        background: #edf0f9;
+        padding: 0.3rem 0.5rem;
+        border-radius: 6px 6px 0 0;
+
+        h6 {
+          color: $blackColor;
+          font-family: "Inter", sans-serif;
+          font-size: clamp(12px, 0.72vw, 15px);
+          font-weight: 500;
+          letter-spacing: 0;
+        }
+      }
+      .cardBody {
+        padding: 0.8rem 0.5rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+        grid-gap: 1.5rem 0.5rem;
+
+        .eachBodyInfo {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 5px;
+          label {
+            color: #000000b3;
+            font-family: "Inter";
+            font-size: clamp(11px, 0.625vw, 13px);
+            font-weight: 400;
+          }
+          p {
+            color: #35353d;
+            font-family: "Inter";
+            font-size: clamp(13px, 0.83vw, 17px);
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
