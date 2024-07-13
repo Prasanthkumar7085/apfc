@@ -5,9 +5,7 @@ const DevicesPage = () => {
 
     return (
         <Suspense>
-            <div>
-                <Devices />
-            </div>
+            <Devices />
         </Suspense>
     );
 }

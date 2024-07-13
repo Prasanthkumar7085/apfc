@@ -36,14 +36,15 @@ const TablePaginationComponent = ({ paginationDetails, capturePageNum, captureRo
   );
 
   return (
-    <Card className={styles.tablePagenationBlock}>
-      <div className={styles.tablePagination} >
-        <div>
-          <Typography variant="caption" className={styles.label}>
+    <Card className="tablePagenationBlock">
+      <div className="tablePagination" >
+        <div className="rowPerPage">
+          <Typography className="label">
             {values} Per Page
           </Typography>
 
           <Select
+            className="selectComponent"
             value={noOfRows}
             onChange={handlePagerowChange}
             defaultValue={searchParams.limit ? searchParams.limit : 10}
@@ -55,14 +56,14 @@ const TablePaginationComponent = ({ paginationDetails, capturePageNum, captureRo
             }}
           >
             {limitOptions.map((item: number) => (
-              <MenuItem value={item} key={item}>
+              <MenuItem className="menuItem" value={item} key={item}>
                 {item}
               </MenuItem>
             ))}
           </Select>
         </div>
-        <div>
-          <Typography variant="caption">
+        
+          <Typography variant="caption" className="totalCount">
             {" "}
             {(paginationDetails?.page == 1
               ? 1
@@ -75,14 +76,13 @@ const TablePaginationComponent = ({ paginationDetails, capturePageNum, captureRo
                   : paginationDetails?.page * paginationDetails?.limit)}{" "}
             of {paginationDetails?.total} {values}
           </Typography>
-        </div>
+        
 
         <Pagination
           shape="rounded"
           sx={{
             "& .MuiButtonBase-root": {
               height: "25px !important",
-              // width: "25px !important",
               minWidth: "inherit",
             },
           }}
