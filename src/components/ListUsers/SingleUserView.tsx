@@ -66,7 +66,7 @@ const SingleUserView = () => {
                     </Avatar>
                     <h4 className="profileName">{usersData?.full_name}</h4>
                     <div className="status">
-                        <Image alt="" src="/Completed 1.svg" width={12} height={12} />
+                        <Image alt="" src="/Completed-icon.svg" width={12} height={12} />
                         <span>{usersData?.status?.charAt(0).toUpperCase() + usersData?.status?.slice(1)}    </span>
                     </div>
 

@@ -37,3 +37,40 @@
 .settings-group {
   margin-bottom: 20px;
 }
+
+#viewSettings {
+  .headerBlock {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .userInfo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .userProfile {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        h6 {
+          color: $blackColor;
+          font-family: "Inter";
+          font-size: clamp(14px, 0.93vw, 19px);
+          font-weight: 400;
+          line-height: 100%;
+        }
+      }
+      .status {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        p {
+          color: $greenColor;
+          font-family: "Inter";
+          font-size: clamp(13px, 0.83vw, 16px);
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

@@ -23,7 +23,6 @@ import Image from "next/image";
 const LoginPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -140,7 +139,7 @@ const LoginPage = () => {
                 onClick={signIn}
               >
                 {loading ? (
-                  <CircularProgress color="inherit" size={"1.8rem"} />
+                  <CircularProgress color="inherit" size={"1rem"} />
                 ) : (
                   "Login"
                 )}
