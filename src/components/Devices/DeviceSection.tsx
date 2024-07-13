@@ -9,7 +9,12 @@ import TablePaginationComponent from "../Core/TablePaginationComponent";
 import { toast, Toaster } from "sonner";
 import { updateDeviceStatusAPI } from "@/services/devicesAPIs";
 
-const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any) => {
+const DeviceSection = ({
+  devicesData,
+  paginationDetails,
+  getData,
+  loading,
+}: any) => {
   const { id } = useParams();
   const router = useRouter();
 
@@ -64,7 +69,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
 
   return (
     <div className="devicesGrp">
-      {devicesData?.length ?
+      {devicesData?.length ? (
         devicesData.map((item: any, index: number) => {
           return (
             <div className="eachDeviceBlock" key={index}>
@@ -98,39 +103,70 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                           </span>
                         }
                       >
-                        <span className="statusTxt">{item?.status == "ACTIVE" ? "Online" : "Ofline"}</span>
+                        <span className="statusTxt">
+                          {item?.status == "ACTIVE" ? "Online" : "Ofline"}
+                        </span>
                       </Tooltip>
                     </div>
-                    <Image alt="" src="/iconsetting.svg" height={25} width={25} />
+                    <Image
+                      alt=""
+                      src="/iconsetting.svg"
+                      style={{ cursor: "pointer" }}
+                      height={25}
+                      width={25}
+                      onClick={() =>
+                        router.push(
+                          `devices/${item?.id}/view-settings?state=Level1`
+                        )
+                      }
+                    />
                   </div>
                 </div>
                 <div className="deviceInfo">
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Average Voltage LN</p>
-                    <h5 className="infoValue">{item?.device_parameters?.voltage_measurements?.average_voltage_ln || "--"}</h5>
+                    <h5 className="infoValue">
+                      {item?.device_parameters?.voltage_measurements
+                        ?.average_voltage_ln || "--"}
+                    </h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Average Voltage LL</p>
-                    <h5 className="infoValue">{item?.device_parameters?.voltage_measurements?.average_voltage_ll || "--"}</h5>
+                    <h5 className="infoValue">
+                      {item?.device_parameters?.voltage_measurements
+                        ?.average_voltage_ll || "--"}
+                    </h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Average Current</p>
-                    <h5 className="infoValue">{item?.device_parameters?.voltage_measurements?.average_current || "--"}</h5>
+                    <h5 className="infoValue">
+                      {item?.device_parameters?.voltage_measurements
+                        ?.average_current || "--"}
+                    </h5>
                   </div>
                 </div>
               </div>
               <div className="deviceInfo" style={{ padding: "16px 12px" }}>
                 <div className="eachDeviceInfo">
                   <p className="infoTitle">Total kW</p>
-                  <h5 className="infoValue">{item?.device_parameters?.power_measurements?.total_kw || "--"}</h5>
+                  <h5 className="infoValue">
+                    {item?.device_parameters?.power_measurements?.total_kw ||
+                      "--"}
+                  </h5>
                 </div>
                 <div className="eachDeviceInfo">
                   <p className="infoTitle">Total kVA</p>
-                  <h5 className="infoValue">{item?.device_parameters?.power_measurements?.total_kva || "--"}</h5>
+                  <h5 className="infoValue">
+                    {item?.device_parameters?.power_measurements?.total_kva ||
+                      "--"}
+                  </h5>
                 </div>
                 <div className="eachDeviceInfo">
                   <p className="infoTitle">Total kVAr</p>
-                  <h5 className="infoValue">{item?.device_parameters?.power_measurements?.total_kvar || "--"}</h5>
+                  <h5 className="infoValue">
+                    {item?.device_parameters?.power_measurements?.total_kvar ||
+                      "--"}
+                  </h5>
                 </div>
                 <div className="avarageInfo">
                   <p className="infoTitle">Average PF</p>
@@ -138,7 +174,9 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                 </div>
                 <div className="eachDeviceInfo">
                   <p className="infoTitle">kWh</p>
-                  <h5 className="infoValue">{item?.device_parameters?.power_measurements?.kwh || "--"}</h5>
+                  <h5 className="infoValue">
+                    {item?.device_parameters?.power_measurements?.kwh || "--"}
+                  </h5>
                 </div>
               </div>
 
@@ -151,10 +189,16 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                     height={24}
                     width={50}
                   />
-                  {item?.device_parameters?.errors?.under_compensate_error === true ? (
+                  {item?.device_parameters?.errors?.under_compensate_error ===
+                  true ? (
                     <div className="errorBlock">
-                      <Image alt="" src="/iconinfo.svg" height={18} width={18} />
-                      <h6 >Under Compensate Error</h6>
+                      <Image
+                        alt=""
+                        src="/iconinfo.svg"
+                        height={18}
+                        width={18}
+                      />
+                      <h6>Under Compensate Error</h6>
                     </div>
                   ) : (
                     ""
@@ -162,10 +206,22 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                 </div>
                 <div className="actionsList">
                   {!item?.user_full_name ? (
-                    <Button className="assignUserBtn" variant="contained" startIcon={<Image src="/users/assign-icon.svg" alt="" width={14} height={14} />} onClick={() => {
-                      setDialogOpen(true)
-                      setDeviceId(item?.id)
-                    }}>
+                    <Button
+                      className="assignUserBtn"
+                      variant="contained"
+                      startIcon={
+                        <Image
+                          src="/users/assign-icon.svg"
+                          alt=""
+                          width={14}
+                          height={14}
+                        />
+                      }
+                      onClick={() => {
+                        setDialogOpen(true);
+                        setDeviceId(item?.id);
+                      }}
+                    >
                       Assign User
                     </Button>
                   ) : (
@@ -173,7 +229,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                   )}
                   {item?.user_full_name ? (
                     <div className="userInfo">
-                      <Avatar className="userAvathar" >
+                      <Avatar className="userAvathar">
                         {item?.user_full_name?.[0] || "--"}
                       </Avatar>
                       <h4 className="userName">
@@ -187,51 +243,50 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
                     variant="outlined"
                     className="viewBtn"
                     onClick={() => {
-                      router.push(`/devices/${item?.id}`)
+                      router.push(`/devices/${item?.id}`);
                     }}
-                    startIcon={<Image alt="" src="/icon2.svg" height={15} width={15} />}
+                    startIcon={
+                      <Image alt="" src="/icon2.svg" height={15} width={15} />
+                    }
                   >
                     View
                   </Button>
                 </div>
               </div>
-
             </div>
-          )
-        }) : (
-          !loading ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                flexDirection: "column",
-                alignItems: "center"
-              }}
-            >
-              <Image
-                src="/No data Image.svg"
-                alt=""
-                height={300}
-                width={300}
-              />
-              <Button
-                className="addUserBtn"
-                variant='outlined'
-                onClick={() => router.push('/devices/add')}
-                startIcon={<AddIcon />}
-              >
-                Add New Device
-              </Button>
-            </div>
-          ) : ""
-        )}
+          );
+        })
+      ) : !loading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Image src="/No data Image.svg" alt="" height={300} width={300} />
+          <Button
+            className="addUserBtn"
+            variant="outlined"
+            onClick={() => router.push("/devices/add")}
+            startIcon={<AddIcon />}
+          >
+            Add New Device
+          </Button>
+        </div>
+      ) : (
+        ""
+      )}
       <AssignUserDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
         getData={getData}
         devicesId={devicesId}
       />
-      {id ? "" :
+      {id ? (
+        ""
+      ) : (
         <div>
           <TablePaginationComponent
             paginationDetails={paginationDetails}
@@ -240,7 +295,7 @@ const DeviceSection = ({ devicesData, paginationDetails, getData, loading }: any
             values="Devices"
           />
         </div>
-      }
+      )}
       <Toaster richColors closeButton position="top-right" />
     </div>
   );

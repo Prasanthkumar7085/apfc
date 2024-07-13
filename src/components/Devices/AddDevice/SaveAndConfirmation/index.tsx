@@ -29,19 +29,15 @@ const SaveAndConfirmationButtons = ({
 
     if (params?.get("state") == "Level1") {
       responseData = addLeve1DeviceSettingsAPI(id, payload);
-      router.push(`${pathName}?state=Level2`);
     }
     if (params?.get("state") == "Level2") {
       responseData = addLeve2DeviceSettingsAPI(id, payload);
-      router.push(`${pathName}?state=Level3`);
     }
     if (params?.get("state") == "Level3") {
       responseData = addLeve3DeviceSettingsAPI(id, payload);
-      router.push(`${pathName}?state=Level4`);
     }
     if (params?.get("state") == "Level4") {
       responseData = addfanDeviceSettingsAPI(id, payload);
-      router.back();
     }
     return responseData;
   };
@@ -52,7 +48,9 @@ const SaveAndConfirmationButtons = ({
     try {
       const response = await getLevelBasedAPI(payload);
       if (response?.status == 200 || response?.status == 201) {
-        getLevelBasedDeviceDetails();
+        router.push(`${pathName}?state=${params?.get("state")}`);
+
+        await getLevelBasedDeviceDetails();
         toast.success(response?.message);
       }
     } catch (err) {

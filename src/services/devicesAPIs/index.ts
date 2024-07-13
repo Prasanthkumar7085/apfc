@@ -2,7 +2,9 @@ import { ListDevicesApiProps } from "@/interfaces/listDeviesAPITypes";
 import { $fetch } from "@/lib/fetch";
 import { handleAPIErrorResponse } from "@/lib/httpErrorHandler";
 
-export const getAllDevicesAPI = async (params: Partial<ListDevicesApiProps>) => {
+export const getAllDevicesAPI = async (
+  params: Partial<ListDevicesApiProps>
+) => {
   try {
     const { success, data } = await $fetch.get("/devices", params);
     if (!success) {
@@ -158,12 +160,17 @@ export const getAllListUsersAPI = async (params: any) => {
   }
 };
 
-export const assignUserAPI = async (payload: {
-  user: number,
-
-}, id: any) => {
+export const assignUserAPI = async (
+  payload: {
+    user: number;
+  },
+  id: any
+) => {
   try {
-    const { success, data } = await $fetch.patch(`/devices/${id}/assign-user`, payload);
+    const { success, data } = await $fetch.patch(
+      `/devices/${id}/assign-user`,
+      payload
+    );
     if (!success) {
       return handleAPIErrorResponse(data);
     }
@@ -173,11 +180,37 @@ export const assignUserAPI = async (payload: {
   }
 };
 
-export const updateDeviceStatusAPI = async (payload: {
-  status: string,
-}, id: any) => {
+export const updateDeviceStatusAPI = async (
+  payload: {
+    status: string;
+  },
+  id: any
+) => {
   try {
-    const { success, data } = await $fetch.patch(`/devices/${id}/status`, payload);
+    const { success, data } = await $fetch.patch(
+      `/devices/${id}/status`,
+      payload
+    );
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const resetDevicePasswordAPI = async (
+  payload: {
+    password: string;
+  },
+  id: any
+) => {
+  try {
+    const { success, data } = await $fetch.patch(
+      `/devices/${id}/reset-password`,
+      payload
+    );
     if (!success) {
       return handleAPIErrorResponse(data);
     }

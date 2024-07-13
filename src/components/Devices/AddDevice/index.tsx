@@ -55,7 +55,7 @@ const UpdateLevelBasedSettings = () => {
 
   useEffect(() => {
     getLevelBasedDeviceDetails();
-  }, [params]);
+  }, [params?.get("state")]);
 
   return (
     <div id="settingsPage">
