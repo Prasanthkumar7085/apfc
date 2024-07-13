@@ -98,8 +98,10 @@ const SingleUserView = () => {
                     !loading ? (
                         <div className="noDataBlock" >
                             <Image src="/No data Image.svg" alt="" width={200} height={200} />
-                            <p>{"It looks like you haven't added any devices yet."}</p>
-                            <p>{"add a new device to monitor your agricultural operations."}</p>
+                                <div className="textBlock">
+                                    <p className="noDataTxt">{"It looks like you haven't added any devices yet."}</p>
+                                    <p className="noDataTxt">{"add a new device to monitor your agricultural operations."}</p>
+                                </div>
                             <Button
                                 className="addUserBtn"
                                 variant='outlined'

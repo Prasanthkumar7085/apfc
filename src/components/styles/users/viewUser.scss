@@ -104,8 +104,31 @@ $avatharColor: #ff7a00;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-block: 2rem;
+  .textBlock {
+    margin-block: 2rem 1rem;
+    .noDataTxt {
+      color: $blackColor;
+      text-align: center;
+      font-family: "Inter";
+      font-size: clamp(13px, 0.83vw, 18px);
+      font-weight: 400;
+      margin: 0;
+    }
+  }
   .addUserBtn {
-    
+    border-radius: 4px;
+    border: 1px solid $primaryColor;
+    color: $primaryColor;
+    font-family: "Inter";
+    font-size: clamp(12px, 0.72vw, 15px);
+    font-weight: 600;
+    text-transform: capitalize;
+    letter-spacing: 0;
+    padding: 5px 10px;
+    svg {
+      font-size: 16px;
+    }
   }
 }
 .devicesGrp {
