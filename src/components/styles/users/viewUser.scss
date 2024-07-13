@@ -99,6 +99,15 @@ $avatharColor: #ff7a00;
     }
   }
 }
+.noDataBlock {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  .addUserBtn {
+    
+  }
+}
 .devicesGrp {
   padding: 12px;
   .eachDeviceBlock {
@@ -184,7 +193,7 @@ $avatharColor: #ff7a00;
   }
   .temparatureInfo {
     background: #d3d9f066;
-    padding:8px 12px;
+    padding: 8px 12px;
     @include align-center();
     justify-content: space-between;
     .tempItems {

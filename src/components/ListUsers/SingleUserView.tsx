@@ -96,8 +96,8 @@ const SingleUserView = () => {
                     />
                 ) : (
                     !loading ? (
-                        <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center" }}>
-                            <Image src="/No data Image.svg" alt="" width={300} height={300} />
+                        <div className="noDataBlock" >
+                            <Image src="/No data Image.svg" alt="" width={200} height={200} />
                             <p>{"It looks like you haven't added any devices yet."}</p>
                             <p>{"add a new device to monitor your agricultural operations."}</p>
                             <Button
