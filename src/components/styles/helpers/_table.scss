@@ -12,6 +12,9 @@ $colorTableHeader: #e6f6ee;
 $headerTextColor: #545961;
 $bodyTextColor: #24282d;
 $bodyBorderColor: #edf2f7;
+$backBtnCOlor: #e47078;
+$labelColor: #4f4f4f;
+$inputBorderColor: #9c9c9c;
 
 .mainTable {
   .tableContainer {
@@ -104,84 +107,60 @@ $bodyBorderColor: #edf2f7;
     padding-left: 0;
     padding-right: 0;
   }
+}
+.tablePagenationBlock {
+  padding: 0.625rem 0.625rem 0.625rem 0.9375rem !important;
+  box-shadow: none !important;
+  border: 1px solid #efefef !important;
+  .tablePagination {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    color: #000000 !important;
+    border-radius: 0 !important;
+    width: 100% !important;
 
-  .listingPagination {
-    .paginationCard {
-      padding: 10px !important;
-      width: 100%;
-      min-width: 100%;
-      border-radius: 0 0 10px 10px;
-      box-shadow: none;
-      box-sizing: border-box;
-      border: 0.578032px solid transparent;
-      background: $whiteColor;
+    & * {
+      font-size: clamp(12px, 0.625vw, 14px);
+      font-family: "Inter", sans-serif;
+      letter-spacing: 0;
+            font-weight: 500;
+
+    }
+    .label {
+      margin-right: 10px;
+    }
+    .rowPerPage {
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-      padding: 10px;
-      position: sticky;
-      bottom: 0;
-      left: 0;
-      .paginationText {
-        font-family: "Poppins", sans-serif;
-        font-size: clamp(12px, 0.625vw, 14px);
-        font-weight: 500;
-        color: $blackColor;
-      }
-      .totalCount {
-        font-size: clamp(12px, 0.625vw, 14px);
-        font-family: "Poppins", sans-serif;
-        font-weight: 500;
-        margin-top: 5px;
-        margin-right: 1rem;
-        white-space: pre-wrap;
-        color: $blackColor;
-      }
-      .paginationButtons {
-        .MuiButtonBase-root {
-          height: 25px !important;
-          min-width: 25px !important;
-          font-family: "Poppins", sans-serif;
-          font-weight: 500;
-          color: $blackColor;
-          font-size: clamp(12px, 0.625vw, 14px);
+      .selectComponent {
+        font-family: "Inter", sans-serif;
+        border: 1px solid $inputBorderColor;
+
+        &:hover {
+          border-color: $inputBorderColor;
         }
-        .MuiButtonBase-root:hover {
-          // background: $colorTableHeader !important;
-          font-weight: 600 !important;
-          color: $blackColor;
+
+        &:focus-within {
+          border-color: $inputBorderColor;
         }
-        .Mui-selected {
-          color: $blackColor;
-          font-family: "Poppins", sans-serif;
-          font-weight: 600;
-          font-size: clamp(12px, 0.625vw, 14px);
-          // background: $colorTableHeader !important;
+
+        &.Mui-focused {
+          border-color: $inputBorderColor;
         }
       }
-      .countPerPage {
-        height: 25px !important;
-        border-radius: 3px !important;
-        font-size: clamp(11px, 0.625vw, 14px);
-        border: none;
-        margin-top: 1px;
-        font-family: "Poppins", sans-serif;
-        color: $blackColor;
-        font-weight: 500;
+
+      fieldset {
+        border: 0;
       }
-      .gotoPage {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        color: $blackColor;
-        .MuiInputBase-input {
-          padding: 2px;
-          width: 40px;
-          height: 20px;
-          font-size: clamp(12px, 0.62vw, 14px);
-        }
-      }
+    }
+    .totalCount {
+      font-size: clamp(12px, 0.625vw, 14px);
+      font-family: "Inter", sans-serif;
+      font-weight: 500;
+      margin-top: 5px;
+      margin-right: 1rem;
+      white-space: pre-wrap;
+      color: $blackColor;
     }
   }
 }
-
