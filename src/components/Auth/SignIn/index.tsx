@@ -140,11 +140,11 @@ const LoginPage = () => {
                     errorMessage={errorMessages?.password}
                   />
                   <p style={{ color: "red" }}>{invalid}</p>
-                  <div className="forgotBtnGrp">
+                  {/* <div className="forgotBtnGrp">
                     <Button variant="text" className="forgotBtn">
                       Forgot Your Password ?
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
                 <Button
                   type="submit"

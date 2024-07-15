@@ -13,7 +13,7 @@ const Devices = () => {
     const router = useRouter();
     const pathname = usePathname();
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [devicesData, setDevicesData] = useState<any[]>([]);
     const [paginationDetails, setPaginationDetails] = useState({});
     const [searchParams, setSearchParams] = useState(
