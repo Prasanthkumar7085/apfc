@@ -29,7 +29,11 @@ const SingleDeviceView = () => {
   useEffect(() => {
     getPatientResults();
   }, []);
- 
+
+  const capitalizeAndRemoveUnderscore = (text: any) => {
+    return text.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
+  };
+
   const firstRowHeight = '100%';
   return (
     <div id="deviceViewPage">
@@ -51,7 +55,7 @@ const SingleDeviceView = () => {
                   <div className="cardBody">
                     {Object.keys(deviceData.voltage_measurements).map((item, index) => (
                       <div className="eachBodyInfo" key={index}>
-                        <label>{item}</label>
+                        <label>{capitalizeAndRemoveUnderscore(item)}</label>
                         <Typography>
                           {deviceData.voltage_measurements[item] || "--"}
                         </Typography>
@@ -75,7 +79,7 @@ const SingleDeviceView = () => {
                   <div className="cardBody">
                     {Object.keys(deviceData.errors).map((item, index) => (
                       <div className="eachBodyInfo" key={index}>
-                        <label>{item}</label>
+                        <label>{capitalizeAndRemoveUnderscore(item)}</label>
                         <Typography>
 
                           {deviceData?.errors[item] === true
@@ -103,12 +107,10 @@ const SingleDeviceView = () => {
               <div className="cardBody">
                 {Object.keys(deviceData.power_measurements).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
-                    <label>{item}</label>
+                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.power_measurements[item] === true
-                        ? "Error"
-                        : "" || "--"}
+                      {deviceData?.power_measurements[item] || "--"}
                     </Typography>
                   </div>
                 ))}
@@ -131,12 +133,10 @@ const SingleDeviceView = () => {
               <div className="cardBody">
                 {Object.keys(deviceData.relay_status).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
-                    <label>{item}</label>
+                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.relay_status[item] === true
-                        ? "Error"
-                        : "" || "--"}
+                      {deviceData?.relay_status[item] || "--"}
                     </Typography>
                   </div>
                 ))}
@@ -156,12 +156,10 @@ const SingleDeviceView = () => {
               <div className="cardBody">
                 {Object.keys(deviceData.bank_values).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
-                    <label>{item}</label>
+                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.bank_values[item] === true
-                        ? "Error"
-                        : "" || "--"}
+                      {deviceData?.bank_values[item] + " " + "Kvar" || "--"}
                     </Typography>
                   </div>
                 ))}
@@ -183,12 +181,10 @@ const SingleDeviceView = () => {
               <div className="cardBody">
                 {Object.keys(deviceData.total_harmonic_distortion).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
-                    <label>{item}</label>
+                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.total_harmonic_distortion[item] === true
-                        ? "Error"
-                        : "" || "--"}
+                      {deviceData?.total_harmonic_distortion[item] || "--"}
                     </Typography>
                   </div>
                 ))}
