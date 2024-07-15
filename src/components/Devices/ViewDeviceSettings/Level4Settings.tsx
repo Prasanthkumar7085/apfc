@@ -15,11 +15,24 @@ const Level4Settings = ({ levelBasedData }: any) => {
         );
       default:
         return (
-          <div className="fieldGroup" key={setting.name}>
-            <label className="label">{setting.label}</label>
-            <Typography variant="caption">
-              {levelBasedData[setting?.name] || "--"}
-            </Typography>
+          <div className="fieldGroup levelFanFeild" key={setting.name}>
+            {/* <label className="label">{setting.label}</label> */}
+            {levelBasedData[setting?.name] == "ON" ||
+              levelBasedData[setting?.name] == "OFF" ? (
+              <Typography
+                className={
+                  levelBasedData[setting?.name] == "ON"
+                    ? "value radioOn"
+                    : "value radioOff"
+                }
+              >
+                {levelBasedData[setting?.name] || "--"}
+              </Typography>
+            ) : (
+              <Typography className="value">
+                {levelBasedData[setting?.name] || "--"}
+              </Typography>
+            )}
           </div>
         );
     }
@@ -30,9 +43,10 @@ const Level4Settings = ({ levelBasedData }: any) => {
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Fan Settings</h3>
-
-          <Image alt="" src="/car-radiator.svg" height={70} width={70} />
-          <div>{fanSettings.map(renderField)}</div>
+          <div className="fanSettings">
+            <Image alt="" src="/car-radiator.svg" height={35} width={35} />
+            <div className="levelFanGrp">{fanSettings.map(renderField)}</div>
+          </div>
         </section>
       </form>
     </div>
