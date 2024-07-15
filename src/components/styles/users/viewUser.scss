@@ -52,10 +52,15 @@ $avatharColor: #ff7a00;
       }
       .status {
         gap: 4px;
-        color: $greenColor;
         font-size: clamp(13px, 0.83vw, 16px);
         font-weight: 400;
         @include align-center;
+        &.active {
+          color: $greenColor;
+        }
+        &.inactive {
+          color: $secondaryColor;
+        }
       }
     }
     .joiningInfo {

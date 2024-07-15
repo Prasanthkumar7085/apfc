@@ -48,6 +48,9 @@ body {
     -webkit-text-fill-color: #000 !important;
     height: 0px !important;
   }
+  input {
+    color: $blackColor !important;
+  }
 }
 .errorComponent {
   color: $secondaryColor; 

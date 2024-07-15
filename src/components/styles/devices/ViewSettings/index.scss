@@ -46,11 +46,22 @@
         align-items: center;
         gap: 0.5rem;
         p {
-          color: $greenColor;
           font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 400;
+          &.active {
+            color: $greenColor;
+          }
+          &.inactive {
+            color: $secondaryColor;
+          }
         }
+      }
+      .editbtn {
+        padding: 4px 10px !important;
+        display: flex;
+        align-items: center;
+        gap: 3px;
       }
     }
     .levelTabs {
