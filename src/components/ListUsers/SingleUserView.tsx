@@ -10,6 +10,7 @@ import { getSigleUserAPI, getSigleUserDevicesAPI } from "@/services/listUsersAPI
 import LoadingComponent from "../Core/LoadingComponent";
 import DeviceSection from "../Devices/DeviceSection";
 import AssignDeviceDialog from "./AssignDeviceDialog";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const SingleUserView = () => {
     const params = useParams();
@@ -62,9 +63,9 @@ const SingleUserView = () => {
             <div className="userInfo">
                 <div className="profileGrp">
                     <Avatar className="profileavatarIcon">
-                        {usersData?.full_name?.[0]}
+                        {usersData?.full_name?.[0].toUpperCase()}
                     </Avatar>
-                    <h4 className="profileName">{usersData?.full_name}</h4>
+                    <h4 className="profileName">{capitalizeFirstTwoWords(usersData?.full_name)}</h4>
                     <div className="status">
                         <Image alt="" src="/Completed-icon.svg" width={12} height={12} />
                         <span>{usersData?.status?.charAt(0).toUpperCase() + usersData?.status?.slice(1)}    </span>

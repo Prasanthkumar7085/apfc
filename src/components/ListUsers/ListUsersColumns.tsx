@@ -1,10 +1,12 @@
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
+
 export const ListUserColumns = [
     {
         accessorFn: (row: any) => row.full_name,
         id: "first_name",
         header: () => <span>Name</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+            return <span>{info.getValue() ? capitalizeFirstTwoWords(info.getValue()) : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
         width: "150px",
