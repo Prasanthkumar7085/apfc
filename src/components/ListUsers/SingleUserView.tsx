@@ -11,10 +11,13 @@ import LoadingComponent from "../Core/LoadingComponent";
 import DeviceSection from "../Devices/DeviceSection";
 import AssignDeviceDialog from "./AssignDeviceDialog";
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
+import { useDispatch } from "react-redux";
+import { setSingleUser } from "@/redux/Modules/userlogin";
 
 const SingleUserView = () => {
     const params = useParams();
     const router = useRouter();
+    const dispatch = useDispatch();
 
     const [loading, setLoading] = useState(true);
     const [usersData, setUsersData] = useState<any>({});
@@ -26,6 +29,7 @@ const SingleUserView = () => {
         try {
             const response = await getSigleUserAPI(params?.id);
             setUsersData(response?.data)
+            dispatch(setSingleUser(response?.data));
         } catch (err) {
             console.error(err);
         } finally {
@@ -37,7 +41,7 @@ const SingleUserView = () => {
         setLoading(true);
         try {
             const response = await getSigleUserDevicesAPI(params?.id);
-            setData(response?.data)
+            setData(response?.data);
         } catch (err) {
             console.error(err);
         } finally {
@@ -52,14 +56,6 @@ const SingleUserView = () => {
 
     return (
         <div id="viewUserPage" >
-            <Button
-                variant="outlined"
-                className="backBtn"
-                sx={{ alignSelf: 'flex-start', mb: 2 }}
-                onClick={() => router.back()}
-                startIcon={<Image src="/users/back-icon.svg" alt="" width={13} height={13} />}  >
-                Back
-            </Button>
             <div className="userInfo">
                 <div className="profileGrp">
                     <Avatar className="profileavatarIcon">

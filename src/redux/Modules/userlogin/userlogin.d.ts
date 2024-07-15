@@ -26,6 +26,7 @@ declare namespace IReduxUserLogin {
     user: Partial<IUserResponse>;
     emailWhilePasswordReset: string
     singleDevice: any
+    singleUser: any
   }
 
 

@@ -8,10 +8,13 @@ import { toast, Toaster } from "sonner";
 import { addUserAPI, getSigleUserAPI, updateUserAPI } from "@/services/listUsersAPIs";
 import ErrorMessagesComponent from "../Core/ErrorMessagesComponent";
 import LoadingComponent from "../Core/LoadingComponent";
+import { useDispatch } from "react-redux";
+import { setSingleUser } from "@/redux/Modules/userlogin";
 
 const AddUser = () => {
     const router = useRouter();
     const params = useParams();
+    const dispatch = useDispatch();
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -31,6 +34,7 @@ const AddUser = () => {
                 setEmail(response?.data?.email)
                 setPhone(response?.data?.phone)
                 setUserType(response?.data?.user_type)
+                dispatch(setSingleUser(response?.data));
             }
         } catch (err) {
             console.error(err);
@@ -134,15 +138,6 @@ const AddUser = () => {
 
     return (
         <Box id="addUser">
-            <Button
-                className="backBtn"
-                variant="outlined"
-                sx={{ alignSelf: 'flex-start', mb: 2 }}
-                onClick={() => router.back()}
-                startIcon={<Image src="/users/back-icon.svg" alt="" width={13} height={13} />}
-            >
-                Back
-            </Button>
             <div className="feildBlock">
                 <label className="label">Full Name <span>*</span></label>
                 <TextField

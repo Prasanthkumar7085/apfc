@@ -1,6 +1,6 @@
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
-import { deleteSingleDevice, removeUserDetails } from "@/redux/Modules/userlogin";
+import { deleteSingleDevice, deleteSingleUser, removeUserDetails } from "@/redux/Modules/userlogin";
 import { getSigleDeviceAPI } from "@/services/devicesAPIs";
 import {
   Avatar,
@@ -33,6 +33,9 @@ const HeadNavbar = () => {
   );
   const deviceData = useSelector(
     (state: any) => state?.auth?.singleDevice
+  );
+  const userData = useSelector(
+    (state: any) => state?.auth?.singleUser
   );
 
 
@@ -79,13 +82,33 @@ const HeadNavbar = () => {
 
   return (
     <div className="headnav">
+      {path == "/users/add" || path == `/users/${param?.id}` || path.includes(`/users/${param?.id}/edit`) ? (
+        <>
+          <Button
+            variant="outlined"
+            className="backBtn"
+            onClick={() => {
+              router.back();
+              dispatch(deleteSingleUser());
+            }}
+            startIcon={
+              <Image src="/users/back-icon.svg" alt="" width={13} height={13} />
+            }
+          >
+            Back
+          </Button>
+          <h5 className="pagetitle">{userData?.full_name ? userData?.full_name || "--" : "Add New Device"}</h5>
+        </>
+      ) : (
+        path == "/users" ? <h4 className="pagetitle"> Users </h4> : ""
+      )}
       {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) ? (
         <>
           <Button
             variant="outlined"
             className="backBtn"
             onClick={() => {
-              if (path == `/devices/${param?.id}/update-settings` || path == `devices/${param?.id}/view-settings`) {
+              if (path == `/devices/${param?.id}/update-settings` || path.includes(`devices/${param?.id}/view-settings`)) {
                 router.push('/devices');
               } else {
                 router.back();
@@ -101,58 +124,65 @@ const HeadNavbar = () => {
           <h5 className="pagetitle">{deviceData?.device_name ? deviceData?.device_name || "--" : "Add New Device"}</h5>
         </>
       ) : (
-        <h4 className="pagetitle"> {path.includes("/users") ? "Users" : "Devices"} </h4>
+        path == "/devices" ? <h4 className="pagetitle"> Devices </h4> : ""
       )}
       <div className="navActions">
-        {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) ? (
-          ""
-        ) : (
-          <>
-            <TextField
-              className="defaultTextFeild"
-              defaultValue="Search"
-              variant="outlined"
-              type="search"
-              value={searchString}
-              onChange={handleSearchChange}
-              placeholder="Search"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Image src="/users/search-icon.svg" alt="" width={15} height={15} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            {path == "/users" ? (
-              <Button
-                className="addUserBtn"
-                variant='contained'
-                onClick={() => router.push("/users/add")}
-                startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
-              >
-                Add New User
-              </Button>
+        {path == "/devices/add" ||
+          path == `/devices/${param?.id}` ||
+          path.includes(`/devices/${param?.id}/update-settings`) ||
+          path.includes(`devices/${param?.id}/view-settings`) ||
+          path == "/users/add" ||
+          path == `/users/${param?.id}` ||
+          path.includes(`/users/${param?.id}/edit`)
+          ? (
+            ""
+          ) : (
+            <>
+              <TextField
+                className="defaultTextFeild"
+                defaultValue="Search"
+                variant="outlined"
+                type="search"
+                value={searchString}
+                onChange={handleSearchChange}
+                placeholder="Search"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Image src="/users/search-icon.svg" alt="" width={15} height={15} />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              {path == "/users" ? (
+                <Button
+                  className="addUserBtn"
+                  variant='contained'
+                  onClick={() => router.push("/users/add")}
+                  startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
+                >
+                  Add New User
+                </Button>
 
-            ) : (
-              ""
-            )}
-            {path == "/devices" ? (
-              <Button
-                className="addUserBtn"
-                variant='contained'
-                onClick={() => router.push("/devices/add")}
-                startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
-              >
-                Add New Device
-              </Button>
+              ) : (
+                ""
+              )}
+              {path == "/devices" ? (
+                <Button
+                  className="addUserBtn"
+                  variant='contained'
+                  onClick={() => router.push("/devices/add")}
+                  startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
+                >
+                  Add New Device
+                </Button>
 
-            ) : (
-              ""
-            )}
+              ) : (
+                ""
+              )}
 
-          </>
-        )}
+            </>
+          )}
         <div
           className="profileGrp"
           onClick={handleOpenUserMenu}

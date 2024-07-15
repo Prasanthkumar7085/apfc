@@ -7,7 +7,8 @@ const reducerName = "auth";
 export const initialState: IReduxUserLogin.IInitialLoginState = {
   user: {},
   emailWhilePasswordReset: "",
-  singleDevice: {}
+  singleDevice: {},
+  singleUser: {}
 };
 
 export const userLoginSlice = createSlice({
@@ -35,6 +36,12 @@ export const userLoginSlice = createSlice({
     deleteSingleDevice: (state: any) => {
       state.singleDevice = {};
     },
+    setSingleUser: (state: any, action: any) => {
+      state.singleUser = action.payload;
+    },
+    deleteSingleUser: (state: any) => {
+      state.singleUser = {};
+    },
   },
 });
 export const {
@@ -42,7 +49,9 @@ export const {
   deleteProfileDetails,
   setEmailOnForgotPassword,
   setSingleDevice,
-  deleteSingleDevice
+  deleteSingleDevice,
+  setSingleUser,
+  deleteSingleUser
 } = userLoginSlice.actions;
 
 
