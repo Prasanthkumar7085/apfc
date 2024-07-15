@@ -15,7 +15,7 @@
       margin: 0;
       padding: 0.6rem 0.5rem;
       color: $blackColor;
-      font-family: "Inter", sans-serif;
+      font-family: $fontPrimary;
       font-size: clamp(12px, 0.72vw, 15px);
       font-weight: 500;
       letter-spacing: 0;
@@ -30,7 +30,7 @@
       .label {
         margin-bottom: 4px;
         color: rgba(0, 0, 0, 0.7);
-        font-family: "Inter";
+        font-family: $fontPrimary;
         font-size: clamp(11px, 0.625vw, 14px);
         font-weight: 400;
       }
@@ -45,7 +45,7 @@
           border-radius: 3;
           height: 30px;
           border: 1px solid $textFeildStroke;
-          font-family: "Inter", sans-serif;
+          font-family: $fontPrimary;
           font-size: clamp(0.75em, 0.72vw, 1.1em);
 
           fieldset {
@@ -61,7 +61,7 @@
         width: 100%;
         .MuiSelect-select {
           width: 100%;
-          font-family: "Inter", sans-serif;
+          font-family: $fontPrimary;
           padding: 3px 11px !important;
           font-size: clamp(0.75em, 0.72vw, 1.1em);
           border: 1px solid $textFeildStroke;
@@ -94,7 +94,7 @@
           }
           .MuiTypography-root {
             color: rgba(0, 0, 0, 0.7);
-            font-family: "Inter";
+            font-family: $fontPrimary;
             font-size: clamp(11px, 0.625vw, 14px);
             font-weight: 400;
             padding-left: 4px;
@@ -121,7 +121,7 @@
       .label {
         margin-bottom: 4px;
         color: $blackColor;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         font-size: clamp(12px, 0.72vw, 15px);
         font-weight: 500;
       }
@@ -153,60 +153,60 @@
     grid-template-columns: 70px auto;
     align-items: flex-start;
     gap: 1rem;
-    .fieldGroup{
-        display: flex;
-        flex-direction: column;
-        
-        .label {
-          margin-bottom: 4px;
-          color: rgba(0, 0, 0, 0.7);
-          font-family: "Inter";
-          font-size: clamp(11px, 0.625vw, 14px);
-          font-weight: 400;
-          margin-top:1.2rem ;
-        }
+    .fieldGroup {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        margin-bottom: 4px;
+        color: rgba(0, 0, 0, 0.7);
+        font-family: $fontPrimary;
+        font-size: clamp(11px, 0.625vw, 14px);
+        font-weight: 400;
+        margin-top: 1.2rem;
+      }
       .settingsTextFeild {
-          width: 50%;
-          .MuiInputBase-root {
-            background: $whiteColor;
-            color: #6a718599;
-            font-weight: 400;
-            font-size: 13.5px;
-            box-sizing: border-box;
-            border-radius: 3;
-            height: 30px;
-            border: 1px solid $textFeildStroke;
-            font-family: "Inter", sans-serif;
-            font-size: clamp(0.75em, 0.72vw, 1.1em);
-  
-            fieldset {
-              border: 0 !important;
-            }
-            .MuiTypography-root {
-              font-size: clamp(0.75em, 0.72vw, 1.1em);
-            }
-          }
-        }
-  
-        .settingSelectFeild {
-          width: 100%;
-          .MuiSelect-select {
-            width: 100%;
-            font-family: "Inter", sans-serif;
-            padding: 3px 11px !important;
-            font-size: clamp(0.75em, 0.72vw, 1.1em);
-            border: 1px solid $textFeildStroke;
-            border-radius: 4px;
-            color: #6a718599;
-          }
-          .MuiSvgIcon-root {
-            width: 0.9em;
-          }
+        width: 50%;
+        .MuiInputBase-root {
+          background: $whiteColor;
+          color: #6a718599;
+          font-weight: 400;
+          font-size: 13.5px;
+          box-sizing: border-box;
+          border-radius: 3;
+          height: 30px;
+          border: 1px solid $textFeildStroke;
+          font-family: $fontPrimary;
+          font-size: clamp(0.75em, 0.72vw, 1.1em);
+
           fieldset {
-            border: 0;
-            border-radius: 4px;
+            border: 0 !important;
+          }
+          .MuiTypography-root {
+            font-size: clamp(0.75em, 0.72vw, 1.1em);
           }
         }
+      }
+
+      .settingSelectFeild {
+        width: 100%;
+        .MuiSelect-select {
+          width: 100%;
+          font-family: $fontPrimary;
+          padding: 3px 11px !important;
+          font-size: clamp(0.75em, 0.72vw, 1.1em);
+          border: 1px solid $textFeildStroke;
+          border-radius: 4px;
+          color: #6a718599;
+        }
+        .MuiSvgIcon-root {
+          width: 0.9em;
+        }
+        fieldset {
+          border: 0;
+          border-radius: 4px;
+        }
+      }
     }
   }
 }
@@ -222,7 +222,7 @@
   .btn {
     border-radius: 8px;
     text-transform: capitalize;
-    font-family: "Inter";
+    font-family: $fontPrimary;
     font-size: clamp(13px, 0.83vw, 18px);
     font-weight: 500;
     box-shadow: none;

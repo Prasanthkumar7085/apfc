@@ -35,7 +35,7 @@
         gap: 0.5rem;
         h6 {
           color: $blackColor;
-          font-family: "Inter";
+          font-family: $fontPrimary;
           font-size: clamp(14px, 0.93vw, 19px);
           font-weight: 400;
           line-height: 100%;
@@ -47,7 +47,7 @@
         gap: 0.5rem;
         p {
           color: $greenColor;
-          font-family: "Inter";
+          font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 400;
         }
@@ -57,7 +57,7 @@
       .tabBtn {
         text-transform: capitalize;
         color: $blackColor;
-        font-family: "Inter";
+        font-family: $fontPrimary;
         font-size: clamp(13px, 0.83vw, 17px);
         font-weight: 400;
         padding: 0;
@@ -90,11 +90,14 @@
         margin: 0;
         padding: 0.6rem 0.5rem;
         color: $blackColor;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         font-size: clamp(11px, 0.72vw, 15px);
         font-weight: 500;
         letter-spacing: 0;
         border-bottom: 1px solid #d5d9dd;
+        &:not(:first-child) {
+          padding: 1rem 0.5rem 0.6rem !important;
+        }
       }
       .fieldGroup {
         padding: 0 0.5rem;
@@ -105,22 +108,40 @@
         .label {
           margin-bottom: 4px;
           color: #000000b3;
-          font-family: "Inter";
+          font-family: $fontPrimary;
           font-size: clamp(10px, 0.625vw, 14px);
           font-weight: 400;
         }
-        
+
         .value {
           color: #35353d;
-          font-family: "Inter";
+          font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 400;
         }
+        .passwordSetting {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          .settingsTextFeild {
+            width: 40% !important;
+          }
+          .resetPasswordTxt {
+            color: $secondaryColor;
+            font-family: $fontPrimary;
+            font-size: clamp(12px, 0.72vw, 15px);
+            font-weight: 400;
+            letter-spacing: 0;
+          }
+        }
       }
       .grp {
-          display: grid;
-          grid-template-columns:  repeat(4, 1fr);
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        &.timingSettings {
+          grid-template-columns: 100px auto !important;
         }
+      }
     }
   }
 }

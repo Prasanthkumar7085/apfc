@@ -22,19 +22,13 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
             {setting.name == "password" ? (
               <>
                 <label className="label">{setting.label}</label>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
+                <div className="passwordSetting">
                   <PasswordFormFields
                     name={setting.name}
                     value={levelBasedData}
                   />
 
-                  <Typography variant="caption">Reset password</Typography>
+                  <Typography className="resetPasswordTxt">Reset password</Typography>
                 </div>
               </>
             ) : (
@@ -94,7 +88,7 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
         </section>
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Timing </h3>
-          <div className="grp">
+          <div className="grp timingSettings">
 
           {TimingSettings.map(renderField)}
           </div>

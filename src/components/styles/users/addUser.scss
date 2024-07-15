@@ -5,8 +5,8 @@ $inputHoverBorder: #2f80ed;
 $inputTxtColor: #bdbdbd;
 
 @mixin flex-column {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 #addUser {
@@ -23,7 +23,7 @@ $inputTxtColor: #bdbdbd;
     border-radius: 4px;
     border: 1px solid $backBtnCOlor;
     color: $backBtnCOlor;
-    font-family: "Inter", sans-serif;
+    font-family: $fontPrimary;
     font-size: clamp(11px, 0.72vw, 15px);
     font-weight: 500;
     text-transform: capitalize;
@@ -36,7 +36,7 @@ $inputTxtColor: #bdbdbd;
     gap: 5px;
     label {
       color: $labelColor;
-      font-family: "Inter";
+      font-family: $fontPrimary;
       font-size: clamp(12px, 0.72vw, 15px);
       font-weight: 500;
       span {
@@ -53,7 +53,7 @@ $inputTxtColor: #bdbdbd;
         border-radius: 3;
         height: 32px;
         border: 1px solid $inputBorderColor;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
 
         fieldset {
@@ -74,7 +74,7 @@ $inputTxtColor: #bdbdbd;
     .selectComponent {
       .MuiSelect-select {
         width: 100%;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         padding: 4px 11px !important;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
         border: 1px solid $inputBorderColor;
@@ -102,16 +102,15 @@ $inputTxtColor: #bdbdbd;
       }
     }
   }
-   .addUserBtn {
-      border-radius: 6px;
-      background: $primaryColor;
-      text-transform: capitalize;
-      color: $whiteColor;
-      font-family: "Inter", sans-serif;
-      font-size: clamp(12px, 0.72vw, 15px);
-      font-weight: 500;
-      padding: 6px 20px;
-      box-shadow: none;
-
-    }
+  .addUserBtn {
+    border-radius: 6px;
+    background: $primaryColor;
+    text-transform: capitalize;
+    color: $whiteColor;
+    font-family: $fontPrimary;
+    font-size: clamp(12px, 0.72vw, 15px);
+    font-weight: 500;
+    padding: 6px 20px;
+    box-shadow: none;
+  }
 }
