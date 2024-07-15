@@ -127,6 +127,10 @@ const DeviceSection = ({
                         src="/iconsetting.svg"
                         height={25}
                         width={25}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          router.push(`/devices/${item?.id}/view-settings`)
+                        }}
                       />
                     </div>
                   </div>

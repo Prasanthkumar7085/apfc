@@ -18,7 +18,7 @@ const ListUsers = () => {
     const router = useRouter();
     const pathname = usePathname();
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [dialogOpen, setDialogOpen] = useState(false);
     const [userId, setUserId] = useState<any>();
     const [usersData, setUsersData] = useState<any[]>([]);
