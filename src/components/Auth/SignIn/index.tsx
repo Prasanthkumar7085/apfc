@@ -91,7 +91,7 @@ const LoginPage = () => {
               </h2>
               <div className="formsBlock">
                 <div className="InputFeild">
-                  <label className="formLabel">User Name</label>
+                  <label className="formLabel">Email</label>
                   <TextField
                     autoComplete="new-email"
                     variant="outlined"
