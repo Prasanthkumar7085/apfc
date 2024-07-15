@@ -105,7 +105,7 @@ const SingleDeviceSettings = () => {
     try {
       const response = await getSigleDeviceAPI(id);
       setDeviceData(response?.data);
-      dispatch(setSingleDevice(response?.data));
+      // dispatch(setSingleDevice(response?.data));
     } catch (err) {
       console.error(err);
     } finally {
