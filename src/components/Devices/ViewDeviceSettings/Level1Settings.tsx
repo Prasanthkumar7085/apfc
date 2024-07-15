@@ -19,24 +19,27 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
       case "password":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">{setting.label}</label>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              {setting.name == "password" ? (
-                <PasswordFormFields
-                  name={setting.name}
-                  value={levelBasedData}
-                />
-              ) : (
-                ""
-              )}
-              <Typography variant="caption">Reset password</Typography>
-            </div>
+            {setting.name == "password" ? (
+              <>
+                <label className="label">{setting.label}</label>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <PasswordFormFields
+                    name={setting.name}
+                    value={levelBasedData}
+                  />
+
+                  <Typography variant="caption">Reset password</Typography>
+                </div>
+              </>
+            ) : (
+              ""
+            )}
           </div>
         );
       default:
