@@ -16,7 +16,6 @@ const Level4Settings = ({ levelBasedData }: any) => {
       default:
         return (
           <div className="fieldGroup levelFanFeild" key={setting.name}>
-            {/* <label className="label">{setting.label}</label> */}
             {levelBasedData[setting?.name] == "ON" ||
               levelBasedData[setting?.name] == "OFF" ? (
               <Typography
@@ -38,7 +37,9 @@ const Level4Settings = ({ levelBasedData }: any) => {
                           {levelBasedData[setting?.name] + " C" || "--"}
                         </Typography>
                       </div>
-                    : ""
+                      : <Typography className="value">
+                        {levelBasedData[setting?.name] || "--"}
+                      </Typography>
                 }
             </>
             )}
