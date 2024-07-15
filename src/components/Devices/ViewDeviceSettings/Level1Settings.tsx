@@ -12,7 +12,6 @@ import {
 } from "@/lib/constants/addDevicesConstants";
 import { resetDevicePasswordAPI } from "@/services/devicesAPIs";
 import { Typography } from "@mui/material";
-import { assert } from "console";
 
 const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
   const renderField = (setting: any) => {
@@ -44,7 +43,7 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
         return (
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
-            <Typography variant="caption">
+            <Typography className="value">
               {levelBasedData[setting?.name] || "--"}
             </Typography>
           </div>
@@ -64,13 +63,16 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
     // }
   };
   return (
-    <div>
+    <div id="levelOne">
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Authetication Settings</h3>
           {AuthenticationSettings.map(renderField)}
           <h3 className="eachBlockHeading">Device Configuration</h3>
+          <div className="grp">
+
           {DeviceConfiguration.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">
             Current Transformer (CT) Settings
           </h3>

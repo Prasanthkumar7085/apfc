@@ -19,6 +19,7 @@
 }
 
 #viewSettings {
+  width: 95%;
   .headerBlock {
     width: 100%;
     display: flex;
@@ -69,7 +70,52 @@
       }
     }
   }
-  .tab-content {
-    
+}
+#levelOne {
+  .form {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+    .eachFormContainer {
+      flex: 0 1 49%;
+      background-color: $whiteColor;
+      padding: 0 0.5rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      box-sizing: border-box;
+      border: 1px solid #dfdfdf;
+
+      .eachBlockHeading {
+        margin: 0;
+        padding: 0.6rem 0.5rem;
+        color: $blackColor;
+        font-family: "Inter", sans-serif;
+        font-size: clamp(12px, 0.72vw, 15px);
+        font-weight: 500;
+        letter-spacing: 0;
+        border-bottom: 1px solid #d5d9dd;
+      }
+      .fieldGroup {
+        padding: 0 0.5rem;
+        margin-top: 9.6px;
+        display: flex;
+        flex-direction: column;
+
+        .label {
+          margin-bottom: 4px;
+          color: #000000b3;
+          font-family: "Inter";
+          font-size: clamp(11px, 0.625vw, 14px);
+          font-weight: 400;
+        }
+        .value {
+          color: #35353d;
+          font-family: "Inter";
+          font-size: clamp(13px, 0.83vw, 16px);
+          font-weight: 400;
+        }
+      }
+    }
   }
 }
