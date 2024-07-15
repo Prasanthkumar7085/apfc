@@ -14,6 +14,7 @@ $inputTxtColor: #bdbdbd;
   background-color: $whiteColor;
   border-radius: 8px;
   width: 35%;
+  max-width: 500px;
   margin: 0 auto;
   box-shadow: none;
   box-sizing: border-box;
@@ -112,5 +113,28 @@ $inputTxtColor: #bdbdbd;
     font-weight: 500;
     padding: 6px 20px;
     box-shadow: none;
+  }
+}
+
+#addSettingstepper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  .eachStep {
+    background-color: $whiteColor;
+    border-radius: 8px;
+    border: 1px solid #c1c9d2;
+    color: #3c4257;
+    font-family: $fontPrimary;
+    font-size: clamp(12px, 0.72vw, 16px);
+    font-weight: 500;
+    padding: 0.625rem;
+    text-align: left;
+    box-sizing: border-box;
+    min-width: 110px;
+    &.active {
+      color: $primaryColor !important;
+      border: 1px solid $primaryColor;
+    }
   }
 }

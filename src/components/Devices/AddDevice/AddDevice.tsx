@@ -85,7 +85,7 @@ const AddDevice = () => {
 
       <div className="feildBlock">
         <label className="label">
-          Device Location <span>*</span>
+          Device Location 
         </label>
         <TextField
           className="textFeild"

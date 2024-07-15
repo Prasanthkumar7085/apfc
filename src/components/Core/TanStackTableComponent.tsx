@@ -228,29 +228,20 @@ const TanStackTableComponent: FC<pageProps> = ({
                         ) : !loading ? (
                             <tr>
                                 <td colSpan={10}>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            flexDirection: "column",
-                                            alignItems: "center"
-                                        }}
-                                    >
-                                        <Image
-                                            src="/No data Image.svg"
-                                            alt=""
-                                            height={300}
-                                            width={300}
-                                        />
-                                        <Button
-                                            className="addUserBtn"
-                                            variant='outlined'
-                                            onClick={() => router.push('/users/add')}
-                                            startIcon={<AddIcon />}
-                                        >
-                                            Add New User
-                                        </Button>
-                                    </div>
+                                   
+                                        <div className="noDataBlock">
+                                            <Image src="/No data Image.svg" alt="" height={300} width={300} />
+                                            
+                                            <Button
+                                                className="addUserBtn"
+                                                variant="outlined"
+                                                onClick={() => router.push('/users/add')}
+                                                startIcon={<AddIcon />}
+                                                sx={{marginTop:"2rem"}}
+                                            >
+                                                Add New User
+                                            </Button>
+                                        </div>
                                 </td>
                             </tr>
                         ) : (
