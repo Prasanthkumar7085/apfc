@@ -25,9 +25,10 @@ import Level2Settings from "./Level2Settings";
 import Level3Settings from "./Level3Settings";
 import Level4Settings from "./Level4Settings";
 import LoadingComponent from "@/components/Core/LoadingComponent";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSingleDevice } from "@/redux/Modules/userlogin";
 import Image from "next/image";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -54,9 +55,13 @@ const SingleDeviceSettings = () => {
   const router = useRouter();
   const pathName = usePathname();
 
+  const deviceName = useSelector(
+    (state: any) => state?.auth?.singleDevice
+  );
+
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
-    router.push(`${pathName}?state=Level${newValue + 1}`);
+    router.replace(`${pathName}?state=Level${newValue + 1}`);
   };
 
   const { id } = useParams();
@@ -138,13 +143,34 @@ const SingleDeviceSettings = () => {
         </Tabs>
         <div className="userInfo">
           <div className="userProfile">
-            <Avatar alt="Aasia Ramanathan" sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }} />
-            <Typography variant="h6">Aasia Ramanathan</Typography>
+            <Avatar alt="Aasia Ramanathan" sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }} >
+              {deviceName?.user_full_name?.[0].toUpperCase() || "--"}
+            </Avatar>
+            <Typography variant="h6">
+              {capitalizeFirstTwoWords(deviceName?.user_full_name) ||
+                "--"}
+            </Typography>
           </div>
           <div className="status">
             <Image alt="" src="/Completed-icon.svg" width={13} height={13} />
 
-            <Typography >Active</Typography>
+            <Typography >{deviceName?.status == "ACTIVE" ? "Active" : "Inactive"}</Typography>
+          </div>
+          <div
+            title="Edit Device"
+            style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+            onClick={() => {
+              router.push(`/devices/${deviceName.id}/update-settings?state=${params.get("state")}`)
+            }}
+          >
+            <Image
+              alt=""
+              src="/edit-user.svg"
+              width={16}
+              height={16}
+              style={{ color: "red" }}
+            />
+            <p>Edit</p>
           </div>
         </div>
       </div>
