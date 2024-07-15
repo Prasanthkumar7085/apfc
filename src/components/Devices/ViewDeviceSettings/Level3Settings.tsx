@@ -16,9 +16,22 @@ const Level3Settings = ({ levelBasedData }: any) => {
         return (
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
-            <Typography className="value">
-              {levelBasedData[setting?.name] || "--"}
-            </Typography>
+            {levelBasedData[setting?.name] == "ON" ||
+              levelBasedData[setting?.name] == "OFF" ? (
+              <Typography
+                className={
+                  levelBasedData[setting?.name] == "ON"
+                    ? "value radioOn"
+                    : "value radioOff"
+                }
+              >
+                {levelBasedData[setting?.name] || "--"}
+              </Typography>
+            ) : (
+              <Typography className="value ">
+                {levelBasedData[setting?.name] || "--"}
+              </Typography>
+            )}
           </div>
         );
     }

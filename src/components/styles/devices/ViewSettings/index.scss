@@ -85,19 +85,19 @@
       margin-bottom: 1rem;
       box-sizing: border-box;
       border: 1px solid #dfdfdf;
-     height: fit-content ;
+      height: fit-content;
 
       .eachBlockHeading {
         margin: 0;
-        padding: 0.8rem 0.5rem 0.3rem;
+        padding: 0.8rem 0.5rem 0.4rem;
         color: $blackColor;
         font-family: $fontPrimary;
-        font-size: clamp(11px, 0.72vw, 15px);
+        font-size: clamp(11.5px, 0.72vw, 15px);
         font-weight: 500;
         letter-spacing: 0;
         border-bottom: 1px solid #d5d9dd;
         &:not(:first-child) {
-          padding: 1rem 0.5rem 0.3rem !important;
+          padding: 1rem 0.5rem 0.4rem !important;
         }
       }
       .fieldGroup {
@@ -119,6 +119,12 @@
           font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 400;
+          &.radioOff {
+            color: $secondaryColor !important;
+          }
+          &.radioOn {
+            color: $greenColor;
+          }
         }
         .passwordSetting {
           display: flex;
@@ -135,14 +141,74 @@
             letter-spacing: 0;
           }
         }
+        &.levelFanFeild {
+          margin: 0;
+
+          .radioOff {
+            position: relative;
+            padding-left: 13px;
+            &::before {
+              content: "";
+              height: 6px;
+              width: 6px;
+              border-radius: 100%;
+              background-color: $secondaryColor;
+              position: absolute;
+              top: calc(50% - 3px);
+              left: 3px;
+            }
+          }
+          .radioOn {
+            color: $greenColor;
+            position: relative;
+            padding-left: 13px;
+            &::before {
+              content: "";
+              height: 6px;
+              width: 6px;
+              border-radius: 100%;
+              background-color: $greenColor;
+              position: absolute;
+              top: calc(50% - 3px);
+              left: 3px;
+            }
+          }
+        }
+      }
+      .fanSettings {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        padding: 1rem 0.5rem 0.3rem;
+        .levelFanGrp {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          .tempBlock {
+            display: flex;
+            align-items: center;
+          }
+        }
       }
       .grp {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        grid-gap: 0.5rem 2rem;
         &.timingSettings {
           grid-template-columns: 100px auto !important;
         }
       }
     }
   }
+}
+
+.MuiTooltip-tooltip {
+  background-color: $whiteColor !important;
+  color: $blackColor !important;
+  font-weight: 500;
+  box-shadow: 0px 0px 10px #e6e4e4;
+}
+.MuiTooltip-arrow {
+  color: #e6e4e4;
 }

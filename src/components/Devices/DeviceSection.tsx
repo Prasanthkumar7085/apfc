@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import styles from "./DeviceSection.module.css";
-import { Avatar, Button, MenuItem, Stack, Tooltip } from "@mui/material";
+import { Avatar, Button, MenuItem, Stack, Tooltip, useTheme } from "@mui/material";
 import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
 import {
@@ -24,6 +24,7 @@ const DeviceSection = ({
   const { id } = useParams();
   const router = useRouter();
   const pathname = usePathname();
+  const theme = useTheme();
 
   const [dialogOpen, setDialogOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
@@ -95,12 +96,11 @@ const DeviceSection = ({
                         style={{ cursor: "pointer" }}
                       >
                         <Image alt="" src="/icondot.svg" height={5} width={5} />
-                        {/* <p className="statusTxt">{item?.status == "ACTIVE" ? "Online" : "Ofline"}</p> */}
                         <Tooltip
                           arrow
                           title={
-                            <span style={{ fontSize: "16px" }}>
-                              <MenuItem
+                            <span>
+                              <MenuItem className="menuItem"
                                 disabled={item?.status == "ACTIVE"}
                                 onClick={() => {
                                   updateDeviceStatus(item.id, "ACTIVE");
@@ -108,19 +108,26 @@ const DeviceSection = ({
                               >
                                 Online
                               </MenuItem>
-                              <MenuItem
+                              <MenuItem className="menuItem"
                                 disabled={item?.status == "INACTIVE"}
                                 onClick={() => {
                                   updateDeviceStatus(item.id, "INACTIVE");
                                 }}
                               >
-                                Ofline
+                                Offline
                               </MenuItem>
                             </span>
                           }
+                          sx={{
+                            backgroundColor: 'white',
+                            color: 'black', // change this to your desired text color
+                            '& .MuiTooltip-arrow': {
+                              color: 'white', // changes the arrow color
+                            },
+                          }}
                         >
                           <span className="statusTxt">
-                            {item?.status == "ACTIVE" ? "Online" : "Ofline"}
+                            {item?.status == "ACTIVE" ? "Online" : "Offline"}
                           </span>
                         </Tooltip>
                       </div>
