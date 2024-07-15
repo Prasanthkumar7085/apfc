@@ -16,7 +16,7 @@ const SingleUserView = () => {
     const params = useParams();
     const router = useRouter();
 
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [usersData, setUsersData] = useState<any>({});
     const [data, setData] = useState<any[]>([]);
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -99,10 +99,10 @@ const SingleUserView = () => {
                     !loading ? (
                         <div className="noDataBlock" >
                             <Image src="/No data Image.svg" alt="" width={200} height={200} />
-                                <div className="textBlock">
-                                    <p className="noDataTxt">{"It looks like you haven't added any devices yet."}</p>
-                                    <p className="noDataTxt">{"add a new device to monitor your agricultural operations."}</p>
-                                </div>
+                            <div className="textBlock">
+                                <p className="noDataTxt">{"It looks like you haven't added any devices yet."}</p>
+                                <p className="noDataTxt">{"add a new device to monitor your agricultural operations."}</p>
+                            </div>
                             <Button
                                 className="addUserBtn"
                                 variant='outlined'
