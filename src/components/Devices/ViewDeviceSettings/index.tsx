@@ -142,15 +142,19 @@ const SingleDeviceSettings = () => {
           <Tab label="Fan Settings" className="tabBtn" />
         </Tabs>
         <div className="userInfo">
-          <div className="userProfile">
-            <Avatar alt="Aasia Ramanathan" sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }} >
-              {deviceName?.user_full_name?.[0].toUpperCase() || "--"}
-            </Avatar>
-            <Typography variant="h6">
-              {capitalizeFirstTwoWords(deviceName?.user_full_name) ||
-                "--"}
-            </Typography>
-          </div>
+          {deviceName?.user_full_name ? (
+            <div className="userProfile">
+              <Avatar alt="Aasia Ramanathan" sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }} >
+                {deviceName?.user_full_name?.[0].toUpperCase() || "--"}
+              </Avatar>
+              <Typography variant="h6">
+                {capitalizeFirstTwoWords(deviceName?.user_full_name) ||
+                  "--"}
+              </Typography>
+            </div>
+          ) : (
+            ""
+          )}
           <div className="status">
             <Image alt="" src="/Completed-icon.svg" width={13} height={13} />
 

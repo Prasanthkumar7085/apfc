@@ -89,7 +89,7 @@ const HeadNavbar = () => {
             className="backBtn"
             onClick={() => {
               router.back();
-              // dispatch(deleteSingleUser());
+              dispatch(deleteSingleUser());
             }}
             startIcon={
               <Image src="/users/back-icon.svg" alt="" width={13} height={13} />
@@ -108,12 +108,12 @@ const HeadNavbar = () => {
             variant="outlined"
             className="backBtn"
             onClick={() => {
-              // if (path == `/devices/${param?.id}/update-settings` || path.includes(`devices/${param?.id}/view-settings`)) {
-              //   router.push('/devices');
-              // } else {
-              router.back();
-              // }
-              // dispatch(deleteSingleDevice());
+              if (path == `/devices/${param?.id}/update-settings` || path.includes(`devices/${param?.id}/view-settings`)) {
+                router.push('/devices');
+              } else {
+                router.back();
+              }
+              dispatch(deleteSingleDevice());
             }}
             startIcon={
               <Image src="/users/back-icon.svg" alt="" width={13} height={13} />

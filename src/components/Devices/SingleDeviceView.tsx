@@ -57,7 +57,7 @@ const SingleDeviceView = () => {
                       <div className="eachBodyInfo" key={index}>
                         <label>{capitalizeAndRemoveUnderscore(item)}</label>
                         <Typography>
-                          {deviceData.voltage_measurements[item] || "--"}
+                          {deviceData.voltage_measurements[item].toFixed(2) + " " + "V" || "--"}
                         </Typography>
                       </div>
                     ))}
@@ -110,7 +110,7 @@ const SingleDeviceView = () => {
                     <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.power_measurements[item] || "--"}
+                      {deviceData?.power_measurements[item].toFixed(2) || "--"}
                     </Typography>
                   </div>
                 ))}
@@ -159,7 +159,7 @@ const SingleDeviceView = () => {
                     <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.bank_values[item] + " " + "Kvar" || "--"}
+                      {deviceData?.bank_values[item].toFixed(2) + " " + "Kvar" || "--"}
                     </Typography>
                   </div>
                 ))}

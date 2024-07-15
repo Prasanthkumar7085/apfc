@@ -1,5 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
-import { Avatar, Button, MenuItem, Tooltip, } from "@mui/material";
+import { Avatar, Button, MenuItem, Tooltip, Typography, } from "@mui/material";
 import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
 import {
@@ -194,13 +194,17 @@ const DeviceSection = ({
 
                 <div className="temparatureInfo">
                   <div className="tempItems">
-                    <Image
+                    {/* <Image
                       className="icontemperature"
                       alt=""
                       src="/icontemperature.svg"
                       height={24}
                       width={50}
-                    />
+                    /> */}
+                    <Image src="/devices/temparature.svg" alt="" height={24} width={20} />
+                    <Typography>
+                      {item?.temperature ? item?.temperature + " C" : "--"}
+                    </Typography>
                     {item?.under_compensate_error ===
                       1 ? (
                       <div className="errorBlock">
@@ -368,7 +372,7 @@ const DeviceSection = ({
             );
           })
         ) : !loading ? (
-            <div className="noDataBlock" style={{ height:"calc(100vh - 250px)"}}>
+          <div className="noDataBlock" style={{ height: "calc(100vh - 250px)" }}>
             <Image src="/No data Image.svg" alt="" height={300} width={300} />
             <div className="textBlock">
               <p className="noDataTxt">
