@@ -5,6 +5,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import { Grid, Typography, Paper, Button } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const SingleDeviceView = () => {
   const params = useParams();

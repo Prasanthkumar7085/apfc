@@ -7,6 +7,7 @@ import LoadingComponent from "../Core/LoadingComponent";
 import { assignUserAPI, getAllListUsersAPI } from "@/services/devicesAPIs";
 import Image from "next/image";
 import { toast } from "sonner";
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 
 const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
     const router = useRouter();
@@ -61,7 +62,7 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
             <DialogTitle className="dialogHeader">
                 <span className="dialogHeading">
 
-                Select User
+                    Select User
                 </span>
                 <IconButton
                     className="closeBtn"
@@ -71,7 +72,7 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                         setSearch("")
                         setSelectedUser({});
                     }}
-                   
+
                 >
                     <CloseIcon />
                 </IconButton>
@@ -102,12 +103,12 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                             selected={user === selectedUser}
                         >
                             <ListItemIcon className="radioBtn">
-                                <Radio 
+                                <Radio
                                     checked={user === selectedUser}
                                     onChange={() => setSelectedUser(user)}
                                 />
                             </ListItemIcon>
-                            <ListItemText className="listText" primary={user?.full_name} />
+                            <ListItemText className="listText" primary={capitalizeFirstTwoWords(user?.full_name)} />
                         </ListItem>
                     ))}
                 </List>

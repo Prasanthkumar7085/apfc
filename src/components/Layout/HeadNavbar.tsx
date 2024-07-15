@@ -1,3 +1,4 @@
+import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
 import { removeUserDetails } from "@/redux/Modules/userlogin";
 import {
@@ -136,7 +137,7 @@ const HeadNavbar = () => {
             {userDetails?.full_name?.slice(0, 1).toUpperCase()}
           </Avatar>
           <div className="profileName">
-            <h4 className="profile">{userDetails?.full_name}</h4>
+            <h4 className="profile">{capitalizeFirstTwoWords(userDetails?.full_name)}</h4>
             <p className="designation">{userDetails?.user_type}</p>
           </div>
           <Image className="icon" alt="" src="/icon1.svg" height={12} width={12} style={{ marginTop: "2px" }} />
