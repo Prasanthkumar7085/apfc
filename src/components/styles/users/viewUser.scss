@@ -129,6 +129,10 @@ $avatharColor: #ff7a00;
     svg {
       font-size: 16px;
     }
+    &:hover {
+      border: 1px solid $primaryColor;
+      color: $primaryColor;
+    }
   }
 }
 .devicesGrp {

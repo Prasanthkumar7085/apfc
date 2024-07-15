@@ -272,7 +272,7 @@ const DeviceSection = ({
             );
           })
         ) : !loading ? (
-          <div className="noDataBlock">
+            <div className="noDataBlock" style={{ height:"calc(100vh - 250px)"}}>
             <Image src="/No data Image.svg" alt="" height={300} width={300} />
             <div className="textBlock">
               <p className="noDataTxt">

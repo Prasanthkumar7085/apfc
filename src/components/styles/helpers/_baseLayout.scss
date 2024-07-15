@@ -1,4 +1,4 @@
-$baseLayoutBackground:$whiteColor;
+$baseLayoutBackground: $whiteColor;
 $backBtnCOlor: #e47078;
 
 .mainBodyContainer {
@@ -13,6 +13,8 @@ $backBtnCOlor: #e47078;
     height: 100vh;
     overflow-x: hidden;
     background: $baseLayoutBackground;
+        height: calc(100vh - 60px);
+   
 
     .mainChlidren {
       width: 100%;
@@ -32,4 +34,8 @@ $backBtnCOlor: #e47078;
   font-weight: 500;
   text-transform: capitalize;
   padding: 1px 2px 1px 6px;
+  &:hover {
+    border: 1px solid $backBtnCOlor;
+    color: $backBtnCOlor;
+  }
 }
