@@ -9,9 +9,7 @@ import { setSingleDevice } from "@/redux/Modules/userlogin";
 
 const SingleDeviceView = () => {
   const params = useParams();
-  const router = useRouter();
   const dispatch = useDispatch();
-
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState<any>({});
 
