@@ -13,7 +13,7 @@ export const AuthenticationSettings = [
 ];
 
 export const DeviceConfiguration = [
-  { label: "Level Indication", type: "text", name: "level_indication" },
+  // { label: "Level Indication", type: "text", name: "level_indication" },
   {
     label: "Network Selection",
     type: "select",
