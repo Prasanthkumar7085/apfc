@@ -1,6 +1,5 @@
 import AddIcon from "@mui/icons-material/Add";
-import styles from "./DeviceSection.module.css";
-import { Avatar, Button, MenuItem, Stack, Tooltip, useTheme } from "@mui/material";
+import { Avatar, Button, MenuItem, Tooltip, } from "@mui/material";
 import { useEffect, useState } from "react";
 import AssignUserDialog from "./AssignUserDialog";
 import {
@@ -24,8 +23,6 @@ const DeviceSection = ({
   const { id } = useParams();
   const router = useRouter();
   const pathname = usePathname();
-  const theme = useTheme();
-
   const [dialogOpen, setDialogOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
   const [showLoading, setShowLoading] = useState(false);
@@ -92,10 +89,11 @@ const DeviceSection = ({
                     </h4>
                     <div className="settingsBlock">
                       <div
-                        className="deviceStatus"
+                        className={item?.status == "ACTIVE" ? "deviceStatus online" : "deviceStatus offline"}
                         style={{ cursor: "pointer" }}
                       >
-                        <Image alt="" src="/icondot.svg" height={5} width={5} />
+                        {item?.status == "ACTIVE" ? <Image alt="" src="/devices/icondot-online.svg" height={5} width={5} /> : <Image alt="" src="/devices/icondot-offline.svg" height={5} width={5} />}
+
                         <Tooltip
                           arrow
                           title={
@@ -118,15 +116,8 @@ const DeviceSection = ({
                               </MenuItem>
                             </span>
                           }
-                          sx={{
-                            backgroundColor: 'white',
-                            color: 'black', // change this to your desired text color
-                            '& .MuiTooltip-arrow': {
-                              color: 'white', // changes the arrow color
-                            },
-                          }}
                         >
-                          <span className="statusTxt">
+                          <span className= "statusTxt">
                             {item?.status == "ACTIVE" ? "Online" : "Offline"}
                           </span>
                         </Tooltip>
@@ -213,7 +204,7 @@ const DeviceSection = ({
                       width={50}
                     />
                     {item?.device_parameters?.errors?.under_compensate_error ===
-                    true ? (
+                      true ? (
                       <div className="errorBlock">
                         <Image
                           alt=""

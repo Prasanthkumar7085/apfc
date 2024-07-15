@@ -161,12 +161,18 @@ $avatharColor: #ff7a00;
         gap: 1rem;
         .deviceStatus {
           border-radius: 4px;
-          background: #45a8451a;
           padding: 6px 10px;
           gap: 4px;
           @include align-center();
-          .statusTxt {
+          &.online {
+            background-color: #45a8451a;
             color: $primaryColor;
+          }
+          &.offline {
+            color: $secondaryColor !important;
+            background-color: #d948411a;
+          }
+          .statusTxt {
             font-size: clamp(13px, 0.83vw, 16px);
             font-weight: 500;
             line-height: 100%;
