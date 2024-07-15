@@ -62,8 +62,9 @@ const SingleUserView = () => {
                         {usersData?.full_name?.[0].toUpperCase()}
                     </Avatar>
                     <h4 className="profileName">{capitalizeFirstTwoWords(usersData?.full_name)}</h4>
-                    <div className="status">
-                        <Image alt="" src="/Completed-icon.svg" width={12} height={12} />
+                    <div className={usersData?.status == "ACTIVE" ? "status active" : "status inactive"}>
+                        {usersData?.status == "ACTIVE" ?
+                            <Image alt="" src="/devices/icondot-online.svg" width={8} height={8} /> : <Image alt="" src="/devices/icondot-offline.svg" width={8} height={8} />}
                         <span>{usersData?.status?.charAt(0).toUpperCase() + usersData?.status?.slice(1)}    </span>
                     </div>
 

@@ -156,11 +156,12 @@ const SingleDeviceSettings = () => {
             ""
           )}
           <div className="status">
-            <Image alt="" src="/Completed-icon.svg" width={13} height={13} />
+            {deviceName?.status == "ACTIVE" ?
+              <Image alt="" src="/devices/icondot-online.svg" width={8} height={8} /> : <Image alt="" src="/devices/icondot-offline.svg" width={8} height={8} />}
 
-            <Typography >{deviceName?.status == "ACTIVE" ? "Active" : "Inactive"}</Typography>
+            <Typography className={deviceName?.status == "ACTIVE" ? "active" : "inactive"} >{deviceName?.status == "ACTIVE" ? "Active" : "Inactive"}</Typography>
           </div>
-          <div
+          <div className="backBtn editbtn"
             title="Edit Device"
             style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
             onClick={() => {
@@ -170,11 +171,11 @@ const SingleDeviceSettings = () => {
             <Image
               alt=""
               src="/edit-user.svg"
-              width={16}
-              height={16}
-              style={{ color: "red" }}
+              width={10}
+              height={10}
+           
             />
-            <p>Edit</p>
+            <span>Edit</span>
           </div>
         </div>
       </div>

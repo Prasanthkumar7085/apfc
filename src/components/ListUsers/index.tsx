@@ -123,8 +123,8 @@ const ListUsers = () => {
                     <Tooltip
                         arrow
                         title={
-                            <span style={{ fontSize: "16px" }}>
-                                <MenuItem
+                            <span >
+                                <MenuItem className="menuItem"
                                     disabled={info.getValue() == "ACTIVE"}
                                     onClick={() => {
                                         updateUserStatus(info?.row?.original?.id, "ACTIVE");
@@ -132,7 +132,7 @@ const ListUsers = () => {
                                 >
                                     Active
                                 </MenuItem>
-                                <MenuItem
+                                <MenuItem className="menuItem"
                                     disabled={info.getValue() == "INACTIVE"}
                                     onClick={() => {
                                         updateUserStatus(info?.row?.original?.id, "INACTIVE");
@@ -143,7 +143,7 @@ const ListUsers = () => {
                             </span>
                         }
                     >
-                        <span className={value === "active" ? "status inactive" : "status active"} style={{ cursor: "pointer" }}>{capitalizedValue}</span>
+                        <span className={value === "INACTIVE" ? "status inactive" : "status active"} style={{ cursor: "pointer" }}>{capitalizedValue}</span>
                     </Tooltip>
                 );
             },

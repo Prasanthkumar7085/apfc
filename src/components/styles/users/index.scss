@@ -23,13 +23,15 @@
         left: -4px;
       }
       &.active {
+        color: $greenColor;
         &::before {
-          background-color: green;
+          background-color: $greenColor;
         }
       }
       &.inactive {
+        color: $secondaryColor;
         &::before {
-          background-color: red;
+          background-color: $secondaryColor;
         }
       }
     }
