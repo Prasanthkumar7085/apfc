@@ -70,27 +70,39 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData }: any) => {
           {AuthenticationSettings.map(renderField)}
           <h3 className="eachBlockHeading">Device Configuration</h3>
           <div className="grp">
-
           {DeviceConfiguration.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">
             Current Transformer (CT) Settings
           </h3>
+          <div className="grp">
           {CurrentTransformerSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">
             Potential Transformer (PT) Settings
           </h3>
+          <div className="grp">
           {PotentialTransformerSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Compensation Settings</h3>
+          <div className="grp">
           {CompensationSettings.map(renderField)}
+          </div>
         </section>
         <section className="eachFormContainer">
-          <h3 className="eachBlockHeading">Timing Settings</h3>
+          <h3 className="eachBlockHeading">Timing </h3>
+          <div className="grp">
+
           {TimingSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
+          <div className="grp">
           {ControlSensitivitySettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Commnunication Settings</h3>
+          <div className="grp">
           {CommunicationSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Display Settings</h3>
           {DisplaySettings.map(renderField)}
         </section>
