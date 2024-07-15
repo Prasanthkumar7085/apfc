@@ -27,6 +27,27 @@ body {
     border-radius: 10px;
     background-color: transparent !important;
   }
+
+  /* Define a specific background color for autofilled inputs */
+  input:-webkit-autofill {
+    background-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+    height: 0px !important;
+    padding: 12px;
+  }
+
+  /* Maintain consistent style across different states */
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    background-color: white !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+    height: 0px !important;
+  }
 }
 
 @import "./helpers/sideNavbar";

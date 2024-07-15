@@ -119,3 +119,15 @@
   font-family: $fontPrimary;
   font-weight: 400;
 }
+.profileMenuBlock {
+  margin-top: 40px;
+  .MuiPaper-root {
+    box-shadow: none;
+    border: 1px solid #cecece;
+    border-radius: 4px;
+    padding-inline: 1rem;
+    li {
+      padding: 0;
+    }
+  }
+}

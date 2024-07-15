@@ -132,7 +132,6 @@ const HeadNavbar = () => {
           onClick={handleOpenUserMenu}
           style={{ cursor: "pointer" }}
         >
-          {/* <Image alt="" src="/avatar@2x.png" height={30} width={30} /> */}
           <Avatar sx={{ bgcolor: "orange" }}>
             {userDetails?.full_name?.slice(0, 1).toUpperCase()}
           </Avatar>
@@ -144,15 +143,8 @@ const HeadNavbar = () => {
         </div>
       </div>
       <Menu
-        sx={{
-          mt: "45px",
-          "& .MuiPaper-root": {
-            boxShadow: "none",
-            border: "1px solid  #CECECE",
-            borderRadius: "8px",
-            paddingInline: "1rem",
-          },
-        }}
+        className="profileMenuBlock"
+       
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{
@@ -167,7 +159,7 @@ const HeadNavbar = () => {
         open={Boolean(anchorElUser)}
         onClose={handleCloseUserMenu}
       >
-        <MenuItem onClick={logout}>
+        <MenuItem className="menuItem" onClick={logout}>
           Log Out
         </MenuItem>
       </Menu>
