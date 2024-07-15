@@ -1,6 +1,7 @@
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
-import { removeUserDetails } from "@/redux/Modules/userlogin";
+import { deleteSingleDevice, removeUserDetails } from "@/redux/Modules/userlogin";
+import { getSigleDeviceAPI } from "@/services/devicesAPIs";
 import {
   Avatar,
   Button,
@@ -15,25 +16,32 @@ import {
 } from "@mui/material";
 import Cookies from "js-cookie";
 import Image from "next/image";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import LoadingComponent from "../Core/LoadingComponent";
 
 const HeadNavbar = () => {
   const router = useRouter();
   const path = usePathname();
   const params = useSearchParams();
+  const param = useParams();
   const dispatch = useDispatch();
 
   const userDetails = useSelector(
     (state: any) => state.auth.user?.data?.user_details
   );
+  const deviceData = useSelector(
+    (state: any) => state?.auth?.singleDevice
+  );
+
 
   const [searchParams, setSearchParams] = useState(
     Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
   );
+
   const [searchString, setSearchString] = useState(params.get("search_string") || "");
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+  const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(
     null
   );
 
@@ -67,65 +75,82 @@ const HeadNavbar = () => {
     router.push("/");
   };
 
+
   return (
     <div className="headnav">
-      <h4 className="pagetitle"> {path.includes("/users") ? "Users" : "Devices"} </h4>
+      {path == "/devices/add" || path == `/devices/${param?.id}` || path == `/devices/${param?.id}/update-settings` || path == `devices/${param?.id}/view-settings` ? (
+        <>
+          <Button
+            variant="outlined"
+            className="backBtn"
+            onClick={() => {
+              if (path == `/devices/${param?.id}/update-settings` || path == `devices/${param?.id}/view-settings`) {
+                router.push('/devices');
+              } else {
+                router.back();
+              }
+              dispatch(deleteSingleDevice());
+            }}
+            startIcon={
+              <Image src="/users/back-icon.svg" alt="" width={13} height={13} />
+            }
+          >
+            Back
+          </Button>
+          <h5 className="pagetitle">{deviceData?.device_name ? deviceData?.device_name : "Add New Device"}</h5>
+        </>
+      ) : (
+        <h4 className="pagetitle"> {path.includes("/users") ? "Users" : "Devices"} </h4>
+      )}
       <div className="navActions">
-        <TextField
-          className="defaultTextFeild"
-          defaultValue="Search"
-          variant="outlined"
-          type="search"
-          value={searchString}
-          onChange={handleSearchChange}
-          placeholder="Search"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <Image src="/users/search-icon.svg" alt="" width={15} height={15} />
-              </InputAdornment>
-            ),
-          }}
-        />
-        {/* <FormControl
-          className="defaultSelect"
-          variant="outlined"
-        >
-          <Select
-            color="primary"
-          >
-            <MenuItem className="menuItem" value="">Select Device</MenuItem>
-            <MenuItem className="menuItem" value="Device 1">Device 1</MenuItem>
-            <MenuItem className="menuItem" value="Device 2">Device 2</MenuItem>
-            <MenuItem className="menuItem" value="Device 3">Device 3</MenuItem>
-          </Select>
-        </FormControl> */}
-
-        {path == "/users" ? (
-          <Button
-            className="addUserBtn"
-            variant='contained'
-            onClick={() => router.push("/users/add")}
-            startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
-          >
-            Add New User
-          </Button>
-
-        ) : (
+        {path == "/devices/add" || path == `/devices/${param?.id}` || path == `/devices/${param?.id}/update-settings` || path == `devices/${param?.id}/view-settings` ? (
           ""
-        )}
-        {path == "/devices" ? (
-          <Button
-            className="addUserBtn"
-            variant='contained'
-            onClick={() => router.push("/devices/add")}
-            startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
-          >
-            Add New Device
-          </Button>
-
         ) : (
-          ""
+          <>
+            <TextField
+              className="defaultTextFeild"
+              defaultValue="Search"
+              variant="outlined"
+              type="search"
+              value={searchString}
+              onChange={handleSearchChange}
+              placeholder="Search"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Image src="/users/search-icon.svg" alt="" width={15} height={15} />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            {path == "/users" ? (
+              <Button
+                className="addUserBtn"
+                variant='contained'
+                onClick={() => router.push("/users/add")}
+                startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
+              >
+                Add New User
+              </Button>
+
+            ) : (
+              ""
+            )}
+            {path == "/devices" ? (
+              <Button
+                className="addUserBtn"
+                variant='contained'
+                onClick={() => router.push("/devices/add")}
+                startIcon={<Image src="/users/add-icon.svg" alt="" height={10} width={10} />}
+              >
+                Add New Device
+              </Button>
+
+            ) : (
+              ""
+            )}
+
+          </>
         )}
         <div
           className="profileGrp"
@@ -144,7 +169,6 @@ const HeadNavbar = () => {
       </div>
       <Menu
         className="profileMenuBlock"
-       
         id="menu-appbar"
         anchorEl={anchorElUser}
         anchorOrigin={{

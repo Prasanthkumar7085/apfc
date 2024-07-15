@@ -51,17 +51,6 @@ const AddDevice = () => {
   };
   return (
     <Box id="addUser">
-      <Button
-        className="backBtn"
-        variant="outlined"
-        sx={{ alignSelf: "flex-start", mb: 2 }}
-        onClick={() => router.back()}
-        startIcon={
-          <Image src="/users/back-icon.svg" alt="" width={13} height={13} />
-        }
-      >
-        Back
-      </Button>
       <div className="feildBlock">
         <label className="label">
           Device Name <span>*</span>

@@ -25,7 +25,7 @@ const ArrowSteppers = ({ selectedStep, setSelectedStep }: any) => {
             {params?.get("state") == step?.title ? (
               <img className={styles.arroIcon} alt="" src="/arro.svg" />
             ) : (
-              ""
+              <img className={styles.arroIcon} alt="" src="/Bg.png" />
             )}
             <div className={styles.titletext}>
               <h3 className={styles.title}>{step?.title}</h3>
