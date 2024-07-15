@@ -125,7 +125,6 @@
           &.radioOn {
             color: $greenColor;
           }
-         
         }
         .passwordSetting {
           display: flex;
@@ -143,6 +142,8 @@
           }
         }
         &.levelFanFeild {
+          margin: 0;
+
           .radioOff {
             position: relative;
             padding-left: 13px;
@@ -176,19 +177,24 @@
       }
       .fanSettings {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: flex-start;
         gap: 0.5rem;
-        padding: 1rem 0.5rem;
+        padding: 1rem 0.5rem 0.3rem;
         .levelFanGrp {
           display: flex;
           align-items: center;
           gap: 1rem;
+          .tempBlock {
+            display: flex;
+            align-items: center;
+          }
         }
       }
       .grp {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
+        grid-gap: 0.5rem 2rem;
         &.timingSettings {
           grid-template-columns: 100px auto !important;
         }
