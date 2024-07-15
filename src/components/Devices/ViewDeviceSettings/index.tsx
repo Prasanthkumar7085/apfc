@@ -22,12 +22,15 @@ import {
   getLevel1DeviceSettingsAPI,
   getLevel2DeviceSettingsAPI,
   getLevel3DeviceSettingsAPI,
+  getSigleDeviceAPI,
 } from "@/services/devicesAPIs";
 import Level1Settings from "./Level1Settings";
 import Level2Settings from "./Level2Settings";
 import Level3Settings from "./Level3Settings";
 import Level4Settings from "./Level4Settings";
 import LoadingComponent from "@/components/Core/LoadingComponent";
+import { useDispatch } from "react-redux";
+import { setSingleDevice } from "@/redux/Modules/userlogin";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -61,6 +64,7 @@ const SingleDeviceSettings = () => {
 
   const { id } = useParams();
   const params = useSearchParams();
+  const dispatch = useDispatch();
 
   const [selectedStep, setSelectedStep] = useState<any>("Level1");
   const [loading, setLoading] = useState<boolean>(false);
@@ -97,6 +101,24 @@ const SingleDeviceSettings = () => {
       setLoading(false);
     }
   };
+  const [deviceData, setDeviceData] = useState<any>({});
+
+  const getPatientResults = async () => {
+    setLoading(true);
+    try {
+      const response = await getSigleDeviceAPI(id);
+      setDeviceData(response?.data);
+      dispatch(setSingleDevice(response?.data));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getPatientResults();
+  }, []);
 
   useEffect(() => {
     getLevelBasedDeviceDetails();

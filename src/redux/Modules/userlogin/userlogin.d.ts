@@ -25,6 +25,7 @@ declare namespace IReduxUserLogin {
   export interface IInitialLoginState {
     user: Partial<IUserResponse>;
     emailWhilePasswordReset: string
+    singleDevice: any
   }
 
 

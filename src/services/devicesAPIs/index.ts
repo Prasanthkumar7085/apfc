@@ -17,6 +17,8 @@ export const getAllDevicesAPI = async (
 };
 
 export const getSigleDeviceAPI = async (id: any) => {
+  console.log(id);
+
   try {
     const { success, data } = await $fetch.get(`/devices/${id}/parameters`);
     if (!success) {
