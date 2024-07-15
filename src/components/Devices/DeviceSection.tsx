@@ -80,6 +80,8 @@ const DeviceSection = ({
       >
         {devicesData?.length ? (
           devicesData.map((item: any, index: number) => {
+            console.log(item);
+
             return (
               <div className="eachDeviceBlock" key={index}>
                 <div className="headerBlock">
@@ -117,7 +119,7 @@ const DeviceSection = ({
                             </span>
                           }
                         >
-                          <span className= "statusTxt">
+                          <span className="statusTxt">
                             {item?.status == "ACTIVE" ? "Online" : "Offline"}
                           </span>
                         </Tooltip>
@@ -140,22 +142,19 @@ const DeviceSection = ({
                     <div className="eachDeviceInfo">
                       <p className="infoTitle">Average Voltage LN</p>
                       <h5 className="infoValue">
-                        {item?.device_parameters?.voltage_measurements
-                          ?.average_voltage_ln || "--"}
+                        {item?.average_voltage_ln || "--"}
                       </h5>
                     </div>
                     <div className="eachDeviceInfo">
                       <p className="infoTitle">Average Voltage LL</p>
                       <h5 className="infoValue">
-                        {item?.device_parameters?.voltage_measurements
-                          ?.average_voltage_ll || "--"}
+                        {item?.average_voltage_ll || "--"}
                       </h5>
                     </div>
                     <div className="eachDeviceInfo">
                       <p className="infoTitle">Average Current</p>
                       <h5 className="infoValue">
-                        {item?.device_parameters?.voltage_measurements
-                          ?.average_current || "--"}
+                        {item?.average_current || "--"}
                       </h5>
                     </div>
                   </div>
@@ -164,22 +163,21 @@ const DeviceSection = ({
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Total kW</p>
                     <h5 className="infoValue">
-                      {item?.device_parameters?.power_measurements?.total_kw ||
+                      {item?.total_kw ||
                         "--"}
                     </h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Total kVA</p>
                     <h5 className="infoValue">
-                      {item?.device_parameters?.power_measurements?.total_kva ||
+                      {item?.total_kva ||
                         "--"}
                     </h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Total kVAr</p>
                     <h5 className="infoValue">
-                      {item?.device_parameters?.power_measurements
-                        ?.total_kvar || "--"}
+                      {item?.total_kvar || "--"}
                     </h5>
                   </div>
                   <div className="avarageInfo">
@@ -189,7 +187,7 @@ const DeviceSection = ({
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">kWh</p>
                     <h5 className="infoValue">
-                      {item?.device_parameters?.power_measurements?.kwh || "--"}
+                      {item?.kwh || "--"}
                     </h5>
                   </div>
                 </div>
@@ -203,8 +201,8 @@ const DeviceSection = ({
                       height={24}
                       width={50}
                     />
-                    {item?.device_parameters?.errors?.under_compensate_error ===
-                      true ? (
+                    {item?.under_compensate_error ===
+                      1 ? (
                       <div className="errorBlock">
                         <Image
                           alt=""
@@ -213,6 +211,104 @@ const DeviceSection = ({
                           width={18}
                         />
                         <h6>Under Compensate Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.under_voltage_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>Under Voltage Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.ct_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>CT Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.no_voltage_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>No Voltage Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.over_compensate_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>Over Compensate Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.over_voltage_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>Over Voltage Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.temperature_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>Temperature Error</h6>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                    {item?.thd_i_error ===
+                      1 ? (
+                      <div className="errorBlock">
+                        <Image
+                          alt=""
+                          src="/iconinfo.svg"
+                          height={18}
+                          width={18}
+                        />
+                        <h6>THD I Error</h6>
                       </div>
                     ) : (
                       ""

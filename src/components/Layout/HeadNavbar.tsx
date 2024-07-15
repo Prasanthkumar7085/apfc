@@ -58,7 +58,8 @@ const HeadNavbar = () => {
     setSearchString(newSearchString);
     let queryParams = {
       ...searchParams,
-      search_string: newSearchString
+      search_string: newSearchString,
+      page: 1
     }
     let queryString = prepareURLEncodedParams("", queryParams)
     router.push(`${path}${queryString}`);
@@ -78,7 +79,7 @@ const HeadNavbar = () => {
 
   return (
     <div className="headnav">
-      {path == "/devices/add" || path == `/devices/${param?.id}` || path == `/devices/${param?.id}/update-settings` || path == `devices/${param?.id}/view-settings` ? (
+      {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) ? (
         <>
           <Button
             variant="outlined"
@@ -97,13 +98,13 @@ const HeadNavbar = () => {
           >
             Back
           </Button>
-          <h5 className="pagetitle">{deviceData?.device_name ? deviceData?.device_name : "Add New Device"}</h5>
+          <h5 className="pagetitle">{deviceData?.device_name ? deviceData?.device_name || "--" : "Add New Device"}</h5>
         </>
       ) : (
         <h4 className="pagetitle"> {path.includes("/users") ? "Users" : "Devices"} </h4>
       )}
       <div className="navActions">
-        {path == "/devices/add" || path == `/devices/${param?.id}` || path == `/devices/${param?.id}/update-settings` || path == `devices/${param?.id}/view-settings` ? (
+        {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) ? (
           ""
         ) : (
           <>

@@ -53,11 +53,11 @@ const DevicesList = () => {
 
   useEffect(() => {
     getPatientResults({
-      page: 1,
-      limit: 10,
+      page: searchParams?.page ? searchParams?.page : 1,
+      limit: searchParams?.limit ? searchParams?.limit : 10,
       search_string: searchParams?.search_string,
     });
-  }, [searchParams?.search_string]);
+  }, [searchParams?.search_string, searchParams?.page, searchParams?.limit]);
 
   useEffect(() => {
     setSearchParams(
