@@ -49,6 +49,11 @@ body {
     height: 0px !important;
   }
 }
+.errorComponent {
+  color: $secondaryColor; 
+  font-size: clamp(11px, 0.69vw, 13px);
+  font-family: $fontPrimary
+}
 
 @import "./helpers/sideNavbar";
 @import "./helpers/navbar";
