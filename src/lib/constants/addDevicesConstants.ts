@@ -236,14 +236,15 @@ export const fanAndHysteresisSettings: Setting[] = [
 export const factoryAndEnergySettings: Setting[] = [
   { name: "factory_default", label: "Factory Default", type: "switch" },
   { name: "reset_energy", label: "Reset Energy", type: "switch" },
+
+  { name: "reset_kwh", label: "Reset kWh", type: "switch" },
+  { name: "reset_kvah", label: "Reset kVAh", type: "switch" },
+  { name: "reset_kvarh", label: "Reset kVARh", type: "switch" },
   {
     name: "reset_energy_password",
     label: "Reset Energy Password",
     type: "password",
   },
-  { name: "reset_kwh", label: "Reset kWh", type: "switch" },
-  { name: "reset_kvah", label: "Reset kVAh", type: "switch" },
-  { name: "reset_kvarh", label: "Reset kVARh", type: "switch" },
 ];
 
 export const factoryEnergySettings: any = [

@@ -23,9 +23,22 @@ const Level2Settings = ({ levelBasedData }: any) => {
         return (
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
-            <Typography variant="caption">
-              {levelBasedData[setting?.name] || "--"}
-            </Typography>
+            {levelBasedData[setting?.name] == "ON" ||
+            levelBasedData[setting?.name] == "OFF" ? (
+              <Typography
+                className={
+                  levelBasedData[setting?.name] == "ON"
+                    ? "value radioOn"
+                    : "value radioOff"
+                }
+              >
+                {levelBasedData[setting?.name] || "--"}
+              </Typography>
+            ) : (
+              <Typography className="value ">
+                {levelBasedData[setting?.name] || "--"}
+              </Typography>
+            )}
           </div>
         );
     }
@@ -36,35 +49,23 @@ const Level2Settings = ({ levelBasedData }: any) => {
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Voltage Settings</h3>
-          <div className="grp">
-            {voltageSettings.map(renderField)}
-          </div>
+          <div className="grp">{voltageSettings.map(renderField)}</div>
 
           <h3 className="eachBlockHeading">Harmonic Distortion Settings</h3>
           <div className="grp">
             {harmonicDistortionSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Compensation Settings</h3>
-          <div className="grp">
-            {compensationSettings.map(renderField)}
-          </div>
+          <div className="grp">{compensationSettings.map(renderField)}</div>
 
           <h3 className="eachBlockHeading">Error Handling</h3>
-          <div className="grp">
-          {errorHandlingSettings.map(renderField)}
-          </div>
+          <div className="grp">{errorHandlingSettings.map(renderField)}</div>
           <h3 className="eachBlockHeading">Fan and Hysteresis Settings</h3>
-          <div className="grp">
-
-          {fanAndHysteresisSettings.map(renderField)}
-          </div>
+          <div className="grp">{fanAndHysteresisSettings.map(renderField)}</div>
         </section>
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
-          <div className="grp">
-
-          {factoryAndEnergySettings.map(renderField)}
-          </div>
+          <div className="grp">{factoryAndEnergySettings.map(renderField)}</div>
         </section>
       </form>
     </div>
