@@ -16,7 +16,7 @@
   .pagetitle {
     margin: 0;
     color: #000;
-    font-family: "Inter";
+    font-family: $fontPrimary;
     font-size: clamp(14.5px, 0.93vw, 20px);
     font-weight: 500;
     line-height: 100%; /* 18px */
@@ -39,7 +39,7 @@
         border-radius: 3;
         height: 30px;
         border: 1px solid $textFeildStroke;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
 
         fieldset {
@@ -51,7 +51,7 @@
       width: 150px;
       .MuiSelect-select {
         width: 100%;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         padding: 3px 11px !important;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
         border: 1px solid $textFeildStroke;
@@ -71,7 +71,7 @@
       background: $primaryColor;
       text-transform: capitalize;
       color: $whiteColor;
-      font-family: "Inter", sans-serif;
+      font-family: $fontPrimary;
       font-size: clamp(11px, 0.72vw, 15px);
       font-weight: 500;
       padding: 5px 10px;
@@ -95,7 +95,7 @@
         .profile {
           color: #252525;
           letter-spacing: 0;
-          font-family: "Inter", sans-serif;
+          font-family: $fontPrimary;
           font-size: clamp(12px, 0.72vw, 15px);
           font-weight: 400;
           line-height: 100%;
@@ -103,7 +103,7 @@
         }
         .designation {
           color: $greenColor;
-          font-family: "Inter";
+          font-family: $fontPrimary;
           font-size: clamp(10px, 0.625vw, 14px);
           font-weight: 400;
           line-height: 100%;
@@ -116,6 +116,6 @@
 
 .menuItem {
   font-size: clamp(0.75em, 0.72vw, 1.1em);
-  font-family: "Inter", sans-serif;
+  font-family: $fontPrimary;
   font-weight: 400;
 }

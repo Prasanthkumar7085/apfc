@@ -31,7 +31,7 @@
     }
     .formTitle {
       color: $primaryColor;
-      font-family: "Inter", sans-serif;
+      font-family: $fontPrimary;
       font-size: clamp(12px, 0.72vw, 16px);
       font-weight: 500;
       margin: 0;
@@ -75,7 +75,7 @@
         .forgotBtn {
           color: $secondaryColor;
           text-transform: capitalize;
-          font-family: "Inter", sans-serif;
+          font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 500;
           line-height: 100%;
@@ -92,7 +92,7 @@
         text-transform: capitalize;
         color: $whiteColor;
         text-align: center;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         font-size: clamp(13px, 0.83vw, 18px);
         font-weight: 500;
         line-height: 100%;

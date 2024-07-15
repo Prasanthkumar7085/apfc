@@ -13,7 +13,7 @@
     border: 0;
     .dialogHeading {
       color: $blackColor;
-      font-family: "Inter", sans-serif;
+      font-family: $fontPrimary;
       font-size: clamp(15px, 0.93vw, 20px);
       font-weight: 400;
     }
@@ -38,7 +38,7 @@
         border-radius: 3;
         height: 30px;
         border: 1px solid $textFeildStroke;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
 
         fieldset {
@@ -72,7 +72,7 @@
         .listText {
           span {
             color: $blackColor;
-            font-family: "Inter";
+            font-family: $fontPrimary;
             font-size: clamp(14px, 0.93vw, 18px);
             font-weight: 400;
           }
@@ -96,14 +96,14 @@
       &.addUserBtn {
         background: #d948411a;
         color: $blackColor;
-        font-family: "Inter", sans-serif;
+        font-family: $fontPrimary;
         letter-spacing: 0;
         padding-inline: 15px;
       }
       &.confirmbtn {
         color: $whiteColor;
         background: $primaryColor;
-        font-family: "Poppins", sans-serif;
+        font-family: $font-secondary;
         padding-inline: 20px;
       }
     }

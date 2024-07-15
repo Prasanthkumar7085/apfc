@@ -42,15 +42,29 @@ const SaveAndConfirmationButtons = ({
     return responseData;
   };
 
+  const saveAndContinueButton = () => {
+    if (params?.get("state") == "Level1") {
+      router.push(`${pathName}?state=Level2`);
+    }
+    if (params?.get("state") == "Level2") {
+      router.push(`${pathName}?state=Level3`);
+    }
+    if (params?.get("state") == "Level3") {
+      router.push(`${pathName}?state=Level4`);
+    }
+    if (params?.get("state") == "Level4") {
+      router.push("/devices");
+    }
+  };
+
   const addLevelBasedSettings = async () => {
     setLoading(true);
     let payload = { ...levelBasedData };
     try {
       const response = await getLevelBasedAPI(payload);
       if (response?.status == 200 || response?.status == 201) {
-        router.push(`${pathName}?state=${params?.get("state")}`);
-
         await getLevelBasedDeviceDetails();
+        saveAndContinueButton();
         toast.success(response?.message);
       }
     } catch (err) {

@@ -86,7 +86,9 @@ const DeviceSection = ({
               <div className="eachDeviceBlock" key={index}>
                 <div className="headerBlock">
                   <div className="header">
-                    <h4 className="deviceTItle">{capitalizeFirstTwoWords(item?.device_name) || "--"}</h4>
+                    <h4 className="deviceTItle">
+                      {capitalizeFirstTwoWords(item?.device_name) || "--"}
+                    </h4>
                     <div className="settingsBlock">
                       <div
                         className="deviceStatus"
@@ -128,9 +130,11 @@ const DeviceSection = ({
                         height={25}
                         width={25}
                         style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          router.push(`/devices/${item?.id}/view-settings`)
-                        }}
+                        onClick={() =>
+                          router.push(
+                            `devices/${item.id}/view-settings?state=Level1`
+                          )
+                        }
                       />
                     </div>
                   </div>
@@ -202,7 +206,7 @@ const DeviceSection = ({
                       width={50}
                     />
                     {item?.device_parameters?.errors?.under_compensate_error ===
-                      true ? (
+                    true ? (
                       <div className="errorBlock">
                         <Image
                           alt=""
@@ -245,7 +249,8 @@ const DeviceSection = ({
                           {item?.user_full_name?.[0].toUpperCase() || "--"}
                         </Avatar>
                         <h4 className="userName">
-                          {capitalizeFirstTwoWords(item?.user_full_name) || "--"}
+                          {capitalizeFirstTwoWords(item?.user_full_name) ||
+                            "--"}
                         </h4>
                       </div>
                     ) : (
@@ -298,19 +303,20 @@ const DeviceSection = ({
         getData={getData}
         devicesId={devicesId}
       />
-      {id ?
-        "" :
-        devicesData?.length ? (
-          <div>
-            <TablePaginationComponent
-              paginationDetails={paginationDetails}
-              capturePageNum={capturePageNum}
-              captureRowPerItems={captureRowPerItems}
-              values="Devices"
-            />
-          </div>
-        ) : ""
-      }
+      {id ? (
+        ""
+      ) : devicesData?.length ? (
+        <div>
+          <TablePaginationComponent
+            paginationDetails={paginationDetails}
+            capturePageNum={capturePageNum}
+            captureRowPerItems={captureRowPerItems}
+            values="Devices"
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <Toaster richColors closeButton position="top-right" />
     </div>
   );

@@ -6,7 +6,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Inter", sans-serif !important;
+  font-family: $fontPrimary !important;
 }
 
 * {
@@ -34,12 +34,15 @@ body {
 @import "./helpers/baseLayout";
 @import "./helpers/table";
 @import "./helpers/dialog";
+
 //auth module
 @import "./signin.scss";
+
 //users module
 @import "./users/index.scss";
 @import "./users/addUser.scss";
 @import "./users/viewUser.scss";
+
 //devices module
 @import "./devices/AddSettings/index.scss";
 @import "./devices/AddSettings/addLevelOne.scss";

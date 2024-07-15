@@ -22,7 +22,6 @@ import Image from "next/image";
 const LoginPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -141,11 +140,11 @@ const LoginPage = () => {
                     errorMessage={errorMessages?.password}
                   />
                   <p style={{ color: "red" }}>{invalid}</p>
-                  <div className="forgotBtnGrp">
+                  {/* <div className="forgotBtnGrp">
                     <Button variant="text" className="forgotBtn">
                       Forgot Your Password ?
                     </Button>
-                  </div>
+                  </div> */}
                 </div>
                 <Button
                   type="submit"
@@ -154,7 +153,7 @@ const LoginPage = () => {
                   fullWidth
                 >
                   {loading ? (
-                    <CircularProgress color="inherit" size={"1.8rem"} />
+                    <CircularProgress color="inherit" size={"1rem"} />
                   ) : (
                     "Login"
                   )}

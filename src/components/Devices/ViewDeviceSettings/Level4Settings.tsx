@@ -26,7 +26,7 @@ const Level4Settings = ({ levelBasedData }: any) => {
   };
 
   return (
-    <div>
+    <div id="levelOne">
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Fan Settings</h3>

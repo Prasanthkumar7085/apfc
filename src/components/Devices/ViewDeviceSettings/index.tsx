@@ -4,12 +4,8 @@ import {
   Tabs,
   Tab,
   Typography,
-  TextField,
-  Button,
-  Select,
-  MenuItem,
-  InputLabel,
-  FormControl,
+  Avatar,
+
 } from "@mui/material";
 import {
   useParams,
@@ -31,6 +27,7 @@ import Level4Settings from "./Level4Settings";
 import LoadingComponent from "@/components/Core/LoadingComponent";
 import { useDispatch } from "react-redux";
 import { setSingleDevice } from "@/redux/Modules/userlogin";
+import Image from "next/image";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -45,7 +42,7 @@ function TabPanel(props: any) {
     >
       {value === index && (
         <Box className="tab-content">
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -125,40 +122,48 @@ const SingleDeviceSettings = () => {
   }, [params]);
 
   return (
-    <div>
-      <div className="header">
-        <Typography variant="h6">Aasia Ramanathan</Typography>
-        <div className="status">
-          <Typography variant="body1">Active</Typography>
-        </div>
-      </div>
-      <Box sx={{ width: "100%" }}>
+    <div id="viewSettings">
+
+      <div className="headerBlock" >
         <Tabs
+          className="levelTabs"
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Level1" />
-          <Tab label="Level2" />
-          <Tab label="Level3" />
-          <Tab label="Fan Settings" />
+          <Tab label="Level1" className="tabBtn" />
+          <Tab label="Level2" className="tabBtn" />
+          <Tab label="Level3" className="tabBtn" />
+          <Tab label="Fan Settings" className="tabBtn" />
         </Tabs>
-        <TabPanel value={value} index={0}>
-          <Level1Settings
-            levelBasedData={levelBasedData}
-            setLevelBasedData={setLevelBasedData}
-          />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Level2Settings levelBasedData={levelBasedData} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <Level3Settings levelBasedData={levelBasedData} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <Level4Settings levelBasedData={levelBasedData} />
-        </TabPanel>
-      </Box>
+        <div className="userInfo">
+          <div className="userProfile">
+            <Avatar alt="Aasia Ramanathan" sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }} />
+            <Typography variant="h6">Aasia Ramanathan</Typography>
+          </div>
+          <div className="status">
+            <Image alt="" src="/Completed-icon.svg" width={13} height={13} />
+
+            <Typography >Active</Typography>
+          </div>
+        </div>
+      </div>
+      <TabPanel value={value} index={0}>
+        <Level1Settings
+          levelBasedData={levelBasedData}
+          setLevelBasedData={setLevelBasedData}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <Level2Settings levelBasedData={levelBasedData} />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <Level3Settings levelBasedData={levelBasedData} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Level4Settings levelBasedData={levelBasedData} />
+      </TabPanel>
+
       <LoadingComponent loading={loading} />
     </div>
   );
