@@ -25,11 +25,14 @@ const Level3Settings = ({ levelBasedData }: any) => {
   };
 
   return (
-    <div>
+    <div id="levelOne">
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
-          {factoryEnergySettings.map(renderField)}
+          <div className="grp">
+
+            {factoryEnergySettings.map(renderField)}
+          </div>
         </section>
       </form>
     </div>

@@ -85,10 +85,11 @@
       margin-bottom: 1rem;
       box-sizing: border-box;
       border: 1px solid #dfdfdf;
+     height: fit-content ;
 
       .eachBlockHeading {
         margin: 0;
-        padding: 0.6rem 0.5rem;
+        padding: 0.8rem 0.5rem 0.3rem;
         color: $blackColor;
         font-family: $fontPrimary;
         font-size: clamp(11px, 0.72vw, 15px);
@@ -96,7 +97,7 @@
         letter-spacing: 0;
         border-bottom: 1px solid #d5d9dd;
         &:not(:first-child) {
-          padding: 1rem 0.5rem 0.6rem !important;
+          padding: 1rem 0.5rem 0.3rem !important;
         }
       }
       .fieldGroup {
@@ -122,7 +123,7 @@
         .passwordSetting {
           display: flex;
           align-items: center;
-          gap: 1rem;
+          gap: 0.5rem;
           .settingsTextFeild {
             width: 40% !important;
           }
