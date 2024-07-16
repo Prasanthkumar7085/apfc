@@ -68,7 +68,7 @@ export const updateUserAPI = async (payload: {
 
 export const getSigleUserDevicesAPI = async (id: any) => {
     try {
-        const { success, data } = await $fetch.get(`/users/${id}/devices`);
+        const { success, data } = await $fetch.get(`/users/${id}/devices?web=true`);
         if (!success) {
             return handleAPIErrorResponse(data);
         }
