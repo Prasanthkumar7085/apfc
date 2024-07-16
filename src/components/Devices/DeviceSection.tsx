@@ -371,24 +371,25 @@ const DeviceSection = ({
                       ""
                     )}
                     {item?.user_full_name ? (
+                      <Button
+                        className="assignUserBtn"
+                        variant="contained"
+                        startIcon={
+                          <Image
+                            src="delete-user.svg"
+                            alt=""
+                            width={14}
+                            height={14}
+                          />
+                        }
+                        onClick={() => {
+                          openDialog(item?.id);
+                        }}
+                      >
+                        Remove Assign User
+                      </Button>): ("")}
+                    {item?.user_full_name ? (
                       <div className="userInfo">
-                        <Button
-                          className="assignUserBtn"
-                          variant="contained"
-                          startIcon={
-                            <Image
-                              src="delete-user.svg"
-                              alt=""
-                              width={14}
-                              height={14}
-                            />
-                          }
-                          onClick={() => {
-                            openDialog(item?.id);
-                          }}
-                        >
-                          Remove Assign User
-                        </Button>
                         <Avatar className="userAvathar">
                           {item?.user_full_name?.[0].toUpperCase() || "--"}
                         </Avatar>

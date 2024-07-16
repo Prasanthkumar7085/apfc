@@ -139,7 +139,7 @@ const LoginPage = () => {
                   <ErrorMessagesComponent
                     errorMessage={errorMessages?.password}
                   />
-                  <p style={{ color: "red" }}>{invalid}</p>
+                  <p className="errorComponent">{invalid}</p>
                   {/* <div className="forgotBtnGrp">
                     <Button variant="text" className="forgotBtn">
                       Forgot Your Password ?
