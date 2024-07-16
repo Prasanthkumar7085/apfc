@@ -54,6 +54,7 @@
         grid-template-columns: repeat(4, 1fr);
         align-items: center;
         grid-gap: 1.5rem 0.5rem;
+
         @media (max-width: 1280px) {
           grid-template-columns: repeat(3, 1fr);
         }
@@ -75,6 +76,14 @@
             font-family: $fontPrimary;
             font-size: clamp(13px, 0.83vw, 17px);
             font-weight: 400;
+          }
+        }
+        &.voltageMesurement {
+          grid-template-columns: repeat(1, 1fr) !important;
+          .eachInnerBody {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 1.5rem 0.2rem;
           }
         }
       }
