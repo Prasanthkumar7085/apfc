@@ -19,6 +19,7 @@ import {
   getLevel2DeviceSettingsAPI,
   getLevel3DeviceSettingsAPI,
   getSigleDeviceAPI,
+  updateDevicePasswordAPI,
 } from "@/services/devicesAPIs";
 import Level1Settings from "./Level1Settings";
 import Level2Settings from "./Level2Settings";
@@ -29,6 +30,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSingleDevice } from "@/redux/Modules/userlogin";
 import Image from "next/image";
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
+import { toast, Toaster } from "sonner";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -71,6 +73,8 @@ const SingleDeviceSettings = () => {
   const [selectedStep, setSelectedStep] = useState<any>("Level1");
   const [loading, setLoading] = useState<boolean>(false);
   const [levelBasedData, setLevelBasedData] = useState<any>({});
+  const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
 
   const getLevelBasedAPI = () => {
     let responseData: any;
@@ -96,6 +100,7 @@ const SingleDeviceSettings = () => {
       const response = await getLevelBasedAPI();
       if (response?.status == 200 || response?.status == 201) {
         setLevelBasedData(response?.data);
+        setPassword(response?.data?.password);
       }
     } catch (err) {
       console.error(err);
@@ -118,6 +123,26 @@ const SingleDeviceSettings = () => {
     }
   };
 
+  const updateDevicePassword = async () => {
+    setLoading(true);
+    try {
+      const payload = {
+        password: password,
+      };
+      let response: any = await updateDevicePasswordAPI(payload, id);
+
+      if (response.success) {
+        toast.success(response.message);
+        getLevelBasedDeviceDetails();
+        closeDialog();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     getPatientResults();
   }, []);
@@ -125,6 +150,14 @@ const SingleDeviceSettings = () => {
   useEffect(() => {
     getLevelBasedDeviceDetails();
   }, [params]);
+
+  const openDialog = () => {
+    setOpen(true);
+  }
+
+  const closeDialog = () => {
+    setOpen(false)
+  }
 
   return (
     <div id="viewSettings">
@@ -165,7 +198,7 @@ const SingleDeviceSettings = () => {
             title="Edit Device"
             style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
             onClick={() => {
-              router.push(`/devices/${deviceName.id}/update-settings?state=${params.get("state")}`)
+              router.push(`/devices/${id}/update-settings?state=${params.get("state")}`)
             }}
           >
             <Image
@@ -173,7 +206,7 @@ const SingleDeviceSettings = () => {
               src="/edit-user.svg"
               width={10}
               height={10}
-           
+
             />
             <span>Edit</span>
           </div>
@@ -183,6 +216,12 @@ const SingleDeviceSettings = () => {
         <Level1Settings
           levelBasedData={levelBasedData}
           setLevelBasedData={setLevelBasedData}
+          password={password}
+          setPassword={setPassword}
+          updateDevicePassword={updateDevicePassword}
+          openDialog={openDialog}
+          closeDialog={closeDialog}
+          open={open}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -196,6 +235,7 @@ const SingleDeviceSettings = () => {
       </TabPanel>
 
       <LoadingComponent loading={loading} />
+      <Toaster richColors closeButton position="top-right" />
     </div>
   );
 };

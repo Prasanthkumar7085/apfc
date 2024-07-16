@@ -234,3 +234,17 @@ export const deleteAssignUserAPI = async (id: any) => {
     throw err;
   }
 };
+
+export const updateDevicePasswordAPI = async (payload: {
+  password: string,
+}, id: any) => {
+  try {
+    const { success, data } = await $fetch.patch(`/devices/${id}/reset-password`, payload);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
