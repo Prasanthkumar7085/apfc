@@ -55,7 +55,7 @@ export const ListUserColumns = [
     {
         accessorFn: (row: any) => row.device_count,
         id: "device_count",
-        header: () => <span>Devices Assigend</span>,
+        header: () => <span>Devices Assigned</span>,
         cell: (info: any) => {
             return <span className="assignDeviceText">{info.getValue() || "0"}</span>;
         },
