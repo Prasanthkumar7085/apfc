@@ -12,18 +12,20 @@ import {
   PotentialTransformerSettings,
   TimingSettings,
 } from "@/lib/constants/addDevicesConstants";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useState } from "react";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
 import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import ErrorMessagesComponent from "@/components/Core/ErrorMessagesComponent";
 type CombinedEvent = ChangeEvent<HTMLInputElement> | SelectChangeEvent<any>;
 
 const Level1Component = ({
   levelBasedData,
   setLevelBasedData,
-  getLevelBasedDeviceDetails,
+  getLevelBasedDeviceDetails
 }: any) => {
+  const [errorMessages, setErrorMessages] = useState<any>();
   const handleChange = (
-    e: CombinedEvent  ) => {
+    e: CombinedEvent) => {
     const { name, value } = e.target;
     setLevelBasedData((prevState: any) => ({
       ...prevState,
@@ -40,11 +42,11 @@ const Level1Component = ({
             <label className="label">
               {setting.label}
             </label>
-              <RangeWithUnits
-                setting={setting}
-                value={levelBasedData}
-                handleChange={handleChange}
-              />
+            <RangeWithUnits
+              setting={setting}
+              value={levelBasedData}
+              handleChange={handleChange}
+            />
           </div>
         );
       case "password":
@@ -53,11 +55,16 @@ const Level1Component = ({
             <label className="label">
               {setting.label}
             </label>
-              <PasswordFormFields
-                name={setting.name}
-                handleChange={handleChange}
-                value={levelBasedData}
-              />
+            <PasswordFormFields
+              name={setting.name}
+              handleChange={handleChange}
+              value={levelBasedData}
+            />
+            {setting.name == "confirm_password" ? (
+              <ErrorMessagesComponent errorMessage={errorMessages?.password} />
+            ) : (
+              ""
+            )}
           </div>
         );
       case "select":
@@ -66,18 +73,18 @@ const Level1Component = ({
             <label className="label">
               {setting.label}
             </label>
-              <Select
-                className="settingSelectFeild"
-                onChange={handleChange}
-                name={setting.name}
-                value={levelBasedData?.[setting.name]}
-              >
-                {setting.options?.map((option: any) => (
-                  <MenuItem className="menuItem" key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
+            <Select
+              className="settingSelectFeild"
+              onChange={handleChange}
+              name={setting.name}
+              value={levelBasedData?.[setting.name]}
+            >
+              {setting.options?.map((option: any) => (
+                <MenuItem className="menuItem" key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
           </div>
         );
       case "radio":
@@ -132,6 +139,7 @@ const Level1Component = ({
       <SaveAndConfirmationButtons
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+        setErrorMessages={setErrorMessages}
       />
     </div>
   );

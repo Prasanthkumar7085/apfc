@@ -17,12 +17,14 @@ import { Button } from "@mui/material";
 const SaveAndConfirmationButtons = ({
   levelBasedData,
   getLevelBasedDeviceDetails,
+  setErrorMessages
 }: any) => {
   const router = useRouter();
   const params = useSearchParams();
   const [loading, setLoading] = useState<boolean>(false);
   const { id } = useParams();
   const pathName = usePathname();
+
 
   const getLevelBasedAPI = (payload: any) => {
     let responseData: any;
@@ -64,8 +66,12 @@ const SaveAndConfirmationButtons = ({
       const response = await getLevelBasedAPI(payload);
       if (response?.status == 200 || response?.status == 201) {
         await getLevelBasedDeviceDetails();
+        setErrorMessages(null);
         saveAndContinueButton();
         toast.success(response?.message);
+      } else if (response.status == 422) {
+        setErrorMessages(response.error_data);
+        throw response;
       }
     } catch (err) {
       console.error(err);
