@@ -11,19 +11,22 @@ import {
 import Image from "next/image";
 import TablePaginationComponent from "../Core/TablePaginationComponent";
 import { toast, Toaster } from "sonner";
-import { updateDeviceStatusAPI } from "@/services/devicesAPIs";
+import { deleteAssignUserAPI, updateDeviceStatusAPI } from "@/services/devicesAPIs";
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
+import DeleteDialog from "../Core/DeleteDialog";
 
 const DeviceSection = ({
   devicesData,
   paginationDetails,
   getData,
   loading,
+  setLoading
 }: any) => {
   const { id } = useParams();
   const router = useRouter();
   const pathname = usePathname();
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
   const [showLoading, setShowLoading] = useState(false);
   const params = useSearchParams();
@@ -50,6 +53,22 @@ const DeviceSection = ({
     }
   };
 
+  const deleteAssignUser = async () => {
+    setLoading(true);
+    try {
+      const response = await deleteAssignUserAPI(devicesId);
+      if (response.success) {
+        closeDialog();
+        toast.success(response.message);
+        getData({});
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     setSearchParams(
       Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
@@ -71,6 +90,16 @@ const DeviceSection = ({
       page: 1,
     });
   };
+
+  const openDialog = (id: any) => {
+    setOpen(true);
+    setDeviceId(id)
+  }
+
+  const closeDialog = () => {
+    setOpen(false)
+  }
+
 
   return (
     <div>
@@ -343,6 +372,23 @@ const DeviceSection = ({
                     )}
                     {item?.user_full_name ? (
                       <div className="userInfo">
+                        <Button
+                          className="assignUserBtn"
+                          variant="contained"
+                          startIcon={
+                            <Image
+                              src="delete-user.svg"
+                              alt=""
+                              width={14}
+                              height={14}
+                            />
+                          }
+                          onClick={() => {
+                            openDialog(item?.id);
+                          }}
+                        >
+                          Remove Assign User
+                        </Button>
                         <Avatar className="userAvathar">
                           {item?.user_full_name?.[0].toUpperCase() || "--"}
                         </Avatar>
@@ -415,6 +461,13 @@ const DeviceSection = ({
       ) : (
         ""
       )}
+      <DeleteDialog
+        deleteUser={deleteAssignUser}
+        headerName="Delete Assign User"
+        lable="You Wan't Delete Assign User"
+        open={open}
+        closeDialog={closeDialog}
+      />
       <Toaster richColors closeButton position="top-right" />
     </div>
   );

@@ -221,3 +221,16 @@ export const resetDevicePasswordAPI = async (
     throw err;
   }
 };
+
+
+export const deleteAssignUserAPI = async (id: any) => {
+  try {
+    const { success, data } = await $fetch.delete(`/devices/${id}/user`);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};

@@ -2,13 +2,13 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton }
 import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
 
-const DeleteDialog = ({ deleteUser, open, closeDialog, lable }: any) => {
+const DeleteDialog = ({ deleteUser, open, closeDialog, lable, headerName }: any) => {
     const router = useRouter();
 
     return (
         <Dialog open={open} onClose={closeDialog} maxWidth="xs" fullWidth>
             <DialogTitle>
-                Delete User
+                {headerName}
                 <IconButton
                     aria-label="close"
                     onClick={() => {
