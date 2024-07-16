@@ -97,7 +97,7 @@ const HeadNavbar = () => {
           >
             Back
           </Button>
-          <h5 className="pagetitle">{userData?.full_name ? userData?.full_name || "--" : "Add New Device"}</h5>
+          <h5 className="pagetitle">{userData?.full_name ? userData?.full_name || "--" : "Add New User"}</h5>
         </>
       ) : (
         path == "/users" ? <h4 className="pagetitle"> Users </h4> : ""
