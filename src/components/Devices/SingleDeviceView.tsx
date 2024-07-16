@@ -391,7 +391,7 @@ const SingleDeviceView = () => {
                     <label>{capitalizeAndRemoveUnderscore(item)}</label>
                     <Typography>
 
-                      {deviceData?.bank_values[item].toFixed(2) + " " + "Kvar" || "--"}
+                      {deviceData?.bank_values[item]?.toFixed(2) + " " + "Kvar" || "--"}
                     </Typography>
                   </div>
                 ))}

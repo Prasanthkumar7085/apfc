@@ -168,19 +168,19 @@ const DeviceSection = ({
                     <div className="eachDeviceInfo">
                       <p className="infoTitle">Average Voltage LN</p>
                       <h5 className="infoValue">
-                        {item?.average_voltage_ln || "--"}
+                        {item?.average_voltage_ln?.toFixed(2) || "--"}
                       </h5>
                     </div>
                     <div className="eachDeviceInfo">
                       <p className="infoTitle">Average Voltage LL</p>
                       <h5 className="infoValue">
-                        {item?.average_voltage_ll || "--"}
+                        {item?.average_voltage_ll?.toFixed(2) || "--"}
                       </h5>
                     </div>
                     <div className="eachDeviceInfo">
                       <p className="infoTitle">Average Current</p>
                       <h5 className="infoValue">
-                        {item?.average_current || "--"}
+                        {item?.average_current?.toFixed(2) || "--"}
                       </h5>
                     </div>
                   </div>
@@ -189,31 +189,31 @@ const DeviceSection = ({
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Total kW</p>
                     <h5 className="infoValue">
-                      {item?.total_kw ||
+                      {item?.total_kw?.toFixed(2) ||
                         "--"}
                     </h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Total kVA</p>
                     <h5 className="infoValue">
-                      {item?.total_kva ||
+                      {item?.total_kva?.toFixed(2) ||
                         "--"}
                     </h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">Total kVAr</p>
                     <h5 className="infoValue">
-                      {item?.total_kvar || "--"}
+                      {item?.total_kvar?.toFixed(2) || "--"}
                     </h5>
                   </div>
                   <div className="avarageInfo">
                     <p className="infoTitle">Average PF</p>
-                    <h5 className="infoValue">{item?.average_pf || "--"}</h5>
+                    <h5 className="infoValue">{item?.average_pf?.toFixed(2) || "--"}</h5>
                   </div>
                   <div className="eachDeviceInfo">
                     <p className="infoTitle">kWh</p>
                     <h5 className="infoValue">
-                      {item?.kwh || "--"}
+                      {item?.kwh?.toFixed(2) || "--"}
                     </h5>
                   </div>
                 </div>
