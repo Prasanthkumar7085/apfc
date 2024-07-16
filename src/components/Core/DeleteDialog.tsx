@@ -6,33 +6,33 @@ const DeleteDialog = ({ deleteUser, open, closeDialog, lable, headerName }: any)
     const router = useRouter();
 
     return (
-        <Dialog open={open} onClose={closeDialog} maxWidth="xs" fullWidth>
-            <DialogTitle>
-                {headerName}
+        <Dialog open={open} onClose={closeDialog} maxWidth="xs" fullWidth className="deleteDialog">
+            <DialogTitle className="dialogHeader">
+                <span className="dialogHeading"> {headerName}</span>
                 <IconButton
+                    className="closeBtn"
+
                     aria-label="close"
                     onClick={() => {
                         closeDialog();
                     }}
-                    sx={{ position: 'absolute', right: 8, top: 8 }}
                 >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent dividers>
+            <DialogContent  className="dialogContent">
                 <p>{lable}</p>
             </DialogContent>
-            <DialogActions>
+            <DialogActions className="dialogActions">
                 <Button
-                    variant="outlined"
-                    color="primary"
-                    sx={{ mt: 2 }}
+                    className="cancelBtn"
+                    variant="text"
                     onClick={closeDialog}
                 >
                     Cancel
                 </Button>
                 <Button
-                    color="primary"
+                    className="confirmbtn"
                     variant="contained"
                     onClick={deleteUser}
                 >

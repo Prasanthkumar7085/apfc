@@ -239,6 +239,14 @@ $avatharColor: #ff7a00;
     .tempItems {
       @include align-center();
       gap: 1rem;
+      .temparature {
+        @include align-center();
+        gap: 4px;
+        p {
+          font-size: clamp(13px, 0.83vw, 17px);
+          font-family: $fontPrimary;
+        }
+      }
       .errorBlock {
         @include align-center();
         gap: 4px;

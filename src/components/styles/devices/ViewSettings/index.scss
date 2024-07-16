@@ -123,6 +123,7 @@
           font-family: $fontPrimary;
           font-size: clamp(10px, 0.625vw, 14px);
           font-weight: 400;
+          white-space: nowrap;
         }
 
         .value {
@@ -150,6 +151,10 @@
             font-size: clamp(12px, 0.72vw, 15px);
             font-weight: 400;
             letter-spacing: 0;
+            text-transform: capitalize;
+            &:hover {
+              background: transparent;
+            }
           }
         }
         &.levelFanFeild {

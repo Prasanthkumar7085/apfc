@@ -1,6 +1,6 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 const ResetPasswordDialog = ({ updateDevicePassword, open, closeDialog, password, setPassword }: any) => {
@@ -10,23 +10,26 @@ const ResetPasswordDialog = ({ updateDevicePassword, open, closeDialog, password
     };
 
     return (
-        <Dialog open={open} onClose={closeDialog} maxWidth="xs" fullWidth>
-            <DialogTitle>
-                Reset Password
+        <Dialog open={open} onClose={closeDialog} maxWidth="xs" fullWidth className="deleteDialog">
+            <DialogTitle className="dialogHeader">
+              
+                <span className="dialogHeading">
+                    Reset Password
+                </span>  
                 <IconButton
+                    className="closeBtn"
                     aria-label="close"
                     onClick={() => {
                         closeDialog();
                     }}
-                    sx={{ position: 'absolute', right: 8, top: 8 }}
                 >
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent dividers>
-                <label>Resest Password</label>
+            <DialogContent className="dialogContent">
+                <label>New Password</label>
                 <TextField
-                    className="settingsTextFeild"
+                    className="defaultTextFeild"
                     autoComplete="new-password"
                     variant="outlined"
                     placeholder="Reset Password"
@@ -50,17 +53,16 @@ const ResetPasswordDialog = ({ updateDevicePassword, open, closeDialog, password
                     }}
                 />
             </DialogContent>
-            <DialogActions>
+            <DialogActions className="dialogActions">
                 <Button
-                    variant="outlined"
-                    color="primary"
-                    sx={{ mt: 2 }}
+                    className="cancelBtn"
+                    variant="text"
                     onClick={closeDialog}
                 >
                     Cancel
                 </Button>
                 <Button
-                    color="primary"
+                    className="confirmbtn"
                     variant="contained"
                     onClick={updateDevicePassword}
                     disabled={!password}
