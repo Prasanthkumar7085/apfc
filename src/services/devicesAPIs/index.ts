@@ -17,10 +17,9 @@ export const getAllDevicesAPI = async (
 };
 
 export const getSigleDeviceAPI = async (id: any) => {
-  console.log(id);
 
   try {
-    const { success, data } = await $fetch.get(`/devices/${id}`);
+    const { success, data } = await $fetch.get(`/devices/${id}/parameters`);
     if (!success) {
       return handleAPIErrorResponse(data);
     }
@@ -240,6 +239,19 @@ export const updateDevicePasswordAPI = async (payload: {
 }, id: any) => {
   try {
     const { success, data } = await $fetch.patch(`/devices/${id}/reset-password`, payload);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getDeviceAPI = async (id: any) => {
+
+  try {
+    const { success, data } = await $fetch.get(`/devices/${id}`);
     if (!success) {
       return handleAPIErrorResponse(data);
     }

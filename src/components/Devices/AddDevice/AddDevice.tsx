@@ -1,7 +1,7 @@
 import ErrorMessagesComponent from "@/components/Core/ErrorMessagesComponent";
 import LoadingComponent from "@/components/Core/LoadingComponent";
 import { setSingleDevice } from "@/redux/Modules/userlogin";
-import { addDeviceAPI, getSigleDeviceAPI, updateDeviceAPI } from "@/services/devicesAPIs";
+import { addDeviceAPI, getDeviceAPI, updateDeviceAPI } from "@/services/devicesAPIs";
 import { Box, Button, TextField } from "@mui/material";
 
 import { useParams, useRouter } from "next/navigation";
@@ -83,7 +83,7 @@ const AddDevice = () => {
   const getSingleDevice = async () => {
     setLoading(true);
     try {
-      const response = await getSigleDeviceAPI(params?.id);
+      const response = await getDeviceAPI(params?.id);
       setDeviceDetails(response?.data);
       dispatch(setSingleDevice(response?.data));
     } catch (err) {

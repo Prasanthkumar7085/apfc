@@ -34,6 +34,7 @@ const SingleDeviceView = () => {
   const capitalizeAndRemoveUnderscore = (text: any) => {
     return text.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
   };
+  console.log(deviceData, "fdsppdspds")
 
   const firstRowHeight = '100%';
   return (
@@ -52,7 +53,7 @@ const SingleDeviceView = () => {
                 <div className="cardHeader">
                   <Typography variant="h6">Voltage Measurements</Typography>
                 </div>
-                {Object.keys(deviceData).length && deviceData.voltage_measurements !== null ? (
+                {Object?.keys(deviceData).length && deviceData?.voltage_measurements !== null ? (
                   <div className="cardBody voltageMesurement">
                     <div className="eachInnerBody">
                       <div className="eachBodyInfo">
@@ -153,9 +154,9 @@ const SingleDeviceView = () => {
                 <div className="cardHeader">
                   <Typography variant="h6">Errors</Typography>
                 </div>
-                {Object.keys(deviceData).length && deviceData.errors !== null ? (
+                {Object?.keys(deviceData)?.length && deviceData?.errors !== null ? (
                   <div className="cardBody">
-                    {Object.keys(deviceData.errors).map((item, index) => (
+                    {Object?.keys(deviceData?.errors)?.map((item, index) => (
                       <div className="eachBodyInfo" key={index}>
                         <label>{capitalizeAndRemoveUnderscore(item)}</label>
                         <Typography className={deviceData?.errors[item] === true ? "errorData" : "nonError"} >

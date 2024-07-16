@@ -102,7 +102,7 @@ const HeadNavbar = () => {
       ) : (
         path == "/users" ? <h4 className="pagetitle"> Users </h4> : ""
       )}
-      {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) ? (
+      {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) || path.includes(`/devices/${param?.id}/edit`) ? (
         <>
           <Button
             variant="outlined"
@@ -133,7 +133,8 @@ const HeadNavbar = () => {
           path.includes(`devices/${param?.id}/view-settings`) ||
           path == "/users/add" ||
           path == `/users/${param?.id}` ||
-          path.includes(`/users/${param?.id}/edit`)
+          path.includes(`/users/${param?.id}/edit`) ||
+          path.includes(`/devices/${param?.id}/edit`)
           ? (
             ""
           ) : (
