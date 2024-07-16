@@ -20,7 +20,7 @@ export const ListUserColumns = [
             return <span>{info.getValue() ? info.getValue() : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
-        width: "150px",
+        width: "300px",
     },
     {
         accessorFn: (row: any) => row.phone,
@@ -30,7 +30,7 @@ export const ListUserColumns = [
             return <span>{info.getValue() ? info.getValue() : "--"}</span>;
         },
         footer: (props: any) => props.column.id,
-        width: "150px",
+        width: "200px",
     },
     // {
     //     accessorFn: (row: any) => row.device_name,
@@ -40,7 +40,7 @@ export const ListUserColumns = [
     //         return <span>{info.getValue() ? info.getValue() : "--"}</span>;
     //     },
     //     footer: (props: any) => props.column.id,
-    //     width: "150px",
+    //     width: "200px",
     // },
     // {
     //     accessorFn: (row: any) => row.last_active_at,
@@ -50,7 +50,7 @@ export const ListUserColumns = [
     //         return <span>{info.getValue() ? dayjs(info.getValue()).format("MM-DD-YYYY") : "--"}</span>;
     //     },
     //     footer: (props: any) => props.column.id,
-    //     width: "150px",
+    //     width: "200px",
     // },
     {
         accessorFn: (row: any) => row.device_count,
