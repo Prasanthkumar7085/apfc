@@ -13,6 +13,7 @@ import AssignDeviceDialog from "./AssignDeviceDialog";
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 import { useDispatch } from "react-redux";
 import { setSingleUser } from "@/redux/Modules/userlogin";
+import dayjs from "dayjs";
 
 const SingleUserView = () => {
     const params = useParams();
@@ -71,7 +72,7 @@ const SingleUserView = () => {
                 </div>
                 <div className="joiningInfo">
                     <Image alt="" src="/calendar-blank 1.svg" width={15} height={15} />
-                    {/* <span>Joined {dayjs(usersData?.updated_at).format("MMM YY")}</span> */}
+                    <span>Joined {dayjs(usersData?.created_at).format("MMM YY")}</span>
                 </div>
                 <div className="contactDetails">
                     <div className="contactInfo">
@@ -91,6 +92,8 @@ const SingleUserView = () => {
                     <DeviceSection
                         devicesData={data}
                         loading={loading}
+                        getData={getSinleUserDevices}
+                        setLoading={setLoading}
                     />
                 ) : (
                     !loading ? (
