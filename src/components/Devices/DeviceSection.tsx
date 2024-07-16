@@ -223,17 +223,14 @@ const DeviceSection = ({
 
                 <div className="temparatureInfo">
                   <div className="tempItems">
-                    {/* <Image
-                      className="icontemperature"
-                      alt=""
-                      src="/icontemperature.svg"
-                      height={24}
-                      width={50}
-                    /> */}
+                    
+                    <div className="temparature">
                     <Image src="/devices/temparature.svg" alt="" height={24} width={20} />
                     <Typography>
                       {item?.temperature ? item?.temperature + " C" : "--"}
                     </Typography>
+                      
+                    </div>
                     {item?.under_compensate_error ===
                       1 ? (
                       <div className="errorBlock">
