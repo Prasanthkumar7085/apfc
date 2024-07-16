@@ -95,6 +95,31 @@
               margin: 0;
             }
           }
+          &.avarageBlock {
+            border-radius: 4px;
+            background: #d0d5dd;
+            width: 80%;
+            padding: 4px 10px;
+            gap: 2px;
+
+            label {
+              font-size: clamp(10px, 0.625vw, 13px) !important;
+            }
+          }
+          &.avaragePfBlock {
+            border-radius: 4px;
+            background: #e1f0dc;
+            width: 80%;
+            padding: 4px 10px;
+            gap: 2px !important;
+
+            label {
+              font-size: clamp(10px, 0.625vw, 13px) !important;
+            }
+            p {
+              color: $greenColor !important;
+            }
+          }
         }
         &.voltageMesurement {
           grid-template-columns: repeat(1, 1fr) !important;

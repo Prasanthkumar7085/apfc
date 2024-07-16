@@ -76,7 +76,7 @@ const SingleDeviceView = () => {
                           {deviceData.voltage_measurements?.voltage_v3n.toFixed(2) + " " + "V" || "--"}
                         </Typography>
                       </div>
-                      <div className="eachBodyInfo">
+                      <div className="eachBodyInfo avarageBlock">
                         <label>Average Voltage LN</label>
                         <Typography>
                           {deviceData.voltage_measurements?.average_voltage_ln.toFixed(2) + " " + "V" || "--"}
@@ -105,7 +105,7 @@ const SingleDeviceView = () => {
                           {deviceData.voltage_measurements?.voltage_v31.toFixed(2) + " " + "V" || "--"}
                         </Typography>
                       </div>
-                      <div className="eachBodyInfo">
+                      <div className="eachBodyInfo avarageBlock">
 
                         <label>Average Voltage LL</label>
                         <Typography>
@@ -135,7 +135,7 @@ const SingleDeviceView = () => {
                           {deviceData.voltage_measurements?.current_i3.toFixed(2) + " " + "V" || "--"}
                         </Typography>
                       </div>
-                      <div className="eachBodyInfo">
+                      <div className="eachBodyInfo avarageBlock">
                         <label>Average Current</label>
                         <Typography>
                           {deviceData.voltage_measurements?.average_current.toFixed(2) + " " + "V" || "--"}
@@ -212,7 +212,7 @@ const SingleDeviceView = () => {
                       {deviceData.power_measurements?.kw3.toFixed(2) + " " + "V" || "--"}
                     </Typography>
                   </div>
-                  <div className="eachBodyInfo">
+                  <div className="eachBodyInfo avarageBlock">
 
                     <label>Total kW</label>
                     <Typography>
@@ -242,7 +242,7 @@ const SingleDeviceView = () => {
                       {deviceData.power_measurements?.kva3.toFixed(2) + " " + "V" || "--"}
                     </Typography>
                   </div>
-                  <div className="eachBodyInfo">
+                  <div className="eachBodyInfo avarageBlock">
 
                     <label>Total kVA</label>
                     <Typography>
@@ -272,7 +272,7 @@ const SingleDeviceView = () => {
                       {deviceData.power_measurements?.kvar3.toFixed(2) + " " + "V" || "--"}
                     </Typography>
                   </div>
-                  <div className="eachBodyInfo">
+                  <div className="eachBodyInfo avarageBlock">
 
                     <label>Total kVAr</label>
                     <Typography>
@@ -302,7 +302,7 @@ const SingleDeviceView = () => {
                       {deviceData.power_measurements?.pf3.toFixed(2) + " " + "V" || "--"}
                     </Typography>
                   </div>
-                  <div className="eachBodyInfo">
+                  <div className="eachBodyInfo avaragePfBlock">
 
                     <label>Average PF</label>
                     <Typography>
