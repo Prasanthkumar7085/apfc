@@ -14,7 +14,7 @@ const SingleDeviceView = () => {
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState<any>({});
 
-  const getPatientResults = async () => {
+  const getSingleDevice = async () => {
     setLoading(true);
     try {
       const response = await getSigleDeviceAPI(params?.id);
@@ -28,7 +28,7 @@ const SingleDeviceView = () => {
   };
 
   useEffect(() => {
-    getPatientResults();
+    getSingleDevice();
   }, []);
 
   const capitalizeAndRemoveUnderscore = (text: any) => {

@@ -1,14 +1,18 @@
 import ErrorMessagesComponent from "@/components/Core/ErrorMessagesComponent";
 import LoadingComponent from "@/components/Core/LoadingComponent";
-import { addDeviceAPI } from "@/services/devicesAPIs";
+import { setSingleDevice } from "@/redux/Modules/userlogin";
+import { addDeviceAPI, getSigleDeviceAPI, updateDeviceAPI } from "@/services/devicesAPIs";
 import { Box, Button, TextField } from "@mui/material";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
 const AddDevice = () => {
   const router = useRouter();
+  const params = useParams();
+  const dispatch = useDispatch();
   const [deviceDetails, setDeviceDetails] = useState<any>({
     device_name: "",
     device_serial_number: "",
@@ -19,9 +23,10 @@ const AddDevice = () => {
 
   const handleFieldValue = (event: any) => {
     const { name, value } = event.target;
+    const deviceVAlue = value.replace(/^\s+/, '');
     setDeviceDetails({
       ...deviceDetails,
-      [name]: value,
+      [name]: deviceVAlue,
     });
   };
 
@@ -49,6 +54,58 @@ const AddDevice = () => {
       setLoading(false);
     }
   };
+
+  const updateDevice = async () => {
+    setLoading(true);
+    try {
+      const payload = { ...deviceDetails };
+      let response: any = await updateDeviceAPI(payload, params?.id);
+
+      if (response.success) {
+        setErrorMessages(null);
+        toast.success(response.message);
+        setTimeout(() => {
+          router.push(
+            `/devices/${params?.id}/update-settings?state=Level1`
+          );
+        }, 1000);
+      } else if (response.status === 422) {
+        setErrorMessages(response.error_data);
+        throw response;
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getSingleDevice = async () => {
+    setLoading(true);
+    try {
+      const response = await getSigleDeviceAPI(params?.id);
+      setDeviceDetails(response?.data);
+      dispatch(setSingleDevice(response?.data));
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (params?.id) {
+      getSingleDevice();
+    }
+  }, [])
+  const apiCalls = () => {
+    if (params?.id) {
+      updateDevice();
+    } else {
+      addDevice();
+    }
+  }
+
   return (
     <Box id="addUser">
       <div className="feildBlock">
@@ -85,7 +142,7 @@ const AddDevice = () => {
 
       <div className="feildBlock">
         <label className="label">
-          Device Location 
+          Device Location
         </label>
         <TextField
           className="textFeild"
@@ -103,9 +160,9 @@ const AddDevice = () => {
         variant="contained"
         color="success"
         sx={{ alignSelf: "flex-end" }}
-        onClick={addDevice}
+        onClick={apiCalls}
       >
-        Add Device
+        {params?.id ? "Update Device" : "Add Device"}
       </Button>
       <LoadingComponent loading={loading} />
     </Box>

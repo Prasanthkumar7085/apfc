@@ -116,7 +116,24 @@ const DeviceSection = ({
                     <h4 className="deviceTItle">
                       {capitalizeFirstTwoWords(item?.device_name) || "--"}
                     </h4>
+
                     <div className="settingsBlock">
+                      <div className="backBtn editbtn"
+                        title="Edit Device"
+                        style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
+                        onClick={() => {
+                          router.push(`/devices/${item?.id}/edit`)
+                        }}
+                      >
+                        <Image
+                          alt=""
+                          src="/edit-user.svg"
+                          width={10}
+                          height={10}
+
+                        />
+                        <span>Edit</span>
+                      </div>
                       <div
                         className={item?.status == "ACTIVE" ? "deviceStatus online" : "deviceStatus offline"}
                         style={{ cursor: "pointer" }}
@@ -156,6 +173,7 @@ const DeviceSection = ({
                         src="/iconsetting.svg"
                         height={25}
                         width={25}
+                        title="View Settings"
                         style={{ cursor: "pointer" }}
                         onClick={() =>
                           router.push(`/devices/${item.id}/view-settings?state=Level1`
@@ -220,13 +238,13 @@ const DeviceSection = ({
 
                 <div className="temparatureInfo">
                   <div className="tempItems">
-                    
+
                     <div className="temparature">
-                    <Image src="/devices/temparature.svg" alt="" height={24} width={20} />
-                    <Typography>
-                      {item?.temperature ? item?.temperature + " C" : "--"}
-                    </Typography>
-                      
+                      <Image src="/devices/temparature.svg" alt="" height={24} width={20} />
+                      <Typography>
+                        {item?.temperature ? item?.temperature + " C" : "--"}
+                      </Typography>
+
                     </div>
                     {item?.under_compensate_error ===
                       1 ? (
@@ -381,7 +399,7 @@ const DeviceSection = ({
                         }}
                       >
                         Remove Assign User
-                      </Button>): ("")}
+                      </Button>) : ("")}
                     {item?.user_full_name ? (
                       <div className="userInfo">
                         <Avatar className="userAvathar">
@@ -398,6 +416,7 @@ const DeviceSection = ({
                     <Button
                       variant="outlined"
                       className="viewBtn"
+                      title="View Device"
                       onClick={() => {
                         router.push(`/devices/${item?.id}`);
                       }}
@@ -459,7 +478,7 @@ const DeviceSection = ({
       <DeleteDialog
         deleteUser={deleteAssignUser}
         headerName="Delete Assign User"
-        lable="You Wan't Delete Assign User"
+        lable="You Wan't To Delete Assign User"
         open={open}
         closeDialog={closeDialog}
       />

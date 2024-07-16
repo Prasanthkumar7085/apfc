@@ -218,7 +218,7 @@ const ListUsers = () => {
             <DeleteDialog
                 deleteUser={deleteUser}
                 headerName="Delete User"
-                lable="You Wan't Delete User"
+                lable="You Wan't To Delete User"
                 open={dialogOpen}
                 closeDialog={closeDialog}
             />
