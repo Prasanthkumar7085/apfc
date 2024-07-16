@@ -109,6 +109,11 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                                 />
                             </ListItemIcon>
                             <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name)} />
+                            {device?.user_full_name ? (
+                                <Image src="/user-profile.svg" alt="" width={15} height={15} />
+                            ) : (
+                                ""
+                            )}
                         </ListItem>
                     ))}
                 </List>
