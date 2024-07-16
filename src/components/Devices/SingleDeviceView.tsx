@@ -159,7 +159,7 @@ const SingleDeviceView = () => {
                       <div className="eachBodyInfo" key={index}>
                         <label>{capitalizeAndRemoveUnderscore(item)}</label>
                         <Typography className={deviceData?.errors[item] === true ? "errorData" : "nonError"} >
-                         
+
                           {deviceData?.errors[item] === true
                             ? <Image
                               alt=""
@@ -170,7 +170,7 @@ const SingleDeviceView = () => {
                             : "" || ""}
                           {deviceData?.errors[item] === true
                             ? "Error"
-                            : "" || "--"}
+                            : "Error" || "--"}
                         </Typography>
                       </div>
                     ))}
@@ -351,7 +351,7 @@ const SingleDeviceView = () => {
             ) : (
               <div className="noData">No Data</div>
             )}
-           
+
           </Paper>
         </Grid>
 
