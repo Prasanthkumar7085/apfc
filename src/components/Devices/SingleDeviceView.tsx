@@ -34,7 +34,6 @@ const SingleDeviceView = () => {
   const capitalizeAndRemoveUnderscore = (text: any) => {
     return text.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
   };
-  console.log(deviceData, "fdsppdspds")
 
   const firstRowHeight = '100%';
   return (
