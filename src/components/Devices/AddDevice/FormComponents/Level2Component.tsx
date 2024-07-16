@@ -18,7 +18,6 @@ const Level2Component = ({
   setLevelBasedData,
   getLevelBasedDeviceDetails,
 }: any) => {
-  console.log(levelBasedData, "fdi9eww00e0");
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
     setLevelBasedData({
@@ -37,12 +36,12 @@ const Level2Component = ({
             </label>
             <Switch
               className="switchComponent"
-              size="small" 
-                name={setting.name}
-                checked={levelBasedData[setting.name] == "ON" ? true : false}
-                onChange={handleChange}
-                inputProps={{ "aria-label": setting.label }}
-              />
+              size="small"
+              name={setting.name}
+              checked={levelBasedData[setting.name] == "ON" ? true : false}
+              onChange={handleChange}
+              inputProps={{ "aria-label": setting.label }}
+            />
           </div>
         );
       case "input":
