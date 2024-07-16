@@ -28,20 +28,20 @@ const Level4Settings = ({ levelBasedData }: any) => {
                 {levelBasedData[setting?.name] || "--"}
               </Typography>
             ) : (
-                <>
+              <>
                 {
-                    setting?.name == "temperature" ?
-                      <div className="tempBlock">
-                        <Image src="/devices/temparature.svg" alt="" height={30} width={30}/>
-                        <Typography className="value">
-                          {levelBasedData[setting?.name] + " C" || "--"}
-                        </Typography>
-                      </div>
-                      : <Typography className="value">
-                        {levelBasedData[setting?.name] || "--"}
+                  setting?.name == "temperature" ?
+                    <div className="tempBlock">
+                      <Image src="/devices/temparature.svg" alt="" height={30} width={30} />
+                      <Typography className="value">
+                        {levelBasedData[setting?.name] ? levelBasedData[setting?.name] + " C" : "--"}
                       </Typography>
+                    </div>
+                    : <Typography className="value">
+                      {levelBasedData[setting?.name] || "--"}
+                    </Typography>
                 }
-            </>
+              </>
             )}
           </div>
         );

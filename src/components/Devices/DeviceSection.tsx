@@ -109,8 +109,6 @@ const DeviceSection = ({
       >
         {devicesData?.length ? (
           devicesData.map((item: any, index: number) => {
-            console.log(item);
-
             return (
               <div className="eachDeviceBlock" key={index}>
                 <div className="headerBlock">
@@ -160,8 +158,7 @@ const DeviceSection = ({
                         width={25}
                         style={{ cursor: "pointer" }}
                         onClick={() =>
-                          router.push(
-                            `devices/${item.id}/view-settings?state=Level1`
+                          router.push(`/devices/${item.id}/view-settings?state=Level1`
                           )
                         }
                       />

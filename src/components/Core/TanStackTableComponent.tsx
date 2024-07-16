@@ -153,22 +153,22 @@ const TanStackTableComponent: FC<pageProps> = ({
                                                             header.getContext()
                                                         )}
                                                         {{
-                                                            asc: (
-                                                                <Image
-                                                                    src="/core/sort/sort-asc.svg"
-                                                                    height={8}
-                                                                    width={8}
-                                                                    alt="image"
-                                                                />
-                                                            ),
-                                                            desc: (
-                                                                <Image
-                                                                    src="/core/sort/sort-desc.svg"
-                                                                    height={8}
-                                                                    width={8}
-                                                                    alt="image"
-                                                                />
-                                                            ),
+                                                            // asc: (
+                                                            //     <Image
+                                                            //         src="/core/sort/sort-asc.svg"
+                                                            //         height={8}
+                                                            //         width={8}
+                                                            //         alt="image"
+                                                            //     />
+                                                            // ),
+                                                            // desc: (
+                                                            //     <Image
+                                                            //         src="/core/sort/sort-desc.svg"
+                                                            //         height={8}
+                                                            //         width={8}
+                                                            //         alt="image"
+                                                            //     />
+                                                            // ),
                                                         }[header.column.getIsSorted() as string] ?? (
                                                                 <Image
                                                                     src="/core/sort/un-sort.svg"
@@ -228,20 +228,20 @@ const TanStackTableComponent: FC<pageProps> = ({
                         ) : !loading ? (
                             <tr>
                                 <td colSpan={10}>
-                                   
-                                        <div className="noDataBlock">
-                                            <Image src="/No data Image.svg" alt="" height={300} width={300} />
-                                            
-                                            <Button
-                                                className="addUserBtn"
-                                                variant="outlined"
-                                                onClick={() => router.push('/users/add')}
-                                                startIcon={<AddIcon />}
-                                                sx={{marginTop:"2rem"}}
-                                            >
-                                                Add New User
-                                            </Button>
-                                        </div>
+
+                                    <div className="noDataBlock">
+                                        <Image src="/No data Image.svg" alt="" height={300} width={300} />
+
+                                        <Button
+                                            className="addUserBtn"
+                                            variant="outlined"
+                                            onClick={() => router.push('/users/add')}
+                                            startIcon={<AddIcon />}
+                                            sx={{ marginTop: "2rem" }}
+                                        >
+                                            Add New User
+                                        </Button>
+                                    </div>
                                 </td>
                             </tr>
                         ) : (

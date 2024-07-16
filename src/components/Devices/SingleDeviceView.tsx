@@ -51,7 +51,61 @@ const SingleDeviceView = () => {
                 <div className="cardHeader">
                   <Typography variant="h6">Voltage Measurements</Typography>
                 </div>
-                {Object.keys(deviceData).length && deviceData.voltage_measurements !== null ? (
+                <div className="eachBodyInfo">
+                  <label>Voltage V1N</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.voltage_v1n.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Voltage V2N</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.voltage_v2n.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Voltage V3N</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.voltage_v3n.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Average Voltage LN</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.average_voltage_ln.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                </div>
+                <div className="eachBodyInfo">
+                  <label>Voltage V12</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.voltage_v12.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Voltage V23</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.voltage_v23.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Voltage V31</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.voltage_v31.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Average Voltage LL</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.average_voltage_ll.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                </div>
+                <div className="eachBodyInfo">
+                  <label>Current I1</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.current_i1.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Current I2</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.current_i2.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Current I3</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.current_i3.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                  <label>Average Current</label>
+                  <Typography>
+                    {deviceData.voltage_measurements?.average_current.toFixed(2) + " " + "V" || "--"}
+                  </Typography>
+                </div>
+                {/* {Object.keys(deviceData).length && deviceData.voltage_measurements !== null ? (
                   <div className="cardBody">
                     {Object.keys(deviceData.voltage_measurements).map((item, index) => (
                       <div className="eachBodyInfo" key={index}>
@@ -64,7 +118,7 @@ const SingleDeviceView = () => {
                   </div>
                 ) : (
                   <div className="noData">No Data</div>
-                )}
+                )} */}
 
               </Paper>
             </Grid>
@@ -80,7 +134,7 @@ const SingleDeviceView = () => {
                     {Object.keys(deviceData.errors).map((item, index) => (
                       <div className="eachBodyInfo" key={index}>
                         <label>{capitalizeAndRemoveUnderscore(item)}</label>
-                        <Typography>
+                        <Typography className={deviceData?.errors[item] === true ? "Error" : "nonError"} >
 
                           {deviceData?.errors[item] === true
                             ? "Error"
@@ -102,8 +156,104 @@ const SingleDeviceView = () => {
             <div className="cardHeader">
               <Typography variant="h6">Power Measurements</Typography>
             </div>
+            <div className="eachBodyInfo">
+              <label>kW1</label>
+              <Typography>
+                {deviceData.power_measurements?.kw1.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kW2</label>
+              <Typography>
+                {deviceData.power_measurements?.kw2.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kW3</label>
+              <Typography>
+                {deviceData.power_measurements?.kw3.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>Total kW</label>
+              <Typography>
+                {deviceData.power_measurements?.total_kw.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+            </div>
+            <div className="eachBodyInfo">
+              <label>kVA1</label>
+              <Typography>
+                {deviceData.power_measurements?.kva1.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kVA2</label>
+              <Typography>
+                {deviceData.power_measurements?.kva2.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kVA3</label>
+              <Typography>
+                {deviceData.power_measurements?.kva3.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>Total kVA</label>
+              <Typography>
+                {deviceData.power_measurements?.total_kva.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+            </div>
+            <div className="eachBodyInfo">
+              <label>kVAr1</label>
+              <Typography>
+                {deviceData.power_measurements?.kvar1.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kVAr2</label>
+              <Typography>
+                {deviceData.power_measurements?.kvar2.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kVAr3</label>
+              <Typography>
+                {deviceData.power_measurements?.kvar3.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>Total kVAr</label>
+              <Typography>
+                {deviceData.power_measurements?.total_kvar.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+            </div>
+            <div className="eachBodyInfo">
+              <label>PF1</label>
+              <Typography>
+                {deviceData.power_measurements?.pf1.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>PF2</label>
+              <Typography>
+                {deviceData.power_measurements?.pf2.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>PF3</label>
+              <Typography>
+                {deviceData.power_measurements?.pf3.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>Average PF</label>
+              <Typography>
+                {deviceData.average_pf.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+            </div>
+            <div className="eachBodyInfo">
+              <label>kWh</label>
+              <Typography>
+                {deviceData.power_measurements?.kwh.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kVAh</label>
+              <Typography>
+                {deviceData.power_measurements?.kvah.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>kVArh</label>
+              <Typography>
+                {deviceData.power_measurements?.kvarh.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+            </div>
+            <div className="eachBodyInfo">
+              <label>Temperature</label>
+              <Typography>
+                {deviceData.power_measurements?.temperature.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+              <label>Frequency</label>
+              <Typography>
+                {deviceData.power_measurements?.frequency.toFixed(2) + " " + "V" || "--"}
+              </Typography>
+            </div>
 
-            {Object.keys(deviceData).length && deviceData.power_measurements !== null ? (
+            {/* {Object.keys(deviceData).length && deviceData.power_measurements !== null ? (
               <div className="cardBody">
                 {Object.keys(deviceData.power_measurements).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
@@ -117,7 +267,7 @@ const SingleDeviceView = () => {
               </div>
             ) : (
               <div className="noData">No Data</div>
-            )}
+            )} */}
 
 
           </Paper>
