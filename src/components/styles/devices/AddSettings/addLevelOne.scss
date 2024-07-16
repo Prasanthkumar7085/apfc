@@ -3,6 +3,7 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
+
   .eachFormContainer {
     flex: 0 1 32.66%;
     background-color: $whiteColor;
@@ -21,6 +22,7 @@
       letter-spacing: 0;
       border-bottom: 1px solid #d5d9dd;
     }
+
     .fieldGroup {
       padding: 0 0.5rem;
       margin-top: 9.6px;
@@ -34,8 +36,10 @@
         font-size: clamp(11px, 0.625vw, 14px);
         font-weight: 400;
       }
+
       .settingsTextFeild {
         width: 100%;
+
         .MuiInputBase-root {
           background: $whiteColor;
           color: #6a718599;
@@ -51,6 +55,7 @@
           fieldset {
             border: 0 !important;
           }
+
           .MuiTypography-root {
             font-size: clamp(0.75em, 0.72vw, 1.1em);
           }
@@ -59,6 +64,7 @@
 
       .settingSelectFeild {
         width: 100%;
+
         .MuiSelect-select {
           width: 100%;
           font-family: $fontPrimary;
@@ -66,32 +72,39 @@
           font-size: clamp(0.75em, 0.72vw, 1.1em);
           border: 1px solid $textFeildStroke;
           border-radius: 4px;
-          color: #6a718599;
+          color: $blackColor;
         }
+
         .MuiSvgIcon-root {
           width: 0.9em;
         }
+
         fieldset {
           border: 0;
           border-radius: 4px;
         }
       }
+
       .radioGrp {
         .MuiFormGroup-root {
           display: flex;
           flex-direction: row;
           gap: 1rem;
           margin: 0.5rem 0 0;
+
           .MuiFormControlLabel-root {
             margin: 0;
           }
+
           .MuiButtonBase-root {
             color: #d9d9d9;
             padding: 0;
+
             &.Mui-checked {
               color: $primaryColor;
             }
           }
+
           .MuiTypography-root {
             color: rgba(0, 0, 0, 0.7);
             font-family: $fontPrimary;
@@ -100,11 +113,13 @@
             padding-left: 4px;
           }
         }
+
         .MuiSvgIcon-root {
           font-size: 16px;
         }
       }
     }
+
     .radioFeildGrp {
       padding: 0 0.5rem;
       margin-top: 9.6px;
@@ -112,6 +127,7 @@
       flex-direction: row;
       align-items: center;
       gap: 1rem;
+
       &.sameLine {
         min-width: 100px;
         max-width: 150px;
@@ -125,24 +141,29 @@
         font-size: clamp(12px, 0.72vw, 15px);
         font-weight: 500;
       }
+
       .switchComponent {
         .MuiSwitch-thumb {
           color: #e47078;
         }
+
         .Mui-checked {
           .MuiSwitch-thumb {
             color: $greenColor !important;
           }
         }
+
         .MuiSwitch-track {
           background-color: #e47078;
         }
-        .Mui-checked + .MuiSwitch-track {
+
+        .Mui-checked+.MuiSwitch-track {
           background-color: $greenColor !important;
         }
       }
     }
   }
+
   .eachFormCard {
     flex: 0 1 25%;
     background-color: $whiteColor;
@@ -153,6 +174,7 @@
     grid-template-columns: 70px auto;
     align-items: flex-start;
     gap: 1rem;
+
     .fieldGroup {
       display: flex;
       flex-direction: column;
@@ -165,8 +187,10 @@
         font-weight: 400;
         margin-top: 1.2rem;
       }
+
       .settingsTextFeild {
         width: 50%;
+
         .MuiInputBase-root {
           background: $whiteColor;
           color: #6a718599;
@@ -182,6 +206,7 @@
           fieldset {
             border: 0 !important;
           }
+
           .MuiTypography-root {
             font-size: clamp(0.75em, 0.72vw, 1.1em);
           }
@@ -190,6 +215,7 @@
 
       .settingSelectFeild {
         width: 100%;
+
         .MuiSelect-select {
           width: 100%;
           font-family: $fontPrimary;
@@ -197,11 +223,13 @@
           font-size: clamp(0.75em, 0.72vw, 1.1em);
           border: 1px solid $textFeildStroke;
           border-radius: 4px;
-          color: #6a718599;
+          color: $blackColor;
         }
+
         .MuiSvgIcon-root {
           width: 0.9em;
         }
+
         fieldset {
           border: 0;
           border-radius: 4px;
@@ -219,6 +247,7 @@
   margin-top: 0.5rem;
   width: 90%;
   box-sizing: border-box;
+
   .btn {
     border-radius: 8px;
     text-transform: capitalize;
@@ -227,9 +256,11 @@
     font-weight: 500;
     box-shadow: none;
     min-width: inherit;
+
     &.cancelBtn {
       color: $secondaryColor;
     }
+
     &.saveBtn {
       background-color: $secondaryColor;
       color: $whiteColor;

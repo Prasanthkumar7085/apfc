@@ -31,19 +31,23 @@ $inputTxtColor: #bdbdbd;
     padding: 1px 2px 1px 6px;
     margin-bottom: 1.5rem;
   }
+
   .feildBlock {
     margin-bottom: 1rem;
     @include flex-column;
     gap: 5px;
+
     label {
       color: $labelColor;
       font-family: $fontPrimary;
       font-size: clamp(12px, 0.72vw, 15px);
       font-weight: 500;
+
       span {
         color: $backBtnCOlor !important;
       }
     }
+
     .textFeild {
       .MuiInputBase-root {
         background: $whiteColor;
@@ -60,6 +64,7 @@ $inputTxtColor: #bdbdbd;
         fieldset {
           border: 0 !important;
         }
+
         &:hover {
           border-color: $inputHoverBorder;
         }
@@ -67,11 +72,13 @@ $inputTxtColor: #bdbdbd;
         &:focus-within {
           border-color: $inputHoverBorder;
         }
+
         &.Mui-focused {
           border-color: $inputHoverBorder;
         }
       }
     }
+
     .selectComponent {
       .MuiSelect-select {
         width: 100%;
@@ -80,7 +87,7 @@ $inputTxtColor: #bdbdbd;
         font-size: clamp(0.75em, 0.72vw, 1.1em);
         border: 1px solid $inputBorderColor;
         border-radius: 4px;
-        color: $inputTxtColor;
+        color: $blackColor;
         box-sizing: border-box;
 
         &:hover {
@@ -95,14 +102,17 @@ $inputTxtColor: #bdbdbd;
           border-color: $inputHoverBorder;
         }
       }
+
       .MuiSvgIcon-root {
         width: 0.9em;
       }
+
       fieldset {
         border: 0;
       }
     }
   }
+
   .addUserBtn {
     border-radius: 6px;
     background: $primaryColor;
@@ -121,6 +131,7 @@ $inputTxtColor: #bdbdbd;
   display: flex;
   align-items: center;
   gap: 1rem;
+
   .eachStep {
     background-color: $whiteColor;
     border-radius: 8px;
@@ -133,6 +144,7 @@ $inputTxtColor: #bdbdbd;
     text-align: left;
     box-sizing: border-box;
     min-width: 110px;
+
     &.active {
       color: $primaryColor !important;
       border: 1px solid $primaryColor;

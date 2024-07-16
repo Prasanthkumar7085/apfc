@@ -25,10 +25,12 @@ $avatharColor: #ff7a00;
     padding: 1px 2px 1px 6px;
     margin-bottom: 1.5rem;
   }
+
   .userInfo {
     .profileGrp {
       @include align-center;
       gap: 0.6rem;
+
       .profileavatarIcon {
         width: 35px;
         height: 35px;
@@ -42,6 +44,7 @@ $avatharColor: #ff7a00;
         font-weight: 500;
         @include align-center;
       }
+
       .profileName {
         color: $blackColor;
         font-size: clamp(14px, 0.93vw, 20px);
@@ -50,19 +53,23 @@ $avatharColor: #ff7a00;
         margin: 0;
         padding-right: 0.5rem;
       }
+
       .status {
         gap: 4px;
         font-size: clamp(13px, 0.83vw, 16px);
         font-weight: 400;
         @include align-center;
+
         &.active {
           color: $greenColor;
         }
+
         &.inactive {
           color: $secondaryColor;
         }
       }
     }
+
     .joiningInfo {
       gap: 5px;
       color: $blackColor;
@@ -71,10 +78,12 @@ $avatharColor: #ff7a00;
       margin: 1rem 0;
       @include align-center;
     }
+
     .contactDetails {
       @include align-center;
       justify-content: flex-start;
       gap: 0.8rem;
+
       .contactInfo {
         color: $blackColor;
         font-size: clamp(13px, 0.83vw, 16px);
@@ -87,6 +96,7 @@ $avatharColor: #ff7a00;
       }
     }
   }
+
   .userDevices {
     box-shadow: none;
     border-radius: 8px;
@@ -94,6 +104,7 @@ $avatharColor: #ff7a00;
     overflow: hidden;
     margin-top: 16px;
     border: 1px solid $textFeildStroke;
+
     .blockHeading {
       color: $blackColor;
       font-size: clamp(14px, 0.83vw, 18px);
@@ -104,14 +115,17 @@ $avatharColor: #ff7a00;
     }
   }
 }
+
 .noDataBlock {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   margin-block: 2rem;
+
   .textBlock {
     margin-block: 2rem 1rem;
+
     .noDataTxt {
       color: $blackColor;
       text-align: center;
@@ -121,6 +135,7 @@ $avatharColor: #ff7a00;
       margin: 0;
     }
   }
+
   .addUserBtn {
     border-radius: 4px;
     border: 1px solid $primaryColor;
@@ -131,19 +146,23 @@ $avatharColor: #ff7a00;
     text-transform: capitalize;
     letter-spacing: 0;
     padding: 5px 10px;
+
     svg {
       font-size: 16px;
     }
+
     &:hover {
       border: 1px solid $primaryColor;
       color: $primaryColor;
     }
   }
 }
+
 .devicesGrp {
   padding: 12px;
   max-height: calc(100vh - 160px);
   overflow-y: auto;
+
   .eachDeviceBlock {
     background-color: $whiteColor;
     box-shadow: none;
@@ -151,13 +170,23 @@ $avatharColor: #ff7a00;
     border-radius: 8px;
     margin-bottom: 1rem;
   }
+
   .headerBlock {
     border-bottom: 1px solid $textFeildStroke;
     padding: 10px;
+
+    .editbtn {
+      padding: 4px 10px !important;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
     .header {
       @include align-center();
       justify-content: space-between;
       margin-bottom: 1rem;
+
       .deviceTItle {
         color: $blackColor;
         font-family: $fontPrimary;
@@ -165,22 +194,27 @@ $avatharColor: #ff7a00;
         font-weight: 500;
         margin: 0;
       }
+
       .settingsBlock {
         @include align-center();
         gap: 1rem;
+
         .deviceStatus {
           border-radius: 4px;
           padding: 6px 10px;
           gap: 4px;
           @include align-center();
+
           &.online {
             background-color: #45a8451a;
             color: $primaryColor;
           }
+
           &.offline {
             color: $secondaryColor !important;
             background-color: #d948411a;
           }
+
           .statusTxt {
             font-size: clamp(13px, 0.83vw, 16px);
             font-weight: 500;
@@ -191,19 +225,23 @@ $avatharColor: #ff7a00;
       }
     }
   }
+
   .deviceInfo {
     @include align-center();
     gap: 5%;
+
     .eachDeviceInfo {
       display: flex;
       flex-direction: column;
       gap: 5px;
+
       .infoTitle {
         color: #878787;
         font-size: clamp(11px, 0.625vw, 14px);
         font-weight: 400;
         margin: 0;
       }
+
       .infoValue {
         color: $blackColor;
         font-size: clamp(13px, 0.83vw, 18px);
@@ -211,18 +249,21 @@ $avatharColor: #ff7a00;
         margin: 0;
       }
     }
+
     .avarageInfo {
       border-radius: 4px;
       background: #e1f0dc;
       display: flex;
       flex-direction: column;
       padding: 4px 8px;
+
       .infoTitle {
         color: #878787;
         font-size: clamp(8px, 0.55vw, 12px);
         font-weight: 400;
         margin: 0;
       }
+
       .infoValue {
         color: $greenColor;
         font-size: clamp(11px, 0.72vw, 16px);
@@ -231,28 +272,34 @@ $avatharColor: #ff7a00;
       }
     }
   }
+
   .temparatureInfo {
     background: #d3d9f066;
     padding: 8px 12px;
     @include align-center();
     justify-content: space-between;
+
     .tempItems {
       @include align-center();
       gap: 1rem;
+
       .temparature {
         @include align-center();
         gap: 4px;
+
         p {
           font-size: clamp(13px, 0.83vw, 17px);
           font-family: $fontPrimary;
         }
       }
+
       .errorBlock {
         @include align-center();
         gap: 4px;
         border-radius: 60px;
         background: #d948411a;
         padding: 4px 10px;
+
         h6 {
           color: $secondaryColor;
           font-size: clamp(13px, 0.83vw, 16px);
@@ -261,9 +308,11 @@ $avatharColor: #ff7a00;
         }
       }
     }
+
     .actionsList {
       @include align-center();
       gap: 1rem;
+
       .assignUserBtn {
         border-radius: 4px;
         background: $whiteColor;
@@ -276,15 +325,18 @@ $avatharColor: #ff7a00;
         letter-spacing: 0;
         padding: 4px 15px;
       }
+
       .userInfo {
         @include align-center();
         gap: 4px;
+
         .userAvathar {
           background-color: $avatharColor;
           height: 25px;
           width: 25px;
           font-size: 12px;
         }
+
         .userName {
           color: $blackColor;
           font-size: clamp(12px, 0.72vw, 15px);
@@ -293,6 +345,7 @@ $avatharColor: #ff7a00;
           letter-spacing: 0;
         }
       }
+
       .viewBtn {
         border-radius: 4px;
         border: 1px solid $whiteColor;
