@@ -136,9 +136,8 @@ const TanStackTableComponent: FC<pageProps> = ({
                                                         // onClick={() => sortAndGetData(header)}
                                                         {...{
                                                             className: header.column.getCanSort()
-                                                                ? "cursor-pointer select-none"
+                                                                ? "select-none"
                                                                 : "",
-                                                            onClick: header.column.getToggleSortingHandler(),
                                                         }}
                                                         style={{
                                                             display: "flex",
