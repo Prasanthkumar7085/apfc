@@ -20,19 +20,23 @@
 
 #viewSettings {
   width: 95%;
+
   .headerBlock {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     .userInfo {
       display: flex;
       align-items: center;
       gap: 1rem;
+
       .userProfile {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+
         h6 {
           color: $blackColor;
           font-family: $fontPrimary;
@@ -41,29 +45,35 @@
           line-height: 100%;
         }
       }
+
       .status {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+
         p {
           font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 400;
+
           &.active {
             color: $greenColor;
           }
+
           &.inactive {
             color: $secondaryColor;
           }
         }
       }
+
       .editbtn {
         padding: 4px 10px !important;
         display: flex;
         align-items: center;
-        gap: 3px;
+        gap: 6px;
       }
     }
+
     .levelTabs {
       .tabBtn {
         text-transform: capitalize;
@@ -72,22 +82,26 @@
         font-size: clamp(13px, 0.83vw, 17px);
         font-weight: 400;
         padding: 0;
+
         &.Mui-selected {
           color: #ff7a00;
         }
       }
+
       .MuiTabs-indicator {
         background-color: #ff7a00;
       }
     }
   }
 }
+
 #levelOne {
   .form {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
+
     .eachFormContainer {
       flex: 0 1 49%;
       background-color: $whiteColor;
@@ -107,10 +121,12 @@
         font-weight: 500;
         letter-spacing: 0;
         border-bottom: 1px solid #d5d9dd;
+
         &:not(:first-child) {
           padding: 1rem 0.5rem 0.4rem !important;
         }
       }
+
       .fieldGroup {
         padding: 0 0.5rem;
         margin-top: 9.6px;
@@ -131,20 +147,25 @@
           font-family: $fontPrimary;
           font-size: clamp(13px, 0.83vw, 16px);
           font-weight: 400;
+
           &.radioOff {
             color: $secondaryColor !important;
           }
+
           &.radioOn {
             color: $greenColor;
           }
         }
+
         .passwordSetting {
           display: flex;
           align-items: center;
           gap: 0.5rem;
+
           .settingsTextFeild {
             width: 40% !important;
           }
+
           .resetPasswordTxt {
             color: $secondaryColor;
             font-family: $fontPrimary;
@@ -152,17 +173,20 @@
             font-weight: 400;
             letter-spacing: 0;
             text-transform: capitalize;
+
             &:hover {
               background: transparent;
             }
           }
         }
+
         &.levelFanFeild {
           margin: 0;
 
           .radioOff {
             position: relative;
             padding-left: 13px;
+
             &::before {
               content: "";
               height: 6px;
@@ -174,10 +198,12 @@
               left: 3px;
             }
           }
+
           .radioOn {
             color: $greenColor;
             position: relative;
             padding-left: 13px;
+
             &::before {
               content: "";
               height: 6px;
@@ -191,26 +217,31 @@
           }
         }
       }
+
       .fanSettings {
         display: flex;
         align-items: center;
         justify-content: flex-start;
         gap: 0.5rem;
         padding: 1rem 0.5rem 0.3rem;
+
         .levelFanGrp {
           display: flex;
           align-items: center;
           gap: 1rem;
+
           .tempBlock {
             display: flex;
             align-items: center;
           }
         }
       }
+
       .grp {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         grid-gap: 0.5rem 2rem;
+
         &.timingSettings {
           grid-template-columns: 100px auto !important;
         }
@@ -225,6 +256,7 @@
   font-weight: 500;
   box-shadow: 0px 0px 10px #e6e4e4;
 }
+
 .MuiTooltip-arrow {
   color: #e6e4e4;
 }
