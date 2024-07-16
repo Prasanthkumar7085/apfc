@@ -14,7 +14,7 @@ const LayoutNavbar: FC<pageProps> = ({ children }) => {
         <div className="mainBodyContainer" >
             <SideNavBar />
             <div className="mainContainer" style={{
-                backgroundColor: ['/update-settings', '/devices/add', '/users/add'].some(path => pathname.includes(path)) ? "#F5F7FA" : "#fff"
+                backgroundColor: ['/update-settings', '/devices/add', '/users/add', "/edit"].some(path => pathname.includes(path)) ? "#F5F7FA" : "#fff"
             }}>
                 <HeadNavbar />
                 <div className="mainChlidren">
