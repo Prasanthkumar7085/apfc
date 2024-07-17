@@ -172,18 +172,18 @@ const HeadNavbar = () => {
                   ),
                 }}
               />
-            
-                <Select
+
+              <Select
                 className="defaultSelect"
-                  disableUnderline
-                  displayEmpty
-                  value={status}
-                  onChange={handleStatusChange}
-                >
-                  <MenuItem className="menuItem" value="">All</MenuItem>
-                <MenuItem className="menuItem" value="ACTIVE">Active</MenuItem>
-                <MenuItem className="menuItem" value="INACTIVE">Inactive</MenuItem>
-                </Select>
+                disableUnderline
+                displayEmpty
+                value={status}
+                onChange={handleStatusChange}
+              >
+                <MenuItem className="menuItem" value="">All</MenuItem>
+                <MenuItem className="menuItem" value="ACTIVE">{path == '/users' ? "Active" : "Online"}</MenuItem>
+                <MenuItem className="menuItem" value="INACTIVE">{path == '/users' ? "Inactive" : "Ofline"}</MenuItem>
+              </Select>
               {path == "/users" ? (
                 <Button
                   className="addUserBtn"
