@@ -28,7 +28,7 @@ const Level4Component = ({
               value={
                 levelBasedData?.[setting.name]
                   ? levelBasedData?.[setting.name]
-                  : null
+                  : "NONE"
               }
             >
               {setting.options?.map((option: any) => (

@@ -267,7 +267,7 @@ export const fanSettings: any = [
   {
     name: "set_status",
     type: "select",
-    options: ["None", "Fixed ON", "Temperature On", "Temperature Off"],
+    options: ["NONE", "Fixed ON", "Temperature On", "Temperature Off"],
   },
   { name: "temperature", label: "Temperature", type: "number", unit: "c" },
 ];
