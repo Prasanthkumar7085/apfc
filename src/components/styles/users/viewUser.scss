@@ -265,6 +265,7 @@ $avatharColor: #ff7a00;
     padding: 8px 12px;
     @include align-center();
     justify-content: space-between;
+    border-radius: 0 0 6px 6px;
 
     .tempItems {
       @include align-center();

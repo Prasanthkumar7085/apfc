@@ -18,7 +18,7 @@ $inputBorderColor: #9c9c9c;
 
 .mainTable {
   .tableContainer {
-  height: calc(-160px + 100vh);
+  max-height: calc(-160px + 100vh);
     overflow: auto;
     background: transparent;
     border-radius: 8px;
@@ -131,6 +131,7 @@ $inputBorderColor: #9c9c9c;
     }
     .rowPerPage {
       display: flex;
+      align-items: center;
       .selectComponent {
         font-family: $fontPrimary;
         border: 1px solid $inputBorderColor;
