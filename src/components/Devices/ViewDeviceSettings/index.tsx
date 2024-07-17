@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Tabs,
-  Tab,
-  Typography,
-  Avatar,
-
-} from "@mui/material";
+import { Box, Tabs, Tab, Typography, Avatar } from "@mui/material";
 import {
   useParams,
   usePathname,
@@ -43,11 +36,7 @@ function TabPanel(props: any) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box className="tab-content">
-          {children}
-        </Box>
-      )}
+      {value === index && <Box className="tab-content">{children}</Box>}
     </div>
   );
 }
@@ -57,9 +46,7 @@ const SingleDeviceSettings = () => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const deviceName = useSelector(
-    (state: any) => state?.auth?.singleDevice
-  );
+  const deviceName = useSelector((state: any) => state?.auth?.singleDevice);
 
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
@@ -153,16 +140,15 @@ const SingleDeviceSettings = () => {
 
   const openDialog = () => {
     setOpen(true);
-  }
+  };
 
   const closeDialog = () => {
-    setOpen(false)
-  }
+    setOpen(false);
+  };
 
   return (
     <div id="viewSettings">
-
-      <div className="headerBlock" >
+      <div className="headerBlock">
         <Tabs
           className="levelTabs"
           value={value}
@@ -177,37 +163,53 @@ const SingleDeviceSettings = () => {
         <div className="userInfo">
           {deviceName?.user_full_name ? (
             <div className="userProfile">
-              <Avatar alt="Aasia Ramanathan" sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }} >
+              <Avatar
+                alt="Aasia Ramanathan"
+                sx={{ bgcolor: "#FF7A00", width: "30px", height: "30px" }}
+              >
                 {deviceName?.user_full_name?.[0].toUpperCase() || "--"}
               </Avatar>
               <Typography variant="h6">
-                {capitalizeFirstTwoWords(deviceName?.user_full_name) ||
-                  "--"}
+                {capitalizeFirstTwoWords(deviceName?.user_full_name) || "--"}
               </Typography>
             </div>
           ) : (
             ""
           )}
           <div className="status">
-            {deviceName?.status == "ACTIVE" ?
-              <Image alt="" src="/devices/icondot-online.svg" width={8} height={8} /> : <Image alt="" src="/devices/icondot-offline.svg" width={8} height={8} />}
+            {deviceName?.status == "ACTIVE" ? (
+              <Image
+                alt=""
+                src="/devices/icondot-online.svg"
+                width={8}
+                height={8}
+              />
+            ) : (
+              <Image
+                alt=""
+                src="/devices/icondot-offline.svg"
+                width={8}
+                height={8}
+              />
+            )}
 
-            <Typography className={deviceName?.status == "ACTIVE" ? "active" : "inactive"} >{deviceName?.status == "ACTIVE" ? "Active" : "Inactive"}</Typography>
+            <Typography
+              className={deviceName?.status == "ACTIVE" ? "active" : "inactive"}
+            >
+              {deviceName?.status == "ACTIVE" ? "Active" : "Inactive"}
+            </Typography>
           </div>
-          <div className="backBtn editbtn"
+          <div
+            className="backBtn editbtn"
             title="Edit Device"
             style={{ cursor: "pointer", display: "flex", alignItems: "center" }}
             onClick={() => {
-              router.push(`/devices/${id}/update-settings?state=${params.get("state")}`)
+              router.push(
+                `/devices/${id}/update-settings?state=${params.get("state")}`
+              );
             }}
           >
-            <Image
-              alt=""
-              src="/edit-user.svg"
-              width={10}
-              height={10}
-
-            />
+            <Image alt="" src="/edit-user.svg" width={10} height={10} />
             <span>Edit</span>
           </div>
         </div>
