@@ -129,9 +129,11 @@ const LoginPage = () => {
                             edge="end"
                           >
                             {showPassword ? (
-                              <VisibilityOff sx={{ fontSize: "1.2rem" }} />
-                            ) : (
                               <Visibility sx={{ fontSize: "1.2rem" }} />
+
+                            ) : (
+                              <VisibilityOff sx={{ fontSize: "1.2rem" }} />
+
                             )}
                           </IconButton>
                         </InputAdornment>

@@ -83,7 +83,7 @@ const HeadNavbar = () => {
   return (
     <div className="headnav">
       {path == "/users/add" || path == `/users/${param?.id}` || path.includes(`/users/${param?.id}/edit`) ? (
-        <>
+        <div className="withBackGrp" >
           <Button
             variant="outlined"
             className="backBtn"
@@ -98,12 +98,12 @@ const HeadNavbar = () => {
             Back
           </Button>
           <h5 className="pagetitle">{userData?.full_name ? userData?.full_name || "--" : "Add New User"}</h5>
-        </>
+        </div>
       ) : (
         path == "/users" ? <h4 className="pagetitle"> Users </h4> : ""
       )}
       {path == "/devices/add" || path == `/devices/${param?.id}` || path.includes(`/devices/${param?.id}/update-settings`) || path.includes(`devices/${param?.id}/view-settings`) || path.includes(`/devices/${param?.id}/edit`) ? (
-        <>
+        <div className="withBackGrp" >
           <Button
             variant="outlined"
             className="backBtn"
@@ -122,7 +122,7 @@ const HeadNavbar = () => {
             Back
           </Button>
           <h5 className="pagetitle">{deviceData?.device_name ? deviceData?.device_name || "--" : "Add New Device"}</h5>
-        </>
+        </div>
       ) : (
         path == "/devices" ? <h4 className="pagetitle"> Devices </h4> : ""
       )}
