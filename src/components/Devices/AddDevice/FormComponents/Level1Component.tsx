@@ -129,7 +129,7 @@ const Level1Component = ({
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
           {ControlSensitivitySettings.map(renderField)}
-          <h3 className="eachBlockHeading">Commnunication Settings</h3>
+          <h3 className="eachBlockHeading">Communication Settings</h3>
           {CommunicationSettings.map(renderField)}
           <h3 className="eachBlockHeading">Display Settings</h3>
           {DisplaySettings.map(renderField)}
