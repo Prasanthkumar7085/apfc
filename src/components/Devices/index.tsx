@@ -29,6 +29,7 @@ const DevicesList = () => {
     page = searchParams?.page,
     limit = searchParams?.limit,
     search_string = searchParams?.search_string,
+    status = searchParams?.status
   }: Partial<ListDevicesApiProps>) => {
     setLoading(true);
     try {
@@ -36,6 +37,7 @@ const DevicesList = () => {
         page: page ? page : 1,
         limit: limit ? limit : 10,
         search_string: search_string ? search_string : "",
+        status: status ? status : ""
       };
       let queryString = prepareURLEncodedParams("", queryParams);
 
@@ -56,8 +58,9 @@ const DevicesList = () => {
       page: searchParams?.page ? searchParams?.page : 1,
       limit: searchParams?.limit ? searchParams?.limit : 10,
       search_string: searchParams?.search_string,
+      status: searchParams?.status
     });
-  }, [searchParams?.search_string, searchParams?.page, searchParams?.limit]);
+  }, [searchParams?.search_string, searchParams?.status, searchParams?.page, searchParams?.limit]);
 
   useEffect(() => {
     setSearchParams(
