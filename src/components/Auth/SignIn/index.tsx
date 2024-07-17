@@ -57,7 +57,6 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error(err);
-      toast.error("Error while login");
     } finally {
       setLoading(false);
     }

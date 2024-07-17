@@ -16,15 +16,18 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
     const [search, setSearch] = useState('');
     const [selectedUser, setSelectedUser] = useState<any>({});
 
-    const getAllUsers = async () => {
+    const getAllUsers = async ({
+        page = 1,
+        limit = 100,
+        search_string = search
+    }) => {
         setLoading(true);
         try {
             let queryParams: any = {
-                search_string: search ? search : ""
+                search_string: search_string ? search_string : "",
+                page: page,
+                limit: limit
             };
-            if (search) {
-                queryParams["search_string"] = search;
-            }
             const response = await getAllListUsersAPI(queryParams);
             setUsersData(response?.data || []);
         } catch (err) {
@@ -54,7 +57,11 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
     };
 
     useEffect(() => {
-        getAllUsers();
+        getAllUsers({
+            page: 1,
+            limit: 100,
+            search_string: search
+        });
     }, [search]);
 
     return (
@@ -104,7 +111,7 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                         >
                             <ListItemIcon className="radioBtn">
                                 <Radio
-                                    checked={user === selectedUser}
+                                    checked={user.id === selectedUser.id}
                                     onChange={() => setSelectedUser(user)}
                                 />
                             </ListItemIcon>

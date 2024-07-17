@@ -144,7 +144,7 @@ const AddUser = () => {
                     className="textFeild"
                     value={name}
                     onChange={(e) => handleNameChange(e)}
-                    placeholder="User Full Name"
+                    placeholder="Enter User Full Name"
                     fullWidth
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.full_name} />
@@ -155,7 +155,7 @@ const AddUser = () => {
                     className="textFeild"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="User Email"
+                    placeholder="Enter User Email"
                     fullWidth
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.email} />
@@ -166,7 +166,7 @@ const AddUser = () => {
                     className="textFeild"
                     value={phone}
                     onChange={(e) => handlePhoneChange(e)}
-                    placeholder="User Mobile"
+                    placeholder="Enter User Mobile"
                     fullWidth
                 />
                 <ErrorMessagesComponent errorMessage={errorMessages?.phone} />
@@ -179,7 +179,7 @@ const AddUser = () => {
                         value={password}
                         type={showPassword ? "text" : "password"}
                         onChange={(e) => handlePasswordChange(e)}
-                        placeholder="User Password"
+                        placeholder="Enter User Password"
                         fullWidth
                         InputProps={{
                             endAdornment: (

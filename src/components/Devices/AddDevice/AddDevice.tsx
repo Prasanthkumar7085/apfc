@@ -117,7 +117,7 @@ const AddDevice = () => {
           value={deviceDetails["device_name"]}
           name="device_name"
           onChange={handleFieldValue}
-          placeholder="Device Name"
+          placeholder="Enter Device Name"
           fullWidth
         />
         <ErrorMessagesComponent errorMessage={errorMessages?.device_name} />
@@ -132,7 +132,7 @@ const AddDevice = () => {
           value={deviceDetails["device_serial_number"]}
           name="device_serial_number"
           onChange={handleFieldValue}
-          placeholder="Device Serial Number"
+          placeholder="Enter Device Serial Number"
           fullWidth
         />
         <ErrorMessagesComponent
@@ -149,7 +149,7 @@ const AddDevice = () => {
           value={deviceDetails["location"]}
           name="location"
           onChange={handleFieldValue}
-          placeholder="Device Location"
+          placeholder="Enter Device Location"
           fullWidth
         />
         <ErrorMessagesComponent errorMessage={errorMessages?.location} />

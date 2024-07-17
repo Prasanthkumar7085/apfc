@@ -151,7 +151,7 @@ export const addDeviceAPI = async (payload: any) => {
 
 export const getAllListUsersAPI = async (params: any) => {
   try {
-    const { success, data } = await $fetch.get("/users?page=1&limit=100", params);
+    const { success, data } = await $fetch.get("/users", params);
     if (!success) {
       return handleAPIErrorResponse(data);
     }

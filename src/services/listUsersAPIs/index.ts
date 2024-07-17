@@ -80,7 +80,7 @@ export const getSigleUserDevicesAPI = async (id: any) => {
 
 export const getAllListDevicesAPI = async (params: any) => {
     try {
-        const { success, data } = await $fetch.get("/devices?page=1&limit=100", params);
+        const { success, data } = await $fetch.get("/devices", params);
         if (!success) {
             return handleAPIErrorResponse(data);
         }

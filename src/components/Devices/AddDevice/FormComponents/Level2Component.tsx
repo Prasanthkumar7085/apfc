@@ -18,6 +18,7 @@ const Level2Component = ({
   setLevelBasedData,
   getLevelBasedDeviceDetails,
 }: any) => {
+  const [errorMessages, setErrorMessages] = useState<any>();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
     setLevelBasedData({
@@ -97,6 +98,7 @@ const Level2Component = ({
       <SaveAndConfirmationButtons
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+        setErrorMessages={setErrorMessages}
       />
     </div>
   );
