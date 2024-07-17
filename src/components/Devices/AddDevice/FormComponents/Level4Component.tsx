@@ -3,12 +3,14 @@ import { fanSettings } from "@/lib/constants/addDevicesConstants";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
 import Image from "next/image";
 import { MenuItem, Select } from "@mui/material";
+import { useState } from "react";
 
 const Level4Component = ({
   levelBasedData,
   setLevelBasedData,
   getLevelBasedDeviceDetails,
 }: any) => {
+  const [errorMessages, setErrorMessages] = useState<any>();
   const renderField = (setting: any) => {
     switch (setting.type) {
       case "select":
@@ -18,18 +20,18 @@ const Level4Component = ({
               <label className="label">
                 {setting.label}
               </label> : ""}
-              <Select
-                className="settingSelectFeild"
-                onChange={handleChange}
-                name={setting.name}
-                value={levelBasedData?.[setting.name]}
-              >
-                {setting.options?.map((option: any) => (
-                  <MenuItem className="menuItem" key={option} value={option}>
-                    {option}
-                  </MenuItem>
-                ))}
-              </Select>
+            <Select
+              className="settingSelectFeild"
+              onChange={handleChange}
+              name={setting.name}
+              value={levelBasedData?.[setting.name]}
+            >
+              {setting.options?.map((option: any) => (
+                <MenuItem className="menuItem" key={option} value={option}>
+                  {option}
+                </MenuItem>
+              ))}
+            </Select>
           </div>
         );
       case "input":
@@ -59,8 +61,8 @@ const Level4Component = ({
     <div>
       <form className="form">
         <section className="eachFormCard">
-          
-            <Image  alt="" src="/car-radiator.svg" height={70} width={70} />
+
+          <Image alt="" src="/car-radiator.svg" height={70} width={70} />
           <div>
             {fanSettings.map(renderField)}
           </div>
@@ -69,6 +71,7 @@ const Level4Component = ({
       <SaveAndConfirmationButtons
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+        setErrorMessages={setErrorMessages}
       />
     </div>
   );

@@ -20,7 +20,7 @@ const DeleteDialog = ({ deleteUser, open, closeDialog, lable, headerName }: any)
                     <CloseIcon />
                 </IconButton>
             </DialogTitle>
-            <DialogContent  className="dialogContent">
+            <DialogContent className="dialogContent">
                 <p>{lable}</p>
             </DialogContent>
             <DialogActions className="dialogActions">
@@ -36,7 +36,7 @@ const DeleteDialog = ({ deleteUser, open, closeDialog, lable, headerName }: any)
                     variant="contained"
                     onClick={deleteUser}
                 >
-                    Delete
+                    Yes
                 </Button>
             </DialogActions>
         </Dialog>

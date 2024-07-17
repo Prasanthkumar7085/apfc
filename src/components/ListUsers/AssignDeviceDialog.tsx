@@ -17,15 +17,18 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
     const [search, setSearch] = useState('');
     const [selectedUser, setSelectedUser] = useState<any>({});
 
-    const getAllDevices = async () => {
+    const getAllDevices = async ({
+        page = 1,
+        limit = 100,
+        search_string = search
+    }) => {
         setLoading(true);
         try {
             let queryParams: any = {
-                search_string: search ? search : ""
+                search_string: search_string ? search_string : "",
+                page: page,
+                limit: limit
             };
-            if (search) {
-                queryParams["search_string"] = search;
-            }
             const response = await getAllListDevicesAPI(queryParams);
             setDeviceData(response?.data || []);
         } catch (err) {
@@ -42,11 +45,12 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
             };
             let response: any = await assignDeviceAPI(payload, params?.id);
 
-            if (response.success) {
+            if (response.status == 200) {
                 onClose();
                 toast.success(response.message);
                 getSinleUser();
                 getSinleUserDevices();
+                setSelectedUser(null);
             }
         } catch (err) {
             console.error(err);
@@ -56,7 +60,11 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
     };
 
     useEffect(() => {
-        getAllDevices();
+        getAllDevices({
+            page: 1,
+            limit: 100,
+            search_string: search
+        });
     }, [search]);
 
     return (
@@ -99,12 +107,10 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                     {deviceData.map((device: any, index: number) => (
                         <ListItem
                             key={index}
-                            onClick={() => setSelectedUser(device)}
-                            selected={device === selectedUser}
                         >
                             <ListItemIcon className="radioBtn">
                                 <Radio
-                                    checked={device === selectedUser}
+                                    checked={selectedUser?.id ? selectedUser?.id == device?.id : false}
                                     onChange={() => setSelectedUser(device)}
                                 />
                             </ListItemIcon>

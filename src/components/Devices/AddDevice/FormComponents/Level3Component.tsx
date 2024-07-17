@@ -8,6 +8,7 @@ const Level3Component = ({
   setLevelBasedData,
   getLevelBasedDeviceDetails,
 }: any) => {
+  const [errorMessages, setErrorMessages] = useState<any>();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = event.target;
     setLevelBasedData({
@@ -26,12 +27,12 @@ const Level3Component = ({
             </label>
             <Switch
               className="switchComponent"
-size="small"
-                name={setting.name}
-                checked={levelBasedData[setting.name] == "ON" ? true : false}
-                onChange={handleChange}
-                inputProps={{ "aria-label": setting.label }}
-              />
+              size="small"
+              name={setting.name}
+              checked={levelBasedData[setting.name] == "ON" ? true : false}
+              onChange={handleChange}
+              inputProps={{ "aria-label": setting.label }}
+            />
           </div>
         );
       case "input":
@@ -63,11 +64,12 @@ size="small"
           <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
           {factoryEnergySettings.map(renderField)}
         </section>
-      
+
       </form>
       <SaveAndConfirmationButtons
         levelBasedData={levelBasedData}
         getLevelBasedDeviceDetails={getLevelBasedDeviceDetails}
+        setErrorMessages={setErrorMessages}
       />
     </div>
   );

@@ -13,12 +13,17 @@ import {
 } from "@/services/devicesAPIs";
 import { toast } from "sonner";
 import { Button } from "@mui/material";
+interface pageProps {
+  levelBasedData: any;
+  getLevelBasedDeviceDetails: any;
+  setErrorMessages?: any;
+}
 
 const SaveAndConfirmationButtons = ({
   levelBasedData,
   getLevelBasedDeviceDetails,
   setErrorMessages
-}: any) => {
+}: pageProps) => {
   const router = useRouter();
   const params = useSearchParams();
   const [loading, setLoading] = useState<boolean>(false);

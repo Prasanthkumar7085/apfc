@@ -158,7 +158,7 @@ const ListUsers = () => {
                 return (
                     <div style={{ display: "flex", gap: "1rem" }}>
                         <div
-                            title="User View"
+                            title="View User"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
                                 router.push(`/users/${info?.row?.original?.id}`)
@@ -172,7 +172,7 @@ const ListUsers = () => {
                             />
                         </div>
                         <div
-                            title="User Edit"
+                            title="Edit User"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
                                 router.push(`/users/${info?.row?.original?.id}/edit`)
@@ -185,7 +185,7 @@ const ListUsers = () => {
                                 height={13}
                             />
                         </div>
-                        <div title="User Delete"
+                        <div title="Delete User"
                             style={{ cursor: "pointer" }}
                             onClick={() => {
                                 openDialog(info?.row?.original?.id)
@@ -218,7 +218,7 @@ const ListUsers = () => {
             <DeleteDialog
                 deleteUser={deleteUser}
                 headerName="Delete User"
-                lable="You Wan't To Delete User"
+                lable="Are you sure you want to delete the user?"
                 open={dialogOpen}
                 closeDialog={closeDialog}
             />

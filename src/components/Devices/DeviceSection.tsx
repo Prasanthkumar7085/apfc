@@ -398,7 +398,7 @@ const DeviceSection = ({
                           openDialog(item?.id);
                         }}
                       >
-                        Remove Assign User
+                        Remove Assigned User
                       </Button>) : ("")}
                     {item?.user_full_name ? (
                       <div className="userInfo">
@@ -478,7 +478,7 @@ const DeviceSection = ({
       <DeleteDialog
         deleteUser={deleteAssignUser}
         headerName="Delete Assign User"
-        lable="You Wan't To Delete Assign User"
+        lable="Are you sure you want to delete the assigned user?"
         open={open}
         closeDialog={closeDialog}
       />
