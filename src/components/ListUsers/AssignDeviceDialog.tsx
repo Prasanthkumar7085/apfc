@@ -137,9 +137,9 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                 <Button
                     className="confirmbtn"
                     variant="contained"
-                    disabled={!selectedUser.id}
+                    disabled={!selectedUser?.id}
                     onClick={() => {
-                        assignDevice(selectedUser.id);
+                        assignDevice(selectedUser?.id);
                     }}
                 >
                     Confirm
