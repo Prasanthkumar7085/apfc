@@ -169,9 +169,9 @@ const SingleDeviceSettings = () => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Level1" className="tabBtn" />
-          <Tab label="Level2" className="tabBtn" />
-          <Tab label="Level3" className="tabBtn" />
+          <Tab label="Level 1" className="tabBtn" />
+          <Tab label="Level 2" className="tabBtn" />
+          <Tab label="Level 3" className="tabBtn" />
           <Tab label="Fan Settings" className="tabBtn" />
         </Tabs>
         <div className="userInfo">

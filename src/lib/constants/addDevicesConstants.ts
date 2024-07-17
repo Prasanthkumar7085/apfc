@@ -263,8 +263,8 @@ export const fanSettings: any = [
   { name: "temperature", label: "Temperature", type: "number", unit: "c" },
 ];
 export const steppersConstansts = [
-  { title: "Level1", sub_title: "Short step description" },
-  { title: "Level2", sub_title: "Short step description" },
-  { title: "Level3", sub_title: "Short step description" },
-  { title: "Level4", sub_title: "Short step description" },
+  { title: "Level 1", sub_title: "Short step description" },
+  { title: "Level 2", sub_title: "Short step description" },
+  { title: "Level 3", sub_title: "Short step description" },
+  { title: "Level 4", sub_title: "Short step description" },
 ];
