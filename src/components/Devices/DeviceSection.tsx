@@ -388,7 +388,7 @@ const DeviceSection = ({
                         variant="contained"
                         startIcon={
                           <Image
-                            src="delete-user.svg"
+                            src="/delete-user.svg"
                             alt=""
                             width={14}
                             height={14}

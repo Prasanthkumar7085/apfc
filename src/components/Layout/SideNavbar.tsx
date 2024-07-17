@@ -12,7 +12,7 @@ const SideNavBar = () => {
           className="logoIcon"
           alt=""
           src="/logo1.svg"
-          width={60}
+          width={100}
           height={60}
         />
 

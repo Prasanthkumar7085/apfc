@@ -109,7 +109,7 @@ const Level1Component = ({
     <div>
       <form className="form">
         <section className="eachFormContainer">
-          <h3 className="eachBlockHeading">Authetication Settings</h3>
+          <h3 className="eachBlockHeading">Authentication Settings</h3>
           {AuthenticationSettings.map(renderField)}
           <h3 className="eachBlockHeading">Device Configuration</h3>
           {DeviceConfiguration.map(renderField)}
