@@ -174,7 +174,7 @@ const AddUser = () => {
                             endAdornment: (
                                 <InputAdornment position="end">
                                     <IconButton onClick={togglePasswordVisibility} edge="end">
-                                        {showPassword ? <VisibilityOff sx={{ fontSize: "1.2rem" }} /> : <Visibility sx={{ fontSize: "1.2rem" }} />}
+                                        {showPassword ? <Visibility sx={{ fontSize: "1.2rem" }} /> : <VisibilityOff sx={{ fontSize: "1.2rem" }} />}
                                     </IconButton>
                                 </InputAdornment>
                             ),
