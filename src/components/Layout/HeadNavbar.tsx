@@ -172,57 +172,18 @@ const HeadNavbar = () => {
                   ),
                 }}
               />
-              <FormControl
-                variant="outlined"
-                sx={{
-                  borderRadius: "0px 0px 0px 0px",
-                  width: "220px",
-                  height: "39px",
-                  m: 0,
-                  p: 0,
-                  "& .MuiInputBase-root": {
-                    m: 0,
-                    p: 0,
-                    minHeight: "39px",
-                    justifyContent: "center",
-                    display: "inline-flex",
-                  },
-                  "& .MuiInputLabel-root": {
-                    m: 0,
-                    p: 0,
-                    minHeight: "39px",
-                    display: "inline-flex",
-                  },
-                  "& .MuiMenuItem-root": {
-                    m: 0,
-                    p: 0,
-                    height: "39px",
-                    display: "inline-flex",
-                  },
-                  "& .MuiSelect-select": {
-                    m: 0,
-                    p: 0,
-                    height: "39px",
-                    alignItems: "center",
-                    display: "inline-flex",
-                  },
-                  "& .MuiInput-input": { m: 0, p: 0 },
-                  "& .MuiInputBase-input": { textAlign: "left", p: "0 !important" },
-                }}
-              >
+            
                 <Select
-                  color="primary"
+                className="defaultSelect"
                   disableUnderline
                   displayEmpty
                   value={status}
                   onChange={handleStatusChange}
                 >
-                  <MenuItem value="">All</MenuItem>
-                  <MenuItem value="ACTIVE">Active</MenuItem>
-                  <MenuItem value="INACTIVE">Inactive</MenuItem>
+                  <MenuItem className="menuItem" value="">All</MenuItem>
+                <MenuItem className="menuItem" value="ACTIVE">Active</MenuItem>
+                <MenuItem className="menuItem" value="INACTIVE">Inactive</MenuItem>
                 </Select>
-                <FormHelperText />
-              </FormControl>
               {path == "/users" ? (
                 <Button
                   className="addUserBtn"
