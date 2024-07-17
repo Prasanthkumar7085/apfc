@@ -215,12 +215,15 @@ $avatharColor: #ff7a00;
 
   .deviceInfo {
     @include align-center();
-    gap: 5%;
+    gap: 3%;
+
 
     .eachDeviceInfo {
       display: flex;
       flex-direction: column;
       gap: 5px;
+      width: 9%;
+      min-width: 105px;
 
       .infoTitle {
         color: #878787;
