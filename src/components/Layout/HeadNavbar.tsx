@@ -182,7 +182,7 @@ const HeadNavbar = () => {
               >
                 <MenuItem className="menuItem" value="">All</MenuItem>
                 <MenuItem className="menuItem" value="ACTIVE">{path == '/users' ? "Active" : "Online"}</MenuItem>
-                <MenuItem className="menuItem" value="INACTIVE">{path == '/users' ? "Inactive" : "Ofline"}</MenuItem>
+                <MenuItem className="menuItem" value="INACTIVE">{path == '/users' ? "Inactive" : "Offline"}</MenuItem>
               </Select>
               {path == "/users" ? (
                 <Button
