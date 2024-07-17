@@ -231,6 +231,15 @@ export const fanAndHysteresisSettings: Setting[] = [
     max: 100,
     unit: "%",
   },
+  { name: "over_temperature", label: "Over Temperature", type: "switch" },
+  {
+    name: "over_temperature_setting",
+    label: "Over Temperature Setting",
+    type: "input",
+    min: 0,
+    max: 100,
+    unit: "C",
+  },
 ];
 
 export const factoryAndEnergySettings: Setting[] = [
