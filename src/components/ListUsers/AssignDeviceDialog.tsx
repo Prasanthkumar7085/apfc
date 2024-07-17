@@ -50,7 +50,7 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                 toast.success(response.message);
                 getSinleUser();
                 getSinleUserDevices();
-                setSelectedUser(null);
+                setSelectedUser({});
             }
         } catch (err) {
             console.error(err);
@@ -110,7 +110,7 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                         >
                             <ListItemIcon className="radioBtn">
                                 <Radio
-                                    checked={selectedUser?.id ? selectedUser?.id == device?.id : false}
+                                    checked={device?.id === selectedUser?.id}
                                     onChange={() => setSelectedUser(device)}
                                 />
                             </ListItemIcon>

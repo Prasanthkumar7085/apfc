@@ -48,6 +48,7 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                 onClose();
                 toast.success(response.message);
                 getData({});
+                setSelectedUser({});
             }
         } catch (err) {
             console.error(err);
