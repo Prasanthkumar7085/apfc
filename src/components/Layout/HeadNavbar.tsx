@@ -44,6 +44,7 @@ const HeadNavbar = () => {
   );
 
   const [searchString, setSearchString] = useState(params.get("search_string") || "");
+  const [status, setStatus] = useState(params.get("status") || "");
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(
     null
   );
@@ -67,6 +68,18 @@ const HeadNavbar = () => {
     let queryString = prepareURLEncodedParams("", queryParams)
     router.push(`${path}${queryString}`);
   };
+
+  const handleStatusChange = (event: any) => {
+    const newSearchString = event.target.value;
+    setStatus(newSearchString);
+    let queryParams = {
+      ...searchParams,
+      status: newSearchString,
+      page: 1
+    }
+    let queryString = prepareURLEncodedParams("", queryParams)
+    router.push(`${path}${queryString}`);
+  };
   useEffect(() => {
     setSearchParams(
       Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
@@ -79,6 +92,10 @@ const HeadNavbar = () => {
     router.push("/");
   };
 
+
+  const capitalizeFirstLetter = (name: any) => {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  }
 
   return (
     <div className="headnav">
@@ -155,6 +172,57 @@ const HeadNavbar = () => {
                   ),
                 }}
               />
+              <FormControl
+                variant="outlined"
+                sx={{
+                  borderRadius: "0px 0px 0px 0px",
+                  width: "220px",
+                  height: "39px",
+                  m: 0,
+                  p: 0,
+                  "& .MuiInputBase-root": {
+                    m: 0,
+                    p: 0,
+                    minHeight: "39px",
+                    justifyContent: "center",
+                    display: "inline-flex",
+                  },
+                  "& .MuiInputLabel-root": {
+                    m: 0,
+                    p: 0,
+                    minHeight: "39px",
+                    display: "inline-flex",
+                  },
+                  "& .MuiMenuItem-root": {
+                    m: 0,
+                    p: 0,
+                    height: "39px",
+                    display: "inline-flex",
+                  },
+                  "& .MuiSelect-select": {
+                    m: 0,
+                    p: 0,
+                    height: "39px",
+                    alignItems: "center",
+                    display: "inline-flex",
+                  },
+                  "& .MuiInput-input": { m: 0, p: 0 },
+                  "& .MuiInputBase-input": { textAlign: "left", p: "0 !important" },
+                }}
+              >
+                <Select
+                  color="primary"
+                  disableUnderline
+                  displayEmpty
+                  value={status}
+                  onChange={handleStatusChange}
+                >
+                  <MenuItem value="">All</MenuItem>
+                  <MenuItem value="ACTIVE">Active</MenuItem>
+                  <MenuItem value="INACTIVE">Inactive</MenuItem>
+                </Select>
+                <FormHelperText />
+              </FormControl>
               {path == "/users" ? (
                 <Button
                   className="addUserBtn"
@@ -194,7 +262,9 @@ const HeadNavbar = () => {
           </Avatar>
           <div className="profileName">
             <h4 className="profile">{capitalizeFirstTwoWords(userDetails?.full_name)}</h4>
-            <p className="designation">{userDetails?.user_type}</p>
+            <p className="designation">
+              {userDetails?.user_type ? capitalizeFirstLetter(userDetails.user_type) : ''}
+            </p>
           </div>
           <Image className="icon" alt="" src="/icon1.svg" height={12} width={12} style={{ marginTop: "2px" }} />
         </div>
