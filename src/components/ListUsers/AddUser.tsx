@@ -16,24 +16,34 @@ const AddUser = () => {
     const params = useParams();
     const dispatch = useDispatch();
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [userType, setUserType] = useState("");
     const [loading, setLoading] = useState(false);
     const [errorMessages, setErrorMessages] = useState<any>();
     const [showPassword, setShowPassword] = useState(false);
+    const [userDetails, setUserDetails] = useState<any>({
+        full_name: "",
+        email: "",
+        phone: "",
+        password: "",
+        user_type: "",
+    });
+
+    const handleFieldValue = (event: any) => {
+        const { name, value } = event.target;
+        const userValue = name === "phone"
+            ? value.replace(/\D/g, '').slice(0, 10)
+            : value.replace(/^\s+/, '');
+        setUserDetails({
+            ...userDetails,
+            [name]: userValue,
+        });
+    };
 
     const getSingleUser = async () => {
         setLoading(true);
         try {
             const response = await getSigleUserAPI(params?.id);
             if (response.status === 200) {
-                setName(response?.data?.full_name)
-                setEmail(response?.data?.email)
-                setPhone(response?.data?.phone)
-                setUserType(response?.data?.user_type)
+                setUserDetails(response?.data)
                 dispatch(setSingleUser(response?.data));
             }
         } catch (err) {
@@ -47,11 +57,7 @@ const AddUser = () => {
         setLoading(true);
         try {
             const payload = {
-                full_name: name,
-                email: email,
-                phone: phone,
-                password: password,
-                user_type: userType,
+                ...userDetails
             };
             let response: any = await addUserAPI(payload);
 
@@ -77,10 +83,7 @@ const AddUser = () => {
         setLoading(true);
         try {
             const payload = {
-                full_name: name,
-                email: email,
-                phone: phone,
-                user_type: userType,
+                ...userDetails
             };
             let response: any = await updateUserAPI(payload, params?.id);
 
@@ -100,24 +103,6 @@ const AddUser = () => {
             setLoading(false);
         }
     };
-
-    const handlePhoneChange = (e: any) => {
-        const value = e.target.value;
-        if (/^\d{0,10}$/.test(value)) {
-            setPhone(value);
-        }
-    };
-
-    const handleNameChange = (e: any) => {
-        const value = e.target.value.replace(/^\s+/, '');
-        setName(value);
-    };
-
-    const handlePasswordChange = (e: any) => {
-        const value = e.target.value.replace(/^\s+/, '');
-        setPassword(value);
-    };
-
     const togglePasswordVisibility = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
@@ -142,8 +127,9 @@ const AddUser = () => {
                 <label className="label">Full Name <span>*</span></label>
                 <TextField
                     className="textFeild"
-                    value={name}
-                    onChange={(e) => handleNameChange(e)}
+                    name="full_name"
+                    value={userDetails["full_name"]}
+                    onChange={handleFieldValue}
                     placeholder="Enter User Full Name"
                     fullWidth
                 />
@@ -153,8 +139,9 @@ const AddUser = () => {
                 <label className="label">Email <span>*</span></label>
                 <TextField
                     className="textFeild"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    name="email"
+                    value={userDetails["email"]}
+                    onChange={handleFieldValue}
                     placeholder="Enter User Email"
                     fullWidth
                 />
@@ -164,8 +151,9 @@ const AddUser = () => {
                 <label className="label">Mobile</label>
                 <TextField
                     className="textFeild"
-                    value={phone}
-                    onChange={(e) => handlePhoneChange(e)}
+                    name="phone"
+                    value={userDetails["phone"]}
+                    onChange={handleFieldValue}
                     placeholder="Enter User Mobile"
                     fullWidth
                 />
@@ -176,9 +164,10 @@ const AddUser = () => {
                     <label className="label">Password <span>*</span></label>
                     <TextField
                         className="textFeild"
-                        value={password}
+                        name="password"
+                        value={userDetails["password"]}
                         type={showPassword ? "text" : "password"}
-                        onChange={(e) => handlePasswordChange(e)}
+                        onChange={handleFieldValue}
                         placeholder="Enter User Password"
                         fullWidth
                         InputProps={{
@@ -200,8 +189,9 @@ const AddUser = () => {
                 <label className="label">User Type <span>*</span></label>
                 <Select
                     className="selectComponent"
-                    value={userType}
-                    onChange={(e) => setUserType(e.target.value)}
+                    name="user_type"
+                    value={userDetails["user_type"]}
+                    onChange={handleFieldValue}
                     displayEmpty
                     fullWidth
                 >
