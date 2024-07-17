@@ -16,15 +16,20 @@ const Level4Component = ({
       case "select":
         return (
           <div className="fieldGroup" key={setting.name}>
-            {setting.label ?
-              <label className="label">
-                {setting.label}
-              </label> : ""}
+            {setting.label ? (
+              <label className="label">{setting.label}</label>
+            ) : (
+              ""
+            )}
             <Select
               className="settingSelectFeild"
               onChange={handleChange}
               name={setting.name}
-              value={levelBasedData?.[setting.name]}
+              value={
+                levelBasedData?.[setting.name]
+                  ? levelBasedData?.[setting.name]
+                  : null
+              }
             >
               {setting.options?.map((option: any) => (
                 <MenuItem className="menuItem" key={option} value={option}>
@@ -38,12 +43,18 @@ const Level4Component = ({
       case "number":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">{setting.label}</label>
-            <RangeWithUnits
-              setting={setting}
-              value={levelBasedData}
-              handleChange={handleChange}
-            />
+            {levelBasedData?.["set_status"] == "Temperature On" ? (
+              <>
+                <label className="label">{setting.label}</label>
+                <RangeWithUnits
+                  setting={setting}
+                  value={levelBasedData}
+                  handleChange={handleChange}
+                />
+              </>
+            ) : (
+              ""
+            )}
           </div>
         );
       default:
@@ -61,11 +72,8 @@ const Level4Component = ({
     <div>
       <form className="form">
         <section className="eachFormCard">
-
           <Image alt="" src="/car-radiator.svg" height={70} width={70} />
-          <div>
-            {fanSettings.map(renderField)}
-          </div>
+          <div>{fanSettings.map(renderField)}</div>
         </section>
       </form>
       <SaveAndConfirmationButtons

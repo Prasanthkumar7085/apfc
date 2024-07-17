@@ -15,13 +15,18 @@ const ArrowSteppers = ({ selectedStep, setSelectedStep }: any) => {
       {steppersConstansts?.map((step, index) => {
         return (
           <div
-            className={params?.get("state") == step?.title ? "eachStep active" : "eachStep"}
+            className={
+              params?.get("state") == step?.label
+                ? "eachStep active"
+                : "eachStep"
+            }
             key={index}
             onClick={() => {
               setSelectedStep(step?.title);
-              router.push(`${pathName}?state=${step?.title}`);
-            }}>
-              {step?.title}
+              router.push(`${pathName}?state=${step?.label}`);
+            }}
+          >
+            {step?.title}
           </div>
         );
       })}

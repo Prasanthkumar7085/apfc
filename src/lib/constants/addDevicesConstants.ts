@@ -258,13 +258,13 @@ export const fanSettings: any = [
   {
     name: "set_status",
     type: "select",
-    options: ["None", "Fixed ON", "Temperature"],
+    options: ["None", "Fixed ON", "Temperature On", "Temperature Off"],
   },
   { name: "temperature", label: "Temperature", type: "number", unit: "c" },
 ];
 export const steppersConstansts = [
-  { title: "Level 1", sub_title: "Short step description" },
-  { title: "Level 2", sub_title: "Short step description" },
-  { title: "Level 3", sub_title: "Short step description" },
-  { title: "Level 4", sub_title: "Short step description" },
+  { title: "Level 1", sub_title: "Short step description", label: "Level1" },
+  { title: "Level 2", sub_title: "Short step description", label: "Level2" },
+  { title: "Level 3", sub_title: "Short step description", label: "Level3" },
+  { title: "Level 4", sub_title: "Short step description", label: "Level4" },
 ];
