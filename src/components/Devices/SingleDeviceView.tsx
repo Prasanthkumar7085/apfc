@@ -35,6 +35,12 @@ const SingleDeviceView = () => {
     return text.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
   };
 
+  const capitalize = (text: any) => {
+    // Convert "Relay1" to "Relay 1" and "Bank1" to "Bank 1"
+    const spacedText = text.replace(/(\D)(\d)/g, '$1 $2');
+    return spacedText.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
+  };
+
   const firstRowHeight = '100%';
   return (
     <div id="deviceViewPage">
@@ -365,7 +371,7 @@ const SingleDeviceView = () => {
               <div className="cardBody">
                 {Object.keys(deviceData.relay_status).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
-                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
+                    <label>{capitalize(item)}</label>
                     <Typography className={deviceData?.relay_status[item] == "ON" ? "radioOn" : "radioOff"}>
 
                       {deviceData?.relay_status[item] || "--"}
@@ -388,7 +394,7 @@ const SingleDeviceView = () => {
               <div className="cardBody">
                 {Object.keys(deviceData.bank_values).map((item, index) => (
                   <div className="eachBodyInfo" key={index}>
-                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
+                    <label>{capitalize(item)}</label>
                     <Typography>
 
                       {deviceData?.bank_values[item]?.toFixed(2) + " " + "Kvar" || "--"}
