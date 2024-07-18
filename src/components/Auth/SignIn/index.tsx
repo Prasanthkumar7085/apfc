@@ -94,7 +94,7 @@ const LoginPage = () => {
                   <TextField
                     autoComplete="new-email"
                     variant="outlined"
-                    placeholder="Email"
+                    placeholder="Enter Email"
                     name="email"
                     type={"text"}
                     value={email}
@@ -111,7 +111,7 @@ const LoginPage = () => {
                   <TextField
                     autoComplete="new-password"
                     variant="outlined"
-                    placeholder="Password"
+                    placeholder="Enter Password"
                     name="password"
                     type={showPassword ? "text" : "password"}
                     value={password}
