@@ -64,9 +64,72 @@ const SaveAndConfirmationButtons = ({
     }
   };
 
+  const level2Values = {
+    created_at: levelBasedData?.created_at ? levelBasedData?.created_at : null,
+    created_by: levelBasedData?.created_by ? levelBasedData?.created_by : null,
+    ct_polarity_error: levelBasedData?.ct_polarity_error ? levelBasedData?.ct_polarity_error : "OFF",
+    device_id: levelBasedData?.device_id ? levelBasedData?.device_id : null,
+    factory_default: levelBasedData?.factory_default ? levelBasedData?.factory_default : "OFF",
+    fan_setting: levelBasedData?.fan_setting ? levelBasedData?.fan_setting : "OFF",
+    histeresis_pf: levelBasedData?.histeresis_pf ? levelBasedData?.histeresis_pf : null,
+    histeresis_voltage: levelBasedData?.histeresis_voltage ? levelBasedData?.histeresis_voltage : null,
+    id: levelBasedData?.id ? levelBasedData?.id : null,
+    no_volt: levelBasedData?.no_volt ? levelBasedData?.no_volt : "OFF",
+    over_compensate: levelBasedData?.over_compensate ? levelBasedData?.over_compensate : "OFF",
+    over_temperature: levelBasedData?.over_temperature ? levelBasedData?.over_temperature : "OFF",
+    over_temperature_setting: levelBasedData?.over_temperature_setting ? levelBasedData?.over_temperature_setting : null,
+    over_volt: levelBasedData?.over_volt ? levelBasedData?.over_volt : "OFF",
+    reset_energy: levelBasedData?.reset_energy ? levelBasedData?.reset_energy : "OFF",
+    reset_energy_password: levelBasedData?.reset_energy_password ? levelBasedData?.reset_energy_password : null,
+    reset_kvah: levelBasedData?.reset_kvah ? levelBasedData?.reset_kvah : "OFF",
+    reset_kvarh: levelBasedData?.reset_kvarh ? levelBasedData?.reset_kvarh : "OFF",
+    reset_kwh: levelBasedData?.reset_kwh ? levelBasedData?.reset_kwh : "OFF",
+    set_max_over_volt: levelBasedData?.set_max_over_volt ? levelBasedData?.set_max_over_volt : null,
+    set_min_over_volt: levelBasedData?.set_min_over_volt ? levelBasedData?.set_min_over_volt : null,
+    step_error: levelBasedData?.step_error ? levelBasedData?.step_error : "OFF",
+    step_error_setting: levelBasedData?.step_error_setting ? levelBasedData?.step_error_setting : null,
+    thd_i_range: levelBasedData?.thd_i_range ? levelBasedData?.thd_i_range : null,
+    total_harmonic_distortion: levelBasedData?.total_harmonic_distortion ? levelBasedData?.total_harmonic_distortion : "OFF",
+    trip_time: levelBasedData?.trip_time ? levelBasedData?.trip_time : "OFF",
+    under_compensate: levelBasedData?.under_compensate ? levelBasedData?.under_compensate : "OFF",
+    under_volt: levelBasedData?.under_volt ? levelBasedData?.under_volt : "OFF",
+    updated_at: levelBasedData?.updated_at ? levelBasedData?.updated_at : null,
+    updated_by: levelBasedData?.updated_by ? levelBasedData?.updated_by : null,
+  }
+
+  const level3Values = {
+    created_at: levelBasedData?.created_at ? levelBasedData?.created_at : null,
+    created_by: levelBasedData?.created_by ? levelBasedData?.created_by : null,
+    device_id: levelBasedData?.device_id ? levelBasedData?.device_id : null,
+    id: levelBasedData?.id ? levelBasedData?.id : null,
+    relay1: levelBasedData?.relay1 ? levelBasedData?.relay1 : "OFF",
+    relay2: levelBasedData?.relay2 ? levelBasedData?.relay2 : "OFF",
+    relay3: levelBasedData?.relay3 ? levelBasedData?.relay3 : "OFF",
+    relay4: levelBasedData?.relay4 ? levelBasedData?.relay4 : "OFF",
+    relay5: levelBasedData?.relay5 ? levelBasedData?.relay5 : "OFF",
+    relay6: levelBasedData?.relay6 ? levelBasedData?.relay6 : "OFF",
+    relay7: levelBasedData?.relay7 ? levelBasedData?.relay7 : "OFF",
+    relay8: levelBasedData?.relay8 ? levelBasedData?.relay8 : "OFF",
+    relay9: levelBasedData?.relay9 ? levelBasedData?.relay9 : "OFF",
+    relay10: levelBasedData?.relay10 ? levelBasedData?.relay10 : "OFF",
+    relay11: levelBasedData?.relay11 ? levelBasedData?.relay11 : "OFF",
+    relay12: levelBasedData?.relay12 ? levelBasedData?.relay12 : "OFF",
+    relay13: levelBasedData?.relay13 ? levelBasedData?.relay13 : "OFF",
+    relay14: levelBasedData?.relay14 ? levelBasedData?.relay14 : "OFF",
+    updated_at: levelBasedData?.updated_at ? levelBasedData?.updated_at : null,
+    updated_by: levelBasedData?.updated_by ? levelBasedData?.updated_by : null,
+  }
+
   const addLevelBasedSettings = async () => {
     setLoading(true);
-    let payload = { ...levelBasedData };
+    let payload = {};
+    if (params?.get("state") == "Level2") {
+      payload = { ...level2Values }
+    } else if (params?.get("state") == "Level3") {
+      payload = { ...level3Values }
+    } else {
+      payload = { ...levelBasedData };
+    }
     try {
       const response = await getLevelBasedAPI(payload);
       if (response?.status == 200 || response?.status == 201) {

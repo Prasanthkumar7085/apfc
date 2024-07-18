@@ -201,7 +201,7 @@ export const errorHandlingSettings: Setting[] = [
     max: 100,
     unit: "%",
   },
-  { name: "ct_polarity_error", label: "CT Polarity error", type: "switch" },
+  { name: "ct_polarity_error", label: "CT Poliarity error", type: "switch" },
   { name: "over_temperature", label: "Over Temperature", type: "switch" },
   {
     name: "over_temperature_setting",
@@ -248,7 +248,7 @@ export const factoryAndEnergySettings: Setting[] = [
 ];
 
 export const factoryEnergySettings: any = [
-  ...Array.from({ length: 14 }, (_, i) => ({
+  ...Array.from({ length: 12 }, (_, i) => ({
     label: `RLY${i + 1}`,
     type: "switch",
     name: `relay${i + 1}`,
