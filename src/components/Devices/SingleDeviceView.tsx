@@ -41,7 +41,7 @@ const SingleDeviceView = () => {
       <div className="deviceinfo">
         <Typography className="deviceNum">
           Device Number:{" "}
-          <span className="deviceName">{deviceData?.device_id || "--"}</span>{" "}
+          <span className="deviceName">{deviceData?.device_serial_number || "--"}</span>{" "}
         </Typography>
       </div>
       <Grid container spacing={2} className="deviceInfoContainer">
