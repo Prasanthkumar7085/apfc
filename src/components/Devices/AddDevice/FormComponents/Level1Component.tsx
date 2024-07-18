@@ -41,11 +41,7 @@ const Level1Component = ({
             <label className="label">
               {setting.label}
             </label>
-            {/* <RangeWithUnits
-              setting={setting}
-              value={levelBasedData}
-              handleChange={handleChange}
-            /> */}
+            <TextField className="settingsTextFeild" value={levelBasedData[setting.name]} onChange={handleChange} name={setting.name} />
           </div>
         );
       case "number":
