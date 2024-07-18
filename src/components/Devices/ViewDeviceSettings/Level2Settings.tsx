@@ -24,7 +24,7 @@ const Level2Settings = ({ levelBasedData }: any) => {
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
             {levelBasedData[setting?.name] == "ON" ||
-            levelBasedData[setting?.name] == "OFF" ? (
+              levelBasedData[setting?.name] == "OFF" ? (
               <Typography
                 className={
                   levelBasedData[setting?.name] == "ON"
@@ -36,7 +36,7 @@ const Level2Settings = ({ levelBasedData }: any) => {
               </Typography>
             ) : (
               <Typography className="value ">
-                {levelBasedData[setting?.name] || "--"}
+                {levelBasedData[setting?.name] || "--"}{levelBasedData[setting?.name] ? setting.unit : ""}
               </Typography>
             )}
           </div>

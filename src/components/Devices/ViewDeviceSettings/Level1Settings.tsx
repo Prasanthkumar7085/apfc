@@ -45,7 +45,7 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
             <Typography className="value">
-              {levelBasedData[setting?.name] || "--"}
+              {levelBasedData[setting?.name] || "--"}{levelBasedData[setting?.name] ? setting.unit : ""}
             </Typography>
           </div>
         );

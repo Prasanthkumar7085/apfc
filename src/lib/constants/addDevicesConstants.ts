@@ -27,7 +27,7 @@ export const CurrentTransformerSettings = [
     type: "select",
     options: ["5A", "10A"],
     name: "ct_secondary",
-    unit: "A",
+    unit: "",
   },
   {
     label: "CT Primary",
@@ -48,7 +48,7 @@ export const CompensationSettings = [
     type: "number",
     name: "phase_compensation_angel",
   },
-  { label: "Nominal Voltage", type: "text", name: "nominal_voltage" },
+  { label: "Nominal Voltage", type: "text", name: "nominal_voltage", unit: "V" },
   {
     label: "Threshold Voltage",
     type: "number",
