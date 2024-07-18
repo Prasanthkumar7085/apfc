@@ -48,7 +48,7 @@ export const CompensationSettings = [
     type: "number",
     name: "phase_compensation_angel",
   },
-  { label: "Nominal Voltage", type: "text", name: "nominal_voltage", unit: "V" },
+  { label: "Nominal Voltage", type: "text", name: "nominal_voltage"},
   {
     label: "Threshold Voltage",
     type: "number",

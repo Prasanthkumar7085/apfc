@@ -111,16 +111,18 @@
       box-sizing: border-box;
       border: 1px solid #dfdfdf;
       height: fit-content;
-
+      .eachFeildGrp {
+        margin-bottom: 0.8rem;
+      }
       .eachBlockHeading {
         margin: 0;
         padding: 0.8rem 0.5rem 0.4rem;
         color: $blackColor;
         font-family: $fontPrimary;
-        font-size: clamp(11.5px, 0.72vw, 15px);
+        font-size: clamp(13px, 0.79vw, 16px);
         font-weight: 500;
         letter-spacing: 0;
-        border-bottom: 1px solid #d5d9dd;
+        border-bottom: 1px solid #c1c5c9;
 
         &:not(:first-child) {
           padding: 1rem 0.5rem 0.4rem !important;
@@ -135,10 +137,9 @@
 
         .label {
           margin-bottom: 4px;
-          color: #000000b3;
+          color: #4d4d4d;
           font-family: $fontPrimary;
-          font-size: clamp(10px, 0.625vw, 14px);
-          font-weight: 400;
+          font-size: clamp(12px, 0.72vw, 14px);
           white-space: nowrap;
         }
 

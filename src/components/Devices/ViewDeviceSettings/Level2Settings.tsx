@@ -49,23 +49,23 @@ const Level2Settings = ({ levelBasedData }: any) => {
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Voltage Settings</h3>
-          <div className="grp">{voltageSettings.map(renderField)}</div>
+          <div className=" grp eachFeildGrp">{voltageSettings.map(renderField)}</div>
 
           <h3 className="eachBlockHeading">Harmonic Distortion Settings</h3>
-          <div className="grp">
+          <div className=" grp eachFeildGrp">
             {harmonicDistortionSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Compensation Settings</h3>
-          <div className="grp">{compensationSettings.map(renderField)}</div>
+          <div className=" grp eachFeildGrp">{compensationSettings.map(renderField)}</div>
 
           <h3 className="eachBlockHeading">Error Handling</h3>
-          <div className="grp">{errorHandlingSettings.map(renderField)}</div>
+          <div className=" grp eachFeildGrp">{errorHandlingSettings.map(renderField)}</div>
           <h3 className="eachBlockHeading">Fan and Hysteresis Settings</h3>
-          <div className="grp">{fanAndHysteresisSettings.map(renderField)}</div>
+          <div className=" grp eachFeildGrp">{fanAndHysteresisSettings.map(renderField)}</div>
         </section>
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
-          <div className="grp">{factoryAndEnergySettings.map(renderField)}</div>
+          <div className=" grp eachFeildGrp">{factoryAndEnergySettings.map(renderField)}</div>
         </section>
       </form>
     </div>

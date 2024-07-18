@@ -147,7 +147,7 @@ $avatharColor: #ff7a00;
 
 .devicesGrp {
   padding: 12px;
-  max-height: calc(100vh - 160px);
+  height: calc(100vh - 160px);
   overflow-y: auto;
 
   .eachDeviceBlock {

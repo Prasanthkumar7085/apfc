@@ -68,44 +68,50 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Authetication Settings</h3>
+          <div className="eachFeildGrp">
+
           {AuthenticationSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Device Configuration</h3>
-          <div className="grp">
+          <div className="grp eachFeildGrp">
             {DeviceConfiguration.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">
             Current Transformer (CT) Settings
           </h3>
-          <div className="grp">
+          <div className="grp eachFeildGrp">
             {CurrentTransformerSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">
             Potential Transformer (PT) Settings
           </h3>
-          <div className="grp">
+          <div className="grp eachFeildGrp">
             {PotentialTransformerSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Compensation Settings</h3>
-          <div className="grp">
+          <div className="grp eachFeildGrp">
             {CompensationSettings.map(renderField)}
           </div>
         </section>
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Timing </h3>
-          <div className="grp timingSettings">
+          <div className="grp timingSettings eachFeildGrp">
 
             {TimingSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
-          <div className="grp">
+          <div className="grp eachFeildGrp">
             {ControlSensitivitySettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Commnunication Settings</h3>
-          <div className="grp">
+          <div className="grp eachFeildGrp">
             {CommunicationSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Display Settings</h3>
+          <div className="eachFeildGrp">
+
           {DisplaySettings.map(renderField)}
+          </div>
         </section>
       </form>
       <ResetPasswordDialog

@@ -77,22 +77,40 @@ const Level2Component = ({
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Voltage Settings</h3>
+          <div className="eachFeildGrp">
+
           {voltageSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Harmonic Distortion Settings</h3>
+          <div className="eachFeildGrp">
+
           {harmonicDistortionSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Compensation Settings</h3>
+          <div className="eachFeildGrp">
+
           {compensationSettings.map(renderField)}
+          </div>
         </section>
 
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Error Handling</h3>
+          <div className="eachFeildGrp">
+
           {errorHandlingSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Fan and Hysteresis Settings</h3>
+          <div className="eachFeildGrp">
+
           {fanAndHysteresisSettings.map(renderField)}
+          </div>
         </section>
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Factory and Energy Settings</h3>
+          <div className="eachFeildGrp">
+
           {factoryAndEnergySettings.map(renderField)}
+          </div>
         </section>
       </form>
       <SaveAndConfirmationButtons

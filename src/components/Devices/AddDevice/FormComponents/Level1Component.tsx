@@ -14,7 +14,7 @@ import {
 } from "@/lib/constants/addDevicesConstants";
 import React, { ChangeEvent, useState } from "react";
 import SaveAndConfirmationButtons from "../SaveAndConfirmation";
-import { MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material";
 import ErrorMessagesComponent from "@/components/Core/ErrorMessagesComponent";
 type CombinedEvent = ChangeEvent<HTMLInputElement> | SelectChangeEvent<any>;
 
@@ -25,7 +25,7 @@ const Level1Component = ({
 }: any) => {
   const [errorMessages, setErrorMessages] = useState<any>();
   const handleChange = (
-    e: CombinedEvent) => {
+    e: any) => {
     const { name, value } = e.target;
     setLevelBasedData((prevState: any) => ({
       ...prevState,
@@ -36,6 +36,18 @@ const Level1Component = ({
   const renderField = (setting: any) => {
     switch (setting.type) {
       case "text":
+        return (
+          <div className="fieldGroup" key={setting.name}>
+            <label className="label">
+              {setting.label}
+            </label>
+            {/* <RangeWithUnits
+              setting={setting}
+              value={levelBasedData}
+              handleChange={handleChange}
+            /> */}
+          </div>
+        );
       case "number":
         return (
           <div className="fieldGroup" key={setting.name}>
@@ -110,29 +122,56 @@ const Level1Component = ({
       <form className="form">
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Authentication Settings</h3>
-          {AuthenticationSettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {AuthenticationSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Device Configuration</h3>
-          {DeviceConfiguration.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {DeviceConfiguration.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Current Transformer (CT) Settings</h3>
-          {CurrentTransformerSettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {CurrentTransformerSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Potential Transformer (PT) Settings</h3>
-          {PotentialTransformerSettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {PotentialTransformerSettings.map(renderField)}
+          </div>
         </section>
 
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Compensation Settings</h3>
-          {CompensationSettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {CompensationSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Timing Settings</h3>
-          {TimingSettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {TimingSettings.map(renderField)}
+          </div>
         </section>
 
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
-          {ControlSensitivitySettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {ControlSensitivitySettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Communication Settings</h3>
-          {CommunicationSettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {CommunicationSettings.map(renderField)}
+          </div>
           <h3 className="eachBlockHeading">Display Settings</h3>
-          {DisplaySettings.map(renderField)}
+          <div className="eachFeildGrp">
+
+            {DisplaySettings.map(renderField)}
+          </div>
         </section>
       </form>
 
