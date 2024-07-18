@@ -10,6 +10,7 @@
     padding: 1px 2px 1px 6px;
     margin-bottom: 1.5rem;
   }
+
   .deviceinfo {
     .deviceName {
       color: $blackColor;
@@ -19,6 +20,7 @@
       line-height: 100%;
       margin-bottom: 0.5rem;
     }
+
     .deviceNum {
       color: #000000b3;
       font-family: $fontPrimary;
@@ -27,13 +29,16 @@
       line-height: 100%;
     }
   }
+
   .deviceInfoContainer {
     margin-top: 1px;
     align-self: stretch;
+
     .eachDetailsCard {
       box-shadow: none;
       border-radius: 8px;
       border: 1px solid #e6e9f2;
+
       .cardHeader {
         border-bottom: 1px solid #e6e9f2;
         background: #edf0f9;
@@ -48,6 +53,7 @@
           letter-spacing: 0;
         }
       }
+
       .cardBody {
         padding: 0.8rem 0.5rem;
         display: grid;
@@ -65,23 +71,28 @@
           align-items: flex-start;
           justify-content: flex-start;
           gap: 5px;
+
           label {
             color: #000000b3;
             font-family: $fontPrimary;
             font-size: clamp(11px, 0.625vw, 13px);
             font-weight: 400;
           }
+
           p {
             color: #35353d;
             font-family: $fontPrimary;
             font-size: clamp(13px, 0.83vw, 17px);
             font-weight: 400;
+
             &.radioOn {
               color: $greenColor;
             }
+
             &.radioOff {
               color: $secondaryColor;
             }
+
             &.errorData {
               display: flex;
               align-items: center;
@@ -95,6 +106,7 @@
               margin: 0;
             }
           }
+
           &.avarageBlock {
             border-radius: 4px;
             background: #d0d5dd;
@@ -106,6 +118,7 @@
               font-size: clamp(10px, 0.625vw, 13px) !important;
             }
           }
+
           &.avaragePfBlock {
             border-radius: 4px;
             background: #e1f0dc;
@@ -116,28 +129,36 @@
             label {
               font-size: clamp(10px, 0.625vw, 13px) !important;
             }
+
             p {
               color: $greenColor !important;
             }
           }
         }
+
         &.voltageMesurement {
           grid-template-columns: repeat(1, 1fr) !important;
+
           .eachInnerBody {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             grid-gap: 1.5rem 0.2rem;
           }
         }
+
         &.harmonicDistortion {
           grid-template-columns: repeat(6, 1fr) !important;
         }
       }
+
       .noData {
         padding: 0.5rem;
         font-size: clamp(13px, 0.83vw, 17px);
         font-family: $fontPrimary;
-        text-align: center;
+        height: calc(100% - 45px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
