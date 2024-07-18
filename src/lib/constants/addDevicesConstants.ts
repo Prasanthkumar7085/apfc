@@ -48,7 +48,7 @@ export const CompensationSettings = [
     type: "number",
     name: "phase_compensation_angel",
   },
-  { label: "Nominal Voltage", type: "text", name: "nominal_voltage"},
+  { label: "Nominal Voltage", type: "text", name: "nominal_voltage" },
   {
     label: "Threshold Voltage",
     type: "number",
@@ -70,7 +70,7 @@ export const CompensationSettings = [
     type: "radio",
     options: [
       { label: "Auto", value: "AUTO" },
-      { label: "Manul", value: "MANUL" },
+      { label: "Manual", value: "MANUL" },
     ],
     name: "control_mode",
   },
@@ -230,15 +230,6 @@ export const fanAndHysteresisSettings: Setting[] = [
     min: 0,
     max: 100,
     unit: "%",
-  },
-  { name: "over_temperature", label: "Over Temperature", type: "switch" },
-  {
-    name: "over_temperature_setting",
-    label: "Over Temperature Setting",
-    type: "input",
-    min: 0,
-    max: 100,
-    unit: "C",
   },
 ];
 

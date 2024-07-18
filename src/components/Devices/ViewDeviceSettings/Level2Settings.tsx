@@ -48,7 +48,7 @@ const Level2Settings = ({ levelBasedData }: any) => {
     <div id="levelOne">
       <form className="form">
         <section className="eachFormContainer">
-          <h3 className="eachBlockHeading">Voltage Settings</h3>
+          <h3 className="eachBlockHeading">Compensation Settings</h3>
           <div className=" grp eachFeildGrp">{voltageSettings.map(renderField)}</div>
 
           <h3 className="eachBlockHeading">Harmonic Distortion Settings</h3>
