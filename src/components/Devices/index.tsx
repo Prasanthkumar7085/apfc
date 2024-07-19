@@ -25,7 +25,7 @@ const DevicesList = () => {
     Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
   );
 
-  const getPatientResults = async ({
+  const getAllListDevices = async ({
     page = searchParams?.page,
     limit = searchParams?.limit,
     search_string = searchParams?.search_string,
@@ -44,6 +44,9 @@ const DevicesList = () => {
       router.push(`${pathname}${queryString}`);
       const response = await getAllDevicesAPI(queryParams);
       const { data, ...rest } = response;
+      if (!data.length && rest?.total_pages < rest?.page) {
+        getAllListDevices({ page: rest?.total_pages })
+      }
       setDevicesData(data);
       setPaginationDetails(rest);
     } catch (err) {
@@ -54,7 +57,7 @@ const DevicesList = () => {
   };
 
   useEffect(() => {
-    getPatientResults({
+    getAllListDevices({
       page: searchParams?.page ? searchParams?.page : 1,
       limit: searchParams?.limit ? searchParams?.limit : 10,
       search_string: searchParams?.search_string,
@@ -73,7 +76,7 @@ const DevicesList = () => {
       <DeviceSection
         devicesData={devicesData}
         paginationDetails={paginationDetails}
-        getData={getPatientResults}
+        getData={getAllListDevices}
         loading={loading}
         setLoading={setLoading}
       />

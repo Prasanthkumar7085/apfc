@@ -27,7 +27,7 @@ const ListUsers = () => {
     const [searchParams, setSearchParams] = useState(
         Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
     );
-    const getPatientResults = async ({
+    const getAllListUsers = async ({
         page = searchParams?.page,
         limit = searchParams?.limit,
         search_string = searchParams?.search_string,
@@ -46,6 +46,11 @@ const ListUsers = () => {
             router.push(`${pathname}${queryString}`);
             const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
+            console.log(rest, 'popo');
+
+            if (!data.length && rest?.total_pages < rest?.page) {
+                getAllListUsers({ page: rest?.total_pages })
+            }
             setUsersData(data);
             setPaginationDetails(rest);
         } catch (err) {
@@ -62,7 +67,7 @@ const ListUsers = () => {
             if (response.success) {
                 closeDialog();
                 toast.success(response.message);
-                getPatientResults({});
+                getAllListUsers({});
             }
         } catch (err) {
             console.error(err);
@@ -81,7 +86,7 @@ const ListUsers = () => {
 
             if (response.success) {
                 toast.success(response.message);
-                getPatientResults({});
+                getAllListUsers({});
             }
         } catch (err) {
             console.error(err);
@@ -91,7 +96,7 @@ const ListUsers = () => {
     };
 
     useEffect(() => {
-        getPatientResults({
+        getAllListUsers({
             page: searchParams?.page ? searchParams?.page : 1,
             limit: searchParams?.limit ? searchParams?.limit : 10,
             search_string: searchParams?.search_string,
@@ -216,7 +221,7 @@ const ListUsers = () => {
                 columns={[...ListUserColumns, ...column]}
                 loading={loading}
                 paginationDetails={paginationDetails}
-                getData={getPatientResults}
+                getData={getAllListUsers}
             />
             <DeleteDialog
                 deleteUser={deleteUser}
