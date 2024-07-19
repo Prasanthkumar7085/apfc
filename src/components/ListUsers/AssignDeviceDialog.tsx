@@ -114,11 +114,15 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                                     onChange={() => setSelectedUser(device)}
                                 />
                             </ListItemIcon>
-                            <Tooltip title={device?.device_name} arrow>
-                                <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name.length > 20
-                                    ? device?.device_name.slice(0, 20) + '...'
-                                    : device?.device_name)} />
-                            </Tooltip>
+                            {device?.device_name.length > 20 ? (
+                                <Tooltip title={device?.device_name} arrow>
+                                    <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name.length > 20
+                                        ? device?.device_name.slice(0, 20) + '...'
+                                        : device?.device_name)} />
+                                </Tooltip>
+                            ) : (
+                                <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name)} />
+                            )}
                             {device?.user_full_name ? (
                                 <Image src="/user-profile.svg" alt="" width={15} height={15} />
                             ) : (

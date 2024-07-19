@@ -9,11 +9,17 @@ export const ListUserColumns = [
         header: () => <span>Name</span>,
         cell: (info: any) => {
             return (
-                <Tooltip title={info.getValue()} arrow>
-                    <span>{info.getValue() ? capitalizeFirstTwoWords(info.getValue().length > 20
-                        ? info.getValue().slice(0, 20) + '...'
-                        : info.getValue()) : "--"}</span>
-                </Tooltip>
+                <>
+                    {info.getValue().length > 20 ? (
+                        <Tooltip title={info.getValue()} arrow>
+                            <span>{info.getValue() ? capitalizeFirstTwoWords(info.getValue().length > 20
+                                ? info.getValue().slice(0, 20) + '...'
+                                : info.getValue()) : "--"}</span>
+                        </Tooltip>
+                    ) : (
+                        <span>{info.getValue() ? capitalizeFirstTwoWords(info.getValue()) : "--"}</span>
+                    )}
+                </>
             );
         },
 

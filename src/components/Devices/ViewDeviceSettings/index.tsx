@@ -169,13 +169,19 @@ const SingleDeviceSettings = () => {
               >
                 {deviceName?.user_full_name?.[0].toUpperCase() || "--"}
               </Avatar>
-              <Tooltip title={deviceName?.user_full_name} arrow>
+              {deviceName?.user_full_name?.length > 20 ? (
+                <Tooltip title={deviceName?.user_full_name} arrow>
+                  <Typography variant="h6">
+                    {capitalizeFirstTwoWords(deviceName?.user_full_name?.length > 20
+                      ? deviceName?.user_full_name.slice(0, 20) + '...'
+                      : deviceName?.user_full_name) || "--"}
+                  </Typography>
+                </Tooltip>
+              ) : (
                 <Typography variant="h6">
-                  {capitalizeFirstTwoWords(deviceName?.user_full_name?.length > 20
-                    ? deviceName?.user_full_name.slice(0, 20) + '...'
-                    : deviceName?.user_full_name) || "--"}
+                  {capitalizeFirstTwoWords(deviceName?.user_full_name) || "--"}
                 </Typography>
-              </Tooltip>
+              )}
             </div>
           ) : (
             ""

@@ -116,11 +116,15 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                                     onChange={() => setSelectedUser(user)}
                                 />
                             </ListItemIcon>
-                            <Tooltip title={user?.full_name} arrow>
-                                <ListItemText className="listText" primary={capitalizeFirstTwoWords(user?.full_name.length > 20
-                                    ? user?.full_name.slice(0, 20) + '...'
-                                    : user?.full_name)} />
-                            </Tooltip>
+                            {user?.full_name.length > 20 ? (
+                                <Tooltip title={user?.full_name} arrow>
+                                    <ListItemText className="listText" primary={capitalizeFirstTwoWords(user?.full_name.length > 20
+                                        ? user?.full_name.slice(0, 20) + '...'
+                                        : user?.full_name)} />
+                                </Tooltip>
+                            ) : (
+                                <ListItemText className="listText" primary={capitalizeFirstTwoWords(user?.full_name)} />
+                            )}
                         </ListItem>
                     ))}
                 </List>

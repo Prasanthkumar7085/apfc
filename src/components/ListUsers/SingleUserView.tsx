@@ -62,13 +62,19 @@ const SingleUserView = () => {
                     <Avatar className="profileavatarIcon">
                         {usersData?.full_name?.[0].toUpperCase()}
                     </Avatar>
-                    <Tooltip title={usersData?.full_name} arrow>
+                    {usersData?.full_name?.length > 20 ? (
+                        <Tooltip title={usersData?.full_name} arrow>
+                            <h4 className="profileName">{
+                                capitalizeFirstTwoWords(usersData?.full_name?.length > 20
+                                    ? usersData?.full_name.slice(0, 20) + '...'
+                                    : usersData?.full_name)}
+                            </h4>
+                        </Tooltip>
+                    ) : (
                         <h4 className="profileName">{
-                            capitalizeFirstTwoWords(usersData?.full_name?.length > 20
-                                ? usersData?.full_name.slice(0, 20) + '...'
-                                : usersData?.full_name)}
+                            capitalizeFirstTwoWords(usersData?.full_name)}
                         </h4>
-                    </Tooltip>
+                    )}
                     <div className={usersData?.status == "ACTIVE" ? "status active" : "status inactive"}>
                         {usersData?.status == "ACTIVE" ?
                             <Image alt="" src="/devices/icondot-online.svg" width={8} height={8} /> : <Image alt="" src="/devices/icondot-offline.svg" width={8} height={8} />}
