@@ -45,10 +45,12 @@ const DevicesList = () => {
       const response = await getAllDevicesAPI(queryParams);
       const { data, ...rest } = response;
       if (!data.length && rest?.total_pages < rest?.page) {
-        getAllListDevices({ page: rest?.total_pages })
+        await getAllListDevices({ page: rest?.total_pages })
+      } else {
+        setDevicesData(data);
+        setPaginationDetails(rest);
       }
-      setDevicesData(data);
-      setPaginationDetails(rest);
+
     } catch (err) {
       console.error(err);
     } finally {

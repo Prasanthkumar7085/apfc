@@ -28,13 +28,13 @@ const DeviceSection = ({
   const [dialogOpen, setDialogOpen] = useState(false);
   const [open, setOpen] = useState(false);
   const [devicesId, setDeviceId] = useState<any>();
-  const [showLoading, setShowLoading] = useState(true);
   const params = useSearchParams();
   const [searchParams, setSearchParams] = useState(
     Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
   );
 
   const updateDeviceStatus = async (id: any, statusValue: string) => {
+    setLoading(true);
     try {
       const payload = {
         status: statusValue,
@@ -47,10 +47,13 @@ const DeviceSection = ({
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   const deleteAssignUser = async () => {
+    setLoading(true);
     try {
       const response = await deleteAssignUserAPI(devicesId);
       if (response.success) {
@@ -60,6 +63,8 @@ const DeviceSection = ({
       }
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
