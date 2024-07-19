@@ -1,6 +1,6 @@
 "use client"
 import AddIcon from "@mui/icons-material/Add";
-import { Avatar, Button } from "@mui/material";
+import { Avatar, Button, Tooltip } from "@mui/material";
 // import dayjs from "dayjs";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
@@ -62,7 +62,13 @@ const SingleUserView = () => {
                     <Avatar className="profileavatarIcon">
                         {usersData?.full_name?.[0].toUpperCase()}
                     </Avatar>
-                    <h4 className="profileName">{capitalizeFirstTwoWords(usersData?.full_name)}</h4>
+                    <Tooltip title={usersData?.full_name} arrow>
+                        <h4 className="profileName">{
+                            capitalizeFirstTwoWords(usersData?.full_name?.length > 20
+                                ? usersData?.full_name.slice(0, 20) + '...'
+                                : usersData?.full_name)}
+                        </h4>
+                    </Tooltip>
                     <div className={usersData?.status == "ACTIVE" ? "status active" : "status inactive"}>
                         {usersData?.status == "ACTIVE" ?
                             <Image alt="" src="/devices/icondot-online.svg" width={8} height={8} /> : <Image alt="" src="/devices/icondot-offline.svg" width={8} height={8} />}

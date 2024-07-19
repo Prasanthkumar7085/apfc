@@ -12,7 +12,8 @@ import {
   Menu,
   MenuItem,
   Select,
-  TextField
+  TextField,
+  Tooltip
 } from "@mui/material";
 import Cookies from "js-cookie";
 import Image from "next/image";
@@ -114,7 +115,11 @@ const HeadNavbar = () => {
           >
             Back
           </Button>
-          <h5 className="pagetitle">{userData?.full_name ? userData?.full_name || "--" : "Add New User"}</h5>
+          <Tooltip title={userData?.full_name} arrow>
+            <h5 className="pagetitle">{userData?.full_name ? capitalizeFirstTwoWords(userData?.full_name?.length > 20
+              ? userData?.full_name.slice(0, 20) + '...'
+              : userData?.full_name) || "--" : "Add New User"}</h5>
+          </Tooltip>
         </div>
       ) : (
         path == "/users" ? <h4 className="pagetitle"> Users </h4> : ""
@@ -138,7 +143,11 @@ const HeadNavbar = () => {
           >
             Back
           </Button>
-          <h5 className="pagetitle">{deviceData?.device_name ? deviceData?.device_name || "--" : "Add New Device"}</h5>
+          <Tooltip title={deviceData?.device_name} arrow>
+            <h5 className="pagetitle">{deviceData?.device_name ? capitalizeFirstTwoWords(deviceData?.device_name?.length > 20
+              ? deviceData?.device_name.slice(0, 20) + '...'
+              : deviceData?.device_name) || "--" : "Add New Device"}</h5>
+          </Tooltip>
         </div>
       ) : (
         path == "/devices" ? <h4 className="pagetitle"> Devices </h4> : ""
