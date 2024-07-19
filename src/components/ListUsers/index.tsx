@@ -46,8 +46,6 @@ const ListUsers = () => {
             router.push(`${pathname}${queryString}`);
             const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
-            console.log(rest, 'popo');
-
             if (!data.length && rest?.total_pages < rest?.page) {
                 getAllListUsers({ page: rest?.total_pages })
             }
