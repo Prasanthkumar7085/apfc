@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Tabs, Tab, Typography, Avatar } from "@mui/material";
+import { Box, Tabs, Tab, Typography, Avatar, Tooltip } from "@mui/material";
 import {
   useParams,
   usePathname,
@@ -169,9 +169,13 @@ const SingleDeviceSettings = () => {
               >
                 {deviceName?.user_full_name?.[0].toUpperCase() || "--"}
               </Avatar>
-              <Typography variant="h6">
-                {capitalizeFirstTwoWords(deviceName?.user_full_name) || "--"}
-              </Typography>
+              <Tooltip title={deviceName?.user_full_name} arrow>
+                <Typography variant="h6">
+                  {capitalizeFirstTwoWords(deviceName?.user_full_name?.length > 20
+                    ? deviceName?.user_full_name.slice(0, 20) + '...'
+                    : deviceName?.user_full_name) || "--"}
+                </Typography>
+              </Tooltip>
             </div>
           ) : (
             ""
