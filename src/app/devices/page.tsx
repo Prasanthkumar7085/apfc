@@ -1,12 +1,15 @@
-import DevicesList from "@/components/Devices";
+// import DevicesList from "@/components/Devices";
 import Devices from "@/components/Devices";
-import { Suspense } from "react";
+import dynamic from "next/dynamic";
+// import { Suspense } from "react";
+
+const DevicesList = dynamic(() => import('@/components/Devices'), {
+  ssr: false
+})
 
 const DevicesPage = () => {
   return (
-    <Suspense>
-      <DevicesList />
-    </Suspense>
+    <DevicesList />
   );
 };
 export default DevicesPage;
