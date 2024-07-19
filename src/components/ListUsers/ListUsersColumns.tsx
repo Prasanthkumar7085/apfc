@@ -1,4 +1,5 @@
 import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
+import { Tooltip } from "@mui/material";
 import dayjs from "dayjs";
 
 export const ListUserColumns = [
@@ -7,8 +8,15 @@ export const ListUserColumns = [
         id: "first_name",
         header: () => <span>Name</span>,
         cell: (info: any) => {
-            return <span>{info.getValue() ? capitalizeFirstTwoWords(info.getValue()) : "--"}</span>;
+            return (
+                <Tooltip title={info.getValue()} arrow>
+                    <span>{info.getValue() ? capitalizeFirstTwoWords(info.getValue().length > 20
+                        ? info.getValue().slice(0, 20) + '...'
+                        : info.getValue()) : "--"}</span>
+                </Tooltip>
+            );
         },
+
         footer: (props: any) => props.column.id,
         width: "150px",
     },

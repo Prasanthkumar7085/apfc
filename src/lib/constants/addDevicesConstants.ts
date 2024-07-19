@@ -266,5 +266,5 @@ export const steppersConstansts = [
   { title: "Level 1", sub_title: "Short step description", label: "Level1" },
   { title: "Level 2", sub_title: "Short step description", label: "Level2" },
   { title: "Level 3", sub_title: "Short step description", label: "Level3" },
-  { title: "Level 4", sub_title: "Short step description", label: "Level4" },
+  { title: "Fan Settings", sub_title: "Short step description", label: "Level4" },
 ];

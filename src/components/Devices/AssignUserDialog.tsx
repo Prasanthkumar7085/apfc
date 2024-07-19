@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, List, ListItem, ListItemText, ListItemIcon, Radio, IconButton, InputAdornment } from "@mui/material";
+import { Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, List, ListItem, ListItemText, ListItemIcon, Radio, IconButton, InputAdornment, Tooltip } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import { useRouter } from "next/navigation";
@@ -112,11 +112,15 @@ const AssignUserDialog = ({ open, onClose, getData, devicesId }: any) => {
                         >
                             <ListItemIcon className="radioBtn">
                                 <Radio
-                                    checked={user.id === selectedUser.id}
+                                    checked={user?.id === selectedUser?.id}
                                     onChange={() => setSelectedUser(user)}
                                 />
                             </ListItemIcon>
-                            <ListItemText className="listText" primary={capitalizeFirstTwoWords(user?.full_name)} />
+                            <Tooltip title={user?.full_name} arrow>
+                                <ListItemText className="listText" primary={capitalizeFirstTwoWords(user?.full_name.length > 20
+                                    ? user?.full_name.slice(0, 20) + '...'
+                                    : user?.full_name)} />
+                            </Tooltip>
                         </ListItem>
                     ))}
                 </List>

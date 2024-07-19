@@ -163,7 +163,7 @@ const SaveAndConfirmationButtons = ({
         className="btn saveBtn"
         onClick={() => addLevelBasedSettings()}
       >
-        Save & Continue
+        {params?.get("state") == "Level4" ? "Submit" : "Save & Continue"}
       </Button>
     </div>
   );

@@ -113,9 +113,15 @@ const DeviceSection = ({
               <div className="eachDeviceBlock" key={index}>
                 <div className="headerBlock">
                   <div className="header">
-                    <h4 className="deviceTItle">
-                      {capitalizeFirstTwoWords(item?.device_name) || "--"}
-                    </h4>
+                    <Tooltip title={item?.device_name} arrow>
+                      <h4 className="deviceTItle">
+                        {capitalizeFirstTwoWords(
+                          item?.device_name.length > 20
+                            ? item?.device_name.slice(0, 20) + '...'
+                            : item?.device_name
+                        ) || "--"}
+                      </h4>
+                    </Tooltip>
 
                     <div className="settingsBlock">
                       <div className="backBtn editbtn"
@@ -405,10 +411,15 @@ const DeviceSection = ({
                         <Avatar className="userAvathar">
                           {item?.user_full_name?.[0].toUpperCase() || "--"}
                         </Avatar>
-                        <h4 className="userName">
-                          {capitalizeFirstTwoWords(item?.user_full_name) ||
-                            "--"}
-                        </h4>
+                        <Tooltip title={item.user_full_name} arrow>
+                          <h4 className="userName">
+                            {capitalizeFirstTwoWords(
+                              item.user_full_name.length > 20
+                                ? item.user_full_name.slice(0, 20) + '...'
+                                : item.user_full_name
+                            ) || "--"}
+                          </h4>
+                        </Tooltip>
                       </div>
                     ) : (
                       ""

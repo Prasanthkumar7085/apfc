@@ -1,6 +1,6 @@
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, List, ListItem, ListItemIcon, ListItemText, Radio, TextField } from "@mui/material";
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, InputAdornment, List, ListItem, ListItemIcon, ListItemText, Radio, TextField, Tooltip } from "@mui/material";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -114,7 +114,11 @@ const AssignDeviceDialog = ({ open, onClose, getSinleUser, getSinleUserDevices }
                                     onChange={() => setSelectedUser(device)}
                                 />
                             </ListItemIcon>
-                            <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name)} />
+                            <Tooltip title={device?.device_name} arrow>
+                                <ListItemText className="listText" primary={capitalizeFirstTwoWords(device?.device_name.length > 20
+                                    ? device?.device_name.slice(0, 20) + '...'
+                                    : device?.device_name)} />
+                            </Tooltip>
                             {device?.user_full_name ? (
                                 <Image src="/user-profile.svg" alt="" width={15} height={15} />
                             ) : (

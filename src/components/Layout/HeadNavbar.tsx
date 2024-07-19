@@ -62,7 +62,7 @@ const HeadNavbar = () => {
     setSearchString(newSearchString);
     let queryParams = {
       ...searchParams,
-      search_string: newSearchString,
+      search_string: encodeURIComponent(newSearchString),
       page: 1
     }
     let queryString = prepareURLEncodedParams("", queryParams)
