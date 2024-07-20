@@ -13,6 +13,7 @@ $avatharColor: #ff7a00;
 #viewUserPage {
   width: 100%;
   font-family: $fontPrimary !important;
+
   .userInfo {
     .profileGrp {
       @include align-center;
@@ -180,6 +181,8 @@ $avatharColor: #ff7a00;
         font-size: clamp(14px, 0.93vw, 20px);
         font-weight: 500;
         margin: 0;
+        white-space: pre-line !important;
+        white-space: pre-wrap !important;
       }
 
       .settingsBlock {

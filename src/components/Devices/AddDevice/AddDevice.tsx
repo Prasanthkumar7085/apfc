@@ -23,7 +23,7 @@ const AddDevice = () => {
 
   const handleFieldValue = (event: any) => {
     const { name, value } = event.target;
-    const deviceVAlue = value.replace(/^\s+/, '');
+    const deviceVAlue = value.replace(/\s+/g, ' ');
     setDeviceDetails({
       ...deviceDetails,
       [name]: deviceVAlue,
