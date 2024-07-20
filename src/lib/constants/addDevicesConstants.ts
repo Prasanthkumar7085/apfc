@@ -148,9 +148,9 @@ export type Setting = {
 };
 
 export const voltageSettings: Setting[] = [
-  { name: "trip_time", label: "TRIP TIME", type: "switch" },
-  { name: "no_volt", label: "NO VOLT", type: "switch" },
-  { name: "over_volt", label: "OVER VOLT", type: "switch" },
+  { name: "trip_time", label: "Trip Time", type: "switch" },
+  { name: "no_volt", label: "No Volt", type: "switch" },
+  { name: "over_volt", label: "Over Volt", type: "switch" },
   {
     name: "set_min_over_volt",
     label: "Set Over Voltage Min",
@@ -167,7 +167,7 @@ export const voltageSettings: Setting[] = [
     max: 1000,
     unit: "V",
   },
-  { name: "under_volt", label: "UNDR VOLT", type: "switch" },
+  { name: "under_volt", label: "Under Volt", type: "switch" },
 ];
 
 export const harmonicDistortionSettings: Setting[] = [
