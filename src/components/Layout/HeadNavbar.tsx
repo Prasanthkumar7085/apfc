@@ -89,6 +89,7 @@ const HeadNavbar = () => {
 
   const logout = () => {
     Cookies.remove("user");
+    Cookies.remove("access_token");
     dispatch(removeUserDetails());
     router.push("/");
   };

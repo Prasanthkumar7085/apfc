@@ -42,6 +42,7 @@ const LoginPage = () => {
       if (response.success) {
         toast.success(response?.message);
         Cookies.set("user", response?.data?.user_details?.user_type);
+        Cookies.set("access_token", response?.data?.access_token);
         dispatch(setUserDetails(response));
         setInvalid(null);
         router.push("/devices");
