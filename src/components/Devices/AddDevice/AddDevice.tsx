@@ -33,7 +33,12 @@ const AddDevice = () => {
   const addDevice = async () => {
     setLoading(true);
     try {
-      const payload = { ...deviceDetails };
+      let data = {
+        device_name: deviceDetails?.device_name ? deviceDetails?.device_name.trim() : "",
+        device_serial_number: deviceDetails?.device_serial_number ? deviceDetails?.device_serial_number.trim() : "",
+        location: deviceDetails?.location ? deviceDetails?.location.trim() : "",
+      }
+      const payload = { ...data };
       let response: any = await addDeviceAPI(payload);
 
       if (response.success) {
@@ -58,7 +63,12 @@ const AddDevice = () => {
   const updateDevice = async () => {
     setLoading(true);
     try {
-      const payload = { ...deviceDetails };
+      let data = {
+        device_name: deviceDetails?.device_name ? deviceDetails?.device_name.trim() : "",
+        device_serial_number: deviceDetails?.device_serial_number ? deviceDetails?.device_serial_number.trim() : "",
+        location: deviceDetails?.location ? deviceDetails?.location.trim() : "",
+      }
+      const payload = { ...data };
       let response: any = await updateDeviceAPI(payload, params?.id);
 
       if (response.success) {
