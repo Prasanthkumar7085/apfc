@@ -44,12 +44,13 @@ const DevicesList = () => {
       router.push(`${pathname}${queryString}`);
       const response = await getAllDevicesAPI(queryParams);
       const { data, ...rest } = response;
-      // if (!data.length && rest?.total_pages < rest?.page) {
-      //   await getAllListDevices({ page: rest?.total_pages })
-      // } else {
-      setDevicesData(data);
-      setPaginationDetails(rest);
-      // }
+      if (!data.length && rest?.total_pages < rest?.page && rest?.page != 1) {
+        await getAllListDevices({ page: rest?.total_pages })
+      } else {
+        setDevicesData(data);
+        setPaginationDetails(rest);
+      }
+      console.log(response);
 
     } catch (err) {
       console.error(err);

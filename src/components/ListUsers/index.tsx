@@ -27,6 +27,7 @@ const ListUsers = () => {
     const [searchParams, setSearchParams] = useState(
         Object.fromEntries(new URLSearchParams(Array.from(useParam.entries())))
     );
+
     const getAllListUsers = async ({
         page = searchParams?.page,
         limit = searchParams?.limit,
@@ -46,12 +47,12 @@ const ListUsers = () => {
             router.push(`${pathname}${queryString}`);
             const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
-            // if (!data.length && rest?.total_pages < rest?.page) {
-            //     await getAllListUsers({ page: rest?.total_pages })
-            // } else {
-            setUsersData(data);
-            setPaginationDetails(rest);
-            // }
+            if (!data.length && rest?.total_pages < rest?.page && rest?.page != 1) {
+                await getAllListUsers({ page: rest?.total_pages })
+            } else {
+                setUsersData(data);
+                setPaginationDetails(rest);
+            }
         } catch (err) {
             console.error(err);
         } finally {
