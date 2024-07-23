@@ -46,12 +46,12 @@ const ListUsers = () => {
             router.push(`${pathname}${queryString}`);
             const response = await getAllListUsersAPI(queryParams);
             const { data, ...rest } = response;
-            if (!data.length && rest?.total_pages < rest?.page) {
-                await getAllListUsers({ page: rest?.total_pages })
-            } else {
-                setUsersData(data);
-                setPaginationDetails(rest);
-            }
+            // if (!data.length && rest?.total_pages < rest?.page) {
+            //     await getAllListUsers({ page: rest?.total_pages })
+            // } else {
+            setUsersData(data);
+            setPaginationDetails(rest);
+            // }
         } catch (err) {
             console.error(err);
         } finally {

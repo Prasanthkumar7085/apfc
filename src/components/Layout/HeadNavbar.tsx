@@ -71,11 +71,11 @@ const HeadNavbar = () => {
   };
 
   const handleStatusChange = (event: any) => {
-    const newSearchString = event.target.value;
-    setStatus(newSearchString);
+    const newStatus = event.target.value;
+    setStatus(newStatus);
     let queryParams = {
       ...searchParams,
-      status: newSearchString,
+      status: encodeURIComponent(newStatus),
       page: 1
     }
     let queryString = prepareURLEncodedParams("", queryParams)
