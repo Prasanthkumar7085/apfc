@@ -50,8 +50,6 @@ const DevicesList = () => {
         setDevicesData(data);
         setPaginationDetails(rest);
       }
-      console.log(response);
-
     } catch (err) {
       console.error(err);
     } finally {

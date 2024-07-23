@@ -229,8 +229,15 @@ const TanStackTableComponent: FC<pageProps> = ({
                                 <td colSpan={10}>
 
                                     <div className="noDataBlock">
-                                        <Image src="/No data Image.svg" alt="" height={300} width={300} />
-
+                                        <Image src="/no-user-image.svg" alt="" height={300} width={300} />
+                                        <div className="textBlock">
+                                            <p className="noDataTxt">
+                                                {"It looks like three are no users yet. Add a new user to start"}
+                                            </p>
+                                            <p className="noDataTxt">
+                                                {"managing your account."}
+                                            </p>
+                                        </div>
                                         <Button
                                             className="addUserBtn"
                                             variant="outlined"
