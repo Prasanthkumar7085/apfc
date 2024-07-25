@@ -508,7 +508,6 @@ const DeviceSection = ({
         open={open}
         closeDialog={closeDialog}
       />
-      <Toaster richColors closeButton position="top-right" />
     </div>
   );
 };

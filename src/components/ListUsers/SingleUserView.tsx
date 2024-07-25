@@ -135,7 +135,6 @@ const SingleUserView = () => {
             />
 
             <LoadingComponent loading={loading} />
-            <Toaster richColors closeButton position="top-right" />
         </div>
     )
 }

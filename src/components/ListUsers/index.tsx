@@ -231,7 +231,6 @@ const ListUsers = () => {
                 closeDialog={closeDialog}
             />
             <LoadingComponent loading={loading} />
-            <Toaster richColors closeButton position="top-right" />
         </div>
     );
 }
