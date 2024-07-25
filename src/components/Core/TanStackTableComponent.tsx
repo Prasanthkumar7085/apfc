@@ -110,7 +110,7 @@ const TanStackTableComponent: FC<pageProps> = ({
     return (
         <div className="mainTable">
 
-            <div className="tableContainer ">
+            <div className="tableContainer">
                 <table className="table">
                     <thead
                         className="thead"
@@ -229,24 +229,35 @@ const TanStackTableComponent: FC<pageProps> = ({
                                 <td colSpan={10}>
 
                                     <div className="noDataBlock">
-                                        <Image src="/no-user-image.svg" alt="" height={300} width={300} />
-                                        <div className="textBlock">
-                                            <p className="noDataTxt">
-                                                {"It looks like three are no users yet. Add a new user to start"}
-                                            </p>
-                                            <p className="noDataTxt">
-                                                {"managing your account."}
-                                            </p>
-                                        </div>
-                                        <Button
-                                            className="addUserBtn"
-                                            variant="outlined"
-                                            onClick={() => router.push('/users/add')}
-                                            startIcon={<AddIcon />}
-                                            sx={{ marginTop: "2rem" }}
-                                        >
-                                            Add New User
-                                        </Button>
+                                        {!data?.length && (useParams?.get('status') || useParams?.get('search_string')) ? (
+                                            <>
+                                                <Image src="/no-data-user.svg" alt="" height={350} width={350} />
+                                                <p >
+                                                    {"No Users"}
+                                                </p>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Image src="/no-user-image.svg" alt="" height={300} width={300} />
+                                                <div className="textBlock">
+                                                    <p className="noDataTxt">
+                                                        {"It looks like three are no users yet. Add a new user to start"}
+                                                    </p>
+                                                    <p className="noDataTxt">
+                                                        {"managing your account."}
+                                                    </p>
+                                                </div>
+                                                <Button
+                                                    className="addUserBtn"
+                                                    variant="outlined"
+                                                    onClick={() => router.push('/users/add')}
+                                                    startIcon={<AddIcon />}
+                                                    sx={{ marginTop: "2rem" }}
+                                                >
+                                                    Add New User
+                                                </Button>
+                                            </>
+                                        )}
                                     </div>
                                 </td>
                             </tr>
@@ -256,7 +267,6 @@ const TanStackTableComponent: FC<pageProps> = ({
                     </tbody>
                 </table>
             </div>
-            <div />
             {data?.length ? (
                 <TablePaginationComponent
                     paginationDetails={paginationDetails}

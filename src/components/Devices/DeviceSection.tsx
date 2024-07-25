@@ -459,23 +459,34 @@ const DeviceSection = ({
           })
         ) : !loading ? (
           <div className="noDataBlock" style={{ height: "calc(100vh - 250px)" }}>
-            <Image src="/No data Image.svg" alt="" height={300} width={300} />
-            <div className="textBlock">
-              <p className="noDataTxt">
-                {"It looks like you haven't added any devices yet."}
-              </p>
-              <p className="noDataTxt">
-                {"add a new device to monitor your agricultural operations."}
-              </p>
-            </div>
-            <Button
-              className="addUserBtn"
-              variant="outlined"
-              onClick={() => router.push("/devices/add")}
-              startIcon={<AddIcon />}
-            >
-              Add New Device
-            </Button>
+            {!devicesData?.length && (params?.get('status') || params?.get('search_string')) ? (
+              <>
+                <Image src="/no-device-image.svg" alt="" height={400} width={400} />
+                <p>
+                  {"No Devices"}
+                </p>
+              </>
+            ) : (
+              <>
+                <Image src="/No data Image.svg" alt="" height={300} width={300} />
+                <div className="textBlock">
+                  <p className="noDataTxt">
+                    {"It looks like you haven't added any devices yet."}
+                  </p>
+                  <p className="noDataTxt">
+                    {"add a new device to monitor your agricultural operations."}
+                  </p>
+                </div>
+                <Button
+                  className="addUserBtn"
+                  variant="outlined"
+                  onClick={() => router.push("/devices/add")}
+                  startIcon={<AddIcon />}
+                >
+                  Add New Device
+                </Button>
+              </>
+            )}
           </div>
         ) : (
           ""
