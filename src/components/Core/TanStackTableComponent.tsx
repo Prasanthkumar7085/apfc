@@ -111,7 +111,7 @@ const TanStackTableComponent: FC<pageProps> = ({
         <div className="mainTable">
 
             <div className="tableContainer">
-                <table className="table">
+                <table className="table" style={{ height: !data?.length && (useParams?.get('status') || useParams?.get('search_string')) ? "100%" : "auto" }}>
                     <thead
                         className="thead"
 
