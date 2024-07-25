@@ -32,7 +32,7 @@ const TablePaginationComponent = ({ paginationDetails, capturePageNum, captureRo
 
   const [limitOptions] = useState(
 
-    [10, 20, 50, 100]
+    [20, 40, 60, 80, 100]
   );
 
   return (
@@ -62,21 +62,21 @@ const TablePaginationComponent = ({ paginationDetails, capturePageNum, captureRo
             ))}
           </Select>
         </div>
-        
-          <Typography variant="caption" className="totalCount">
-            {" "}
-            {(paginationDetails?.page == 1
-              ? 1
-              : (paginationDetails?.page - 1) * paginationDetails?.limit + 1) +
-              " - " +
-              (paginationDetails?.page == paginationDetails?.total_pages
+
+        <Typography variant="caption" className="totalCount">
+          {" "}
+          {(paginationDetails?.page == 1
+            ? 1
+            : (paginationDetails?.page - 1) * paginationDetails?.limit + 1) +
+            " - " +
+            (paginationDetails?.page == paginationDetails?.total_pages
+              ? paginationDetails?.total
+              : paginationDetails?.total < paginationDetails?.limit
                 ? paginationDetails?.total
-                : paginationDetails?.total < paginationDetails?.limit
-                  ? paginationDetails?.total
-                  : paginationDetails?.page * paginationDetails?.limit)}{" "}
-            of {paginationDetails?.total} {values}
-          </Typography>
-        
+                : paginationDetails?.page * paginationDetails?.limit)}{" "}
+          of {paginationDetails?.total} {values}
+        </Typography>
+
 
         <Pagination
           shape="rounded"

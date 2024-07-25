@@ -35,7 +35,7 @@ const DevicesList = () => {
     try {
       let queryParams: any = {
         page: page ? page : 1,
-        limit: limit ? limit : 10,
+        limit: limit ? limit : 20,
         search_string: search_string ? search_string : "",
         status: status ? status : ""
       };
@@ -60,7 +60,7 @@ const DevicesList = () => {
   useEffect(() => {
     getAllListDevices({
       page: searchParams?.page ? searchParams?.page : 1,
-      limit: searchParams?.limit ? searchParams?.limit : 10,
+      limit: searchParams?.limit ? searchParams?.limit : 20,
       search_string: searchParams?.search_string,
       status: searchParams?.status
     });
