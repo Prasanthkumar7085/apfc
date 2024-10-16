@@ -10,7 +10,7 @@
   padding-left: 15px !important;
 }
 
-$colorTableHeader: #e6f6ee;
+$colorTableHeader: #45A845;
 $headerTextColor: #545961;
 $bodyTextColor: #24282d;
 $bodyBorderColor: #edf2f7;
@@ -40,17 +40,17 @@ $inputBorderColor: #9c9c9c;
 
         .table-row {
           background: $colorTableHeader !important;
-          font-weight: 600;
           padding: 6px 12px;
 
           .cell {
-            color: $blackColor;
+            color: $whiteColor;
             font-size: clamp(12px, 0.72vw, 16px);
             font-style: normal;
-            font-weight: 500;
+            font-weight: 400;
             text-transform: capitalize;
             box-sizing: border-box;
             padding: 0 12px;
+            border-right: 1px solid #EAECF0;
 
             &:first-child {
               border-radius: 10px 0 0 0;
