@@ -88,7 +88,6 @@ const SingleDeviceView = () => {
   return (
     <div id="deviceViewPage">
       <div className="headerBlock">
-
         <Tabs
           className="levelTabs"
           value={value}
@@ -113,10 +112,10 @@ const SingleDeviceView = () => {
           <Grid
             item
             xs={12}
-            md={6}
+            md={9}
             style={{ display: "flex", flexDirection: "column" }}
           >
-            <Grid container spacing={2} style={{ flex: 1 }}>
+            <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard />
               </Grid>
@@ -128,7 +127,7 @@ const SingleDeviceView = () => {
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} style={{ flex: 1 }}>
+            <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard />
               </Grid>
@@ -153,7 +152,7 @@ const SingleDeviceView = () => {
             </Grid>
           </Grid>
 
-          <Grid item xs={12} md={6} style={{ display: "flex" }}>
+          <Grid item xs={12} md={3} style={{ display: "flex" }}>
             <Paper className="eachDetailsCard" style={{ flex: 1 }}>
               <div className="cardHeader">
                 <Typography variant="h6">Errors</Typography>
