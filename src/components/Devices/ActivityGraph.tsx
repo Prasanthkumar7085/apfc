@@ -7,6 +7,8 @@ import {
   Tooltip,
   Legend,
   Brush,
+  ComposedChart,
+  Area,
 } from "recharts";
 import { getDeviceDataWithMinuteParamatersAPI } from "@/services/devicesAPIs";
 import { useParams } from "next/navigation";
@@ -151,25 +153,27 @@ const ActivityGraph: React.FC = () => {
     chartWidth: number,
     zoomedDataLength?: any
   ) => {
-    const maxTicks = Math.floor(chartWidth / 100); // Example: 1 tick per 100px
+    const maxTicks = Math.floor(chartWidth / 100);
     const effectiveLength = Math.min(zoomedDataLength, maxTicks);
 
-    if (effectiveLength <= 10) return 1; // Show every label
-    if (effectiveLength <= 30) return 1; // Show every label
-    if (effectiveLength <= 100) return 2; // Show every second label
+    if (effectiveLength <= 10) return 2;
+    if (effectiveLength <= 4) return 2;
+    if (effectiveLength <= 3) return 1;
     return 5;
   };
 
   return (
     <Box className="activityBlock">
-      <Box
-       className="pageHeader"
-        mb={2}
-      >
+      <Box className="pageHeader" mb={2}>
         <h4 className="pageHeading">
-          <Image src="/devices/new/activity-grapg-icon.svg" alt="" width={ 15} height={15} />
+          <Image
+            src="/devices/new/activity-grapg-icon.svg"
+            alt=""
+            width={15}
+            height={15}
+          />
           <span>Activity Graph</span>
-          </h4>
+        </h4>
         <Box className="filterBlock">
           <CustomDateRangePicker
             value={dateRange}
@@ -193,7 +197,6 @@ const ActivityGraph: React.FC = () => {
             )}
             limitTags={2}
           />
-         
         </Box>
       </Box>
 
@@ -201,7 +204,7 @@ const ActivityGraph: React.FC = () => {
         <p>Loading...</p>
       ) : (
         <div style={{ width: "100%", margin: "0 auto" }}>
-          <LineChart width={1300} height={400} data={zoomedData}>
+          <ComposedChart width={1300} height={450} data={zoomedData}>
             <XAxis
               dataKey="timestamp"
               tickFormatter={(timestamp) => {
@@ -212,7 +215,7 @@ const ActivityGraph: React.FC = () => {
                 });
               }}
               interval={interval}
-              angle={-45}
+              angle={-5}
               textAnchor="end"
             />
             <YAxis />
@@ -227,16 +230,19 @@ const ActivityGraph: React.FC = () => {
                   dataKey={param}
                   stroke={parameter?.color}
                   name={parameter?.title}
+                  fill={parameter?.color}
                 />
               );
             })}
+
             <Brush
               dataKey="timestamp"
               height={30}
+              gap={10}
               stroke="#8884d8"
               onChange={handleZoomChange}
             />
-          </LineChart>
+          </ComposedChart>
         </div>
       )}
     </Box>
