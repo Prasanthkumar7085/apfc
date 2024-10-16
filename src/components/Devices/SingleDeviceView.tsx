@@ -128,6 +128,12 @@ const SingleDeviceView = () => {
             </Grid>
 
             <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
+              <Grid item xs={12}>
+                <div className="blockHeading">
+                  <Image src="/devices/new/value/voltage-mesurement.svg" alt="" height={15} width={15} />
+                  <span>Voltage Measurements</span>
+                </div>
+              </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard />
               </Grid>
@@ -140,6 +146,12 @@ const SingleDeviceView = () => {
             </Grid>
 
             <Grid container spacing={2} style={{ flex: 1 }}>
+              <Grid item xs={12}>
+                <div className="blockHeading">
+                  <Image src="/devices/new/value/power-messure.svg" alt="" height={15} width={15} />
+                  <span>Power measurements</span>
+                </div>
+              </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard />
               </Grid>
@@ -153,9 +165,19 @@ const SingleDeviceView = () => {
           </Grid>
 
           <Grid item xs={12} md={3} style={{ display: "flex" }}>
-            <Paper className="eachDetailsCard" style={{ flex: 1 }}>
+            <Paper className="eachDetailsCard errorsCard" style={{ flex: 1 }}>
               <div className="cardHeader">
-                <Typography variant="h6">Errors</Typography>
+                <Typography variant="h6">
+                  <Image src="/devices/new/value/errors.svg" alt="" height={15} width={15} />
+                  <span>
+                    Errors
+</span>
+                  </Typography>
+              </div>
+              <div className="cardInfo">
+                <div className="infoText">
+                  Over Voltage Error detected. The voltage level has exceeded the safe limit. Please check the system to prevent potential damage.
+                </div>
               </div>
               <div className="cardBody">
                 <div className="eachBodyInfo">
@@ -205,7 +227,11 @@ const SingleDeviceView = () => {
           <Grid item xs={12} md={6}>
             <Paper className="eachDetailsCard">
               <div className="cardHeader">
-                <Typography variant="h6">Relay Status</Typography>
+                <Typography variant="h6">
+                  <Image src="/devices/new/value/relay-status.svg" alt="" height={15} width={15} />
+                  <span>Relay Status</span>
+                  
+                  </Typography>
               </div>
               <div className="cardBody">
                 {Array.from({ length: 8 }, (_, index) => {
@@ -230,7 +256,10 @@ const SingleDeviceView = () => {
           <Grid item xs={12} md={6}>
             <Paper className="eachDetailsCard">
               <div className="cardHeader">
-                <Typography variant="h6">Bank Values</Typography>
+                <Typography variant="h6">
+                  <Image src="/devices/new/value/bank-values.svg" alt="" height={15} width={15} />
+                  <span> Bank Values</span>
+                 </Typography>
               </div>
               <div className="cardBody">
                 {Array.from({ length: 14 }, (_, index) => {
