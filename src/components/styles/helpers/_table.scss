@@ -10,7 +10,7 @@
   padding-left: 15px !important;
 }
 
-$colorTableHeader: #45A845;
+$colorTableHeader: #45a845;
 $headerTextColor: #545961;
 $bodyTextColor: #24282d;
 $bodyBorderColor: #edf2f7;
@@ -50,7 +50,7 @@ $inputBorderColor: #9c9c9c;
             text-transform: capitalize;
             box-sizing: border-box;
             padding: 0 12px;
-            border-right: 1px solid #EAECF0;
+            border-right: 1px solid #eaecf0;
 
             &:first-child {
               border-radius: 10px 0 0 0;
@@ -99,6 +99,30 @@ $inputBorderColor: #9c9c9c;
               width: 18px;
               display: flex;
               align-items: center;
+            }
+            .deviceStatus {
+              border-radius: 30px;
+              padding: 6px 10px;
+              gap: 4px;
+              @include align-center();
+              width: fit-content;
+
+              &.online {
+                background-color: #45a8451a;
+                color: $primaryColor;
+              }
+
+              &.offline {
+                color: $secondaryColor !important;
+                background-color: #d948411a;
+              }
+
+              .statusTxt {
+                font-size: clamp(12px, 0.72vw, 15px);
+                font-weight: 500;
+                line-height: 100%;
+                margin: 0;
+              }
             }
           }
 

@@ -300,7 +300,7 @@ const AddDeviceComponent = () => {
   };
 
   return (
-    <Box id="addUser" sx={{ display: "flex", gap: 2, width: "100%" }}>
+    <Box id="addUser" sx={{ width: "100%" }}>
       <div style={{ display: "flex", flexDirection: "row", gap: "1.5em" }}>
         <Box sx={{ width: "40%" }}>
           <div className="feildBlock">
@@ -348,7 +348,8 @@ const AddDeviceComponent = () => {
             />
             <ErrorMessagesComponent errorMessage={errorMessages?.location} />
           </div>
-
+          <div className="btnBlock">
+            
           <Button
             className="addUserBtn"
             variant="contained"
@@ -361,7 +362,7 @@ const AddDeviceComponent = () => {
 
           {params?.id ? (
             <Button
-              className="addUserBtn"
+              className="syncBtn"
               variant="contained"
               color="success"
               sx={{ alignSelf: "flex-end" }}
@@ -372,6 +373,7 @@ const AddDeviceComponent = () => {
           ) : (
             ""
           )}
+</div>
           <LoadingComponent loading={loading} />
         </Box>
 

@@ -115,10 +115,16 @@ $inputTxtColor: #bdbdbd;
       }
     }
   }
+  .btnBlock {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
 
   .addUserBtn {
     border-radius: 6px;
     background: $primaryColor;
+    border: 1px solid $primaryColor;
     text-transform: capitalize;
     color: $whiteColor;
     font-family: $fontPrimary;
@@ -127,6 +133,21 @@ $inputTxtColor: #bdbdbd;
     padding: 6px 20px;
     box-shadow: none;
     margin-top: 1rem;
+
+  }
+  .syncBtn {
+    border-radius: 6px;
+    border: 1px solid $primaryColor;
+    background-color: transparent;
+    text-transform: capitalize;
+    color: $primaryColor;
+    font-family: $fontPrimary;
+    font-size: clamp(12px, 0.72vw, 15px);
+    font-weight: 500;
+    padding: 6px 20px;
+    box-shadow: none;
+    margin-top: 1rem;
+    margin-left: 1em;
   }
 }
 
