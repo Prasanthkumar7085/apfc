@@ -4,6 +4,7 @@ import { setSingleDevice } from "@/redux/Modules/userlogin";
 import {
   addDeviceAPI,
   getDeviceAPI,
+  syncDeviceParamsAPI,
   updateDeviceAPI,
 } from "@/services/devicesAPIs";
 import { Box, Button, TextField } from "@mui/material";
@@ -177,12 +178,14 @@ const AddDevice = () => {
 
       if (response.success) {
         setErrorMessages(null);
+        setOpenSyncParamsDialog(true);
+        setDeviceDetails(response?.data);
         toast.success(response.message);
-        setTimeout(() => {
-          router.push(
-            `/devices/${response?.data?.id}/update-settings?state=Level1`
-          );
-        }, 1000);
+        // setTimeout(() => {
+        //   router.push(
+        //     `/devices/${response?.data?.id}/update-settings?state=Level1`
+        //   );
+        // }, 1000);
       } else if (response.status === 422) {
         setErrorMessages(response.error_data);
         throw response;
@@ -218,6 +221,8 @@ const AddDevice = () => {
       } else if (response.status === 422) {
         setErrorMessages(response.error_data);
         throw response;
+      } else {
+        toast.error(response.message);
       }
     } catch (err) {
       console.error(err);
@@ -226,7 +231,39 @@ const AddDevice = () => {
     }
   };
 
-  const syncDeviceParmas = async () => {};
+  const syncDeviceParmas = async () => {
+    setLoading(true);
+    try {
+      let response: any = await syncDeviceParamsAPI(
+        deviceDetails?.device_serial_number,
+        params?.id || deviceDetails?.id
+      );
+      setOpenSyncParamsDialog(false);
+
+      if (response.success) {
+        setErrorMessages(null);
+        toast.success(response.message);
+        setTimeout(() => {
+          router.push(`/devices/${params?.id}/update-settings?state=Level1`);
+        }, 1000);
+      } else if (response.status === 422) {
+        setErrorMessages(response.error_data);
+        setTimeout(() => {
+          router.back();
+        }, 1000);
+        throw response;
+      } else {
+        toast.error(response.message);
+        setTimeout(() => {
+          router.back();
+        }, 1000);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const getSingleDevice = async () => {
     setLoading(true);
@@ -320,6 +357,20 @@ const AddDevice = () => {
           >
             {params?.id ? "Update Device" : "Add Device"}
           </Button>
+
+          {params?.id ? (
+            <Button
+              className="addUserBtn"
+              variant="contained"
+              color="success"
+              sx={{ alignSelf: "flex-end" }}
+              onClick={syncDeviceParmas}
+            >
+              Sync device params
+            </Button>
+          ) : (
+            ""
+          )}
           <LoadingComponent loading={loading} />
         </Box>
 

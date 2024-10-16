@@ -7,6 +7,8 @@ import {
   DialogTitle,
   Button,
 } from "@mui/material";
+import { Router } from "next/router";
+import { useParams, useRouter } from "next/navigation";
 
 interface SyncDialogProps {
   openSyncParamsDialog: boolean;
@@ -19,6 +21,8 @@ const SyncDeviceDialog: React.FC<SyncDialogProps> = ({
   setOpenSyncParamsDialog,
   handleSync,
 }) => {
+  const router = useRouter();
+  const params = useParams();
   return (
     <Dialog
       open={openSyncParamsDialog}
@@ -33,7 +37,12 @@ const SyncDeviceDialog: React.FC<SyncDialogProps> = ({
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={() => setOpenSyncParamsDialog(false)}
+          onClick={() => {
+            setOpenSyncParamsDialog(false);
+            if (!params?.id) {
+              router.back();
+            }
+          }}
           variant="outlined"
           color="error"
         >
