@@ -1,12 +1,18 @@
 "use client";
-import AddDevice from "@/components/Devices/AddDevice/AddDevice";
+import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
+const AddDeviceComponent = dynamic(
+  () => import("@/components/Devices/AddDevice/AddDevice"),
+  {
+    ssr: false,
+  }
+);
 const AddDevicePage = () => {
-    return (
-        <Suspense>
-            <AddDevice />
-        </Suspense>
-    );
+  return (
+    <Suspense>
+      <AddDeviceComponent />
+    </Suspense>
+  );
 };
 export default AddDevicePage;
