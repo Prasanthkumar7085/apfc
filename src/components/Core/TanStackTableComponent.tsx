@@ -86,6 +86,58 @@ const TanStackTableComponent: FC<pageProps> = ({
     return width;
   };
 
+  const SortItems = ({
+    searchParams,
+    header,
+    removeSortingForColumnIds,
+  }: {
+    searchParams: any;
+    header: any;
+    removeSortingForColumnIds?: string[];
+  }) => {
+    return (
+      <div style={{ display: "flex", alignItems: "center" }}>
+        {searchParams.order_by == header.id ? (
+          searchParams.order_type == "asc" ? (
+            <Image src="/sort-asc.svg" height={13} width={13} alt="image" />
+          ) : (
+            <Image src="/sort-desc.svg" height={13} width={13} alt="image" />
+          )
+        ) : removeSortingForColumnIds?.includes(header.id) ? (
+          ""
+        ) : (
+          <Image src="/un-sort.svg" height={13} width={15} alt="image" />
+        )}
+      </div>
+    );
+  };
+
+  const sortAndGetData = (header: any) => {
+    if (
+      removeSortingForColumnIds &&
+      removeSortingForColumnIds?.length &&
+      removeSortingForColumnIds.includes(header.id)
+    ) {
+      return;
+    }
+    let order_by = header.id;
+    let order_type = "asc";
+    if ((searchParams?.order_by as string) == header.id) {
+      if (searchParams?.order_type == "asc") {
+        order_type = "desc";
+      } else {
+        order_by = "";
+        order_type = "";
+      }
+    }
+
+    getData({
+      ...searchParams,
+      order_by: order_by,
+      order_type: order_type,
+    });
+  };
+
   return (
     <div className="mainTable">
       <div className="tableContainer">
@@ -117,16 +169,13 @@ const TanStackTableComponent: FC<pageProps> = ({
                       >
                         {header.isPlaceholder ? null : (
                           <div
-                            // onClick={() => sortAndGetData(header)}
-                            {...{
-                              className: header.column.getCanSort()
-                                ? "select-none"
-                                : "",
-                            }}
+                            onClick={() => sortAndGetData(header)}
                             style={{
                               display: "flex",
                               gap: "10px",
                               cursor: "pointer",
+                              alignItems: "center",
+                              justifyContent: "space-between",
                               minWidth: getWidth(header.id),
                               width: getWidth(header.id),
                             }}
@@ -135,40 +184,13 @@ const TanStackTableComponent: FC<pageProps> = ({
                               header.column.columnDef.header,
                               header.getContext()
                             )}
-                            {{
-                              // asc: (
-                              //     <Image
-                              //         src="/core/sort/sort-asc.svg"
-                              //         height={8}
-                              //         width={8}
-                              //         alt="image"
-                              //     />
-                              // ),
-                              // desc: (
-                              //     <Image
-                              //         src="/core/sort/sort-desc.svg"
-                              //         height={8}
-                              //         width={8}
-                              //         alt="image"
-                              //     />
-                              // ),
-                            }[header.column.getIsSorted() as string] ?? (
-                              <Image
-                                src="/core/sort/un-sort.svg"
-                                height={8}
-                                width={8}
-                                alt="Unsorted"
-                                style={{
-                                  display:
-                                    header.id === "actions" ||
-                                    removeSortingForColumnIds.includes(
-                                      header.id
-                                    )
-                                      ? "none"
-                                      : "",
-                                }}
-                              />
-                            )}
+                            <SortItems
+                              searchParams={searchParams}
+                              header={header}
+                              removeSortingForColumnIds={
+                                removeSortingForColumnIds
+                              }
+                            />
                           </div>
                         )}
                       </th>

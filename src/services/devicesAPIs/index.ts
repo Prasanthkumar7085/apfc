@@ -17,7 +17,6 @@ export const getAllDevicesAPI = async (
 };
 
 export const getSigleDeviceAPI = async (id: any) => {
-
   try {
     const { success, data } = await $fetch.get(`/devices/${id}/parameters`);
     if (!success) {
@@ -221,7 +220,6 @@ export const resetDevicePasswordAPI = async (
   }
 };
 
-
 export const deleteAssignUserAPI = async (id: any) => {
   try {
     const { success, data } = await $fetch.delete(`/devices/${id}/user`);
@@ -234,11 +232,17 @@ export const deleteAssignUserAPI = async (id: any) => {
   }
 };
 
-export const updateDevicePasswordAPI = async (payload: {
-  password: string,
-}, id: any) => {
+export const updateDevicePasswordAPI = async (
+  payload: {
+    password: string;
+  },
+  id: any
+) => {
   try {
-    const { success, data } = await $fetch.patch(`/devices/${id}/reset-password`, payload);
+    const { success, data } = await $fetch.patch(
+      `/devices/${id}/reset-password`,
+      payload
+    );
     if (!success) {
       return handleAPIErrorResponse(data);
     }
@@ -249,7 +253,6 @@ export const updateDevicePasswordAPI = async (payload: {
 };
 
 export const getDeviceAPI = async (id: any) => {
-
   try {
     const { success, data } = await $fetch.get(`/devices/${id}`);
     if (!success) {
@@ -264,6 +267,24 @@ export const getDeviceAPI = async (id: any) => {
 export const updateDeviceAPI = async (payload: any, id: any) => {
   try {
     const { success, data } = await $fetch.patch(`/devices/${id}`, payload);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getDeviceDataWithMinuteParamatersAPI = async (
+  id: any,
+  queryParams: any
+) => {
+  try {
+    const { success, data } = await $fetch.get(
+      `/devices/${id}/device-params/minute-wise`,
+      queryParams
+    );
     if (!success) {
       return handleAPIErrorResponse(data);
     }

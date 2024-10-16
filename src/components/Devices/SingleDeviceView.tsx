@@ -2,17 +2,55 @@
 import { getSigleDeviceAPI } from "@/services/devicesAPIs";
 import { useEffect, useState } from "react";
 import LoadingComponent from "../Core/LoadingComponent";
-import { Grid, Typography, Paper, Box } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  Paper,
+  Box,
+  Tabs,
+  Tab,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+} from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setSingleDevice } from "@/redux/Modules/userlogin";
 import Image from "next/image";
+import ActivityGraph from "./ActivityGraph";
+import TotalKWCard from "./DeviceParameterWiseDetails/TotalKWCard";
+
+function TabPanel(props: any) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box className="tab-content" sx={{ marginTop: "20px" }}>
+          {children}
+        </Box>
+      )}
+    </div>
+  );
+}
 
 const SingleDeviceView = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState<any>({});
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: any, newValue: any) => {
+    setValue(newValue);
+  };
 
   const getSingleDevice = async () => {
     setLoading(true);
@@ -32,407 +70,187 @@ const SingleDeviceView = () => {
   }, []);
 
   const capitalizeAndRemoveUnderscore = (text: any) => {
-    return text.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
+    return text
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (char: string) => char.toUpperCase());
   };
 
   const capitalize = (text: any) => {
     // Convert "Relay1" to "Relay 1" and "Bank1" to "Bank 1"
-    const spacedText = text.replace(/(\D)(\d)/g, '$1 $2');
-    return spacedText.replace(/_/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
+    const spacedText = text.replace(/(\D)(\d)/g, "$1 $2");
+    return spacedText
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (char: string) => char.toUpperCase());
   };
 
-  const firstRowHeight = '100%';
+  const firstRowHeight = "100%";
+  console.log(deviceData, "deviceData");
   return (
     <div id="deviceViewPage">
-      <div className="deviceinfo">
-        <Typography className="deviceNum">
-          Device Number:{" "}
-          <span className="deviceName">{deviceData?.device_serial_number || "--"}</span>{" "}
-        </Typography>
+      <div className="headerBlock">
+        <Tabs
+          className="levelTabs"
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Device Details" className="tabBtn" />
+          <Tab label="Activity" className="tabBtn" />
+        </Tabs>
       </div>
-      <Grid container spacing={2} className="deviceInfoContainer">
-        <Grid item xs={12} md={6} style={{ display: 'flex', flexDirection: 'column' }}>
-          <Grid container spacing={2} style={{ flex: 1 }}>
-            <Grid item xs={12} md={12}>
-              <Paper className="eachDetailsCard" style={{ height: firstRowHeight }}>
-                <div className="cardHeader">
-                  <Typography variant="h6">Voltage Measurements</Typography>
-                </div>
-                {Object?.keys(deviceData).length && deviceData?.voltage_measurements !== null ? (
-                  <div className="cardBody voltageMesurement">
-                    <div className="eachInnerBody">
-                      <div className="eachBodyInfo">
 
-                        <label>Voltage V1N</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.voltage_v1n.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo">
-
-                        <label className="eachBodyInfo">Voltage V2N</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.voltage_v2n.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo">
-
-                        <label className="eachBodyInfo">Voltage V3N</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.voltage_v3n.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo avarageBlock">
-                        <label>Average Voltage LN</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.average_voltage_ln.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                    </div>
-                    <div className="eachInnerBody">
-                      <div className="eachBodyInfo">
-
-                        <label>Voltage V12</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.voltage_v12.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo">
-
-                        <label>Voltage V23</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.voltage_v23.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo">
-
-                        <label>Voltage V31</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.voltage_v31.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo avarageBlock">
-
-                        <label>Average Voltage LL</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.average_voltage_ll.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                    </div>
-                    <div className="eachInnerBody">
-                      <div className="eachBodyInfo">
-
-                        <label>Current I1</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.current_i1.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo">
-
-                        <label>Current I2</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.current_i2.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo">
-
-                        <label>Current I3</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.current_i3.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                      <div className="eachBodyInfo avarageBlock">
-                        <label>Average Current</label>
-                        <Typography>
-                          {deviceData.voltage_measurements?.average_current.toFixed(2) + " " + "V" || "--"}
-                        </Typography>
-                      </div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="noData">No Data</div>
-                )}
-              </Paper>
+      <TabPanel value={value} index={0}>
+        <div className="deviceinfo">
+          <Typography className="deviceNum">
+            Device Number:
+            <span className="deviceName">
+              {deviceData?.device_serial_number || "--"}
+            </span>{" "}
+          </Typography>
+        </div>
+        <Grid container spacing={2} className="deviceInfoContainer">
+          <Grid
+            item
+            xs={12}
+            md={6}
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <Grid container spacing={2} style={{ flex: 1 }}>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
             </Grid>
-            <Grid item xs={12} md={12}>
-              <Paper className="eachDetailsCard" style={{ height: firstRowHeight }}>
-                <div className="cardHeader">
-                  <Typography variant="h6">Errors</Typography>
-                </div>
-                {Object?.keys(deviceData)?.length && deviceData?.errors !== null ? (
-                  <div className="cardBody">
-                    {Object?.keys(deviceData?.errors)?.map((item, index) => (
-                      <div className="eachBodyInfo" key={index}>
-                        <label>{capitalizeAndRemoveUnderscore(item)}</label>
-                        <Typography className={deviceData?.errors[item] === true ? "errorData" : "nonError"} >
 
-                          {deviceData?.errors[item] === true
-                            ? <Image
-                              alt=""
-                              src="/iconinfo.svg"
-                              height={18}
-                              width={18}
-                            />
-                            : "" || ""}
-                          {deviceData?.errors[item] === true
-                            ? "Error"
-                            : "Error" || "--"}
-                        </Typography>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="noData">No Data</div>
-                )}
+            <Grid container spacing={2} style={{ flex: 1 }}>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+            </Grid>
 
-              </Paper>
+            <Grid container spacing={2} style={{ flex: 1 }}>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
-        <Grid item xs={12} md={6} style={{ display: 'flex' }}>
-          <Paper className="eachDetailsCard" style={{ flex: 1 }}>
-            <div className="cardHeader">
-              <Typography variant="h6">Power Measurements</Typography>
-            </div>
-            {Object.keys(deviceData).length && deviceData.power_measurements !== null ? (
-              <div className="cardBody voltageMesurement">
-                <div className="eachInnerBody">
-                  <div className="eachBodyInfo">
 
-                    <label>kW1</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kw1.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kW2</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kw2.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kW3</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kw3.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo avarageBlock">
-
-                    <label>Total kW</label>
-                    <Typography>
-                      {deviceData.power_measurements?.total_kw.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                </div>
-                <div className="eachInnerBody">
-                  <div className="eachBodyInfo">
-
-                    <label>kVA1</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kva1.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kVA2</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kva2.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-                    <label>kVA3</label>
-
-                    <Typography>
-                      {deviceData.power_measurements?.kva3.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo avarageBlock">
-
-                    <label>Total kVA</label>
-                    <Typography>
-                      {deviceData.power_measurements?.total_kva.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                </div>
-                <div className="eachInnerBody">
-                  <div className="eachBodyInfo">
-
-                    <label>kVAr1</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kvar1.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kVAr2</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kvar2.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kVAr3</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kvar3.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo avarageBlock">
-
-                    <label>Total kVAr</label>
-                    <Typography>
-                      {deviceData.power_measurements?.total_kvar.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                </div>
-                <div className="eachInnerBody">
-                  <div className="eachBodyInfo">
-
-                    <label>PF1</label>
-                    <Typography>
-                      {deviceData.power_measurements?.pf1.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>PF2</label>
-                    <Typography>
-                      {deviceData.power_measurements?.pf2.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>PF3</label>
-                    <Typography>
-                      {deviceData.power_measurements?.pf3.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo avaragePfBlock">
-
-                    <label>Average PF</label>
-                    <Typography>
-                      {deviceData.average_pf?.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                </div>
-                <div className="eachInnerBody">
-                  <div className="eachBodyInfo">
-
-                    <label>kWh</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kwh.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kVAh</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kvah.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-
-                    <label>kVArh</label>
-                    <Typography>
-                      {deviceData.power_measurements?.kvarh.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                </div>
-                <div className="eachInnerBody">
-                  <div className="eachBodyInfo">
-                    <label>Temperature</label>
-                    <Typography>
-                      {deviceData.power_measurements?.temperature.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                  <div className="eachBodyInfo">
-                    <label>Frequency</label>
-                    <Typography>
-                      {deviceData.power_measurements?.frequency.toFixed(2) || "--"}
-                    </Typography>
-                  </div>
-                </div>
+          <Grid item xs={12} md={6} style={{ display: "flex" }}>
+            <Paper className="eachDetailsCard" style={{ flex: 1 }}>
+              <div className="cardHeader">
+                <Typography variant="h6">Errors</Typography>
               </div>
-            ) : (
-              <div className="noData">No Data</div>
-            )}
-
-          </Paper>
-        </Grid>
-
-        <Grid item xs={12} md={6}>
-          <Paper className="eachDetailsCard">
-            <div className="cardHeader">
-              <Typography variant="h6">Relay Status</Typography>
-            </div>
-
-            {Object.keys(deviceData).length && deviceData.relay_status !== null ? (
               <div className="cardBody">
-                {Object.keys(deviceData.relay_status).map((item, index) => (
-                  <div className="eachBodyInfo" key={index}>
-                    <label>{capitalize(item)}</label>
-                    <Typography className={deviceData?.relay_status[item] == "ON" ? "radioOn" : "radioOff"}>
+                <div className="eachBodyInfo">
+                  <label>No voltage error</label>
+                  <Typography>
+                    {deviceData?.no_voltage === 1 ? "No error" : "Error"}
+                  </Typography>
+                </div>
+                <div className="eachBodyInfo">
+                  <label>Under voltage error</label>
+                  <Typography>
+                    {deviceData?.under_voltage === 1 ? "No error" : "Error"}
+                  </Typography>
+                </div>
 
-                      {deviceData?.relay_status[item] || "--"}
-                    </Typography>
-                  </div>
-                ))}
+                <div className="eachBodyInfo">
+                  <label>Over voltage error</label>
+                  <Typography>
+                    {deviceData?.over_voltage === 1 ? "No error" : "Error"}
+                  </Typography>
+                </div>
+
+                <div className="eachBodyInfo">
+                  <label>THID I error</label>
+                  <Typography>
+                    {deviceData?.thdi === 1 ? "No error" : "Error"}
+                  </Typography>
+                </div>
+
+                <div className="eachBodyInfo">
+                  <label>Temperature error</label>
+                  <Typography>
+                    {deviceData?.thdi === 1 ? "No error" : "Error"}
+                  </Typography>
+                </div>
+
+                <div className="eachBodyInfo">
+                  <label>Under compensate error</label>
+                  <Typography>
+                    {deviceData?.thdi === 1 ? "No error" : "Error"}
+                  </Typography>
+                </div>
               </div>
-            ) : (
-              <div className="noData">No Data</div>
-            )}
-          </Paper>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Paper className="eachDetailsCard">
-            <div className="cardHeader">
-              <Typography variant="h6">Bank Values</Typography>
-            </div>
+            </Paper>
+          </Grid>
 
-            {Object.keys(deviceData).length && deviceData.bank_values !== null ? (
+          <Grid item xs={12} md={6}>
+            <Paper className="eachDetailsCard">
+              <div className="cardHeader">
+                <Typography variant="h6">Relay Status</Typography>
+              </div>
               <div className="cardBody">
-                {Object.keys(deviceData.bank_values).map((item, index) => (
-                  <div className="eachBodyInfo" key={index}>
-                    <label>{capitalize(item)}</label>
-                    <Typography>
+                {Array.from({ length: 8 }, (_, index) => {
+                  const relayKey = `relay${index + 1}`;
+                  const relayStatus = deviceData?.[relayKey];
 
-                      {deviceData?.bank_values[item]?.toFixed(2) + " " + "Kvar" || "--"}
-                    </Typography>
-                  </div>
-                ))}
+                  return (
+                    <div className="eachBodyInfo" key={index}>
+                      <label>{`Relay ${index + 1}`}</label>
+                      <Typography
+                        className={relayStatus === 1 ? "radioOn" : "radioOff"}
+                      >
+                        {relayStatus === 1 ? "ON" : "OFF"}
+                      </Typography>
+                    </div>
+                  );
+                })}
               </div>
-            ) : (
-              <div className="noData">No Data</div>
-            )}
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className="eachDetailsCard">
-            <div className="cardHeader">
-              <Typography variant="h6">
-                Total Harmonic Distortion (THD)
-              </Typography>
-            </div>
+            </Paper>
+          </Grid>
 
-            {Object.keys(deviceData).length && deviceData.total_harmonic_distortion !== null ? (
-              <div className="cardBody harmonicDistortion">
-                {Object.keys(deviceData.total_harmonic_distortion).map((item, index) => (
-                  <div className="eachBodyInfo" key={index}>
-                    <label>{capitalizeAndRemoveUnderscore(item)}</label>
-                    <Typography>
-
-                      {deviceData?.total_harmonic_distortion[item] || "--"}
-                    </Typography>
-                  </div>
-                ))}
+          <Grid item xs={12} md={6}>
+            <Paper className="eachDetailsCard">
+              <div className="cardHeader">
+                <Typography variant="h6">Bank Values</Typography>
               </div>
-            ) : (
-              <div className="noData">No Data</div>
-            )}
-          </Paper>
+              <div className="cardBody">
+                {Array.from({ length: 14 }, (_, index) => {
+                  const bankValue = deviceData[`bank${index + 1}`] || 0;
+
+                  return (
+                    <div className="eachBodyInfo" key={index}>
+                      <label>{`Bank ${index + 1}:`}</label>
+                      <Typography>{bankValue}</Typography>
+                    </div>
+                  );
+                })}
+              </div>
+            </Paper>
+          </Grid>
         </Grid>
-      </Grid>
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <ActivityGraph />
+      </TabPanel>
       <LoadingComponent loading={loading} />
     </div>
   );

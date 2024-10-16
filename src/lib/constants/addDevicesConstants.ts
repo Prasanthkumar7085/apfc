@@ -266,5 +266,32 @@ export const steppersConstansts = [
   { title: "Level 1", sub_title: "Short step description", label: "Level1" },
   { title: "Level 2", sub_title: "Short step description", label: "Level2" },
   { title: "Level 3", sub_title: "Short step description", label: "Level3" },
-  { title: "Fan Settings", sub_title: "Short step description", label: "Level4" },
+  {
+    title: "Fan Settings",
+    sub_title: "Short step description",
+    label: "Level4",
+  },
+];
+
+export const parametersForChart = [
+  {
+    value: "total_kw",
+    title: "Total kW",
+    color: "#8884d8",
+  },
+  {
+    value: "average_pf",
+    title: "Average PF",
+    color: "#82ca9d",
+  },
+  {
+    value: "kwh",
+    title: "kWh",
+    color: "#ffc658",
+  },
+  {
+    value: "kvah",
+    title: "kVAh",
+    color: "#ff7300",
+  },
 ];

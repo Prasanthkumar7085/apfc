@@ -29,7 +29,9 @@ const DevicesList = () => {
     page = searchParams?.page,
     limit = searchParams?.limit,
     search_string = searchParams?.search_string,
-    status = searchParams?.status
+    status = searchParams?.status,
+    order_by = searchParams?.order_by,
+    order_type = searchParams?.order_type,
   }: Partial<ListDevicesApiProps>) => {
     setLoading(true);
     try {
@@ -37,7 +39,9 @@ const DevicesList = () => {
         page: page ? page : 1,
         limit: limit ? limit : 20,
         search_string: search_string ? search_string : "",
-        status: status ? status : ""
+        status: status ? status : "",
+        order_by: order_by ? order_by : "",
+        order_type: order_type ? order_type : "",
       };
       let queryString = prepareURLEncodedParams("", queryParams);
 
@@ -45,7 +49,7 @@ const DevicesList = () => {
       const response = await getAllDevicesAPI(queryParams);
       const { data, ...rest } = response;
       if (!data.length && rest?.total_pages < rest?.page && rest?.page != 1) {
-        await getAllListDevices({ page: rest?.total_pages })
+        await getAllListDevices({ page: rest?.total_pages });
       } else {
         setDevicesData(data);
         setPaginationDetails(rest);
@@ -62,9 +66,14 @@ const DevicesList = () => {
       page: searchParams?.page ? searchParams?.page : 1,
       limit: searchParams?.limit ? searchParams?.limit : 20,
       search_string: searchParams?.search_string,
-      status: searchParams?.status
+      status: searchParams?.status,
     });
-  }, [searchParams?.search_string, searchParams?.status, searchParams?.page, searchParams?.limit]);
+  }, [
+    searchParams?.search_string,
+    searchParams?.status,
+    searchParams?.page,
+    searchParams?.limit,
+  ]);
 
   useEffect(() => {
     setSearchParams(
