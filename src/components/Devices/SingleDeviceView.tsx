@@ -88,14 +88,15 @@ const SingleDeviceView = () => {
   return (
     <div id="deviceViewPage">
       <div className="headerBlock">
+
         <Tabs
           className="levelTabs"
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Device Details" className="tabBtn" />
-          <Tab label="Activity" className="tabBtn" />
+          <Tab label="Device Details" className="tabBtn" icon={<Image src="/devices/new/device-settings.svg" alt="" height={20} width={20} />} iconPosition="start" />
+          <Tab label="Activity" className="tabBtn" icon={<Image src="/devices/new/activity.svg" alt="" height={20} width={20} />} iconPosition="start" />
         </Tabs>
       </div>
 
