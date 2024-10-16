@@ -94,8 +94,8 @@ const SingleDeviceView = () => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Device Details" className="tabBtn" />
-          <Tab label="Activity" className="tabBtn" />
+          <Tab label="Device Details" className="tabBtn" icon={<Image src="/devices/new/device-settings.svg" alt="" height={20} width={20} />} iconPosition="start" />
+          <Tab label="Activity" className="tabBtn" icon={<Image src="/devices/new/activity.svg" alt="" height={20} width={20} />} iconPosition="start" />
         </Tabs>
       </div>
 
@@ -112,10 +112,28 @@ const SingleDeviceView = () => {
           <Grid
             item
             xs={12}
-            md={6}
+            md={9}
             style={{ display: "flex", flexDirection: "column" }}
           >
-            <Grid container spacing={2} style={{ flex: 1 }}>
+            <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+              <Grid item xs={12} sm={6} md={4}>
+                <TotalKWCard />
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
+              <Grid item xs={12}>
+                <div className="blockHeading">
+                  <Image src="/devices/new/value/voltage-mesurement.svg" alt="" height={15} width={15} />
+                  <span>Voltage Measurements</span>
+                </div>
+              </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard />
               </Grid>
@@ -128,18 +146,12 @@ const SingleDeviceView = () => {
             </Grid>
 
             <Grid container spacing={2} style={{ flex: 1 }}>
-              <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+              <Grid item xs={12}>
+                <div className="blockHeading">
+                  <Image src="/devices/new/value/power-messure.svg" alt="" height={15} width={15} />
+                  <span>Power measurements</span>
+                </div>
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
-              </Grid>
-            </Grid>
-
-            <Grid container spacing={2} style={{ flex: 1 }}>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard />
               </Grid>
@@ -152,10 +164,20 @@ const SingleDeviceView = () => {
             </Grid>
           </Grid>
 
-          <Grid item xs={12} md={6} style={{ display: "flex" }}>
-            <Paper className="eachDetailsCard" style={{ flex: 1 }}>
+          <Grid item xs={12} md={3} style={{ display: "flex" }}>
+            <Paper className="eachDetailsCard errorsCard" style={{ flex: 1 }}>
               <div className="cardHeader">
-                <Typography variant="h6">Errors</Typography>
+                <Typography variant="h6">
+                  <Image src="/devices/new/value/errors.svg" alt="" height={15} width={15} />
+                  <span>
+                    Errors
+</span>
+                  </Typography>
+              </div>
+              <div className="cardInfo">
+                <div className="infoText">
+                  Over Voltage Error detected. The voltage level has exceeded the safe limit. Please check the system to prevent potential damage.
+                </div>
               </div>
               <div className="cardBody">
                 <div className="eachBodyInfo">
@@ -205,7 +227,11 @@ const SingleDeviceView = () => {
           <Grid item xs={12} md={6}>
             <Paper className="eachDetailsCard">
               <div className="cardHeader">
-                <Typography variant="h6">Relay Status</Typography>
+                <Typography variant="h6">
+                  <Image src="/devices/new/value/relay-status.svg" alt="" height={15} width={15} />
+                  <span>Relay Status</span>
+                  
+                  </Typography>
               </div>
               <div className="cardBody">
                 {Array.from({ length: 8 }, (_, index) => {
@@ -230,7 +256,10 @@ const SingleDeviceView = () => {
           <Grid item xs={12} md={6}>
             <Paper className="eachDetailsCard">
               <div className="cardHeader">
-                <Typography variant="h6">Bank Values</Typography>
+                <Typography variant="h6">
+                  <Image src="/devices/new/value/bank-values.svg" alt="" height={15} width={15} />
+                  <span> Bank Values</span>
+                 </Typography>
               </div>
               <div className="cardBody">
                 {Array.from({ length: 14 }, (_, index) => {
