@@ -171,8 +171,8 @@ const SingleDeviceView = () => {
                   <Image src="/devices/new/value/errors.svg" alt="" height={15} width={15} />
                   <span>
                     Errors
-</span>
-                  </Typography>
+                  </span>
+                </Typography>
               </div>
               <div className="cardInfo">
                 <div className="infoText">
@@ -230,8 +230,8 @@ const SingleDeviceView = () => {
                 <Typography variant="h6">
                   <Image src="/devices/new/value/relay-status.svg" alt="" height={15} width={15} />
                   <span>Relay Status</span>
-                  
-                  </Typography>
+
+                </Typography>
               </div>
               <div className="cardBody">
                 {Array.from({ length: 8 }, (_, index) => {
@@ -259,7 +259,7 @@ const SingleDeviceView = () => {
                 <Typography variant="h6">
                   <Image src="/devices/new/value/bank-values.svg" alt="" height={15} width={15} />
                   <span> Bank Values</span>
-                 </Typography>
+                </Typography>
               </div>
               <div className="cardBody">
                 {Array.from({ length: 14 }, (_, index) => {

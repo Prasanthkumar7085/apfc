@@ -15,6 +15,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import CustomDateRangePicker from "../Core/DateRangePicker";
+import Image from "next/image";
 
 const parameters = [
   { value: "total_kw", title: "Total kW", color: "#8884d8" },
@@ -160,16 +161,22 @@ const ActivityGraph: React.FC = () => {
   };
 
   return (
-    <Box>
+    <Box className="activityBlock">
       <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
+       className="pageHeader"
         mb={2}
       >
-        <h4>Activity Graph</h4>
-        <Box display="flex" alignItems="center">
+        <h4 className="pageHeading">
+          <Image src="/devices/new/activity-grapg-icon.svg" alt="" width={ 15} height={15} />
+          <span>Activity Graph</span>
+          </h4>
+        <Box className="filterBlock">
+          <CustomDateRangePicker
+            value={dateRange}
+            onChange={handleDateRangeChange}
+          />
           <Autocomplete
+            className="defaultAutoComplete"
             multiple
             options={parameters}
             getOptionLabel={(option) => option.title}
@@ -181,17 +188,12 @@ const ActivityGraph: React.FC = () => {
               <TextField
                 {...params}
                 variant="outlined"
-                label="Select Parameters"
                 placeholder="Parameters"
               />
             )}
             limitTags={2}
-            style={{ marginLeft: 16 }}
           />
-          <CustomDateRangePicker
-            value={dateRange}
-            onChange={handleDateRangeChange}
-          />
+         
         </Box>
       </Box>
 
