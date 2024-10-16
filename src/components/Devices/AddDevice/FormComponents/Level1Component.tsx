@@ -9,6 +9,7 @@ import {
   CurrentTransformerSettings,
   DeviceConfiguration,
   DisplaySettings,
+  FrequencySettings,
   PotentialTransformerSettings,
   TimingSettings,
 } from "@/lib/constants/addDevicesConstants";
@@ -21,11 +22,10 @@ type CombinedEvent = ChangeEvent<HTMLInputElement> | SelectChangeEvent<any>;
 const Level1Component = ({
   levelBasedData,
   setLevelBasedData,
-  getLevelBasedDeviceDetails
+  getLevelBasedDeviceDetails,
 }: any) => {
   const [errorMessages, setErrorMessages] = useState<any>();
-  const handleChange = (
-    e: any) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setLevelBasedData((prevState: any) => ({
       ...prevState,
@@ -38,18 +38,19 @@ const Level1Component = ({
       case "text":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">
-              {setting.label}
-            </label>
-            <TextField className="settingsTextFeild" value={levelBasedData[setting.name]} onChange={handleChange} name={setting.name} />
+            <label className="label">{setting.label}</label>
+            <TextField
+              className="settingsTextFeild"
+              value={levelBasedData[setting.name]}
+              onChange={handleChange}
+              name={setting.name}
+            />
           </div>
         );
       case "number":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">
-              {setting.label}
-            </label>
+            <label className="label">{setting.label}</label>
             <RangeWithUnits
               setting={setting}
               value={levelBasedData}
@@ -60,9 +61,7 @@ const Level1Component = ({
       case "password":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">
-              {setting.label}
-            </label>
+            <label className="label">{setting.label}</label>
             <PasswordFormFields
               name={setting.name}
               handleChange={handleChange}
@@ -78,9 +77,7 @@ const Level1Component = ({
       case "select":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">
-              {setting.label}
-            </label>
+            <label className="label">{setting.label}</label>
             <Select
               className="settingSelectFeild"
               onChange={handleChange}
@@ -98,9 +95,7 @@ const Level1Component = ({
       case "radio":
         return (
           <div className="fieldGroup" key={setting.name}>
-            <label className="label">
-              {setting.label}
-            </label>
+            <label className="label">{setting.label}</label>
             <GroupRadioButtons
               setting={setting}
               handleChange={handleChange}
@@ -119,22 +114,22 @@ const Level1Component = ({
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Authentication Settings</h3>
           <div className="eachFeildGrp">
-
             {AuthenticationSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Device Configuration</h3>
           <div className="eachFeildGrp">
-
             {DeviceConfiguration.map(renderField)}
           </div>
-          <h3 className="eachBlockHeading">Current Transformer (CT) Settings</h3>
+          <h3 className="eachBlockHeading">
+            Current Transformer (CT) Settings
+          </h3>
           <div className="eachFeildGrp">
-
             {CurrentTransformerSettings.map(renderField)}
           </div>
-          <h3 className="eachBlockHeading">Potential Transformer (PT) Settings</h3>
+          <h3 className="eachBlockHeading">
+            Potential Transformer (PT) Settings
+          </h3>
           <div className="eachFeildGrp">
-
             {PotentialTransformerSettings.map(renderField)}
           </div>
         </section>
@@ -142,31 +137,27 @@ const Level1Component = ({
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Compensation Settings</h3>
           <div className="eachFeildGrp">
-
             {CompensationSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Timing Settings</h3>
-          <div className="eachFeildGrp">
-
-            {TimingSettings.map(renderField)}
-          </div>
+          <div className="eachFeildGrp">{TimingSettings.map(renderField)}</div>
         </section>
 
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
           <div className="eachFeildGrp">
-
             {ControlSensitivitySettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Communication Settings</h3>
           <div className="eachFeildGrp">
-
             {CommunicationSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Display Settings</h3>
-          <div className="eachFeildGrp">
+          <div className="eachFeildGrp">{DisplaySettings.map(renderField)}</div>
+          <h3 className="eachBlockHeading">Frequency Settings</h3>
 
-            {DisplaySettings.map(renderField)}
+          <div className="eachFeildGrp">
+            {FrequencySettings.map(renderField)}
           </div>
         </section>
       </form>

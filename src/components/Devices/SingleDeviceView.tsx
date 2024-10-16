@@ -291,13 +291,7 @@ const SingleDeviceView = () => {
                   <span>Errors</span>
                 </Typography>
               </div>
-              <div className="cardInfo">
-                <div className="infoText">
-                  Over Voltage Error detected. The voltage level has exceeded
-                  the safe limit. Please check the system to prevent potential
-                  damage.
-                </div>
-              </div>
+
               <div className="cardBody">
                 <div className="eachBodyInfo">
                   <label>No voltage error</label>

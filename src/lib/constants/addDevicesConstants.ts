@@ -135,6 +135,9 @@ export const CommunicationSettings = [
 export const DisplaySettings = [
   { label: "Back Light", type: "number", name: "back_light", unit: "S" },
 ];
+export const FrequencySettings = [
+  { label: "Frequency", type: "number", name: "sync_frequency", unit: "Hz" },
+];
 
 export type Setting = {
   name: string;

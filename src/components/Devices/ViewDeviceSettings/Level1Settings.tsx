@@ -8,13 +8,22 @@ import {
   CurrentTransformerSettings,
   DeviceConfiguration,
   DisplaySettings,
+  FrequencySettings,
   PotentialTransformerSettings,
   TimingSettings,
 } from "@/lib/constants/addDevicesConstants";
 import { Button, Typography } from "@mui/material";
 
-const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPassword, updateDevicePassword, openDialog, closeDialog, open }: any) => {
-
+const Level1Settings = ({
+  levelBasedData,
+  setLevelBasedData,
+  password,
+  setPassword,
+  updateDevicePassword,
+  openDialog,
+  closeDialog,
+  open,
+}: any) => {
   const renderField = (setting: any) => {
     switch (setting.type) {
       case "password":
@@ -29,10 +38,9 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
                     value={levelBasedData}
                   />
 
-                  <Button
-                    className="resetPasswordTxt"
-                    onClick={openDialog}
-                  >Reset password</Button>
+                  <Button className="resetPasswordTxt" onClick={openDialog}>
+                    Reset password
+                  </Button>
                 </div>
               </>
             ) : (
@@ -45,7 +53,8 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
             <Typography className="value">
-              {levelBasedData[setting?.name] || "--"}{levelBasedData[setting?.name] ? setting.unit : ""}
+              {levelBasedData[setting?.name] || "--"}
+              {levelBasedData[setting?.name] ? setting.unit : ""}
             </Typography>
           </div>
         );
@@ -69,8 +78,7 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Authetication Settings</h3>
           <div className="eachFeildGrp">
-
-          {AuthenticationSettings.map(renderField)}
+            {AuthenticationSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Device Configuration</h3>
           <div className="grp eachFeildGrp">
@@ -96,7 +104,6 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
         <section className="eachFormContainer">
           <h3 className="eachBlockHeading">Timing </h3>
           <div className="grp timingSettings eachFeildGrp">
-
             {TimingSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Control Sensitivity Settings</h3>
@@ -108,9 +115,11 @@ const Level1Settings = ({ levelBasedData, setLevelBasedData, password, setPasswo
             {CommunicationSettings.map(renderField)}
           </div>
           <h3 className="eachBlockHeading">Display Settings</h3>
-          <div className="eachFeildGrp">
+          <div className="eachFeildGrp">{DisplaySettings.map(renderField)}</div>
 
-          {DisplaySettings.map(renderField)}
+          <h3 className="eachBlockHeading">Frequency Settings</h3>
+          <div className="eachFeildGrp">
+            {FrequencySettings.map(renderField)}
           </div>
         </section>
       </form>
