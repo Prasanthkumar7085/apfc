@@ -194,7 +194,6 @@ export const DeviceColumns = ({
         return (
           <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
             <div
-              title="Edit User"
               style={{ cursor: "pointer" }}
               onClick={() =>
                 router.push(
@@ -205,15 +204,14 @@ export const DeviceColumns = ({
               <Image
                 alt=""
                 src="/iconsetting.svg"
-                height={25}
-                width={25}
+                height={17}
+                width={17}
                 title="View Settings"
                 style={{ cursor: "pointer" }}
               />
             </div>
 
             <div
-              title="View User"
               style={{ cursor: "pointer" }}
               onClick={() => {
                 router.push(`/devices/${info?.row?.original?.id}`);
@@ -228,7 +226,8 @@ export const DeviceColumns = ({
               />
             </div>
 
-            <IconButton
+            <div
+              style={{ cursor: "pointer" }}
               onClick={() => {
                 router.push(`/devices/${info?.row?.original?.id}/edit`);
               }}
@@ -240,7 +239,7 @@ export const DeviceColumns = ({
                 height={15}
                 title="Edit device"
               />
-            </IconButton>
+            </div>
           </div>
         );
       },
