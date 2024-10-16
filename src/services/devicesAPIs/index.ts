@@ -276,6 +276,19 @@ export const updateDeviceAPI = async (payload: any, id: any) => {
   }
 };
 
+export const syncDeviceParamsAPI = async (serial: any, id: any) => {
+  try {
+    const { success, data } = await $fetch.post(
+      `/devices/${id}/parameters/${serial}/sync`
+    );
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
 export const getDeviceDataWithMinuteParamatersAPI = async (
   id: any,
   queryParams: any

@@ -83,8 +83,6 @@ const SingleDeviceView = () => {
       .replace(/\b\w/g, (char: string) => char.toUpperCase());
   };
 
-  const firstRowHeight = "100%";
-  console.log(deviceData, "deviceData");
   return (
     <div id="deviceViewPage">
       <div className="headerBlock">
@@ -94,8 +92,32 @@ const SingleDeviceView = () => {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Device Details" className="tabBtn" icon={<Image src="/devices/new/device-settings.svg" alt="" height={20} width={20} />} iconPosition="start" />
-          <Tab label="Activity" className="tabBtn" icon={<Image src="/devices/new/activity.svg" alt="" height={20} width={20} />} iconPosition="start" />
+          <Tab
+            label="Device Details"
+            className="tabBtn"
+            icon={
+              <Image
+                src="/devices/new/device-settings.svg"
+                alt=""
+                height={20}
+                width={20}
+              />
+            }
+            iconPosition="start"
+          />
+          <Tab
+            label="Activity"
+            className="tabBtn"
+            icon={
+              <Image
+                src="/devices/new/activity.svg"
+                alt=""
+                height={20}
+                width={20}
+              />
+            }
+            iconPosition="start"
+          />
         </Tabs>
       </div>
 
@@ -104,8 +126,8 @@ const SingleDeviceView = () => {
           <Typography className="deviceNum">
             Device Number:
             <span className="deviceName">
-              {deviceData?.device_serial_number || "--"}
-            </span>{" "}
+              {deviceData?.serial_number || "--"}
+            </span>
           </Typography>
         </div>
         <Grid container spacing={2} className="deviceInfoContainer">
@@ -115,51 +137,143 @@ const SingleDeviceView = () => {
             md={9}
             style={{ display: "flex", flexDirection: "column" }}
           >
-            <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
+            <Grid
+              container
+              spacing={2}
+              style={{ flex: 1, marginBottom: "20px" }}
+            >
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/total-kw.svg"}
+                  mainDetials={["Total KW", deviceData?.total_kw]}
+                  subDetails={{
+                    kW1: deviceData?.kw1,
+                    kW2: deviceData?.kw2,
+                    kW3: deviceData?.kw3,
+                  }}
+                />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/avarage-pf.svg"}
+                  mainDetials={["Average PF", deviceData?.average_pf]}
+                  subDetails={{
+                    PF1: deviceData?.pf1,
+                    PF2: deviceData?.pf2,
+                    PF3: deviceData?.pf3,
+                  }}
+                />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/temparature.svg"}
+                  mainDetials={["Temperature", deviceData?.temperature]}
+                  subDetails={["Frequency", deviceData?.frequency]}
+                />
               </Grid>
             </Grid>
 
-            <Grid container spacing={2} style={{ flex: 1, marginBottom: "20px" }}>
+            <Grid
+              container
+              spacing={2}
+              style={{ flex: 1, marginBottom: "20px" }}
+            >
               <Grid item xs={12}>
                 <div className="blockHeading">
-                  <Image src="/devices/new/value/voltage-mesurement.svg" alt="" height={15} width={15} />
+                  <Image
+                    src="/devices/new/value/voltage-mesurement.svg"
+                    alt=""
+                    height={15}
+                    width={15}
+                  />
                   <span>Voltage Measurements</span>
                 </div>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/voltage-lv.svg"}
+                  mainDetials={[
+                    "Average Voltage LN",
+                    deviceData?.average_voltage_ln,
+                  ]}
+                  subDetails={{
+                    "Voltage V1N": deviceData?.voltage_v1n,
+                    "Voltage V2N": deviceData?.voltage_v2n,
+                    "Voltage V3N": deviceData?.voltage_v3n,
+                  }}
+                />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/voltage-ll.svg"}
+                  mainDetials={[
+                    "Average Voltage LL",
+                    deviceData?.average_voltage_ll,
+                  ]}
+                  subDetails={{
+                    "Voltage V12": deviceData?.voltage_v12,
+                    "Voltage V23": deviceData?.voltage_v23,
+                    "Voltage V31": deviceData?.voltage_v31,
+                  }}
+                />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/avarage-current.svg"}
+                  mainDetials={["Average Current", deviceData?.average_current]}
+                  subDetails={{
+                    "Current I1": deviceData?.current_i1,
+                    "Current I2": deviceData?.current_i2,
+                    "Current I3": deviceData?.current_i3,
+                  }}
+                />
               </Grid>
             </Grid>
 
             <Grid container spacing={2} style={{ flex: 1 }}>
               <Grid item xs={12}>
                 <div className="blockHeading">
-                  <Image src="/devices/new/value/power-messure.svg" alt="" height={15} width={15} />
+                  <Image
+                    src="/devices/new/value/power-messure.svg"
+                    alt=""
+                    height={15}
+                    width={15}
+                  />
                   <span>Power measurements</span>
                 </div>
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/avarage-kva.svg"}
+                  mainDetials={["Average kVA", deviceData?.total_kva]}
+                  subDetails={{
+                    kVA1: deviceData?.kva1,
+                    kVA2: deviceData?.kva2,
+                    kVA3: deviceData?.kva3,
+                  }}
+                />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/total-kva.svg"}
+                  mainDetials={["Total kVAr", deviceData?.total_kvar]}
+                  subDetails={{
+                    kVAr1: deviceData?.kvar1,
+                    kVAr2: deviceData?.kvar2,
+                    kVAr3: deviceData?.kvar3,
+                  }}
+                />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
-                <TotalKWCard />
+                <TotalKWCard
+                  cardimage={"/devices/new/value/total-kvar.svg"}
+                  mainDetials={["Total KW", deviceData?.total_kw]}
+                  subDetails={{
+                    kW1: deviceData?.kw1,
+                    kW2: deviceData?.kw2,
+                    kW3: deviceData?.kw3,
+                  }}
+                />
               </Grid>
             </Grid>
           </Grid>
@@ -168,15 +282,20 @@ const SingleDeviceView = () => {
             <Paper className="eachDetailsCard errorsCard" style={{ flex: 1 }}>
               <div className="cardHeader">
                 <Typography variant="h6">
-                  <Image src="/devices/new/value/errors.svg" alt="" height={15} width={15} />
-                  <span>
-                    Errors
-                  </span>
+                  <Image
+                    src="/devices/new/value/errors.svg"
+                    alt=""
+                    height={15}
+                    width={15}
+                  />
+                  <span>Errors</span>
                 </Typography>
               </div>
               <div className="cardInfo">
                 <div className="infoText">
-                  Over Voltage Error detected. The voltage level has exceeded the safe limit. Please check the system to prevent potential damage.
+                  Over Voltage Error detected. The voltage level has exceeded
+                  the safe limit. Please check the system to prevent potential
+                  damage.
                 </div>
               </div>
               <div className="cardBody">
@@ -228,13 +347,17 @@ const SingleDeviceView = () => {
             <Paper className="eachDetailsCard">
               <div className="cardHeader">
                 <Typography variant="h6">
-                  <Image src="/devices/new/value/relay-status.svg" alt="" height={15} width={15} />
+                  <Image
+                    src="/devices/new/value/relay-status.svg"
+                    alt=""
+                    height={15}
+                    width={15}
+                  />
                   <span>Relay Status</span>
-
                 </Typography>
               </div>
               <div className="cardBody">
-                {Array.from({ length: 8 }, (_, index) => {
+                {Array.from({ length: 14 }, (_, index) => {
                   const relayKey = `relay${index + 1}`;
                   const relayStatus = deviceData?.[relayKey];
 
@@ -257,7 +380,12 @@ const SingleDeviceView = () => {
             <Paper className="eachDetailsCard">
               <div className="cardHeader">
                 <Typography variant="h6">
-                  <Image src="/devices/new/value/bank-values.svg" alt="" height={15} width={15} />
+                  <Image
+                    src="/devices/new/value/bank-values.svg"
+                    alt=""
+                    height={15}
+                    width={15}
+                  />
                   <span> Bank Values</span>
                 </Typography>
               </div>
