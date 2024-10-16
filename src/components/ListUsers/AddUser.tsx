@@ -122,7 +122,7 @@ const AddUser = () => {
     }, [])
 
     return (
-        <Box id="addUser">
+        <Box id="addUser" className="addNewUserPage">
             <div className="feildBlock">
                 <label className="label">Full Name <span>*</span></label>
                 <TextField

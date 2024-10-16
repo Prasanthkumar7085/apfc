@@ -300,7 +300,7 @@ const AddDevice = () => {
 
   return (
     <Box id="addUser" sx={{ display: "flex", gap: 2, width: "100%" }}>
-      <div style={{ display: "flex", flexDirection: "row", gap: 9 }}>
+      <div style={{ display: "flex", flexDirection: "row", gap: "1.5em" }}>
         <Box sx={{ width: "40%" }}>
           <div className="feildBlock">
             <label className="label">
