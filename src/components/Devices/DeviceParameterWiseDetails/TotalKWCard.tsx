@@ -21,14 +21,14 @@ const TotalKWCard = ({ cardimage, mainDetials, subDetails }: any) => {
                 width={25}
                 height={25}
               />
-              <div className="total-text">{mainDetials[0]}</div>
-              <div className="total-value">{mainDetials[1]}</div>
+              <div className="total-text">{mainDetials?.[0]}</div>
+              <div className="total-value">{mainDetials?.[1] || "--"}</div>
             </div>
           ) : (
             Object?.keys(subDetails).map((item: any, index: number) => (
               <div className="row" key={index}>
                 <div className="label">{item}</div>
-                <div className="value">{subDetails?.[item]}</div>
+                <div className="value">{subDetails?.[item] || "--"}</div>
               </div>
             ))
           )}
