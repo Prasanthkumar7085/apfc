@@ -9,4 +9,5 @@ export interface ListDevicesApiProps {
   longitude: string;
   radius: string;
   nearbyme: any;
+  location: string;
 }

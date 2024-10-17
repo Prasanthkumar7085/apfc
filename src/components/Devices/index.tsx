@@ -37,6 +37,7 @@ const DevicesList = () => {
     longitude = searchParams?.longitude,
     radius = searchParams?.radius,
     nearbyme = searchParams?.nearbyme,
+    location = searchParams?.location,
   }: Partial<ListDevicesApiProps>) => {
     setLoading(true);
     try {
@@ -51,6 +52,7 @@ const DevicesList = () => {
         longitude: longitude ? longitude : "",
         radius: radius ? radius : "",
         nearbyme: nearbyme ? nearbyme : "",
+        location: location ? location : "",
       };
       let queryString = prepareURLEncodedParams("", queryParams);
 
@@ -88,6 +90,7 @@ const DevicesList = () => {
     searchParams?.limit,
     searchParams?.latitude,
     searchParams?.longitude,
+    searchParams?.location,
   ]);
 
   useEffect(() => {

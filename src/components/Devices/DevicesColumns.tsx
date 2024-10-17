@@ -53,7 +53,11 @@ export const DeviceColumns = ({
       id: "location",
       header: () => <span>Location Name</span>,
       cell: (info: any) => {
-        return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+        return (
+          <span style={{ textTransform: "capitalize" }}>
+            {info.getValue() ? info.getValue() : "--"}
+          </span>
+        );
       },
 
       footer: (props: any) => props.column.id,

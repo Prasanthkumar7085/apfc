@@ -281,10 +281,12 @@ const AddDeviceComponent = () => {
     try {
       const response = await getDeviceAPI(params?.id);
       setDeviceDetails(response?.data);
-      setPosition({
-        lat: response?.data?.coordinates[0],
-        lng: response?.data?.coordinates[1],
-      });
+      if (response?.data?.coordinates?.length) {
+        setPosition({
+          lat: response?.data?.coordinates[0],
+          lng: response?.data?.coordinates[1],
+        });
+      }
     } catch (err) {
       console.error(err);
     } finally {

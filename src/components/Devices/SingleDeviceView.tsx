@@ -15,7 +15,7 @@ import {
   Divider,
 } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSingleDevice } from "@/redux/Modules/userlogin";
 import Image from "next/image";
 import ActivityGraph from "./ActivityGraph";
@@ -47,6 +47,7 @@ const SingleDeviceView = () => {
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState<any>({});
   const [value, setValue] = useState(0);
+  const deviceDetails = useSelector((state: any) => state?.auth?.singleDevice);
 
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
@@ -125,9 +126,9 @@ const SingleDeviceView = () => {
           <div>
             <div className="deviceinfo">
               <Typography className="deviceNum">
-                Device Number:
+                Device Serial Number :{" "}
                 <span className="deviceName">
-                  {deviceData?.serial_number || "--"}
+                  {deviceDetails?.device_serial_number || "--"}
                 </span>
               </Typography>
             </div>

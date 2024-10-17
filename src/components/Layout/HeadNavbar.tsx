@@ -153,11 +153,9 @@ const HeadNavbar = () => {
       const response = await getDeviceLocationsAPI();
       setDeviceLocations(response?.data);
 
-      if (params.get("latitude") && params.get("longitude")) {
+      if (params.get("location")) {
         let location = response?.data?.find(
-          (item: any) =>
-            item.coordinates[0] == searchParams?.latitude &&
-            item.coordinates[1] == searchParams?.longitude
+          (item: any) => item.location == params.get("location")
         );
         setSelectedLocation(location);
         if (params?.get("nearbyme")) {
@@ -173,7 +171,7 @@ const HeadNavbar = () => {
     if (path == "/devices") {
       getDeviceList();
     }
-  }, []);
+  }, [params]);
 
   useEffect(() => {
     setSearchParams(
@@ -347,28 +345,51 @@ const HeadNavbar = () => {
             <Autocomplete
               className="defaultAutoComplete"
               options={deviceLocations}
-              disabled={isNearby ? true : false}
-              value={selectedLocation ? selectedLocation : null}
-              getOptionLabel={(option: any) => option.location}
-              sx={{ width: 200, display: path == "/users" ? "none" : "" }}
+              disabled={isNearby}
+              value={selectedLocation || null}
+              getOptionLabel={(option) => option.location}
+              sx={{
+                display: path === "/users" ? "none" : "",
+              }}
               renderInput={(params) => (
                 <TextField
                   {...params}
                   variant="outlined"
                   placeholder="Select Location"
+                  sx={{ textTransform: "capitalize" }}
+                  InputProps={{
+                    ...params.InputProps,
+                    sx: {
+                      textTransform: "capitalize",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                    },
+                  }}
                 />
+              )}
+              renderOption={(props, option) => (
+                <li
+                  {...props}
+                  style={{
+                    textTransform: "capitalize",
+                    overflow: "hidden",
+                    whiteSpace: "nowrap",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {option.location}
+                </li>
               )}
               onChange={(event, value) => {
                 setSelectedLocation(value);
 
-                let queryParams: any = {
+                const queryParams = {
                   ...searchParams,
                   page: 1,
+                  location: value?.location,
                 };
-                queryParams.latitude = value?.coordinates[0];
-                queryParams.longitude = value?.coordinates[1];
-                queryParams.radius = 1000;
-                let queryString = prepareURLEncodedParams("", queryParams);
+                const queryString = prepareURLEncodedParams("", queryParams);
                 router.push(`${path}${queryString}`);
               }}
             />
