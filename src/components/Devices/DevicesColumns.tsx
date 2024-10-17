@@ -1,5 +1,7 @@
+import { setSingleDevice } from "@/redux/Modules/userlogin";
 import { Button, IconButton, MenuItem, Tooltip } from "@mui/material";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
 
 export const DeviceColumns = ({
   updateDeviceStatus,
@@ -8,6 +10,7 @@ export const DeviceColumns = ({
   setDialogOpen,
   setDeviceId,
 }: any) => {
+  const dispatch = useDispatch();
   return [
     {
       accessorFn: (row: any) => row.device_serial_number,
@@ -24,6 +27,17 @@ export const DeviceColumns = ({
       accessorFn: (row: any) => row.device_name,
       id: "device_name",
       header: () => <span>Device Name</span>,
+      cell: (info: any) => {
+        return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+      },
+
+      footer: (props: any) => props.column.id,
+      width: "150px",
+    },
+    {
+      accessorFn: (row: any) => row.location,
+      id: "location",
+      header: () => <span>Location Name</span>,
       cell: (info: any) => {
         return <span>{info.getValue() ? info.getValue() : "--"}</span>;
       },
@@ -106,12 +120,14 @@ export const DeviceColumns = ({
                   setDeviceId(info?.row.original?.id);
                 }}
               >
-                <Image
-                  src="/users/assign-icon.svg"
-                  alt=""
-                  width={14}
-                  height={14}
-                />
+                <Tooltip title="Assign User">
+                  <Image
+                    src="/users/assign-icon.svg"
+                    alt=""
+                    width={14}
+                    height={14}
+                  />
+                </Tooltip>
               </IconButton>
             ) : (
               ""
@@ -195,50 +211,61 @@ export const DeviceColumns = ({
           <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
             <div
               style={{ cursor: "pointer" }}
-              onClick={() =>
+              onClick={() => {
+                dispatch(setSingleDevice(info.row.original));
                 router.push(
                   `/devices/${info.row.original.id}/view-settings?state=Level1`
-                )
-              }
+                );
+              }}
             >
-              <Image
-                alt=""
-                src="/iconsetting.svg"
-                height={17}
-                width={17}
-                title="View Settings"
-                style={{ cursor: "pointer" }}
-              />
+              <Tooltip title="View Settings">
+                <Image
+                  alt=""
+                  src="/iconsetting.svg"
+                  height={17}
+                  width={17}
+                  title="View Settings"
+                  style={{ cursor: "pointer" }}
+                />
+              </Tooltip>
             </div>
 
             <div
               style={{ cursor: "pointer" }}
               onClick={() => {
+                dispatch(setSingleDevice(info.row.original));
+
                 router.push(`/devices/${info?.row?.original?.id}`);
               }}
             >
-              <Image
-                alt=""
-                src="/user-view.svg"
-                width={15}
-                height={15}
-                title="View device"
-              />
+              <Tooltip title="View Device">
+                <Image
+                  alt=""
+                  src="/user-view.svg"
+                  width={15}
+                  height={15}
+                  title="View device"
+                />
+              </Tooltip>
             </div>
 
             <div
               style={{ cursor: "pointer" }}
               onClick={() => {
+                dispatch(setSingleDevice(info.row.original));
+
                 router.push(`/devices/${info?.row?.original?.id}/edit`);
               }}
             >
-              <Image
-                alt=""
-                src="/edit-user.svg"
-                width={15}
-                height={15}
-                title="Edit device"
-              />
+              <Tooltip title="Edit Device">
+                <Image
+                  alt=""
+                  src="/edit-user.svg"
+                  width={15}
+                  height={15}
+                  title="Edit device"
+                />
+              </Tooltip>
             </div>
           </div>
         );

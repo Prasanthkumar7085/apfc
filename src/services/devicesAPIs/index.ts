@@ -264,6 +264,18 @@ export const getDeviceAPI = async (id: any) => {
   }
 };
 
+export const getDeviceLocationsAPI = async () => {
+  try {
+    const { success, data } = await $fetch.get(`/devices/locations/all`);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const updateDeviceAPI = async (payload: any, id: any) => {
   try {
     const { success, data } = await $fetch.patch(`/devices/${id}`, payload);

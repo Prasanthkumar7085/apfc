@@ -32,6 +32,9 @@ const DevicesList = () => {
     status = searchParams?.status,
     order_by = searchParams?.order_by,
     order_type = searchParams?.order_type,
+    latitude = searchParams?.latitude,
+    longitude = searchParams?.longitude,
+    radius = searchParams?.radius,
   }: Partial<ListDevicesApiProps>) => {
     setLoading(true);
     try {
@@ -42,6 +45,9 @@ const DevicesList = () => {
         status: status ? status : "",
         order_by: order_by ? order_by : "",
         order_type: order_type ? order_type : "",
+        latitude: latitude ? latitude : "",
+        longitude: longitude ? longitude : "",
+        radius: radius ? radius : "",
       };
       let queryString = prepareURLEncodedParams("", queryParams);
 
@@ -67,12 +73,17 @@ const DevicesList = () => {
       limit: searchParams?.limit ? searchParams?.limit : 20,
       search_string: searchParams?.search_string,
       status: searchParams?.status,
+      latitude: searchParams?.latitude,
+      longitude: searchParams?.longitude,
+      radius: searchParams?.radius,
     });
   }, [
     searchParams?.search_string,
     searchParams?.status,
     searchParams?.page,
     searchParams?.limit,
+    searchParams?.latitude,
+    searchParams?.longitude,
   ]);
 
   useEffect(() => {

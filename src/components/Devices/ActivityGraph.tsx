@@ -18,12 +18,20 @@ import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import CustomDateRangePicker from "../Core/DateRangePicker";
 import Image from "next/image";
+import { color } from "highcharts";
+import LoadingComponent from "../Core/LoadingComponent";
 
 const parameters = [
   { value: "total_kw", title: "Total kW", color: "#8884d8" },
   { value: "average_pf", title: "Average PF", color: "#82ca9d" },
   { value: "kwh", title: "kWh", color: "#ffc658" },
   { value: "kvah", title: "kVAh", color: "#ff7300" },
+  {
+    value: "average_voltage_ll",
+    title: "Average voltage LL",
+    color: "#92298f",
+  },
+  { value: "average_current", title: "Average current", color: "#ff00ff" },
 ];
 
 interface DataPoint {
@@ -103,7 +111,6 @@ const ActivityGraph: React.FC = () => {
   };
 
   const handleZoomChange = async (newRange: any) => {
-    console.log(newRange, "329429343");
     const startIndex = newRange.startIndex;
     const endIndex = newRange.endIndex;
     const chartWidth = 1300;
@@ -118,8 +125,6 @@ const ActivityGraph: React.FC = () => {
       const end = new Date(newRange.end).getTime();
 
       if (!isNaN(start) && !isNaN(end) && start < end) {
-        console.log(newRange, "3294293232332343");
-
         await fetchData(
           new Date(start).toISOString(),
           new Date(end).toISOString()
@@ -218,11 +223,25 @@ const ActivityGraph: React.FC = () => {
               angle={-5}
               textAnchor="end"
             />
-            <YAxis />
+            <YAxis yAxisId="primary" />
+            <YAxis yAxisId="secondary" orientation="right" />
             <Tooltip />
             <Legend />
             {selectedParams.map((param) => {
               const parameter = parameters.find((p) => p.value === param);
+              if (param === "average_pf") {
+                return (
+                  <Line
+                    key={param}
+                    type="monotone"
+                    dataKey={param}
+                    stroke={parameter?.color}
+                    name={parameter?.title}
+                    fill={parameter?.color}
+                    yAxisId="secondary"
+                  />
+                );
+              }
               return (
                 <Line
                   key={param}
@@ -231,10 +250,10 @@ const ActivityGraph: React.FC = () => {
                   stroke={parameter?.color}
                   name={parameter?.title}
                   fill={parameter?.color}
+                  yAxisId="primary"
                 />
               );
             })}
-
             <Brush
               dataKey="timestamp"
               height={30}
@@ -245,6 +264,7 @@ const ActivityGraph: React.FC = () => {
           </ComposedChart>
         </div>
       )}
+      <LoadingComponent loading={loading} />
     </Box>
   );
 };

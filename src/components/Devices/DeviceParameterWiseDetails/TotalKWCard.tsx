@@ -6,11 +6,15 @@ const TotalKWCard = ({ cardimage, mainDetials, subDetails }: any) => {
   return (
     <Paper className="eachDetailCard">
       <div className="card">
-        <div className="left-column">
-          <Image src={cardimage} alt="" width={25} height={25} />
-          <div className="total-text">{mainDetials[0]}</div>
-          <div className="total-value">{mainDetials[1]}</div>
-        </div>
+        {cardimage ? (
+          <div className="left-column">
+            <Image src={cardimage} alt="" width={25} height={25} />
+            <div className="total-text">{mainDetials[0]}</div>
+            <div className="total-value">{mainDetials[1]}</div>
+          </div>
+        ) : (
+          ""
+        )}
 
         <div className="right-column">
           {Array.isArray(subDetails) ? (
@@ -22,13 +26,13 @@ const TotalKWCard = ({ cardimage, mainDetials, subDetails }: any) => {
                 height={25}
               />
               <div className="total-text">{mainDetials?.[0]}</div>
-              <div className="total-value">{mainDetials?.[1] || "--"}</div>
+              <div className="total-value">{mainDetials?.[1]}</div>
             </div>
           ) : (
             Object?.keys(subDetails).map((item: any, index: number) => (
               <div className="row" key={index}>
                 <div className="label">{item}</div>
-                <div className="value">{subDetails?.[item] || "--"}</div>
+                <div className="value">{subDetails?.[item]}</div>
               </div>
             ))
           )}

@@ -117,7 +117,7 @@ const Level1Settings = ({
           <h3 className="eachBlockHeading">Display Settings</h3>
           <div className="eachFeildGrp">{DisplaySettings.map(renderField)}</div>
 
-          <h3 className="eachBlockHeading">Frequency Settings</h3>
+          <h3 className="eachBlockHeading">Sync Frequency</h3>
           <div className="eachFeildGrp">
             {FrequencySettings.map(renderField)}
           </div>

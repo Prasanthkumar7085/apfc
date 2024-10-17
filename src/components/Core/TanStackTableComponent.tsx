@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-table";
 import AddIcon from "@mui/icons-material/Add";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 import TablePaginationComponent from "./TablePaginationComponent";
 import { Button } from "@mui/material";
@@ -28,6 +28,7 @@ const TanStackTableComponent: FC<pageProps> = ({
   getData,
 }) => {
   const router = useRouter();
+  const path = usePathname();
   const [sorting, setSorting] = useState<SortingState>([]);
   const useParams = useSearchParams();
   const [searchParams, setSearchParams] = useState(
@@ -55,10 +56,14 @@ const TanStackTableComponent: FC<pageProps> = ({
     "first_name",
     "email",
     "phone",
-    "device_name",
     "status",
     "last_login",
     "device_count",
+    "user_full_name",
+    "average_voltage_ln",
+    "average_voltage_ll",
+    "average_current",
+    "average_pf",
   ];
 
   const table = useReactTable({
@@ -232,29 +237,44 @@ const TanStackTableComponent: FC<pageProps> = ({
                       useParams?.get("search_string")) ? (
                       <>
                         <Image
-                          src="/no-data-user.svg"
+                          src={
+                            path?.includes("users")
+                              ? "/no-user-image.svg"
+                              : "/no-device-image.svg"
+                          }
                           alt=""
                           height={350}
                           width={350}
                         />
-                        <p>{"No Users"}</p>
+                        <p>
+                          {path?.includes("users") ? "No Users" : "No Devices"}
+                        </p>
                       </>
                     ) : (
                       <>
                         <Image
-                          src="/no-user-image.svg"
+                          src={
+                            path?.includes("users")
+                              ? "/no-user-image.svg"
+                              : "/no-device-image.svg"
+                          }
                           alt=""
                           height={300}
                           width={300}
                         />
+                        <p>
+                          {path?.includes("users") ? "No Users" : "No Devices"}
+                        </p>
                         <div className="textBlock">
                           <p className="noDataTxt">
-                            {
-                              "It looks like three are no users yet. Add a new user to start"
-                            }
+                            {path?.includes("users")
+                              ? "It looks like three are no users yet. Add a new user to start"
+                              : ""}
                           </p>
                           <p className="noDataTxt">
-                            {"managing your account."}
+                            {path?.includes("users")
+                              ? "managing your account."
+                              : ""}
                           </p>
                         </div>
                         <Button
@@ -262,7 +282,10 @@ const TanStackTableComponent: FC<pageProps> = ({
                           variant="outlined"
                           onClick={() => router.push("/users/add")}
                           startIcon={<AddIcon />}
-                          sx={{ marginTop: "2rem" }}
+                          sx={{
+                            marginTop: "2rem",
+                            display: path?.includes("users") ? "block" : "none",
+                          }}
                         >
                           Add New User
                         </Button>
@@ -277,7 +300,7 @@ const TanStackTableComponent: FC<pageProps> = ({
           </tbody>
         </table>
       </div>
-      {data?.length ? (
+      {data?.length && !path?.includes("users") ? (
         <TablePaginationComponent
           paginationDetails={paginationDetails}
           capturePageNum={capturePageNum}

@@ -5,4 +5,7 @@ export interface ListDevicesApiProps {
   status: string;
   order_by: string;
   order_type: string;
+  latitude: string;
+  longitude: string;
+  radius: string;
 }

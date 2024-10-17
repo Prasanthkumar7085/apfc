@@ -57,7 +57,6 @@ const SingleDeviceView = () => {
     try {
       const response = await getSigleDeviceAPI(params?.id);
       setDeviceData(response?.data);
-      dispatch(setSingleDevice(response?.data));
     } catch (err) {
       console.error(err);
     } finally {
@@ -266,12 +265,12 @@ const SingleDeviceView = () => {
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <TotalKWCard
-                  cardimage={"/devices/new/value/total-kvar.svg"}
-                  mainDetials={["Total KW", deviceData?.total_kw]}
+                  cardimage={""}
+                  mainDetials={[]}
                   subDetails={{
-                    kW1: deviceData?.kw1,
-                    kW2: deviceData?.kw2,
-                    kW3: deviceData?.kw3,
+                    kwh: deviceData?.kwh,
+                    kvah: deviceData?.kvah,
+                    kvarh: deviceData?.kvarh,
                   }}
                 />
               </Grid>
@@ -296,41 +295,43 @@ const SingleDeviceView = () => {
                 <div className="eachBodyInfo">
                   <label>No voltage error</label>
                   <Typography>
-                    {deviceData?.no_voltage === 1 ? "No error" : "Error"}
+                    {deviceData?.no_voltage === 0 ? "No error" : "Error"}
                   </Typography>
                 </div>
                 <div className="eachBodyInfo">
                   <label>Under voltage error</label>
                   <Typography>
-                    {deviceData?.under_voltage === 1 ? "No error" : "Error"}
+                    {deviceData?.under_voltage === 0 ? "No error" : "Error"}
                   </Typography>
                 </div>
 
                 <div className="eachBodyInfo">
                   <label>Over voltage error</label>
                   <Typography>
-                    {deviceData?.over_voltage === 1 ? "No error" : "Error"}
+                    {deviceData?.over_voltage === 0 ? "No error" : "Error"}
                   </Typography>
                 </div>
 
                 <div className="eachBodyInfo">
                   <label>THID I error</label>
                   <Typography>
-                    {deviceData?.thdi === 1 ? "No error" : "Error"}
+                    {deviceData?.thdi === 0 ? "No error" : "Error"}
                   </Typography>
                 </div>
 
                 <div className="eachBodyInfo">
                   <label>Temperature error</label>
                   <Typography>
-                    {deviceData?.thdi === 1 ? "No error" : "Error"}
+                    {deviceData?.over_temperature === 0 ? "No error" : "Error"}
                   </Typography>
                 </div>
 
                 <div className="eachBodyInfo">
                   <label>Under compensate error</label>
                   <Typography>
-                    {deviceData?.thdi === 1 ? "No error" : "Error"}
+                    {deviceData?.under_compensation === 0
+                      ? "No error"
+                      : "Error"}
                   </Typography>
                 </div>
               </div>

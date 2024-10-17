@@ -136,7 +136,7 @@ export const DisplaySettings = [
   { label: "Back Light", type: "number", name: "back_light", unit: "S" },
 ];
 export const FrequencySettings = [
-  { label: "Frequency", type: "number", name: "sync_frequency", unit: "Hz" },
+  { label: "Frequency", type: "number", name: "sync_frequency", unit: "" },
 ];
 
 export type Setting = {

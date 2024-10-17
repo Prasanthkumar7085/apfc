@@ -102,7 +102,6 @@ const SingleDeviceSettings = () => {
     try {
       const response = await getSigleDeviceAPI(id);
       setDeviceData(response?.data);
-      dispatch(setSingleDevice(response?.data));
     } catch (err) {
       console.error(err);
     } finally {
@@ -172,9 +171,11 @@ const SingleDeviceSettings = () => {
               {deviceName?.user_full_name?.length > 20 ? (
                 <Tooltip title={deviceName?.user_full_name} arrow>
                   <Typography variant="h6">
-                    {capitalizeFirstTwoWords(deviceName?.user_full_name?.length > 20
-                      ? deviceName?.user_full_name.slice(0, 20) + '...'
-                      : deviceName?.user_full_name) || "--"}
+                    {capitalizeFirstTwoWords(
+                      deviceName?.user_full_name?.length > 20
+                        ? deviceName?.user_full_name.slice(0, 20) + "..."
+                        : deviceName?.user_full_name
+                    ) || "--"}
                   </Typography>
                 </Tooltip>
               ) : (

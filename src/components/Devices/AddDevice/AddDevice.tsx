@@ -26,6 +26,62 @@ import {
 import axios from "axios";
 import SyncDeviceDialog from "@/components/Core/SyncDeviceParamatersDialog";
 
+const LocationMarker = ({ setDeviceDetails }: any) => {
+  typeof window !== "undefined";
+
+  const [position, setPosition] = useState<any>();
+
+  const reverseGeocode = async (lat: any, lng: any) => {
+    try {
+      const response = await axios.get(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+      );
+      return response.data.display_name;
+    } catch (error) {
+      console.error("Error during reverse geocoding:", error);
+      return null;
+    }
+  };
+
+  const map = useMapEvents({
+    async click(e) {
+      try {
+        const placeName = await reverseGeocode(e.latlng.lat, e.latlng.lng);
+
+        let afterRemovingSpaces = placeName
+          ?.split(",")[1]
+          ?.replace(/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]/g, "");
+
+        setPosition(e.latlng);
+        setDeviceDetails((prev: any) => ({
+          ...prev,
+          location: afterRemovingSpaces || "Unknown Location",
+          coordinates: `${e.latlng.lat}, ${e.latlng.lng}`,
+        }));
+      } catch (error) {
+        console.error("Failed to reverse geocode", error);
+        setDeviceDetails((prev: any) => ({
+          ...prev,
+          location: "Unknown Location",
+          coordinates: [e.latlng.lat, e.latlng.lng],
+        }));
+      }
+    },
+  });
+
+  const customIcon: any = L.icon({
+    iconRetinaUrl:
+      "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
+    iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
+    shadowUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+  });
+
+  return position ? <Marker position={position} icon={customIcon} /> : null;
+};
 const AddDeviceComponent = () => {
   const router = useRouter();
 
@@ -87,64 +143,6 @@ const AddDeviceComponent = () => {
     },
   ];
 
-  const LocationMarker = ({ setDeviceDetails }: any) => {
-    typeof window !== "undefined";
-
-    const [position, setPosition] = useState<any>();
-
-    const reverseGeocode = async (lat: any, lng: any) => {
-      try {
-        const response = await axios.get(
-          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
-        );
-        return response.data.display_name;
-      } catch (error) {
-        console.error("Error during reverse geocoding:", error);
-        return null;
-      }
-    };
-
-    const map = useMapEvents({
-      async click(e) {
-        try {
-          const placeName = await reverseGeocode(e.latlng.lat, e.latlng.lng);
-
-          let afterRemovingSpaces = placeName
-            ?.split(",")[1]
-            ?.replace(/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]/g, "");
-
-          setPosition(e.latlng);
-          setDeviceDetails((prev: any) => ({
-            ...prev,
-            location: afterRemovingSpaces || "Unknown Location",
-            coordinates: `${e.latlng.lat}, ${e.latlng.lng}`,
-          }));
-        } catch (error) {
-          console.error("Failed to reverse geocode", error);
-          setDeviceDetails((prev: any) => ({
-            ...prev,
-            location: "Unknown Location",
-            coordinates: `${e.latlng.lat}, ${e.latlng.lng}`,
-          }));
-        }
-      },
-    });
-
-    const customIcon: any = L.icon({
-      iconRetinaUrl:
-        "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon-2x.png",
-      iconUrl: "https://unpkg.com/leaflet@1.7.1/dist/images/marker-icon.png",
-      shadowUrl:
-        "https://unpkg.com/leaflet@1.7.1/dist/images/marker-shadow.png",
-      iconSize: [25, 41],
-      iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
-      shadowSize: [41, 41],
-    });
-
-    return position ? <Marker position={position} icon={customIcon} /> : null;
-  };
-
   const [deviceDetails, setDeviceDetails] = useState<any>({
     device_name: "",
     device_serial_number: "",
@@ -173,6 +171,7 @@ const AddDeviceComponent = () => {
           ? deviceDetails?.device_serial_number.trim()
           : "",
         location: deviceDetails?.location ? deviceDetails?.location.trim() : "",
+        coordinates: deviceDetails?.coordinates || [],
       };
       const payload = { ...data };
       let response: any = await addDeviceAPI(payload);
@@ -209,6 +208,7 @@ const AddDeviceComponent = () => {
           ? deviceDetails?.device_serial_number.trim()
           : "",
         location: deviceDetails?.location ? deviceDetails?.location.trim() : "",
+        coordinates: deviceDetails?.coordinates || [],
       };
       const payload = { ...data };
       let response: any = await updateDeviceAPI(payload, params?.id);
@@ -271,7 +271,6 @@ const AddDeviceComponent = () => {
     try {
       const response = await getDeviceAPI(params?.id);
       setDeviceDetails(response?.data);
-      dispatch(setSingleDevice(response?.data));
     } catch (err) {
       console.error(err);
     } finally {
@@ -349,31 +348,30 @@ const AddDeviceComponent = () => {
             <ErrorMessagesComponent errorMessage={errorMessages?.location} />
           </div>
           <div className="btnBlock">
-            
-          <Button
-            className="addUserBtn"
-            variant="contained"
-            color="success"
-            sx={{ alignSelf: "flex-end" }}
-            onClick={apiCalls}
-          >
-            {params?.id ? "Update Device" : "Add Device"}
-          </Button>
-
-          {params?.id ? (
             <Button
-              className="syncBtn"
+              className="addUserBtn"
               variant="contained"
               color="success"
               sx={{ alignSelf: "flex-end" }}
-              onClick={syncDeviceParmas}
+              onClick={apiCalls}
             >
-              Sync device params
+              {params?.id ? "Update Device" : "Add Device"}
             </Button>
-          ) : (
-            ""
-          )}
-</div>
+
+            {params?.id ? (
+              <Button
+                className="syncBtn"
+                variant="contained"
+                color="success"
+                sx={{ alignSelf: "flex-end" }}
+                onClick={syncDeviceParmas}
+              >
+                Sync device params
+              </Button>
+            ) : (
+              ""
+            )}
+          </div>
           <LoadingComponent loading={loading} />
         </Box>
 
