@@ -64,6 +64,7 @@ const TanStackTableComponent: FC<pageProps> = ({
     "average_voltage_ll",
     "average_current",
     "average_pf",
+    "serial",
   ];
 
   const table = useReactTable({
@@ -300,12 +301,12 @@ const TanStackTableComponent: FC<pageProps> = ({
           </tbody>
         </table>
       </div>
-      {data?.length && !path?.includes("users") ? (
+      {data?.length ? (
         <TablePaginationComponent
           paginationDetails={paginationDetails}
           capturePageNum={capturePageNum}
           captureRowPerItems={captureRowPerItems}
-          values="Users"
+          values={path?.includes("users") ? "Users" : "Devices"}
         />
       ) : (
         ""

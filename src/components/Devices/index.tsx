@@ -11,6 +11,7 @@ import {
 } from "next/navigation";
 import { ListDevicesApiProps } from "@/interfaces/listDeviesAPITypes";
 import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
+import { addSerial } from "@/lib/helpers/addSerialNum";
 
 const DevicesList = () => {
   const params = useParams();
@@ -35,6 +36,7 @@ const DevicesList = () => {
     latitude = searchParams?.latitude,
     longitude = searchParams?.longitude,
     radius = searchParams?.radius,
+    nearbyme = searchParams?.nearbyme,
   }: Partial<ListDevicesApiProps>) => {
     setLoading(true);
     try {
@@ -48,15 +50,17 @@ const DevicesList = () => {
         latitude: latitude ? latitude : "",
         longitude: longitude ? longitude : "",
         radius: radius ? radius : "",
+        nearbyme: nearbyme ? nearbyme : "",
       };
       let queryString = prepareURLEncodedParams("", queryParams);
 
       router.push(`${pathname}${queryString}`);
       const response = await getAllDevicesAPI(queryParams);
-      const { data, ...rest } = response;
+      let { data, ...rest } = response;
       if (!data.length && rest?.total_pages < rest?.page && rest?.page != 1) {
         await getAllListDevices({ page: rest?.total_pages });
       } else {
+        data = addSerial(data, +rest.page, +rest.limit);
         setDevicesData(data);
         setPaginationDetails(rest);
       }

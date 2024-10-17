@@ -10,7 +10,7 @@ import {
 import { Box, Button, TextField } from "@mui/material";
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 
@@ -26,10 +26,13 @@ import {
 import axios from "axios";
 import SyncDeviceDialog from "@/components/Core/SyncDeviceParamatersDialog";
 
-const LocationMarker = ({ setDeviceDetails }: any) => {
+const LocationMarker = ({
+  setDeviceDetails,
+  setPosition,
+  position,
+  mapRef,
+}: any) => {
   typeof window !== "undefined";
-
-  const [position, setPosition] = useState<any>();
 
   const reverseGeocode = async (lat: any, lng: any) => {
     try {
@@ -51,15 +54,13 @@ const LocationMarker = ({ setDeviceDetails }: any) => {
         let afterRemovingSpaces = placeName
           ?.split(",")[1]
           ?.replace(/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]/g, "");
-
         setPosition(e.latlng);
         setDeviceDetails((prev: any) => ({
           ...prev,
           location: afterRemovingSpaces || "Unknown Location",
-          coordinates: `${e.latlng.lat}, ${e.latlng.lng}`,
+          coordinates: [e.latlng.lat, e.latlng.lng],
         }));
       } catch (error) {
-        console.error("Failed to reverse geocode", error);
         setDeviceDetails((prev: any) => ({
           ...prev,
           location: "Unknown Location",
@@ -79,16 +80,24 @@ const LocationMarker = ({ setDeviceDetails }: any) => {
     popupAnchor: [1, -34],
     shadowSize: [41, 41],
   });
+  useEffect(() => {
+    if (position && mapRef.current) {
+      const map = mapRef.current;
+      map.setView(position, map.getZoom());
+    }
+  }, [position]);
 
   return position ? <Marker position={position} icon={customIcon} /> : null;
 };
 const AddDeviceComponent = () => {
   const router = useRouter();
+  const mapRef: any = useRef();
 
   const params = useParams();
   const dispatch = useDispatch();
   const [openSyncParamsDialog, setOpenSyncParamsDialog] =
     useState<boolean>(false);
+  const [position, setPosition] = useState<any>();
 
   const MAP_PROVIDERS = {
     google: {
@@ -147,6 +156,7 @@ const AddDeviceComponent = () => {
     device_name: "",
     device_serial_number: "",
     location: "",
+    coordinates: [],
   });
   const [errorMessages, setErrorMessages] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -271,6 +281,10 @@ const AddDeviceComponent = () => {
     try {
       const response = await getDeviceAPI(params?.id);
       setDeviceDetails(response?.data);
+      setPosition({
+        lat: response?.data?.coordinates[0],
+        lng: response?.data?.coordinates[1],
+      });
     } catch (err) {
       console.error(err);
     } finally {
@@ -343,7 +357,6 @@ const AddDeviceComponent = () => {
               onChange={handleFieldValue}
               placeholder="Enter Device Location"
               fullWidth
-              disabled
             />
             <ErrorMessagesComponent errorMessage={errorMessages?.location} />
           </div>
@@ -380,6 +393,7 @@ const AddDeviceComponent = () => {
             center={[mapConfig?.lat, mapConfig?.lng]}
             zoom={mapConfig?.zoom}
             style={{ height: "100%", width: "100%" }}
+            ref={mapRef} // Attach ref here
           >
             <LayersControl position="topleft">
               {tiles.map(({ attribution, checked, name, subdomains, url }) => {
@@ -399,7 +413,12 @@ const AddDeviceComponent = () => {
                 );
               })}
             </LayersControl>
-            <LocationMarker setDeviceDetails={setDeviceDetails} />
+            <LocationMarker
+              setDeviceDetails={setDeviceDetails}
+              position={position}
+              setPosition={setPosition}
+              mapRef={mapRef}
+            />
           </MapContainer>
         </div>
       </div>

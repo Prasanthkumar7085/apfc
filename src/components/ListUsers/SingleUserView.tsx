@@ -17,6 +17,7 @@ import { capitalizeFirstTwoWords } from "@/lib/helpers/nameFormate";
 import { useDispatch } from "react-redux";
 import { setSingleUser } from "@/redux/Modules/userlogin";
 import dayjs from "dayjs";
+import DeviceSectionForUsers from "../Devices/DeviceListForUsers";
 
 const SingleUserView = () => {
   const params = useParams();
@@ -130,7 +131,7 @@ const SingleUserView = () => {
       <div className="userDevices">
         <h4 className="blockHeading">Devices</h4>
         {data?.length ? (
-          <DeviceSection
+          <DeviceSectionForUsers
             devicesData={data}
             loading={loading}
             getData={getSinleUserDevices}

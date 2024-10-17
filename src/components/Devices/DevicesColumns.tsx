@@ -13,9 +13,23 @@ export const DeviceColumns = ({
   const dispatch = useDispatch();
   return [
     {
-      accessorFn: (row: any) => row.device_serial_number,
-      id: "device_serial_number",
-      header: () => <span>Serial Number</span>,
+      accessorFn: (row: any) => row.serial,
+      id: "serial",
+      header: () => <span>Sl.no</span>,
+      cell: (info: any) => {
+        return <span>{info.getValue() ? info.getValue() : "--"}</span>;
+      },
+
+      footer: (props: any) => props.column.id,
+      width: "70px",
+      minWidth: "70px",
+      maxWidth: "70px",
+    },
+
+    {
+      accessorFn: (row: any) => row.device_name,
+      id: "device_name",
+      header: () => <span>Device Name</span>,
       cell: (info: any) => {
         return <span>{info.getValue() ? info.getValue() : "--"}</span>;
       },
@@ -24,9 +38,9 @@ export const DeviceColumns = ({
       width: "150px",
     },
     {
-      accessorFn: (row: any) => row.device_name,
-      id: "device_name",
-      header: () => <span>Device Name</span>,
+      accessorFn: (row: any) => row.device_serial_number,
+      id: "device_serial_number",
+      header: () => <span>Serial Number</span>,
       cell: (info: any) => {
         return <span>{info.getValue() ? info.getValue() : "--"}</span>;
       },

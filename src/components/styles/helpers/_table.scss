@@ -58,6 +58,18 @@ $inputBorderColor: #9c9c9c;
               overflow: hidden;
               @include first-child-sticky;
             }
+            &:nth-child(2) {
+              background-color: $colorTableHeader;
+              overflow: hidden;
+              position: sticky !important;
+              left: 97px !important;
+            }
+            &:nth-last-child(2) {
+              background-color: $colorTableHeader;
+              overflow: hidden;
+              position: sticky !important;
+              right: 127px !important;
+            }
 
             &:last-child {
               background-color: $colorTableHeader;
@@ -93,7 +105,14 @@ $inputBorderColor: #9c9c9c;
             &:last-child {
               @include last-child-sticky();
             }
-
+            &:nth-child(2) {
+              position: sticky !important;
+              left: 97px !important;
+            }
+            &:nth-last-child(2) {
+              position: sticky !important;
+              right: 127px !important;
+            }
             input {
               height: 16px;
               width: 18px;

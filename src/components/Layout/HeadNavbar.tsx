@@ -95,7 +95,12 @@ const HeadNavbar = () => {
       page: 1,
       ...(checked
         ? {}
-        : { latitude: undefined, longitude: undefined, radius: undefined }),
+        : {
+            latitude: undefined,
+            longitude: undefined,
+            radius: undefined,
+            nearbyme: undefined,
+          }),
     };
 
     if (checked) {
@@ -106,6 +111,7 @@ const HeadNavbar = () => {
             queryParams.latitude = latitude;
             queryParams.longitude = longitude;
             queryParams.radius = 1000;
+            queryParams.nearbyme = "true";
             setIsNearby(true);
 
             let queryString = prepareURLEncodedParams("", queryParams);
@@ -146,14 +152,17 @@ const HeadNavbar = () => {
     try {
       const response = await getDeviceLocationsAPI();
       setDeviceLocations(response?.data);
+
       if (params.get("latitude") && params.get("longitude")) {
         let location = response?.data?.find(
           (item: any) =>
             item.coordinates[0] == searchParams?.latitude &&
             item.coordinates[1] == searchParams?.longitude
         );
-        console.log(location, "location");
         setSelectedLocation(location);
+        if (params?.get("nearbyme")) {
+          setIsNearby(true);
+        }
       }
     } catch (err) {
       console.error(err);

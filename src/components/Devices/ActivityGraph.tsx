@@ -166,7 +166,6 @@ const ActivityGraph: React.FC = () => {
     if (effectiveLength <= 3) return 1;
     return 5;
   };
-
   return (
     <Box className="activityBlock">
       <Box className="pageHeader" mb={2}>
@@ -204,32 +203,50 @@ const ActivityGraph: React.FC = () => {
           />
         </Box>
       </Box>
-
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div style={{ width: "100%", margin: "0 auto" }}>
-          <ComposedChart width={1300} height={450} data={zoomedData}>
-            <XAxis
-              dataKey="timestamp"
-              tickFormatter={(timestamp) => {
-                const date = new Date(timestamp);
-                return date.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
-              }}
-              interval={interval}
-              angle={-5}
-              textAnchor="end"
-            />
-            <YAxis yAxisId="primary" />
-            <YAxis yAxisId="secondary" orientation="right" />
-            <Tooltip />
-            <Legend />
-            {selectedParams.map((param) => {
-              const parameter = parameters.find((p) => p.value === param);
-              if (param === "average_pf") {
+      <div>
+        {zoomedData?.length > 0 ? (
+          <div style={{ width: "100%", margin: "0 auto" }}>
+            <ComposedChart width={1300} height={450} data={zoomedData}>
+              <XAxis
+                dataKey="timestamp"
+                tickFormatter={(timestamp) => {
+                  const date = new Date(timestamp);
+                  return date.toLocaleTimeString([], {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  });
+                }}
+                interval={interval}
+                angle={-5}
+                textAnchor="end"
+              />
+              <YAxis yAxisId="primary" />
+              <YAxis
+                yAxisId="secondary"
+                orientation="right"
+                label={{
+                  value: "Average PF",
+                  angle: 90,
+                  position: "insideRight",
+                }}
+              />
+              <Tooltip />
+              <Legend />
+              {selectedParams.map((param) => {
+                const parameter = parameters.find((p) => p.value === param);
+                if (param === "average_pf") {
+                  return (
+                    <Line
+                      key={param}
+                      type="monotone"
+                      dataKey={param}
+                      stroke={parameter?.color}
+                      name={parameter?.title}
+                      fill={parameter?.color}
+                      yAxisId="secondary"
+                    />
+                  );
+                }
                 return (
                   <Line
                     key={param}
@@ -238,32 +255,31 @@ const ActivityGraph: React.FC = () => {
                     stroke={parameter?.color}
                     name={parameter?.title}
                     fill={parameter?.color}
-                    yAxisId="secondary"
+                    yAxisId="primary"
                   />
                 );
-              }
-              return (
-                <Line
-                  key={param}
-                  type="monotone"
-                  dataKey={param}
-                  stroke={parameter?.color}
-                  name={parameter?.title}
-                  fill={parameter?.color}
-                  yAxisId="primary"
-                />
-              );
-            })}
-            <Brush
-              dataKey="timestamp"
-              height={30}
-              gap={10}
-              stroke="#8884d8"
-              onChange={handleZoomChange}
-            />
-          </ComposedChart>
-        </div>
-      )}
+              })}
+              <Brush
+                dataKey="timestamp"
+                height={30}
+                gap={10}
+                stroke="#8884d8"
+                onChange={handleZoomChange}
+              />
+            </ComposedChart>
+          </div>
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              display: loading ? "none" : "flex",
+              justifyContent: "center",
+            }}
+          >
+            <Image src="/no-device-image.svg" alt="" width={450} height={450} />
+          </div>
+        )}
+      </div>
       <LoadingComponent loading={loading} />
     </Box>
   );
