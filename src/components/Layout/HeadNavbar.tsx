@@ -394,7 +394,10 @@ const HeadNavbar = () => {
               }}
             />
 
-            <div style={{ display: path == "/users" ? "none" : "" }}>
+            <div
+              className="switchBlock"
+              style={{ display: path == "/users" ? "none" : "" }}
+            >
               <Switch
                 checked={isNearby}
                 disabled={selectedLocation ? true : false}
@@ -403,7 +406,9 @@ const HeadNavbar = () => {
                 name="nearbySwitch"
                 inputProps={{ "aria-label": "controlled" }}
               />
-              <span>{isNearby ? "Nearby me" : "Nearby me"}</span>
+              <span className="text">
+                {isNearby ? "Nearby me" : "Nearby me"}
+              </span>
             </div>
 
             {path == "/users" ? (

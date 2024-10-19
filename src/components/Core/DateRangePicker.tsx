@@ -25,7 +25,7 @@ const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({
     <DateRangePicker
       value={value}
       onChange={handleDateRangeChange}
-      style={{ marginBottom: "20px" }}
+      style={{ maxWidth: "250px" }}
       disabledDate={(date) => date.getTime() >= new Date().getTime()}
       editable={false}
       showOneCalendar

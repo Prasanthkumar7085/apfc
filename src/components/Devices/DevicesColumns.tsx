@@ -23,8 +23,8 @@ export const DeviceColumns = ({
 
       footer: (props: any) => props.column.id,
       width: "30px",
-      minWidth: "40px",
-      maxWidth: "50px",
+      minWidth: "30px",
+      maxWidth: "30px",
     },
 
     {
@@ -50,6 +50,7 @@ export const DeviceColumns = ({
 
       footer: (props: any) => props.column.id,
       width: "150px",
+      minWidth: "150px",
     },
     {
       accessorFn: (row: any) => row.location,
@@ -76,8 +77,8 @@ export const DeviceColumns = ({
       },
 
       footer: (props: any) => props.column.id,
-      width: "70px",
-      minWidth: "100px",
+      width: "80px",
+      minWidth: "80px",
       maxWidth: "130px",
     },
     {
@@ -91,7 +92,6 @@ export const DeviceColumns = ({
       footer: (props: any) => props.column.id,
       width: "70px",
       minWidth: "100px",
-      maxWidth: "130px",
     },
 
     {
@@ -103,9 +103,8 @@ export const DeviceColumns = ({
       },
 
       footer: (props: any) => props.column.id,
-      width: "70px",
-      minWidth: "100px",
-      maxWidth: "130px",
+      width: "60px",
+      minWidth: "60px",
     },
     {
       accessorFn: (row: any) => row.total_kw,
@@ -118,7 +117,6 @@ export const DeviceColumns = ({
       footer: (props: any) => props.column.id,
       width: "70px",
       minWidth: "100px",
-      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.user_full_name,
@@ -166,9 +164,8 @@ export const DeviceColumns = ({
         );
       },
       footer: (props: any) => props.column.id,
-      width: "70px",
+      width: "100px",
       minWidth: "100px",
-      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.status,
@@ -232,7 +229,9 @@ export const DeviceColumns = ({
         );
       },
       footer: (props: any) => props.column.id,
-      width: "70px",
+      width: "50px",
+      minWidth: "50px",
+      maxWidth: "50px",
     },
     {
       accessorFn: (row: any) => row.actions,
@@ -240,7 +239,7 @@ export const DeviceColumns = ({
       header: () => <span>Actions</span>,
       cell: (info: any) => {
         return (
-          <div style={{ display: "flex", gap: "1rem", alignItems: "center" }}>
+          <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
             <div
               style={{ cursor: "pointer" }}
               onClick={() => {
@@ -321,7 +320,7 @@ export const DeviceColumns = ({
         );
       },
       footer: (props: any) => props.column.id,
-      width: "100px",
+      width: "80px",
     },
   ];
 };
