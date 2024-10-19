@@ -11,7 +11,6 @@ import {
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import DeleteDialog from "../Core/DeleteDialog";
-import TablePaginationComponent from "../Core/TablePaginationComponent";
 import TanStackTableComponent from "../Core/TanStackTableComponent";
 import AssignUserDialog from "./AssignUserDialog";
 import { DeviceColumns } from "./DevicesColumns";

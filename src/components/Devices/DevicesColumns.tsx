@@ -21,9 +21,9 @@ export const DeviceColumns = ({
       },
 
       footer: (props: any) => props.column.id,
-      width: "70px",
-      minWidth: "70px",
-      maxWidth: "70px",
+      width: "30px",
+      minWidth: "40px",
+      maxWidth: "50px",
     },
 
     {
@@ -36,6 +36,8 @@ export const DeviceColumns = ({
 
       footer: (props: any) => props.column.id,
       width: "150px",
+      minWidth: "100px",
+      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.device_serial_number,
@@ -64,15 +66,17 @@ export const DeviceColumns = ({
       width: "150px",
     },
     {
-      accessorFn: (row: any) => row.average_voltage_ln,
-      id: "average_voltage_ln",
-      header: () => <span>Average Voltage LN</span>,
+      accessorFn: (row: any) => row.total_kw,
+      id: "total_kw",
+      header: () => <span>Total KW</span>,
       cell: (info: any) => {
         return <span>{info.getValue() ? info.getValue() : "--"}</span>;
       },
 
       footer: (props: any) => props.column.id,
-      width: "150px",
+      width: "70px",
+      minWidth: "100px",
+      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.average_voltage_ll,
@@ -83,7 +87,9 @@ export const DeviceColumns = ({
       },
 
       footer: (props: any) => props.column.id,
-      width: "150px",
+      width: "70px",
+      minWidth: "100px",
+      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.average_current,
@@ -94,7 +100,9 @@ export const DeviceColumns = ({
       },
 
       footer: (props: any) => props.column.id,
-      width: "150px",
+      width: "70px",
+      minWidth: "100px",
+      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.average_pf,
@@ -105,7 +113,9 @@ export const DeviceColumns = ({
       },
 
       footer: (props: any) => props.column.id,
-      width: "150px",
+      width: "70px",
+      minWidth: "100px",
+      maxWidth: "130px",
     },
 
     {
@@ -154,7 +164,9 @@ export const DeviceColumns = ({
         );
       },
       footer: (props: any) => props.column.id,
-      width: "150px",
+      width: "70px",
+      minWidth: "100px",
+      maxWidth: "130px",
     },
     {
       accessorFn: (row: any) => row.status,
@@ -218,7 +230,7 @@ export const DeviceColumns = ({
         );
       },
       footer: (props: any) => props.column.id,
-      width: "100px",
+      width: "70px",
     },
     {
       accessorFn: (row: any) => row.actions,

@@ -65,6 +65,7 @@ const TanStackTableComponent: FC<pageProps> = ({
     "average_current",
     "average_pf",
     "serial",
+    "total_kw",
   ];
 
   const table = useReactTable({
