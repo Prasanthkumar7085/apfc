@@ -200,6 +200,18 @@ export const updateDeviceStatusAPI = async (
   }
 };
 
+export const deleteDeviceAPI = async (id: any) => {
+  try {
+    const { success, data } = await $fetch.delete(`/devices/${id}`);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const resetDevicePasswordAPI = async (
   payload: {
     password: string;

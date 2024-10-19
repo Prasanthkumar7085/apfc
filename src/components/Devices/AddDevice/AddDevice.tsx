@@ -344,6 +344,7 @@ const AddDeviceComponent = () => {
               onChange={handleFieldValue}
               placeholder="Enter Device Serial Number"
               fullWidth
+              disabled={params?.id ? true : false}
             />
             <ErrorMessagesComponent
               errorMessage={errorMessages?.device_serial_number}

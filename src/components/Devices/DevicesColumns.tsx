@@ -9,6 +9,7 @@ export const DeviceColumns = ({
   openDialog,
   setDialogOpen,
   setDeviceId,
+  deleteDialogOpen,
 }: any) => {
   const dispatch = useDispatch();
   return [
@@ -295,6 +296,24 @@ export const DeviceColumns = ({
                   width={15}
                   height={15}
                   title="Edit device"
+                />
+              </Tooltip>
+            </div>
+
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                deleteDialogOpen(info.row.original.id);
+              }}
+            >
+              <Tooltip title="Delete device">
+                <Image
+                  alt=""
+                  src="/delete-user.svg"
+                  height={17}
+                  width={17}
+                  title="Delete device"
+                  style={{ cursor: "pointer" }}
                 />
               </Tooltip>
             </div>

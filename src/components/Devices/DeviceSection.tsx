@@ -1,5 +1,6 @@
 import {
   deleteAssignUserAPI,
+  deleteDeviceAPI,
   updateDeviceStatusAPI,
 } from "@/services/devicesAPIs";
 import {
@@ -32,6 +33,38 @@ const DeviceSection = ({
   const [searchParams, setSearchParams] = useState(
     Object.fromEntries(new URLSearchParams(Array.from(params.entries())))
   );
+  const [showDeviceDeleteDialog, setShowDeviceDeleteDialog] =
+    useState<boolean>(false);
+  const [deviceID, setDeviceID] = useState<any>(null);
+
+  const deleteDialogOpen = (id: any) => {
+    setDeviceID(id);
+    setShowDeviceDeleteDialog(true);
+  };
+
+  const closeDeviceDeleteDialog = () => {
+    setShowDeviceDeleteDialog(false);
+  };
+  const deleteDevice = async () => {
+    setLoading(true);
+    closeDeviceDeleteDialog();
+
+    try {
+      const response = await deleteDeviceAPI(deviceID);
+      if (response.success) {
+        setDeviceID(null);
+
+        toast.success(response.message);
+        getData({});
+      } else {
+        toast.error(response.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const updateDeviceStatus = async (id: any, statusValue: string) => {
     setLoading(true);
@@ -109,6 +142,7 @@ const DeviceSection = ({
           openDialog,
           setDialogOpen,
           setDeviceId,
+          deleteDialogOpen,
         })}
         loading={loading}
         paginationDetails={paginationDetails}
@@ -127,6 +161,13 @@ const DeviceSection = ({
         lable="Are you sure you want to delete the assigned user?"
         open={open}
         closeDialog={closeDialog}
+      />
+      <DeleteDialog
+        deleteUser={deleteDevice}
+        headerName="Delete device"
+        lable="Are you sure you want to delete the device?"
+        open={showDeviceDeleteDialog}
+        closeDialog={closeDeviceDeleteDialog}
       />
     </div>
   );
