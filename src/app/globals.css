@@ -35,3 +35,18 @@
 .rs-picker-daterange-header {
   display: none !important;
 }
+
+.recharts-brush-texts {
+  text-anchor: right;
+  transform: translateY(25px);
+}
+
+.recharts-brush-texts:first-of-type {
+  transform: translateY(25px) translateX(10px);
+
+  text-anchor: right;
+}
+
+.recharts-brush-texts:last-of-type {
+  transform: translateY(25px) translateX(-10px);
+}

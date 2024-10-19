@@ -110,29 +110,6 @@ const ActivityGraph: React.FC = () => {
     }
   };
 
-  const handleZoomChange = async (newRange: any) => {
-    const startIndex = newRange.startIndex;
-    const endIndex = newRange.endIndex;
-    const chartWidth = 1300;
-    const intervalValue = calculateXAxisInterval(
-      chartWidth,
-      endIndex - startIndex + 1
-    );
-    setInteval(intervalValue);
-
-    if (newRange && newRange.start && newRange.end) {
-      const start = new Date(newRange.start).getTime();
-      const end = new Date(newRange.end).getTime();
-
-      if (!isNaN(start) && !isNaN(end) && start < end) {
-        await fetchData(
-          new Date(start).toISOString(),
-          new Date(end).toISOString()
-        );
-      }
-    }
-  };
-
   const handleDateRangeChange = (value: [Date | null, Date | null]) => {
     setDateRange(value);
     if (value[0] && value[1]) {
@@ -150,22 +127,57 @@ const ActivityGraph: React.FC = () => {
     }
   };
 
+  const handleZoomChange = async (newRange: any) => {
+    const startIndex = newRange.startIndex;
+    const endIndex = newRange.endIndex;
+
+    if (newRange && newRange.start && newRange.end) {
+      const start = new Date(newRange.start).getTime();
+      const end = new Date(newRange.end).getTime();
+
+      if (!isNaN(start) && !isNaN(end) && start < end) {
+        await fetchData(
+          new Date(start).toISOString(),
+          new Date(end).toISOString()
+        );
+
+        // Calculate interval based on zoomed data
+        const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
+        const firstTimestamp = new Date(zoomedDataSlice[0].timestamp).getTime();
+        const lastTimestamp = new Date(
+          zoomedDataSlice[zoomedDataSlice.length - 1].timestamp
+        ).getTime();
+        const timeDifference = lastTimestamp - firstTimestamp;
+
+        const intervalValue = calculateXAxisInterval(
+          timeDifference,
+          zoomedDataSlice.length
+        );
+        setInteval(intervalValue);
+      }
+    }
+  };
+
+  const calculateXAxisInterval = (
+    timeDifference: number,
+    zoomedDataLength: number
+  ) => {
+    if (zoomedDataLength <= 0) return 1;
+
+    const averageInterval = timeDifference / zoomedDataLength;
+    const averageIntervalInMinutes = averageInterval / (1000 * 60);
+
+    if (averageIntervalInMinutes <= 1) return 1;
+    if (averageIntervalInMinutes <= 5) return 2;
+    if (averageIntervalInMinutes <= 10) return 3;
+    if (averageIntervalInMinutes <= 30) return 5;
+    return 10;
+  };
+
   useEffect(() => {
     fetchData(today.toISOString(), today.toISOString());
   }, [selectedParams]);
 
-  const calculateXAxisInterval = (
-    chartWidth: number,
-    zoomedDataLength?: any
-  ) => {
-    const maxTicks = Math.floor(chartWidth / 100);
-    const effectiveLength = Math.min(zoomedDataLength, maxTicks);
-
-    if (effectiveLength <= 10) return 2;
-    if (effectiveLength <= 4) return 2;
-    if (effectiveLength <= 3) return 1;
-    return 5;
-  };
   return (
     <Box className="activityBlock">
       <Box className="pageHeader" mb={2}>
@@ -205,7 +217,7 @@ const ActivityGraph: React.FC = () => {
       </Box>
       <div>
         {zoomedData?.length > 0 ? (
-          <div style={{ width: "100%", margin: "0 auto" }}>
+          <div style={{ width: "100%" }}>
             <ComposedChart width={1300} height={450} data={zoomedData}>
               <XAxis
                 dataKey="timestamp"
@@ -214,6 +226,7 @@ const ActivityGraph: React.FC = () => {
                   return date.toLocaleTimeString([], {
                     hour: "2-digit",
                     minute: "2-digit",
+                    hour12: false,
                   });
                 }}
                 interval={interval}
@@ -231,7 +244,11 @@ const ActivityGraph: React.FC = () => {
                 }}
               />
               <Tooltip />
-              <Legend />
+              <Legend
+                layout="horizontal"
+                verticalAlign="bottom"
+                align="center"
+              />
               {selectedParams.map((param) => {
                 const parameter = parameters.find((p) => p.value === param);
                 if (param === "average_pf") {

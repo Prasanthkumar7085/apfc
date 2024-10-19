@@ -1,25 +1,22 @@
 "use client";
+import formatDate from "@/lib/helpers/formatDate";
 import { getSigleDeviceAPI } from "@/services/devicesAPIs";
-import { useEffect, useState } from "react";
-import LoadingComponent from "../Core/LoadingComponent";
-import {
-  Grid,
-  Typography,
-  Paper,
-  Box,
-  Tabs,
-  Tab,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-} from "@mui/material";
-import { useParams, useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
-import { setSingleDevice } from "@/redux/Modules/userlogin";
+import { Box, Grid, Paper, Tab, Tabs, Typography } from "@mui/material";
 import Image from "next/image";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Button } from "rsuite";
+import LoadingComponent from "../Core/LoadingComponent";
 import ActivityGraph from "./ActivityGraph";
 import TotalKWCard from "./DeviceParameterWiseDetails/TotalKWCard";
+import TotalParamatersCard from "./DeviceParameterWiseDetails/TotalParamatersCard";
+import { prepareURLEncodedParams } from "@/lib/prepareUrlEncodedParams";
 
 function TabPanel(props: any) {
   const { children, value, index, ...other } = props;
@@ -42,15 +39,24 @@ function TabPanel(props: any) {
 }
 
 const SingleDeviceView = () => {
-  const params = useParams();
+  const params: any = useParams();
   const dispatch = useDispatch();
+  const router = useRouter();
+  const paramsValues = useSearchParams();
+  const path = usePathname();
   const [loading, setLoading] = useState(false);
   const [deviceData, setDeviceData] = useState<any>({});
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(
+    paramsValues?.get("tab") == "activity" ? 1 : 0
+  );
   const deviceDetails = useSelector((state: any) => state?.auth?.singleDevice);
 
   const handleChange = (event: any, newValue: any) => {
     setValue(newValue);
+    let queryString = prepareURLEncodedParams("", {
+      tab: newValue == 0 ? "details" : newValue == 1 ? "activity" : "",
+    });
+    router.push(`${path}${queryString}`);
   };
 
   const getSingleDevice = async () => {
@@ -67,25 +73,20 @@ const SingleDeviceView = () => {
 
   useEffect(() => {
     getSingleDevice();
+    let tabValue = paramsValues?.get("tab");
+    setValue(tabValue == "activity" ? 1 : 0);
   }, []);
-
-  const capitalizeAndRemoveUnderscore = (text: any) => {
-    return text
-      .replace(/_/g, " ")
-      .replace(/\b\w/g, (char: string) => char.toUpperCase());
-  };
-
-  const capitalize = (text: any) => {
-    // Convert "Relay1" to "Relay 1" and "Bank1" to "Bank 1"
-    const spacedText = text.replace(/(\D)(\d)/g, "$1 $2");
-    return spacedText
-      .replace(/_/g, " ")
-      .replace(/\b\w/g, (char: string) => char.toUpperCase());
-  };
 
   return (
     <div id="deviceViewPage">
-      <div className="headerBlock">
+      <div
+        className="headerBlock"
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
         <Tabs
           className="levelTabs"
           value={value}
@@ -119,6 +120,12 @@ const SingleDeviceView = () => {
             iconPosition="start"
           />
         </Tabs>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <p>
+            Last sync {formatDate(deviceData?.updated_at, "DD-MM-YYYY hh:mm a")}
+          </p>
+          <Button onClick={() => getSingleDevice()}>Update Sync</Button>
+        </div>
       </div>
 
       <TabPanel value={value} index={0}>
@@ -270,15 +277,7 @@ const SingleDeviceView = () => {
                     />
                   </Grid>
                   <Grid item xs={12} sm={6} md={4}>
-                    <TotalKWCard
-                      cardimage={""}
-                      mainDetials={[]}
-                      subDetails={{
-                        kwh: deviceData?.kwh,
-                        kvah: deviceData?.kvah,
-                        kvarh: deviceData?.kvarh,
-                      }}
-                    />
+                    <TotalParamatersCard deviceDetails={deviceData} />
                   </Grid>
                 </Grid>
               </Grid>
