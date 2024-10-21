@@ -53,7 +53,9 @@ const Level1Settings = ({
           <div className="fieldGroup" key={setting.name}>
             <label className="label">{setting.label}</label>
             <Typography className="value">
-              {levelBasedData[setting?.name] || "--"}
+              {setting?.name == "sync_frequency"
+                ? levelBasedData["sync_frequency"] || 5
+                : levelBasedData[setting?.name] || "--"}
               {levelBasedData[setting?.name] ? setting.unit : ""}
             </Typography>
           </div>

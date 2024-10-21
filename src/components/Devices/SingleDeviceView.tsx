@@ -49,6 +49,8 @@ const SingleDeviceView = () => {
   const [value, setValue] = useState(
     paramsValues?.get("tab") == "activity" ? 1 : 0
   );
+  const [syncTime, setSyncTime] = useState<any>();
+  const [graphFunctionCall, setGraphFunctionCall] = useState<boolean>(false);
   const deviceDetails = useSelector((state: any) => state?.auth?.singleDevice);
 
   const handleChange = (event: any, newValue: any) => {
@@ -64,6 +66,7 @@ const SingleDeviceView = () => {
     try {
       const response = await getSigleDeviceAPI(params?.id);
       setDeviceData(response?.data);
+      setSyncTime(response?.data?.updated_at);
     } catch (err) {
       console.error(err);
     } finally {
@@ -121,10 +124,18 @@ const SingleDeviceView = () => {
           />
         </Tabs>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <p>
-            Last sync {formatDate(deviceData?.updated_at, "DD-MM-YYYY hh:mm a")}
-          </p>
-          <Button onClick={() => getSingleDevice()}>Update Sync</Button>
+          <p>Last sync {formatDate(syncTime, "DD-MM-YYYY hh:mm a")}</p>
+          <Button
+            onClick={() => {
+              if (value == 1) {
+                setGraphFunctionCall(true);
+              } else {
+                getSingleDevice();
+              }
+            }}
+          >
+            Update Sync
+          </Button>
         </div>
       </div>
 
@@ -302,45 +313,69 @@ const SingleDeviceView = () => {
                   <div className="cardBody">
                     <div className="eachBodyInfo">
                       <label>No voltage error</label>
-                      <Typography>
-                        {deviceData?.no_voltage === 0 ? "No error" : "Error"}
+                      <Typography
+                        className={
+                          deviceData?.no_voltage === 1 ? "errorText" : ""
+                        }
+                      >
+                        {deviceData?.no_voltage === 0 ? "No Error" : "Error"}
                       </Typography>
                     </div>
                     <div className="eachBodyInfo">
                       <label>Under voltage error</label>
-                      <Typography>
-                        {deviceData?.under_voltage === 0 ? "No error" : "Error"}
+                      <Typography
+                        className={
+                          deviceData?.under_voltage === 1 ? "errorText" : ""
+                        }
+                      >
+                        {deviceData?.under_voltage === 0 ? "No Error" : "Error"}
                       </Typography>
                     </div>
 
                     <div className="eachBodyInfo">
                       <label>Over voltage error</label>
-                      <Typography>
-                        {deviceData?.over_voltage === 0 ? "No error" : "Error"}
+                      <Typography
+                        className={
+                          deviceData?.over_voltage === 1 ? "errorText" : ""
+                        }
+                      >
+                        {deviceData?.over_voltage === 0 ? "No Error" : "Error"}
                       </Typography>
                     </div>
 
                     <div className="eachBodyInfo">
                       <label>THID I error</label>
-                      <Typography>
-                        {deviceData?.thdi === 0 ? "No error" : "Error"}
+                      <Typography
+                        className={deviceData?.thdi === 1 ? "errorText" : ""}
+                      >
+                        {deviceData?.thdi === 0 ? "No Error" : "Error"}
                       </Typography>
                     </div>
 
                     <div className="eachBodyInfo">
                       <label>Temperature error</label>
-                      <Typography>
+                      <Typography
+                        className={
+                          deviceData?.over_temperature === 1 ? "errorText" : ""
+                        }
+                      >
                         {deviceData?.over_temperature === 0
-                          ? "No error"
+                          ? "No Error"
                           : "Error"}
                       </Typography>
                     </div>
 
                     <div className="eachBodyInfo">
                       <label>Under compensate error</label>
-                      <Typography>
+                      <Typography
+                        className={
+                          deviceData?.under_compensation === 1
+                            ? "errorText"
+                            : ""
+                        }
+                      >
                         {deviceData?.under_compensation === 0
-                          ? "No error"
+                          ? "No Error"
                           : "Error"}
                       </Typography>
                     </div>
@@ -426,7 +461,11 @@ const SingleDeviceView = () => {
       </TabPanel>
 
       <TabPanel value={value} index={1}>
-        <ActivityGraph />
+        <ActivityGraph
+          graphFunctionCall={graphFunctionCall}
+          setGraphFunctionCall={setGraphFunctionCall}
+          setSyncTime={setSyncTime}
+        />
       </TabPanel>
       <LoadingComponent loading={loading} />
     </div>

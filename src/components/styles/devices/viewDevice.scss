@@ -194,6 +194,13 @@
         .cardInfo {
           background: rgba(217, 72, 65, 0.3);
           padding: 1em;
+
+          .errorText {
+            border-radius: "60px";
+            background: "rgba(217, 72, 65, 0.40)";
+            padding: "5px 10px";
+          }
+
           .infoText {
             color: #000;
             font-family: $fontPrimary;

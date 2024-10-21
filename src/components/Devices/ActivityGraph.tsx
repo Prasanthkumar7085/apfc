@@ -47,23 +47,25 @@ interface CombinedDataPoint {
   [key: string]: number | string;
 }
 
-const ActivityGraph: React.FC = () => {
+const ActivityGraph = ({
+  graphFunctionCall,
+  setGraphFunctionCall,
+  setSyncTime,
+}: any) => {
   const params = useParams();
   const today = new Date();
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<CombinedDataPoint[]>([]);
   const [zoomedData, setZoomedData] = useState<CombinedDataPoint[]>([]);
   const [interval, setInteval] = useState<any>();
-  const [dateRange, setDateRange] = useState<[Date | null, Date | null]>([
-    today,
-    today,
-  ]);
+  const [dateRange, setDateRange] = useState<any>([today, today]);
   const [selectedParams, setSelectedParams] = useState<string[]>([
     "total_kw",
     "average_pf",
   ]);
 
   const fetchData = async (fromDate: string, toDate: string) => {
+    setLoading(true);
     try {
       const promises = selectedParams.map((param) =>
         getDeviceDataWithMinuteParamatersAPI(params?.id, {
@@ -72,12 +74,18 @@ const ActivityGraph: React.FC = () => {
           to_date: toDate,
         })
       );
-
+      setGraphFunctionCall(false);
       const results = await Promise.allSettled(promises);
       const combinedData: CombinedDataPoint[] = [];
 
       results.forEach((result, index) => {
         if (result.status === "fulfilled") {
+          setSyncTime(
+            new Date(
+              result.value.data.slice(-1)?.[0].timestamp
+            ).toLocaleString()
+          );
+
           const seriesData: DataPoint[] = result.value.data;
 
           seriesData.forEach((item: any) => {
@@ -106,6 +114,8 @@ const ActivityGraph: React.FC = () => {
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
+      setLoading(false);
+    } finally {
       setLoading(false);
     }
   };
@@ -177,6 +187,12 @@ const ActivityGraph: React.FC = () => {
   useEffect(() => {
     fetchData(today.toISOString(), today.toISOString());
   }, [selectedParams]);
+
+  useEffect(() => {
+    if (graphFunctionCall) {
+      fetchData(dateRange[0].toISOString(), dateRange[1].toISOString());
+    }
+  }, [graphFunctionCall]);
 
   return (
     <Box className="activityBlock">

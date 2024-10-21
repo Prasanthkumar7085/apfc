@@ -44,7 +44,12 @@ const UpdateLevelBasedSettings = () => {
     try {
       const response = await getLevelBasedAPI();
       if (response?.status == 200 || response?.status == 201) {
-        setLevelBasedData(response?.data);
+        if (!response?.data?.sync_frequency) {
+          let data = { ...response?.data, sync_frequency: 5 };
+          setLevelBasedData(data);
+        } else {
+          setLevelBasedData(response?.data);
+        }
       }
     } catch (err) {
       console.error(err);
