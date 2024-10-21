@@ -124,7 +124,7 @@ const SingleDeviceView = () => {
           />
         </Tabs>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-          <p>Last sync {formatDate(syncTime, "DD-MM-YYYY hh:mm a")}</p>
+          <p>Last sync {formatDate(syncTime, "DD-MM-YYYY HH:mm a")}</p>
           <Button
             onClick={() => {
               if (value == 1) {

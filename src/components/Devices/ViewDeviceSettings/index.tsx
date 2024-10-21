@@ -207,7 +207,7 @@ const SingleDeviceSettings = () => {
             <Typography
               className={deviceName?.status == "ACTIVE" ? "active" : "inactive"}
             >
-              {deviceName?.status == "ACTIVE" ? "Active" : "Inactive"}
+              {deviceName?.status == "ACTIVE" ? "Online" : "Offline"}
             </Typography>
           </div>
           <div

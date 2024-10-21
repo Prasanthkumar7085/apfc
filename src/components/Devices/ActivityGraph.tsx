@@ -80,12 +80,6 @@ const ActivityGraph = ({
 
       results.forEach((result, index) => {
         if (result.status === "fulfilled") {
-          setSyncTime(
-            new Date(
-              result.value.data.slice(-1)?.[0].timestamp
-            ).toLocaleString()
-          );
-
           const seriesData: DataPoint[] = result.value.data;
 
           seriesData.forEach((item: any) => {
@@ -102,6 +96,13 @@ const ActivityGraph = ({
               combinedData.push(newPoint);
             }
           });
+          if (result?.value?.data?.slice(-1)?.[0]?.timestamp) {
+            setSyncTime(
+              new Date(
+                result?.value?.data.slice(-1)?.[0]?.timestamp
+              )?.toLocaleString()
+            );
+          }
         } else {
           console.error(
             `Error fetching data for ${selectedParams[index]}: ${result.reason}`
