@@ -4,10 +4,11 @@ import { setSingleDevice } from "@/redux/Modules/userlogin";
 import {
   addDeviceAPI,
   getDeviceAPI,
+  reverseGeocode,
   syncDeviceParamsAPI,
   updateDeviceAPI,
 } from "@/services/devicesAPIs";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, IconButton, TextField, Tooltip } from "@mui/material";
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -25,6 +26,7 @@ import {
 } from "react-leaflet";
 import axios from "axios";
 import SyncDeviceDialog from "@/components/Core/SyncDeviceParamatersDialog";
+import Image from "next/image";
 
 const LocationMarker = ({
   setDeviceDetails,
@@ -33,18 +35,6 @@ const LocationMarker = ({
   mapRef,
 }: any) => {
   typeof window !== "undefined";
-
-  const reverseGeocode = async (lat: any, lng: any) => {
-    try {
-      const response = await axios.get(
-        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
-      );
-      return response.data.display_name;
-    } catch (error) {
-      console.error("Error during reverse geocoding:", error);
-      return null;
-    }
-  };
 
   const map = useMapEvents({
     async click(e) {
@@ -308,6 +298,33 @@ const AddDeviceComponent = () => {
     }
   };
 
+  const getCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const { latitude, longitude } = position.coords;
+          const placeName = await reverseGeocode(latitude, longitude);
+
+          let afterRemovingSpaces = placeName
+            ?.split(",")[1]
+            ?.replace(/[0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/? ]/g, "");
+          setPosition({ lat: latitude, lng: longitude });
+          setDeviceDetails((prev: any) => ({
+            ...prev,
+            location: afterRemovingSpaces || "Unknown Location",
+            coordinates: [latitude, longitude],
+          }));
+        },
+        (error) => {
+          console.error("Error getting current location: ", error);
+          toast.error("Unable to retrieve current location.");
+        }
+      );
+    } else {
+      toast.error("Geolocation is not supported by this browser.");
+    }
+  };
+
   let mapConfig: any = {
     lat: 16.0725381,
     lng: 80.3219856,
@@ -391,12 +408,12 @@ const AddDeviceComponent = () => {
           <LoadingComponent loading={loading} />
         </Box>
 
-        <div style={{ width: "60%", height: "500px" }}>
+        <div style={{ width: "60%", height: "500px", position: "relative" }}>
           <MapContainer
             center={[mapConfig?.lat, mapConfig?.lng]}
             zoom={mapConfig?.zoom}
             style={{ height: "100%", width: "100%" }}
-            ref={mapRef} // Attach ref here
+            ref={mapRef}
           >
             <LayersControl position="topleft">
               {tiles.map(({ attribution, checked, name, subdomains, url }) => {
@@ -423,6 +440,30 @@ const AddDeviceComponent = () => {
               mapRef={mapRef}
             />
           </MapContainer>
+          <Tooltip
+            title={"Get Current Location"}
+            className="tooltip"
+            placement="top"
+          >
+            <IconButton
+              onClick={getCurrentLocation}
+              style={{
+                position: "absolute",
+                bottom: "10px",
+                right: "10px",
+                zIndex: 1000,
+                background: "#fff",
+              }}
+            >
+              <Image
+                className="logoIcon"
+                alt=""
+                src="/live-location.png"
+                height={30}
+                width={30}
+              />
+            </IconButton>
+          </Tooltip>
         </div>
       </div>
       <SyncDeviceDialog

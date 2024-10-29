@@ -124,6 +124,31 @@ const SingleDeviceView = () => {
           />
         </Tabs>
         <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <div className="status">
+            {deviceDetails?.status == "ACTIVE" ? (
+              <Image
+                alt=""
+                src="/devices/icondot-online.svg"
+                width={8}
+                height={8}
+              />
+            ) : (
+              <Image
+                alt=""
+                src="/devices/icondot-offline.svg"
+                width={8}
+                height={8}
+              />
+            )}
+
+            <Typography
+              className={
+                deviceDetails?.status == "ACTIVE" ? "active" : "inactive"
+              }
+            >
+              {deviceDetails?.status == "ACTIVE" ? "Online" : "Offline"}
+            </Typography>
+          </div>
           <p>Last sync {formatDate(syncTime, "DD-MM-YYYY HH:mm a")}</p>
           <Button
             onClick={() => {

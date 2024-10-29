@@ -305,3 +305,15 @@ export const parametersForChart = [
     color: "#ff7300",
   },
 ];
+export const parameters = [
+  { value: "total_kw", title: "Total kW", color: "#8884D8" },
+  { value: "average_pf", title: "Average PF", color: "#82CA9D" },
+  { value: "kwh", title: "kWh", color: "#FFC658" },
+  { value: "kvah", title: "kVAh", color: "#FF7300" },
+  {
+    value: "average_voltage_ll",
+    title: "Average voltage LL",
+    color: "#92298F",
+  },
+  { value: "average_current", title: "Average current", color: "#FF00FF" },
+];

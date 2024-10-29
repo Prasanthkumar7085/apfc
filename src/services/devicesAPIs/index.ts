@@ -1,6 +1,7 @@
 import { ListDevicesApiProps } from "@/interfaces/listDeviesAPITypes";
 import { $fetch } from "@/lib/fetch";
 import { handleAPIErrorResponse } from "@/lib/httpErrorHandler";
+import axios from "axios";
 
 export const getAllDevicesAPI = async (
   params: Partial<ListDevicesApiProps>
@@ -328,5 +329,17 @@ export const getDeviceDataWithMinuteParamatersAPI = async (
     return data;
   } catch (err) {
     throw err;
+  }
+};
+
+export const reverseGeocode = async (lat: any, lng: any) => {
+  try {
+    const response = await axios.get(
+      `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`
+    );
+    return response.data.display_name;
+  } catch (error) {
+    console.error("Error during reverse geocoding:", error);
+    return null;
   }
 };

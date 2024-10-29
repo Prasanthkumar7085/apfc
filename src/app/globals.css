@@ -50,3 +50,6 @@
 .recharts-brush-texts:last-of-type {
   transform: translateY(25px) translateX(-10px);
 }
+.leaflet-control-attribution {
+  display: none;
+}

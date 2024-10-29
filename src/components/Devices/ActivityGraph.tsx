@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   LineChart,
   Line,
@@ -7,8 +7,7 @@ import {
   Tooltip,
   Legend,
   Brush,
-  ComposedChart,
-  Area,
+  ResponsiveContainer,
 } from "recharts";
 import { getDeviceDataWithMinuteParamatersAPI } from "@/services/devicesAPIs";
 import { useParams } from "next/navigation";
@@ -18,21 +17,8 @@ import TextField from "@mui/material/TextField";
 import { Box } from "@mui/material";
 import CustomDateRangePicker from "../Core/DateRangePicker";
 import Image from "next/image";
-import { color } from "highcharts";
 import LoadingComponent from "../Core/LoadingComponent";
-
-const parameters = [
-  { value: "total_kw", title: "Total kW", color: "#8884d8" },
-  { value: "average_pf", title: "Average PF", color: "#82ca9d" },
-  { value: "kwh", title: "kWh", color: "#ffc658" },
-  { value: "kvah", title: "kVAh", color: "#ff7300" },
-  {
-    value: "average_voltage_ll",
-    title: "Average voltage LL",
-    color: "#92298f",
-  },
-  { value: "average_current", title: "Average current", color: "#ff00ff" },
-];
+import { parameters } from "@/lib/constants/addDevicesConstants";
 
 interface DataPoint {
   timestamp: string;
@@ -57,12 +43,14 @@ const ActivityGraph = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<CombinedDataPoint[]>([]);
   const [zoomedData, setZoomedData] = useState<CombinedDataPoint[]>([]);
-  const [interval, setInteval] = useState<any>();
-  const [dateRange, setDateRange] = useState<any>([today, today]);
   const [selectedParams, setSelectedParams] = useState<string[]>([
     "total_kw",
     "average_pf",
   ]);
+  const [brushStart, setBrushStart] = useState<number>(0);
+  const [brushEnd, setBrushEnd] = useState<number>(0);
+  const chartRef = useRef<HTMLDivElement>(null);
+  const [interval, setInterval] = useState<any>();
 
   const fetchData = async (fromDate: string, toDate: string) => {
     setLoading(true);
@@ -77,13 +65,19 @@ const ActivityGraph = ({
       setGraphFunctionCall(false);
       const results = await Promise.allSettled(promises);
       const combinedData: CombinedDataPoint[] = [];
-
       results.forEach((result, index) => {
         if (result.status === "fulfilled") {
           const seriesData: DataPoint[] = result.value.data;
-
           seriesData.forEach((item: any) => {
-            const timestamp = new Date(item.timestamp).toLocaleString();
+            const timestamp = new Date(item.timestamp).toLocaleString("en-US", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+              hour12: false,
+            });
             const existingPoint = combinedData.find(
               (d) => d.timestamp === timestamp
             );
@@ -109,38 +103,57 @@ const ActivityGraph = ({
           );
         }
       });
-
       setData(combinedData);
       setZoomedData(combinedData);
+      setBrushStart(0);
+      setBrushEnd(combinedData.length - 1);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
       setLoading(false);
-    } finally {
-      setLoading(false);
     }
   };
 
-  const handleDateRangeChange = (value: [Date | null, Date | null]) => {
-    setDateRange(value);
-    if (value[0] && value[1]) {
-      fetchData(dayjs(value[0]).toISOString(), dayjs(value[1]).toISOString());
-    }
-  };
+  const handleWheelZoom = (event: WheelEvent) => {
+    event.preventDefault();
 
-  const handleParamsChange = (event: any, newValue: any[]) => {
-    if (newValue) {
-      setSelectedParams(newValue.map((param) => param.value));
-      fetchData(
-        dayjs(dateRange[0]).toISOString(),
-        dayjs(dateRange[1]).toISOString()
-      );
+    const zoomFactor = 0.1;
+    const currentStartIndex = brushStart;
+    const currentEndIndex = brushEnd;
+
+    const rangeLength = currentEndIndex - currentStartIndex;
+    const centerIndex = Math.round((currentStartIndex + currentEndIndex) / 2);
+
+    const delta = event.deltaY < 0 ? -1 : 1;
+    const newRangeLength = Math.max(
+      1,
+      Math.floor(rangeLength * (1 + zoomFactor * delta))
+    );
+
+    let newStartIndex = Math.max(
+      0,
+      centerIndex - Math.floor(newRangeLength / 2)
+    );
+    let newEndIndex = Math.min(
+      zoomedData.length - 1,
+      newStartIndex + newRangeLength
+    );
+
+    newStartIndex = Math.max(0, Math.min(newStartIndex, zoomedData.length - 1));
+    newEndIndex = Math.max(
+      newStartIndex,
+      Math.min(newEndIndex, zoomedData.length - 1)
+    );
+
+    if (newStartIndex !== brushStart || newEndIndex !== brushEnd) {
+      setBrushStart(newStartIndex);
+      setBrushEnd(newEndIndex);
     }
   };
 
   const handleZoomChange = async (newRange: any) => {
-    const startIndex = newRange.startIndex;
-    const endIndex = newRange.endIndex;
+    const startIndex = Math.max(0, newRange.startIndex);
+    const endIndex = Math.min(zoomedData.length - 1, newRange.endIndex);
 
     if (newRange && newRange.start && newRange.end) {
       const start = new Date(newRange.start).getTime();
@@ -152,7 +165,9 @@ const ActivityGraph = ({
           new Date(end).toISOString()
         );
 
-        // Calculate interval based on zoomed data
+        setBrushStart(startIndex);
+        setBrushEnd(endIndex);
+
         const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
         const firstTimestamp = new Date(zoomedDataSlice[0].timestamp).getTime();
         const lastTimestamp = new Date(
@@ -164,7 +179,7 @@ const ActivityGraph = ({
           timeDifference,
           zoomedDataSlice.length
         );
-        setInteval(intervalValue);
+        setInterval(intervalValue);
       }
     }
   };
@@ -186,17 +201,23 @@ const ActivityGraph = ({
   };
 
   useEffect(() => {
-    fetchData(today.toISOString(), today.toISOString());
-  }, [selectedParams]);
+    const container = chartRef.current;
+    if (container) {
+      container.addEventListener("wheel", handleWheelZoom);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("wheel", handleWheelZoom);
+      }
+    };
+  }, [zoomedData, brushStart, brushEnd]);
 
   useEffect(() => {
-    if (graphFunctionCall) {
-      fetchData(dateRange[0].toISOString(), dateRange[1].toISOString());
-    }
-  }, [graphFunctionCall]);
+    fetchData(today.toISOString(), today.toISOString());
+  }, [selectedParams, graphFunctionCall]);
 
   return (
-    <Box className="activityBlock">
+    <Box className="activityBlock" ref={chartRef}>
       <Box className="pageHeader" mb={2}>
         <h4 className="pageHeading">
           <Image
@@ -208,10 +229,7 @@ const ActivityGraph = ({
           <span>Activity Graph</span>
         </h4>
         <Box className="filterBlock">
-          <CustomDateRangePicker
-            value={dateRange}
-            onChange={handleDateRangeChange}
-          />
+          <CustomDateRangePicker value={[today, today]} onChange={() => {}} />
           <Autocomplete
             className="defaultAutoComplete"
             multiple
@@ -220,7 +238,10 @@ const ActivityGraph = ({
             value={parameters.filter((param) =>
               selectedParams.includes(param.value)
             )}
-            onChange={handleParamsChange}
+            onChange={(event, newValue) => {
+              setSelectedParams(newValue.map((param) => param.value));
+              fetchData(dayjs(today).toISOString(), dayjs(today).toISOString());
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -232,10 +253,10 @@ const ActivityGraph = ({
           />
         </Box>
       </Box>
-      <div>
+      <div style={{ width: "100%" }}>
         {zoomedData?.length > 0 ? (
-          <div style={{ width: "100%" }}>
-            <ComposedChart width={1300} height={450} data={zoomedData}>
+          <ResponsiveContainer width="100%" height={450}>
+            <LineChart data={zoomedData}>
               <XAxis
                 dataKey="timestamp"
                 tickFormatter={(timestamp) => {
@@ -247,8 +268,6 @@ const ActivityGraph = ({
                   });
                 }}
                 interval={interval}
-                angle={-5}
-                textAnchor="end"
               />
               <YAxis yAxisId="primary" />
               <YAxis
@@ -261,11 +280,7 @@ const ActivityGraph = ({
                 }}
               />
               <Tooltip />
-              <Legend
-                layout="horizontal"
-                verticalAlign="bottom"
-                align="center"
-              />
+              <Legend />
               {selectedParams.map((param) => {
                 const parameter = parameters.find((p) => p.value === param);
                 if (param === "average_pf") {
@@ -298,10 +313,12 @@ const ActivityGraph = ({
                 height={30}
                 gap={10}
                 stroke="#8884d8"
+                startIndex={brushStart}
+                endIndex={brushEnd}
                 onChange={handleZoomChange}
               />
-            </ComposedChart>
-          </div>
+            </LineChart>
+          </ResponsiveContainer>
         ) : (
           <div
             style={{
