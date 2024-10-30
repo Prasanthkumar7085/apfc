@@ -12,18 +12,21 @@ const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({
   value,
   onChange,
 }) => {
+  const [selectedDates, setSelectedDates] = React.useState<any>([]);
   const handleDateRangeChange = (newValue: any) => {
-    if (!newValue[0] && !newValue[1]) {
+    if (!newValue?.[0] && !newValue?.[1]) {
       const today = new Date();
+      setSelectedDates([today, today]);
       onChange([today, today]);
     } else {
+      setSelectedDates(newValue);
       onChange(newValue);
     }
   };
 
   return (
     <DateRangePicker
-      value={value}
+      value={selectedDates?.length === 2 ? selectedDates : value}
       onChange={handleDateRangeChange}
       style={{ maxWidth: "250px" }}
       disabledDate={(date) => date.getTime() >= new Date().getTime()}

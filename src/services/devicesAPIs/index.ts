@@ -28,6 +28,17 @@ export const getSigleDeviceAPI = async (id: any) => {
     throw err;
   }
 };
+export const updateSyncDeviceParamsAPI = async (id: any) => {
+  try {
+    const { success, data } = await $fetch.get(`/devices/${id}/sync/params`);
+    if (!success) {
+      return handleAPIErrorResponse(data);
+    }
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
 
 export const addLeve1DeviceSettingsAPI = async (id: any, payload: any) => {
   try {

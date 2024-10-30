@@ -1,6 +1,9 @@
 "use client";
 import formatDate from "@/lib/helpers/formatDate";
-import { getSigleDeviceAPI } from "@/services/devicesAPIs";
+import {
+  getSigleDeviceAPI,
+  updateSyncDeviceParamsAPI,
+} from "@/services/devicesAPIs";
 import { Box, Grid, Paper, Tab, Tabs, Typography } from "@mui/material";
 import Image from "next/image";
 import {
@@ -67,6 +70,17 @@ const SingleDeviceView = () => {
       const response = await getSigleDeviceAPI(params?.id);
       setDeviceData(response?.data);
       setSyncTime(response?.data?.updated_at);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateSync = async () => {
+    setLoading(true);
+    try {
+      const response = await updateSyncDeviceParamsAPI(params?.id);
     } catch (err) {
       console.error(err);
     } finally {
@@ -153,8 +167,10 @@ const SingleDeviceView = () => {
           <Button
             onClick={() => {
               if (value == 1) {
+                updateSync();
                 setGraphFunctionCall(true);
               } else {
+                updateSync();
                 getSingleDevice();
               }
             }}

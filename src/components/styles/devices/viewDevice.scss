@@ -120,7 +120,11 @@
           align-items: flex-start;
           justify-content: flex-start;
           gap: 5px;
-
+          .errorText {
+            border-radius: "60px";
+            background: "rgba(217, 72, 65, 0.40)";
+            padding: "5px 10px";
+          }
           label {
             color: #000000b3;
             font-family: $fontPrimary;
@@ -213,12 +217,6 @@
         .cardInfo {
           background: rgba(217, 72, 65, 0.3);
           padding: 1em;
-
-          .errorText {
-            border-radius: "60px";
-            background: "rgba(217, 72, 65, 0.40)";
-            padding: "5px 10px";
-          }
 
           .infoText {
             color: #000;

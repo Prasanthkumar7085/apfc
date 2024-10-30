@@ -30,10 +30,10 @@ const TotalKWCard = ({ cardimage, mainDetials, subDetails }: any) => {
                 height={25}
               />
               <div className="total-text">
-                {mainDetials?.[0] ? mainDetials?.[0] : ""}
+                {subDetails?.[0] ? subDetails?.[0] : ""}
               </div>
               <div className="total-value">
-                {mainDetials?.[1] ? mainDetials?.[1] : ""}
+                {subDetails?.[1] ? subDetails?.[1] : ""}
               </div>
             </div>
           ) : (

@@ -43,6 +43,7 @@ const ActivityGraph = ({
   const [loading, setLoading] = useState<boolean>(true);
   const [data, setData] = useState<CombinedDataPoint[]>([]);
   const [zoomedData, setZoomedData] = useState<CombinedDataPoint[]>([]);
+  const [selectedDates, setSelectedDates] = useState<string[]>([]);
   const [selectedParams, setSelectedParams] = useState<string[]>([
     "total_kw",
     "average_pf",
@@ -138,13 +139,6 @@ const ActivityGraph = ({
       zoomedData.length - 1,
       newStartIndex + newRangeLength
     );
-
-    newStartIndex = Math.max(0, Math.min(newStartIndex, zoomedData.length - 1));
-    newEndIndex = Math.max(
-      newStartIndex,
-      Math.min(newEndIndex, zoomedData.length - 1)
-    );
-
     if (newStartIndex !== brushStart || newEndIndex !== brushEnd) {
       setBrushStart(newStartIndex);
       setBrushEnd(newEndIndex);
@@ -154,32 +148,37 @@ const ActivityGraph = ({
   const handleZoomChange = async (newRange: any) => {
     const startIndex = Math.max(0, newRange.startIndex);
     const endIndex = Math.min(zoomedData.length - 1, newRange.endIndex);
-
+    setBrushStart(startIndex);
+    setBrushEnd(endIndex);
     if (newRange && newRange.start && newRange.end) {
       const start = new Date(newRange.start).getTime();
       const end = new Date(newRange.end).getTime();
 
       if (!isNaN(start) && !isNaN(end) && start < end) {
-        await fetchData(
-          new Date(start).toISOString(),
-          new Date(end).toISOString()
-        );
+        if (brushStart !== startIndex || brushEnd !== endIndex) {
+          await fetchData(
+            new Date(start).toISOString(),
+            new Date(end).toISOString()
+          );
 
-        setBrushStart(startIndex);
-        setBrushEnd(endIndex);
+          setBrushStart(startIndex);
+          setBrushEnd(endIndex);
 
-        const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
-        const firstTimestamp = new Date(zoomedDataSlice[0].timestamp).getTime();
-        const lastTimestamp = new Date(
-          zoomedDataSlice[zoomedDataSlice.length - 1].timestamp
-        ).getTime();
-        const timeDifference = lastTimestamp - firstTimestamp;
+          const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
+          const firstTimestamp = new Date(
+            zoomedDataSlice[0].timestamp
+          ).getTime();
+          const lastTimestamp = new Date(
+            zoomedDataSlice[zoomedDataSlice.length - 1].timestamp
+          ).getTime();
+          const timeDifference = lastTimestamp - firstTimestamp;
 
-        const intervalValue = calculateXAxisInterval(
-          timeDifference,
-          zoomedDataSlice.length
-        );
-        setInterval(intervalValue);
+          const intervalValue = calculateXAxisInterval(
+            timeDifference,
+            zoomedDataSlice.length
+          );
+          setInterval(intervalValue);
+        }
       }
     }
   };
@@ -229,7 +228,15 @@ const ActivityGraph = ({
           <span>Activity Graph</span>
         </h4>
         <Box className="filterBlock">
-          <CustomDateRangePicker value={[today, today]} onChange={() => {}} />
+          <CustomDateRangePicker
+            value={[today, today]}
+            onChange={(newValue) => {
+              fetchData(
+                dayjs(newValue[0]).format("YYYY-MM-DD"),
+                dayjs(newValue[1]).format("YYYY-MM-DD")
+              );
+            }}
+          />
           <Autocomplete
             className="defaultAutoComplete"
             multiple
