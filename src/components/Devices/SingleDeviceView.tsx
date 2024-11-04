@@ -81,6 +81,7 @@ const SingleDeviceView = () => {
     setLoading(true);
     try {
       const response = await updateSyncDeviceParamsAPI(params?.id);
+      await getSingleDevice();
     } catch (err) {
       console.error(err);
     } finally {
@@ -171,7 +172,6 @@ const SingleDeviceView = () => {
                 setGraphFunctionCall(true);
               } else {
                 updateSync();
-                getSingleDevice();
               }
             }}
           >

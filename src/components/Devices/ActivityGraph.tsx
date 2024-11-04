@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import {
   LineChart,
   Line,
@@ -19,6 +19,7 @@ import CustomDateRangePicker from "../Core/DateRangePicker";
 import Image from "next/image";
 import LoadingComponent from "../Core/LoadingComponent";
 import { parameters } from "@/lib/constants/addDevicesConstants";
+import { debounce } from "lodash";
 
 interface DataPoint {
   timestamp: string;
@@ -139,46 +140,57 @@ const ActivityGraph = ({
       zoomedData.length - 1,
       newStartIndex + newRangeLength
     );
+
     if (newStartIndex !== brushStart || newEndIndex !== brushEnd) {
-      setBrushStart(newStartIndex);
-      setBrushEnd(newEndIndex);
+      debouncedZoom(newStartIndex, newEndIndex);
     }
   };
+
+  const debouncedZoom = useCallback(
+    debounce((newStartIndex, newEndIndex) => {
+      setBrushStart(newStartIndex);
+      setBrushEnd(newEndIndex);
+    }, 100),
+    []
+  );
 
   const handleZoomChange = async (newRange: any) => {
     const startIndex = Math.max(0, newRange.startIndex);
     const endIndex = Math.min(zoomedData.length - 1, newRange.endIndex);
+
+    if (startIndex === brushStart && endIndex === brushEnd) {
+      return;
+    }
+
     setBrushStart(startIndex);
     setBrushEnd(endIndex);
+
     if (newRange && newRange.start && newRange.end) {
       const start = new Date(newRange.start).getTime();
       const end = new Date(newRange.end).getTime();
 
       if (!isNaN(start) && !isNaN(end) && start < end) {
-        if (brushStart !== startIndex || brushEnd !== endIndex) {
-          await fetchData(
-            new Date(start).toISOString(),
-            new Date(end).toISOString()
-          );
+        await fetchData(
+          new Date(start).toISOString(),
+          new Date(end).toISOString()
+        );
 
-          setBrushStart(startIndex);
-          setBrushEnd(endIndex);
-
-          const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
-          const firstTimestamp = new Date(
-            zoomedDataSlice[0].timestamp
-          ).getTime();
-          const lastTimestamp = new Date(
-            zoomedDataSlice[zoomedDataSlice.length - 1].timestamp
-          ).getTime();
-          const timeDifference = lastTimestamp - firstTimestamp;
-
-          const intervalValue = calculateXAxisInterval(
-            timeDifference,
-            zoomedDataSlice.length
-          );
-          setInterval(intervalValue);
+        const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
+        if (zoomedDataSlice.length === 0) {
+          return; // Avoid further processing if there's no data
         }
+
+        const firstTimestamp = new Date(zoomedDataSlice[0].timestamp).getTime();
+        const lastTimestamp = new Date(
+          zoomedDataSlice[zoomedDataSlice.length - 1].timestamp
+        ).getTime();
+        const timeDifference = lastTimestamp - firstTimestamp;
+
+        const intervalValue = calculateXAxisInterval(
+          timeDifference,
+          zoomedDataSlice.length
+        );
+        setInterval(intervalValue);
       }
     }
   };
@@ -208,6 +220,7 @@ const ActivityGraph = ({
       if (container) {
         container.removeEventListener("wheel", handleWheelZoom);
       }
+      debouncedZoom.cancel();
     };
   }, [zoomedData, brushStart, brushEnd]);
 
@@ -261,7 +274,7 @@ const ActivityGraph = ({
         </Box>
       </Box>
       <div style={{ width: "100%" }}>
-        {zoomedData?.length > 0 ? (
+        {zoomedData.length > 0 ? (
           <ResponsiveContainer width="100%" height={450}>
             <LineChart data={zoomedData}>
               <XAxis
