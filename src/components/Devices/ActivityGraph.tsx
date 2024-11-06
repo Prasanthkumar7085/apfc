@@ -124,7 +124,16 @@ const ActivityGraph = ({
     const currentEndIndex = brushEnd;
 
     const rangeLength = currentEndIndex - currentStartIndex;
-    const centerIndex = Math.round((currentStartIndex + currentEndIndex) / 2);
+
+    const chartRect = chartRef.current?.getBoundingClientRect();
+    if (!chartRect) return;
+
+    const mouseX = event.clientX - chartRect.left;
+    const chartWidth = chartRect.width;
+
+    const mouseIndex = Math.round(
+      (mouseX / chartWidth) * (zoomedData.length - 1)
+    );
 
     const delta = event.deltaY < 0 ? -1 : 1;
     const newRangeLength = Math.max(
@@ -134,12 +143,17 @@ const ActivityGraph = ({
 
     let newStartIndex = Math.max(
       0,
-      centerIndex - Math.floor(newRangeLength / 2)
+      mouseIndex - Math.floor(newRangeLength / 2)
     );
     let newEndIndex = Math.min(
       zoomedData.length - 1,
       newStartIndex + newRangeLength
     );
+
+    if (newEndIndex >= zoomedData.length) {
+      newEndIndex = zoomedData.length - 1;
+      newStartIndex = Math.max(0, newEndIndex - newRangeLength);
+    }
 
     if (newStartIndex !== brushStart || newEndIndex !== brushEnd) {
       debouncedZoom(newStartIndex, newEndIndex);
@@ -177,7 +191,7 @@ const ActivityGraph = ({
 
         const zoomedDataSlice = zoomedData.slice(startIndex, endIndex + 1);
         if (zoomedDataSlice.length === 0) {
-          return; // Avoid further processing if there's no data
+          return;
         }
 
         const firstTimestamp = new Date(zoomedDataSlice[0].timestamp).getTime();
